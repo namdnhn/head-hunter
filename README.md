@@ -8,4 +8,7 @@
 - Chạy server trong local (di chuyển vào thư mục chứa file main.py): ```uvicorn main:app -reload```
 - Tắt kích hoạt môi trường ảo: ```deactivate```
 ## Hướng dẫn cài đặt môi trường cho front-end
-(hướng dẫn sau)
+- Phiên bản sử dụng: NodeJS 14.18.0
+- di chuyển vào thư mục front-end: ```cd front-end```
+- Cài đặt môi trường cho front-end: ```yarn install```
+- Chạy front-end: ```yarn serve```
