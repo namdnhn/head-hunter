@@ -1,19 +1,11 @@
-<template>
-	<the-header></the-header>
-</template>
-
-<script lang="ts">
-import TheHeader from '../src/components/layout/TheHeader.vue'
-
-export default {
-	components: {
-		TheHeader
-	}
-};
+<script setup lang="ts">
+// import {HelloWorld} from './components/HelloWorld.vue'
 </script>
 
-<style>
-html {
-	font-family: 'Roboto', sans-serif;
-}
-</style>
+<template>
+  <div>
+    <h1 class=" text-red-500">Hello world <font-awesome-icon icon="fa-solid fa-arrow-right" /></h1>
+  </div>
+</template>
+
+<style scoped></style>
