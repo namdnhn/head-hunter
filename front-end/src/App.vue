@@ -1,17 +1,19 @@
 <template>
-  <h1 class="text-green-600">Alo 12345</h1>
+	<the-header></the-header>
 </template>
 
 <script lang="ts">
+import TheHeader from '../src/components/layout/TheHeader.vue'
+
 export default {
-  created() {
-    console.log("Hello World");
-  },
-  mounted() {
-    console.log("Mounted");
-  },
+	components: {
+		TheHeader
+	}
 };
 </script>
 
 <style>
+html {
+	font-family: 'Roboto', sans-serif;
+}
 </style>
