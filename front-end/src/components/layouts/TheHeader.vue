@@ -14,32 +14,34 @@
                 </a>
 
                 <!-- Menu bars on small screen -->
-                <ul v-show="showMenu" class="md:hidden flex flex-col gap-4 absolute top-16 left-0 w-full bg-gray-100">
-                    <li class="mx-2 rounded-md mt-2 p-4 bg-white flex items-center justify-between">
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</a>
-                    </li>
-                    <li class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
-                        @click="toggleMoreInfo('jobs')">
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Việc làm
-                        </a>
-                        <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoJobs" />
-                        <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
-                    </li>
-                    <li class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
-                        @click="toggleMoreInfo('companies')">
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Công ty
-                        </a>
-                        <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoCompanies" />
-                        <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
-                    </li>
-                    <li class="mx-2 rounded-md mb-2 p-4 bg-white flex items-center justify-between"
-                        @click="toggleMoreInfo('profiles')">
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
-                        </a>
-                        <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoProfiles" />
-                        <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
-                    </li>
-                </ul>
+                <transition name="menu">
+                    <ul v-show="showMenu" class="md:hidden flex flex-col gap-4 absolute top-16 left-0 w-full bg-gray-100">
+                        <li class="mx-2 rounded-md mt-2 p-4 bg-white flex items-center justify-between">
+                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</a>
+                        </li>
+                        <li class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
+                            @click="toggleMoreInfo('jobs')">
+                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Việc làm
+                            </a>
+                            <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoJobs" />
+                            <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
+                        </li>
+                        <li class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
+                            @click="toggleMoreInfo('companies')">
+                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Công ty
+                            </a>
+                            <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoCompanies" />
+                            <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
+                        </li>
+                        <li class="mx-2 rounded-md mb-2 p-4 bg-white flex items-center justify-between"
+                            @click="toggleMoreInfo('profiles')">
+                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
+                            </a>
+                            <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoProfiles" />
+                            <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
+                        </li>
+                    </ul>
+                </transition>
 
                 <!-- Menu on large screen -->
                 <ul class="hidden md:flex gap-6">
@@ -81,12 +83,14 @@
                     <p class="hidden lg:block text-xs md:text-sm lg:text-base">Nguyễn Đức Thiện</p>
                     <font-awesome-icon icon="fa-solid fa-chevron-down" />
                     <!-- more user account info -->
-                    <ul class="absolute top-12 md:top-14 lg:top-16 right-0 w-72 md:w-80 lg:w-96 rounded-lg shadow-md z-10"
-                        v-if="isShowUserInfo">
-                        <base-list icon="fa-solid fa-circle-info" title="Thông tin cá nhân" />
-                        <base-list icon="fa-solid fa-lock" title="Đổi mật khẩu" />
-                        <base-list icon="fa-solid fa-arrow-right-from-bracket" title="Đăng xuất" />
-                    </ul>
+                    <transition name="moreInfo">
+                        <ul class="absolute top-12 md:top-14 lg:top-16 right-0 w-72 md:w-80 lg:w-96 rounded-lg shadow-md z-10"
+                            v-if="isShowUserInfo">
+                            <base-list icon="fa-solid fa-circle-info" title="Thông tin cá nhân" />
+                            <base-list icon="fa-solid fa-lock" title="Đổi mật khẩu" />
+                            <base-list icon="fa-solid fa-arrow-right-from-bracket" title="Đăng xuất" />
+                        </ul>
+                    </transition>
                 </span>
             </span>
 
@@ -135,4 +139,54 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* user account more info animate  */
+.moreInfo-enter-from {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.moreInfo-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.moreInfo-enter-to,
+.moreInfo-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.moreInfo-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.moreInfo-leave-active {
+    transition: all 0.3s ease-in;
+}
+
+/* menu animate  */
+.menu-enter-from {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.menu-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.menu-enter-to,
+.menu-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.menu-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.menu-leave-active {
+    transition: all 0.3s ease-in;
+}
+</style>
