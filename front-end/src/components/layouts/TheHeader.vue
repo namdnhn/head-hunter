@@ -1,5 +1,5 @@
 <template>
-    <header class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md">
+    <header class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md z-50">
         <div class="w-full mx-2 lg:mx-0 lg:w-11/12 flex justify-between">
             <nav class="flex items-center">
                 <!-- Menu icon  -->
@@ -84,7 +84,7 @@
                     <font-awesome-icon icon="fa-solid fa-chevron-down" />
                     <!-- more user account info -->
                     <transition name="moreInfo">
-                        <ul class="absolute top-12 md:top-14 lg:top-16 right-0 w-72 md:w-80 lg:w-96 rounded-lg shadow-md z-10"
+                        <ul class="absolute top-12 md:top-14 lg:top-16 right-0 w-72 md:w-80 lg:w-96 rounded-lg shadow-md z-10 bg-white"
                             v-if="isShowUserInfo">
                             <base-list icon="fa-solid fa-circle-info" title="Thông tin cá nhân" />
                             <base-list icon="fa-solid fa-lock" title="Đổi mật khẩu" />
