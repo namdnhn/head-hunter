@@ -86,7 +86,7 @@
                     <transition name="moreInfo">
                         <ul class="absolute top-12 md:top-14 lg:top-16 right-0 w-72 md:w-80 lg:w-96 rounded-lg shadow-md z-10 bg-white"
                             v-if="isShowUserInfo">
-                            <base-list icon="fa-solid fa-circle-info" title="Thông tin cá nhân" />
+                            <base-list icon="fa-solid fa-circle-info" title="Thông tin tài khoản" />
                             <base-list icon="fa-solid fa-lock" title="Đổi mật khẩu" />
                             <base-list icon="fa-solid fa-arrow-right-from-bracket" title="Đăng xuất" />
                         </ul>
