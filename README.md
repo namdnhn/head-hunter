@@ -11,4 +11,4 @@
 - Phiên bản sử dụng: NodeJS 14.18.0
 - di chuyển vào thư mục front-end: ```cd front-end```
 - Cài đặt môi trường cho front-end: ```yarn install```
-- Chạy front-end: ```yarn serve```
+- Chạy front-end: ```yarn run dev```
