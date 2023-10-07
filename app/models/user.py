@@ -9,7 +9,7 @@ class UserRole(str, enum.Enum):
     HR = "hr"
 
 
-class User(database.Base):
+class UserModel(database.Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, index=True)
     fullname = Column(String(50))
@@ -18,5 +18,3 @@ class User(database.Base):
     date_of_birth = Column(DateTime(timezone=True), default=func.now())
     role = Column(Enum(UserRole))
     phone = Column(String(10))
-
-    cv = relationship("Cv", back_populates="owner")
