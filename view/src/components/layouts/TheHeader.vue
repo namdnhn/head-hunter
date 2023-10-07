@@ -17,7 +17,7 @@
                 <transition name="menu">
                     <ul v-show="showMenu" class="md:hidden flex flex-col gap-4 absolute top-16 left-0 w-full bg-gray-100">
                         <li class="mx-2 rounded-md mt-2 p-4 bg-white flex items-center justify-between">
-                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</a>
+                            <router-link to="/homepage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</router-link>
                         </li>
                         <li class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
                             @click="toggleMoreInfo('jobs')">
@@ -46,7 +46,7 @@
                 <!-- Menu on large screen -->
                 <ul class="hidden md:flex gap-6">
                     <li>
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</a>
+                        <router-link to="/homepage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</router-link>
                     </li>
                     <li>
                         <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Việc làm
