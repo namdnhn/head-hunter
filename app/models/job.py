@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 import database
 
-class Job(database.Base):
+class JobModel(database.Base):
     __tablename__ = "job"
     id = Column(Integer, primary_key=True, index=True)
     company_id = Column(Integer, ForeignKey("company.id"))
@@ -16,6 +16,5 @@ class Job(database.Base):
     Salary = Column(Integer)
     job_status = Column(Boolean)
 
-    company = relationship("Company", back_populates="job_company")
-    post = relationship("Post", back_populates="job_post")
-    application_job = relationship("Application", back_populates="job_application")
+    company = relationship("CompanyModel")
+    post = relationship("PostModel")
