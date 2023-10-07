@@ -67,7 +67,8 @@
                 <div class="flex gap-12 items-center justify-between mb-8">
                     <span class="flex flex-col w-full">
                         <label for="category" class="text-xs md:text-sm mb-2">Job Category</label>
-                        <select name="category" id="category" class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                        <select name="category" id="category"
+                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
                             <option value="">Software & Application</option>
                             <option value="">Software & Application</option>
                             <option value="">Software & Application</option>
@@ -77,7 +78,8 @@
 
                     <span class="flex flex-col w-full">
                         <label for="type" class="text-xs md:text-sm mb-2">Job Type</label>
-                        <select name="type" id="type" class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                        <select name="type" id="type"
+                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
                             <option value="">All type</option>
                             <option value="">All type</option>
                             <option value="">All type</option>
@@ -90,7 +92,8 @@
                 <div class="flex gap-12 items-center justify-between mb-8">
                     <span class="flex flex-col w-full">
                         <label for="level" class="text-xs md:text-sm mb-2">Job Level</label>
-                        <select name="level" id="level" class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                        <select name="level" id="level"
+                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
                             <option value="">Fresher</option>
                             <option value="">Fresher</option>
                             <option value="">Fresher</option>
@@ -100,7 +103,8 @@
 
                     <span class="flex flex-col w-full">
                         <label for="experience" class="text-xs md:text-sm mb-2">Job Experience</label>
-                        <select name="experience" id="experience" class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                        <select name="experience" id="experience"
+                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
                             <option value="">1 year</option>
                             <option value="">1 year</option>
                             <option value="">1 year</option>
@@ -112,7 +116,8 @@
                 <!-- expected salary  -->
                 <div class="flex flex-col w-full">
                     <label for="salary" class="text-xs md:text-sm mb-2">Expected Salary</label>
-                    <select name="salary" id="salary" class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                    <select name="salary" id="salary"
+                        class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
                         <option value="">500$</option>
                         <option value="">500$</option>
                         <option value="">500$</option>
@@ -121,7 +126,8 @@
                 </div>
 
                 <!-- submit button  -->
-                <button type="submit" class="bg-sky-900 text-yellow-100 rounded-lg p-4 mt-10 w-full text-xs md:text-sm lg:text-base">
+                <button type="submit"
+                    class="bg-sky-900 text-yellow-100 rounded-lg p-4 mt-10 w-full text-xs md:text-sm lg:text-base">
                     Search Result
                 </button>
             </form>
@@ -167,7 +173,8 @@
 
             <!-- list job category  -->
             <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-10">
-                <category-card v-for="category in categories" :key="category.id" :icon="category.icon" :job="category.job" :quantity="category.quantity"></category-card>
+                <category-card v-for="category in categories" :key="category.id" :icon="category.icon" :job="category.job"
+                    :quantity="category.quantity"></category-card>
             </ul>
         </div>
     </main>
