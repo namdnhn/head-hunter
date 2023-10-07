@@ -35,8 +35,8 @@
                         </li>
                         <li class="mx-2 rounded-md mb-2 p-4 bg-white flex items-center justify-between"
                             @click="toggleMoreInfo('profiles')">
-                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
-                            </a>
+                            <router-link to="/profile" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
+                            </router-link>
                             <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoProfiles" />
                             <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
                         </li>
@@ -59,8 +59,8 @@
                         </a>
                     </li>
                     <li>
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
-                        </a>
+                        <router-link to="/profile" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
+                        </router-link>
                     </li>
                 </ul>
             </nav>
