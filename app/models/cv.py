@@ -1,19 +1,18 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from ..database import Base
+import database
 
-
-class Cv(Base):
+class Cv(database.Base):
     __tablename__ = "cv"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("user.id"))
-    image_path = Column(String)
-    experience = Column(String)
-    position = Column(String)
-    skill = Column(String)
-    education = Column(String)
-    achivement = Column(String)
-    activity = Column(String)
+    image_path = Column(String(100))
+    experience = Column(String(300))
+    position = Column(String(300))
+    skill = Column(String(300))
+    education = Column(String(300))
+    achivement = Column(String(300))
+    activity = Column(String(300))
 
     owner = relationship("User", back_populates="cv")
-    application = relationship("Application", back_populates="cv")
+    application_cv = relationship("Application", back_populates="cv_application")

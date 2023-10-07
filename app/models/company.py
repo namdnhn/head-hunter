@@ -1,12 +1,12 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from ..database import Base
+import database
 
 
-class Company(Base):
+class Company(database.Base):
     __tablename__ = "company"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    description = Column(String)
+    name = Column(String(50), index=True)
+    description = Column(String(300))
 
-    job = relationship("Company", back_populates="company")
+    job_company = relationship("Job", back_populates="company")

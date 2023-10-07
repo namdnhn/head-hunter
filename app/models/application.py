@@ -1,10 +1,9 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from ..database import Base
+import database
 
-
-class Application(Base):
+class Application(database.Base):
     __tablename__ = "application"
     id = Column(Integer, primary_key=True, index=True)
     cv_id = Column(Integer, ForeignKey("cv.id"))
@@ -12,5 +11,5 @@ class Application(Base):
     application_date = Column(DateTime(timezone=True), default=func.now())
     application_status = Column(Boolean)
 
-    cv = relationship("Cv", back_populates="application")
-    job = relationship("Job", back_populates="application")
+    cv_application = relationship("Cv", back_populates="application_cv")
+    job_application = relationship("Job", back_populates="application_job")
