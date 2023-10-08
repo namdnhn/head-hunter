@@ -7,9 +7,10 @@ import router from './router.ts'
 // import base component 
 import BaseDialog from './components/ui/BaseDialog.vue'
 import BaseList from './components/ui/BaseList.vue'
-import JobCard from './components/ui/JobCard.vue'
-import CategoryCard from './components/ui/CategoryCard.vue'
-import ExperienceCard from './components/ui/ExperienceCard.vue'
+import JobCard from './components/jobs/JobCard.vue'
+import CategoryCard from './components/jobs/CategoryCard.vue'
+import ExperienceCard from './components/profile/ExperienceCard.vue'
+import CvCard from './components/profile/CvCard.vue'
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -18,14 +19,14 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo, faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo, faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFile, } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons/faLinkedin'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle'
 
 
 /* add icons to the library */
-library.add(faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo,faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFacebook, faLinkedin, faGoogle  )
+library.add(faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo,faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFacebook, faLinkedin, faFile, faGoogle  )
 
 const app = createApp(App)
 
@@ -40,5 +41,6 @@ app.component('BaseList', BaseList)
 app.component('JobCard', JobCard)
 app.component('CategoryCard', CategoryCard)
 app.component('ExperienceCard', ExperienceCard)
+app.component('CvCard', CvCard)
 
 app.mount('#app')

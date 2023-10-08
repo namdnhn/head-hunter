@@ -41,14 +41,15 @@
             </div>
 
             <span
-                class="p-4 bg-sky-900 rounded-lg text-yellow-100 hover:cursor-pointer hover:opacity-95 text-xs md:text-sm lg:text-base">Đăng CV <font-awesome-icon icon="fa-solid fa-upload" class="ml-2" />
+                class="p-4 bg-sky-900 rounded-lg text-yellow-100 hover:cursor-pointer hover:opacity-95 text-xs md:text-sm lg:text-base">Đăng
+                CV <font-awesome-icon icon="fa-solid fa-upload" class="ml-2" />
             </span>
         </div>
 
-        <!-- Detail info  -->
-        <div class="px-10 md:px-24 lg:px-40 xl:px-60 py-10">
+        <!-- Detail info and suggest jobs  -->
+        <div class="px-10 md:px-24 lg:px-40 py-10 flex flex-col lg:flex-row lg:gap-10">
             <!-- User info  -->
-            <div>
+            <div class="lg:basis-2/3">
                 <!-- introduce  -->
                 <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
                     <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Giới thiệu</h1>
@@ -206,7 +207,7 @@
                     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 lg:gap-20">
                         <li class="flex gap-2 items-center">
                             <h1
-                                class="py-1 md:py-2 lg:py-3 w-10 md:w-12 lg:w-14 rounded-full bg-green-300 font-bold text-center text-sm md:text-base lg:text-lg">
+                                class="py-1 md:py-2 lg:py-3 px-2 md:px-3 lg:px-4 rounded-full bg-green-300 font-bold text-center text-sm md:text-base lg:text-lg">
                                 JP</h1>
                             <span>
                                 <h2 class="text-xs md:text-sm lg:text-base font-semibold text-sky-900">Japanese</h2>
@@ -216,7 +217,7 @@
 
                         <li class="flex gap-2 items-center">
                             <h1
-                                class="py-1 md:py-2 lg:py-3 w-10 md:w-12 lg:w-14 rounded-full bg-green-300 font-bold text-center text-sm md:text-base lg:text-lg">
+                                class="py-1 md:py-2 lg:py-3 px-2 md:px-3 lg:px-4 rounded-full bg-green-300 font-bold text-center text-sm md:text-base lg:text-lg">
                                 EN</h1>
                             <span>
                                 <h2 class="text-xs md:text-sm lg:text-base font-semibold text-sky-900">English</h2>
@@ -226,7 +227,7 @@
 
                         <li class="flex gap-2 items-center">
                             <h1
-                                class="py-1 md:py-2 lg:py-3 w-10 md:w-12 lg:w-14 rounded-full bg-green-300 font-bold text-center text-sm md:text-base lg:text-lg">
+                                class="py-1 md:py-2 lg:py-3 px-2 md:px-3 lg:px-4 rounded-full bg-green-300 font-bold text-center text-sm md:text-base lg:text-lg">
                                 CN</h1>
                             <span>
                                 <h2 class="text-xs md:text-sm lg:text-base font-semibold text-sky-900">Chinese</h2>
@@ -235,12 +236,29 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- CV  -->
+                <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
+                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">CV</h1>
+
+                    <ul class="flex flex-col gap-4">
+                        <cv-card v-for="card in cv" :key="card.id" :fileName="card.fileName" :time="card.time"></cv-card>
+                    </ul>
+
+                </div>
             </div>
 
             <!-- suggest jobs  -->
-            <div>
+            <div class="lg:basis-1/3">
+                <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900 mb-4">Việc làm phù hợp với bạn</h1>
 
+                <ul class="flex flex-col gap-4">
+                    <job-card v-for="job in jobs" :key="job.id" :featured="job.featured" :urgent="job.urgent"
+                        :level="job.level" :logo="job.logo" :job="job.job" :desc="job.desc" :salary="job.salary"
+                        :position="job.position"></job-card>
+                </ul>
             </div>
+
         </div>
     </main>
 </template>
@@ -278,6 +296,56 @@ export default {
                     duration: "Sep 2021 - Sep 2025",
                 }
             ],
+            jobs: [
+                {
+                    id: 1,
+                    featured: true,
+                    urgent: true,
+                    level: "Senior",
+                    job: "Jr. PHP Developer",
+                    desc: "CSS3, HTML5, Javascript, Bootstrap, Jquery",
+                    logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
+                    salary: "$5K - $8K",
+                    position: "6",
+                },
+                {
+                    id: 2,
+                    featured: true,
+                    urgent: true,
+                    level: "Junior",
+                    job: "Frontend Developer",
+                    desc: "React, Vue, Angular, CSS, HTML, Javascript",
+                    logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
+                    salary: "$3K - $5K",
+                    position: "3",
+                },
+                {
+                    id: 3,
+                    featured: false,
+                    urgent: false,
+                    level: "Senior",
+                    job: "Full Stack Developer",
+                    desc: "Node.js, Express, MongoDB, React, Vue, Angular",
+                    logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-3.png",
+                    salary: "$8K - $12K",
+                    position: "2",
+                },
+                {
+                    id: 4,
+                    featured: true,
+                    urgent: false,
+                    level: "Junior",
+                    job: "UI/UX Designer",
+                    desc: "Adobe XD, Sketch, Figma, Photoshop, Illustrator",
+                    logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-4.png",
+                    salary: "$4K - $6K",
+                    position: "4",
+                },
+            ], 
+            cv: [
+                {id: 1, fileName: "CV1.pdf", time: "12-12-2021"},
+                {id: 2, fileName: "CV2.pdf", time: "12-12-2021"},
+            ]
         }
     }
 }
