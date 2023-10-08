@@ -1,5 +1,5 @@
 <template>
-    <main class="pt-16 lg:pt-20">
+    <main class="pt-16 lg:pt-20 h-auto">
         <!-- Introduce  -->
         <div
             class=" bg-gray-100 px-10 md:px-24 lg:px-40 xl:px-60 py-10 flex flex-col lg:flex-row gap-6 justify-between items-center">
@@ -41,8 +41,7 @@
             </div>
 
             <span
-                class="p-4 bg-sky-900 rounded-lg text-yellow-100 hover:cursor-pointer hover:opacity-95 text-xs md:text-sm lg:text-base">Upload
-                CV <font-awesome-icon icon="fa-solid fa-upload" class="ml-2" />
+                class="p-4 bg-sky-900 rounded-lg text-yellow-100 hover:cursor-pointer hover:opacity-95 text-xs md:text-sm lg:text-base">Đăng CV <font-awesome-icon icon="fa-solid fa-upload" class="ml-2" />
             </span>
         </div>
 
@@ -52,7 +51,7 @@
             <div>
                 <!-- introduce  -->
                 <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
-                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">About Candidate</h1>
+                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Giới thiệu</h1>
                     <p class="text-xs md:text-sm lg:text-base text-gray-600">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                         et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -67,7 +66,7 @@
 
                 <!-- all info  -->
                 <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
-                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">All Infomation</h1>
+                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Thông tin cá nhân</h1>
                     <ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
 
                         <li class="flex gap-4 items-center">
@@ -76,7 +75,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">themezhub@gmail.com
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Mail Address</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Email</p>
                             </span>
                         </li>
 
@@ -86,7 +85,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">855 606 8472
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Phone Number</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Số điện thoại</p>
                             </span>
                         </li>
 
@@ -96,7 +95,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">Male
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Gender</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Giới tính</p>
                             </span>
                         </li>
 
@@ -106,7 +105,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">07 Apr 1992
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Date Of Birth</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Ngày sinh</p>
                             </span>
                         </li>
 
@@ -116,7 +115,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">$750/month
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Offer Salary</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Mức lương mong muốn</p>
                             </span>
                         </li>
 
@@ -126,7 +125,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">1 Year
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Experience</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Kinh nghiệm</p>
                             </span>
                         </li>
 
@@ -136,7 +135,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">Bachelor Degree
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Qualification</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Bằng cấp</p>
                             </span>
                         </li>
 
@@ -146,7 +145,7 @@
                             <span>
                                 <h5 class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold">Level
                                 </h5>
-                                <p class="text-xs lg:text-sm text-gray-500">Junior</p>
+                                <p class="text-xs lg:text-sm text-gray-500">Trình độ</p>
                             </span>
                         </li>
 
@@ -155,7 +154,7 @@
 
                 <!-- Experience  -->
                 <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
-                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">All Experience</h1>
+                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Kinh nghiệm làm việc</h1>
 
                     <ul class="flex flex-col gap-4">
                         <experience-card v-for="company in companies" :key="company.id" :logo="company.logo"
@@ -167,7 +166,7 @@
 
                 <!-- Education  -->
                 <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
-                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Education</h1>
+                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Học vấn</h1>
 
                     <ul class="flex flex-col gap-4">
                         <experience-card v-for="education in educations" :key="education.id" :logo="education.logo"
@@ -178,7 +177,7 @@
 
                 <!-- Candidate skill  -->
                 <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
-                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Candidate Skill</h1>
+                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Kỹ năng</h1>
 
                     <ul class="flex gap-4">
                         <li
@@ -202,7 +201,7 @@
 
                 <!-- Language  -->
                 <div class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10">
-                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Language</h1>
+                    <h1 class="text-base md:text-lg lg:text-xl font-bold text-sky-900">Ngôn ngữ</h1>
 
                     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 lg:gap-20">
                         <li class="flex gap-2 items-center">
