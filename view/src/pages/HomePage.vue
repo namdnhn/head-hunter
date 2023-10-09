@@ -1,19 +1,20 @@
 <template>
-    <main class="pt-16 lg:pt-20 h-screen w-full">
+    <main class="pt-16 lg:pt-20 h-auto w-full">
         <div class="h-auto w-full bg-yellow-100 px-20 py-10 flex flex-col lg:flex-row gap-6 justify-evenly items-center">
             <section class="text-sky-900">
                 <h5 class="text-amber-700 mb-10 font-bold">
-                    Get Hot & Trending Jobs
+                    Khám phá công việc nổi bật và theo xu hướng
                 </h5>
                 <h1 class="text-3xl md:text-4xl lg:text-5xl mb-10 font-bold">
-                    Find & Hire <br />
-                    Top Experts on Head <br />
-                    Hunter
+                    Tìm và tuyển dụng
+                    <br />
+                    các chuyên gia hàng đầu trên <br />
+                    Head Hunter
                 </h1>
                 <p class="text-sm md:text-base lg:text-lg mb-10">
-                    Getting a new job is never easy. Check what new jobs we have
+                    Tìm kiếm công việc không bao giờ là dễ dàng. Hãy kiểm tra những công việc mới chúng tôi
                     <br />
-                    in store for you on Head Hunter.
+                    sẵn sàng cho bạn trên Head Hunter.
                 </p>
                 <span>
                     <ul class="flex gap-10 font-bold">
@@ -22,21 +23,21 @@
                                 <span class="text-sky-900">200</span>
                                 <span class="text-amber-700">M</span>
                             </h2>
-                            <p>Active jobs</p>
+                            <p>Công việc sẵn có</p>
                         </li>
                         <li class="flex flex-col">
                             <h2 class="flex text-3xl md:text-4xl lg:text-5xl gap-2">
                                 <span class="text-sky-900">40</span>
-                                <span class="text-amber-700">M</span>
+                                <span class="text-amber-700">K</span>
                             </h2>
-                            <p>Startups</p>
+                            <p>Doanh Nghiệp</p>
                         </li>
                         <li class="flex flex-col">
                             <h2 class="flex text-3xl md:text-4xl lg:text-5xl gap-2">
                                 <span class="text-sky-900">300</span>
                                 <span class="text-amber-700">K</span>
                             </h2>
-                            <p>Talents</p>
+                            <p>Ứng viên</p>
                         </li>
                     </ul>
                 </span>
@@ -45,7 +46,7 @@
             <!-- Search Jobs -->
             <form action="" class="h-auto p-10 bg-white rounded-lg">
                 <h1 class="text-3xl md:text-4xl lg:text-5xl text-sky-900 mb-8 font-bold">
-                    Grow Your Career With <br />
+                    Phát triển sự nghiệp của bạn với <br />
                     <span class="text-amber-700">Head Hunter</span>
                 </h1>
 
@@ -60,115 +61,99 @@
                     </div>
                     <input type="search"
                         class="block w-full p-4 pl-10 text-xs md:text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search Jobs Keywords" />
-                </div>
-
-                <!-- job category and job type  -->
-                <div class="flex gap-12 items-center justify-between mb-8">
-                    <span class="flex flex-col w-full">
-                        <label for="category" class="text-xs md:text-sm mb-2">Job Category</label>
-                        <select name="category" id="category"
-                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
-                            <option value="">Software & Application</option>
-                            <option value="">Software & Application</option>
-                            <option value="">Software & Application</option>
-                            <option value="">Software & Application</option>
-                        </select>
-                    </span>
-
-                    <span class="flex flex-col w-full">
-                        <label for="type" class="text-xs md:text-sm mb-2">Job Type</label>
-                        <select name="type" id="type"
-                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
-                            <option value="">All type</option>
-                            <option value="">All type</option>
-                            <option value="">All type</option>
-                            <option value="">All type</option>
-                        </select>
-                    </span>
+                        placeholder="Tìm kiếm công việc" />
                 </div>
 
                 <!-- job level and experience  -->
                 <div class="flex gap-12 items-center justify-between mb-8">
                     <span class="flex flex-col w-full">
-                        <label for="level" class="text-xs md:text-sm mb-2">Job Level</label>
+                        <label for="level" class="text-xs md:text-sm mb-2">Trình độ</label>
                         <select name="level" id="level"
                             class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                            <option value="">Intern</option>
                             <option value="">Fresher</option>
-                            <option value="">Fresher</option>
-                            <option value="">Fresher</option>
-                            <option value="">Fresher</option>
+                            <option value="">Junior</option>
+                            <option value="">Middle</option>
+                            <option value="">Senior</option>
                         </select>
                     </span>
 
                     <span class="flex flex-col w-full">
-                        <label for="experience" class="text-xs md:text-sm mb-2">Job Experience</label>
+                        <label for="experience" class="text-xs md:text-sm mb-2">Kinh nghiệm làm việc</label>
                         <select name="experience" id="experience"
                             class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
-                            <option value="">1 year</option>
-                            <option value="">1 year</option>
-                            <option value="">1 year</option>
-                            <option value="">1 year</option>
+                            <option value="">Dưới 1 năm</option>
+                            <option value="">1 năm</option>
+                            <option value="">2 năm</option>
+                            <option value="">3 năm</option>
+                            <option value="">Trên 4 năm</option>
                         </select>
                     </span>
                 </div>
 
                 <!-- expected salary  -->
-                <div class="flex flex-col w-full">
-                    <label for="salary" class="text-xs md:text-sm mb-2">Expected Salary</label>
-                    <select name="salary" id="salary"
-                        class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
-                        <option value="">500$</option>
-                        <option value="">500$</option>
-                        <option value="">500$</option>
-                        <option value="">500$</option>
-                    </select>
+                <div class="flex gap-12 items-center justify-between mb-8">
+                    <span class="flex flex-col w-full">
+                        <label for="salary" class="text-xs md:text-sm mb-2">Mức lương</label>
+                        <select name="salary" id="salary"
+                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                            <option value="">Dưới 10 triệu</option>
+                            <option value="">10 - 15 triệu</option>
+                            <option value="">15 - 20 triệu</option>
+                            <option value="">20 - 30 triệu</option>
+                            <option value="">30 - 40 triệu</option>
+                            <option value="">40 - 50 triệu</option>
+                            <option value="">Trên 50 triệu</option>
+                            <option value="">Thỏa thuận</option>
+                        </select>
+                    </span>
+
+                    <span class="flex flex-col w-full">
+                        <label for="location" class="text-xs md:text-sm mb-2">Địa điểm làm việc</label>
+                        <select name="location" id="location"
+                            class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                            <option value="">Tất cả tỉnh/thành phố</option>
+                            <option value="">Hà Nội</option>
+                            <option value="">TP. Hồ Chí Minh</option>
+                            <option value="">Đà Nẵng</option>
+                        </select>
+                    </span>
                 </div>
 
                 <!-- submit button  -->
                 <button type="submit"
                     class="bg-sky-900 text-yellow-100 rounded-lg p-4 mt-10 w-full text-xs md:text-sm lg:text-base">
-                    Search Result
+                    Tìm kiếm
                 </button>
             </form>
         </div>
 
         <!-- Featured Jobs -->
-        <div class="px-20 py-10 mt-10 mb-10">
-            <h2
-                class="text-center text-sm md:text-base lg:text-lg leading-6 md:leading-7 lg:leading-8 font-semi-bold mb-10">
-                Join over 2,000 companies around the world <br />
-                that trust the
-                <span class="text-amber-700 font-bold">Head Hunter</span>
-                platforms
-            </h2>
+        <div class="px-20 py-10 mb-10">
             <span class="text-center">
-                <h1 class=" text-xl md:text-2xl lg:text-3xl font-extrabold mb-2 text-sky-900">Featured Jobs</h1>
-                <p class="text-xs md:text-sm lg:text-base text-gray-500">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus
-                    qui blanditiis praesentium voluptatum <br> deleniti atque
-                    corrupti quos dolores
-                </p>
+                <h1 class=" text-xl md:text-2xl lg:text-3xl font-extrabold mb-2 text-sky-900">Công việc nổi bật</h1>
+                <!-- <p class="text-xs md:text-sm lg:text-base text-gray-500">
+                    Tham gia vào các công việc nổi bật trên Head Hunter
+                </p> -->
             </span>
 
             <!-- Featured Jobs list -->
-            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
                 <job-card v-for="job in jobs" :key="job.id" :featured="job.featured" :urgent="job.urgent" :level="job.level"
                     :job="job.job" :desc="job.desc" :logo="job.logo" :salary="job.salary" :position="job.position">
                 </job-card>
             </ul>
-
         </div>
 
         <!-- Top job Categories -->
         <div class="px-20 py-10 bg-blue-100">
             <!-- header -->
             <span class="text-center">
-                <h1 class="text-xl md:text-2xl lg:text-3xl font-extrabold mb-2 text-sky-900">Explore Top Categories</h1>
-                <p class="text-xs md:text-sm lg:text-base text-gray-500">At vero eos et accusamus et iusto odio dignissimos
+                <h1 class="text-xl md:text-2xl lg:text-3xl font-extrabold mb-2 text-sky-900">Khám phá lĩnh vực nổi bật</h1>
+                <!-- <p class="text-xs md:text-sm lg:text-base text-gray-500">At vero eos et accusamus et iusto odio dignissimos
                     ducimus qui blanditiis praesentium voluptatum <br>
                     deleniti atque corrupti quos dolores
-                </p>
+                </p> -->
             </span>
 
             <!-- list job category  -->
