@@ -5,10 +5,10 @@
             <span class="flex flex-col">
                 <h2 class=" text-sky-900 font-semibold text-xs md:text-sm lg:text-base hover:cursor-pointer" v-if="!isEditting">{{ fileName }}
                 </h2>
-                <input type="text" class="px-2 py-1 mb-1 border border-sky-950" v-else :value="fileName" @input="$emit('update:fileName', ($event.target as HTMLInputElement).value)" />
+                <input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 mb-1 border border-sky-950 w-full" v-else :value="fileName" @input="$emit('update:fileName', ($event.target as HTMLInputElement).value)" />
 
                 <p class="text-gray-500 text-xs md:text-sm" v-if="!isEditting">{{ time }}</p>
-                <input type="text" class="px-2 py-1 mb-1 border border-sky-950 text-black" v-else :value="time" @input="$emit('update:time', ($event.target as HTMLInputElement).value)" />
+                <input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 mb-1 border border-sky-950 text-black w-full" v-else :value="time" @input="$emit('update:time', ($event.target as HTMLInputElement).value)" />
                 
             </span>
         </div>

@@ -10,7 +10,7 @@
 				</h2>
 				<input
 					type="text"
-					class="px-2 py-1 mb-1 border border-sky-950"
+					class="text-xs md:text-sm lg:text-base px-2 py-1 mb-1 border border-sky-950 w-full"
 					v-else
 					:value="name"
 					@input="
@@ -22,7 +22,7 @@
 				/>
 
 				<ul
-					class="flex mt-1 md:mt-0 flex-col md:flex-row lg:gap-4 text-xs lg:text-sm text-gray-500"
+					class="flex mt-1 md:mt-0 flex-col md:flex-row gap-2 lg:gap-4 text-xs lg:text-sm text-gray-500"
 				>
 					<li>
 						<h3
@@ -33,7 +33,7 @@
 						</h3>
 						<input
 							type="text"
-							class="px-2 py-1 mb-1 border border-sky-950 text-black"
+							class="text-xs md:text-sm lg:text-base px-2 py-1 mb-1 border border-sky-950 text-black w-full"
 							v-else
 							:value="role"
 							@input="
@@ -50,7 +50,7 @@
 					</li>
 					<input
 						type="text"
-						class="px-2 py-1 mb-1 border border-sky-950 text-black" 
+						class="text-xs md:text-sm lg:text-base px-2 py-1 mb-1 border border-sky-950 text-black w-full" 
 						v-else
 						:value="duration"
 						@input="

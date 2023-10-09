@@ -2,7 +2,7 @@
 	<main class="pt-16 lg:pt-20 h-auto">
 		<!-- Introduce  -->
 		<div
-			class="bg-gray-100 px-10 md:px-24 lg:px-40 xl:px-60 py-10 flex flex-col lg:flex-row gap-6 justify-between items-center">
+			class="bg-gray-100 px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-6 justify-between items-center">
 			<div class="flex flex-col md:flex-row items-center gap-6">
 				<img src="https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/team-1.jpg" alt="candidate avt"
 					class="w-32 md:w-40 lg:w-48 h-auto rounded-full" />
@@ -47,7 +47,7 @@
 		</div>
 
 		<!-- Detail info and suggest jobs  -->
-		<div class="px-10 md:px-24 lg:px-40 py-10 flex flex-col lg:flex-row lg:gap-10">
+		<div class="px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row lg:gap-10">
 			<!-- User info  -->
 			<div class="lg:basis-2/3">
 				<!-- introduce  -->
@@ -101,7 +101,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.email }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.email" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -118,7 +118,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.phoneNumber }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.phoneNumber" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -135,7 +135,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.gender }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.gender" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -152,7 +152,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.dob }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.dob" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -169,7 +169,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.insight }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.insight" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -186,7 +186,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.experience }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.experience" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -203,7 +203,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.degree }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.degree" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -220,7 +220,7 @@
 									v-if="!isEdittingPersonalInfo">
 									{{ personalInfo.location }}
 								</h5>
-								<input type="text" class="px-2 py-1 border border-sky-950" v-else
+								<input type="text" class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950" v-else
 									v-model="personalInfo.location" />
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -319,11 +319,11 @@
 							@click="editSkills" />
 					</span>
 
-					<ul class="flex gap-4">
-						<li class="py-2 px-4 text-center bg-green-300 text-sky-950 font-bold rounded-xl text-xs md:text-sm lg:text-base flex items-center gap-2"
+					<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+						<li class="py-2 px-4 text-center bg-green-300 text-sky-950 font-bold rounded-xl text-xs md:text-sm lg:text-base flex items-center justify-center gap-2"
 							v-for="skill in skills" :key="skill.id">
-							<p v-if="!isEdittingSkills">{{ skill.name }}</p>
-							<input type="text" class="border border-sky-950 px-2 py-1" v-else v-model="skill.name" />
+							<p v-if="!isEdittingSkills" class="text-center">{{ skill.name }}</p>
+							<input type="text" class="text-xs md:text-sm lg:text-base border border-sky-950 px-2 py-1 w-full" v-else v-model="skill.name" />
 
 							<font-awesome-icon icon="fa-solid fa-xmark"
 								class="text-green-700 text-xs md:text-sm lg:text-base hover:cursor-pointer"
@@ -359,7 +359,7 @@
 							@click="editLanguage" />
 					</span>
 
-					<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 lg:gap-20">
+					<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6">
 						<language-card v-for="language in languages" :key="language.id" :id="language.id" :isEditting="isEdittingLanguage" v-model:name="language.name" v-model:level="language.level" @delete-language="deleteLanguage"></language-card>
 					</ul>
 
