@@ -33,7 +33,7 @@
 						</h3>
 						<input
 							type="text"
-							class="px-2 py-1 mb-1 border border-sky-950"
+							class="px-2 py-1 mb-1 border border-sky-950 text-black"
 							v-else
 							:value="role"
 							@input="
@@ -50,7 +50,7 @@
 					</li>
 					<input
 						type="text"
-						class="px-2 py-1 mb-1 border border-sky-950"
+						class="px-2 py-1 mb-1 border border-sky-950 text-black" 
 						v-else
 						:value="duration"
 						@input="
