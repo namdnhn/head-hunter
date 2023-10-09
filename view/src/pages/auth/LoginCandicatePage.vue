@@ -6,7 +6,7 @@
         </a>
         <div class="w-full bg-gray- rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-sky-200 dark:border-gray-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-cyan-900">
+                <h1 class="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-cyan-900">
                     Đăng nhập vào tài khoản của bạn
                 </h1>
                 <form class="space-y-4 md:space-y-6" action="#">
@@ -34,7 +34,9 @@
 
 
                     <p class="text-sm font-light text-cyan-800">
-                        Bạn chưa có tài khoản ? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Đăng ký ngay !</a>
+                        Bạn chưa có tài khoản ? <a href="#" class="font-bold text-primary-600 hover:underline dark:text-primary-500">
+                            <router-link to="./registerCandicatePage">Đăng ký ngay !</router-link>
+                            </a>
                     </p>
                 </form>
             </div>
