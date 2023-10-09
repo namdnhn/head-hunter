@@ -14,7 +14,7 @@ class UserModel(database.Base):
     id = Column(Integer, primary_key=True, index=True)
     fullname = Column(String(50))
     email = Column(String(50), unique=True, index=True)
-    password = Column(String(50))
+    password = Column(String(300))
     date_of_birth = Column(DateTime(timezone=True), default=func.now())
     role = Column(Enum(UserRole))
     phone = Column(String(10))
