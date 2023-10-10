@@ -48,3 +48,58 @@
     </div>
   </section>
 </template>
+
+
+<script lang="ts">
+    export default {
+        data(){
+            return {
+                emailCandicate:{
+                    value:'',
+                    isValid: true
+                },
+                passwordCandicate:{
+                    value:'',
+                    isValid: true
+                },
+                rememberPasswordCandicate:{
+                    value:[],
+                    isValid: false,
+                },
+                formIsValid: true, 
+            }
+        },
+        methods : {
+            validateForm(){
+                this.formIsValid = true;
+                if(this.emailCandicate.value === '' ){
+                    this.emailCandicate.isValid = false; 
+                    this.formIsValid = false; 
+                }
+                if(this.passwordCandicate.value === '' || 
+                this.passwordCandicate.value.length < 8){
+                    this.passwordCandicate.isValid = false; 
+                    this.formIsValid = false; 
+                }
+            },
+            submitForm() {
+                this.validateForm(); 
+                if(!this.formIsValid){
+                    return; 
+                }
+
+                const formLoginCandicate = {
+                    first: this.emailCandicate,
+                    second: this.passwordCandicate,
+                    third:this.rememberPasswordCandicate
+                }
+                console.log(formLoginCandicate)
+            },
+            checkKeyDown(){
+                while(onkeydown){
+                    this.passwordCandicate.isValid = true;
+                }
+            }
+        }
+    }
+</script>

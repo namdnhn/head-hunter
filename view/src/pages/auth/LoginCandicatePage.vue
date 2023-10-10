@@ -13,18 +13,22 @@
                     <!-- email -->
                     <div class="form-control" >
                         <label for="email" class="block mb-2 text-sm font-medium text-cyan-900">Email của bạn</label>
-                        <input type="text" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@company.com" 
+                        <input type="email" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@company.com" 
                         v-model="emailCandicate.value">
                     </div>
                     <!-- password  -->
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-cyan-900">Mật khẩu</label>
-                        <input type="text" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                        <input  type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                         v-model="passwordCandicate.value">
                     </div>
                     <div>
-                        <label v-if="!formIsValid" class="block mb-2 text-sm font-medium text-red-500">Đã có lỗi xảy ra, hãy điền và đăng nhập lại !</label>
+                        <!-- <label v-if="checkKeyDown()"></label> -->
+                        <label v-if="!checkKeyDown() " class="block mb-2 text-sm font-medium text-red-500">Mật khẩu của bạn quá ngắn, hãy nhập lại mật khẩu !</label>
                     </div>
+                    <!-- <div>
+                        <label v-if="!formIsValid" class="block mb-2 text-sm font-medium text-red-500">Sai tài khoản đăng nhập hoặc mật khẩu, hãy điền lại !</label>
+                    </div> -->
                     <!-- remember password  -->
                     <div class="flex items-center justify-between">
                         <div class="flex items-start">
@@ -65,7 +69,8 @@
                 },
                 passwordCandicate:{
                     value:'',
-                    isValid: true
+                    isValid: true,
+                    isEditting: true, 
                 },
                 rememberPasswordCandicate:{
                     value:[],
@@ -81,7 +86,8 @@
                     this.emailCandicate.isValid = false; 
                     this.formIsValid = false; 
                 }
-                if(this.passwordCandicate.value === '' ){
+                if(this.passwordCandicate.value === '' || 
+                this.passwordCandicate.value.length < 8){
                     this.passwordCandicate.isValid = false; 
                     this.formIsValid = false; 
                 }
@@ -91,17 +97,24 @@
                 if(!this.formIsValid){
                     return; 
                 }
+
                 const formLoginCandicate = {
                     first: this.emailCandicate,
                     second: this.passwordCandicate,
                     third:this.rememberPasswordCandicate
                 }
                 console.log(formLoginCandicate)
+            },
+            checkKeyDown(){
+                this.passwordCandicate.isEditting = true; 
+                if(onkeydown){
+                    this.passwordCandicate.isValid = !this.passwordCandicate.isEditting;
+                    this.passwordCandicate.isEditting = true;
+                } return true
             }
+        },
+        watch: {
+
         }
     }
 </script>
-
-<style scoped>
-
-</style>
