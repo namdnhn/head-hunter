@@ -1,6 +1,6 @@
 <template>
-    <main class="pt-16 lg:pt-20 h-auto w-full">
-        <div class="h-auto w-full bg-yellow-100 px-20 py-10 flex flex-col lg:flex-row gap-6 justify-evenly items-center">
+    <main class="pt-16 lg:pt-20 w-full">
+        <div class="w-full bg-yellow-100 px-20 py-10 flex flex-col lg:flex-row gap-6 justify-evenly items-center">
             <section class="text-sky-900">
                 <h5 class="text-amber-700 mb-10 font-bold">
                     Khám phá công việc nổi bật và theo xu hướng

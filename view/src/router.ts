@@ -8,6 +8,7 @@ const LoginCandicatePage = defineAsyncComponent(() => import("./pages/auth/Login
 const RegisterCandicatePage = defineAsyncComponent(() => import("./pages/auth/RegisterCandicatePage.vue"))
 const LoginEmployeePage = defineAsyncComponent(() => import("./pages/auth/LoginEmployeePage.vue"))
 const RegisterEmployeePage = defineAsyncComponent(() => import("./pages/auth/RegisterEmployeePage.vue"))
+const JobDetail = defineAsyncComponent(() => import("./pages/jobs/JobDetail.vue"))
 
 const router = createRouter({
   history: createWebHistory(),
@@ -18,7 +19,9 @@ const router = createRouter({
     { path: "/loginCandicatePage", component: LoginCandicatePage},
     { path: "/registerEmployeePage", component: RegisterEmployeePage},
     { path: "/loginEmployeePage", component: LoginEmployeePage},
-    { path: "/registerCandicatePage", component: RegisterCandicatePage}
+    { path: "/registerCandicatePage", component: RegisterCandicatePage},
+    { path: "/jobdetail", component: JobDetail },
+    
   ],
 }); 
 
