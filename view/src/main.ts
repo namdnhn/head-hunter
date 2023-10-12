@@ -19,14 +19,17 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo, faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFile, faPenToSquare, faXmark, } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo, faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFile, faPenToSquare, faXmark,  } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons/faLinkedin'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle'
+import { faStar } from '@fortawesome/free-regular-svg-icons'
+import { faCircle } from '@fortawesome/free-regular-svg-icons/faCircle'
+import { faCircleDot } from '@fortawesome/free-regular-svg-icons/faCircleDot'
 
 
 /* add icons to the library */
-library.add(faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo,faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFacebook, faLinkedin, faFile, faGoogle, faPenToSquare, faXmark  )
+library.add(faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo,faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFacebook, faLinkedin, faFile, faGoogle, faPenToSquare, faXmark, faStar, faCircle,faCircleDot )
 
 const app = createApp(App)
 

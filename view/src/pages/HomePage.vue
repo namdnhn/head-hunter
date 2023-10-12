@@ -1,6 +1,6 @@
 <template>
-    <main class="pt-16 lg:pt-20 h-auto w-full">
-        <div class="h-auto w-full bg-yellow-100 px-20 py-10 flex flex-col lg:flex-row gap-6 justify-evenly items-center">
+    <main class="pt-16 lg:pt-20 w-full">
+        <div class="w-full bg-yellow-100 px-20 py-10 flex flex-col lg:flex-row gap-6 justify-evenly items-center">
             <section class="text-sky-900">
                 <h5 class="text-amber-700 mb-10 font-bold">
                     Khám phá công việc nổi bật và theo xu hướng
@@ -139,7 +139,7 @@
 
             <!-- Featured Jobs list -->
             <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
-                <job-card v-for="job in jobs" :key="job.id" :featured="job.featured" :urgent="job.urgent" :level="job.level"
+                <job-card v-for="job in jobs" :key="job.id" :id="job.id" :featured="job.featured" :urgent="job.urgent" :level="job.level"
                     :job="job.job" :desc="job.desc" :logo="job.logo" :salary="job.salary" :position="job.position">
                 </job-card>
             </ul>
