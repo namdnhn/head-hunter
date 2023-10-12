@@ -139,7 +139,7 @@
 
             <!-- Featured Jobs list -->
             <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
-                <job-card v-for="job in jobs" :key="job.id" :featured="job.featured" :urgent="job.urgent" :level="job.level"
+                <job-card v-for="job in jobs" :key="job.id" :id="job.id" :featured="job.featured" :urgent="job.urgent" :level="job.level"
                     :job="job.job" :desc="job.desc" :logo="job.logo" :salary="job.salary" :position="job.position">
                 </job-card>
             </ul>

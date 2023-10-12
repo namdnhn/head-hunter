@@ -19,7 +19,7 @@
             <img :src="logo" alt="logo company"
                 class="w-20 h-auto hover:cursor-pointer" />
             <div class="text-center mt-4">
-                <h5 class=" text-sky-900 font-bold text-sm md:text-base lg:text-xl hover:cursor-pointer hover:text-green-700">{{job}}</h5>
+                <router-link :to="jobDetailLink" class=" text-sky-900 font-bold text-sm md:text-base lg:text-xl hover:cursor-pointer hover:text-green-700">{{job}}</router-link>
                 <p class="text-gray-500 text-xs md:text-sm lg:text-base">{{ desc }}</p>
             </div>
         </span>
@@ -38,6 +38,10 @@
 <script lang="ts">
 export default {
     props: {
+        id: {
+            type: String,
+            required: true,
+        },
         featured: {
             type: Boolean,
             required: false,
@@ -70,6 +74,11 @@ export default {
             type: Number,
             required: true,
         },
+    },
+    computed: {
+        jobDetailLink() {
+            return "/jobdetail/" + this.id ;
+        }
     }
 }
 </script>
