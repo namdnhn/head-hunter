@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from models.hr import HrModel
 from models.candidate import CandidateModel
 from database import Base, engine
-from routes import companyRouter, userRouter, messageRouter, hrRouter
+from routes import companyRouter, userRouter, hrRouter
 from models.application import ApplicationModel
 from models.post import PostModel
 from fastapi import Depends
@@ -15,7 +15,7 @@ app = FastAPI()
 app.include_router(companyRouter.router, prefix="/api")
 app.include_router(userRouter.router, prefix="/api")
 app.include_router(hrRouter.router, prefix="/api")
-app.include_router(messageRouter.router)
+# app.include_router(messageRouter.router)
 
 app.add_middleware(
     CORSMiddleware,

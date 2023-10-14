@@ -67,8 +67,8 @@
 
             <!-- login, logout  -->
             <span class="flex gap-4 items-center" v-if="!loggedIn">
-                <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Đăng nhập</a>
-                <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Đăng ký</a>
+                <router-link to="/loginCandidatePage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Đăng nhập</router-link>
+                <router-link to="/registerCandidatePage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Đăng ký</router-link>
             </span>
 
             <!-- user account info -->
@@ -110,7 +110,7 @@ export default {
             moreInfoJobs: false,
             moreInfoCompanies: false,
             moreInfoProfiles: false,
-            loggedIn: true,
+            loggedIn: false,
             isShowUserInfo: false
         };
     },

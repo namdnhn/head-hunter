@@ -179,6 +179,7 @@ export default {
                 if (response.ok) {
                     const responseData = await response.json();
                     console.log('Đăng nhập thành công', responseData);
+                    this.$router.push('/homepage')
                 } else {
                     console.error('Lỗi từ API khác:', response.statusText);
                 }
