@@ -15,12 +15,18 @@ except mysql.connector.Error as err:
     print(f"Error: {err}")
 
 engine = create_engine(
-    f"mysql+mysqlconnector://{os.getenv("DB_USERNAME")}:{os.getenv("DB_PASSWORD")}@{os.getenv("DB_HOST")}/{os.getenv("DB_NAME")}", echo=True
+    f"mysql+mysqlconnector://{ os.getenv('DB_USERNAME') }:{ os.getenv('DB_PASSWORD') }@{ os.getenv('DB_HOST') }/{ os.getenv('DB_NAME') }", echo=True
 )
 
 # create a SessionLocal class
 SessionLocal = sessionmaker(autocommit=False, autoflush=True, bind=engine)
-session = SessionLocal()
 
 # create a Base class
 Base = declarative_base()
+
+def getDatabase():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

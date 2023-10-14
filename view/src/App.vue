@@ -5,12 +5,14 @@
             <component :is="slotProps.Component"></component>
         </transition>
     </router-view>
+    <the-footer></the-footer>
 </template>
 
 <script lang="ts">
 import TheHeader from "../src/components/layouts/TheHeader.vue";
+import TheFooter from "../src/components/layouts/TheFooter.vue";
 export default {
-    components: { TheHeader },
+    components: { TheHeader, TheFooter },
 };
 </script>
 

@@ -9,6 +9,6 @@
 - Tắt kích hoạt môi trường ảo: ```deactivate```
 ## Hướng dẫn cài đặt môi trường cho front-end
 - Phiên bản sử dụng: NodeJS 14.18.0
-- di chuyển vào thư mục front-end: ```cd front-end```
+- di chuyển vào thư mục front-end: ```cd view```
 - Cài đặt môi trường cho front-end: ```yarn install```
 - Chạy front-end: ```yarn run dev```
