@@ -17,7 +17,7 @@ const router = createRouter({
     { path: "/", redirect: "/homepage" },
     { path: "/homepage", component: HomePage },
     { path: "/profile", component: ProfilePage },
-    { path: "/loginCandicatePage", component: LoginCandicatePage},
+    { path: "/loginCandidatePage", component: LoginCandicatePage},
     { path: "/registerEmployeePage", component: RegisterEmployeePage},
     { path: "/loginEmployeePage", component: LoginEmployeePage},
     { path: "/registerCandicatePage", component: RegisterCandicatePage},
