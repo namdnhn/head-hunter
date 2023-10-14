@@ -98,7 +98,7 @@ class UserController:
             email=user.email,
             password=bcrypt(user.password),
             date_of_birth=user.date_of_birth,
-            role=user.role,
+            # role=user.role,
             phone=user.phone,
         )
         db.add(db_user)
@@ -132,7 +132,7 @@ class UserController:
             "fullname": user.fullname,
             "email": user.email,
             "date_of_birth": user.date_of_birth,
-            "role": user.role,
+            # "role": user.role,
             "phone": user.phone,
             "jwtToken": access_token,
         }
@@ -160,8 +160,8 @@ class UserController:
             dbUserId.password = user.password
         if user.date_of_birth is not None:
             dbUserId.date_of_birth = user.date_of_birth
-        if user.role is not None:
-            dbUserId.role = user.role
+        # if user.role is not None:
+        #     dbUserId.role = user.role
         if user.phone is not None:
             dbUserId.phone = user.phone
         db.commit()
