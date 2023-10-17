@@ -154,18 +154,38 @@ export default {
                 this.formIsValid = false;
             }
         },
-        submitForm() {
+        async submitForm() {
             this.validateForm();
             if (!this.formIsValid) {
                 return;
             }
 
             const formLoginCandicate = {
-                first: this.emailCandicate,
-                second: this.passwordCandicate,
-                third: this.rememberPasswordCandicate,
+                email: this.emailCandicate.value,
+                password: this.passwordCandicate.value,
+                rememberPassword: this.rememberPasswordCandicate.value,
             };
-            console.log(formLoginCandicate);
+            // console.log(formLoginCandicate);
+            try {
+                // Sử dụng fetch để gửi yêu cầu đến API khác
+                const response = await fetch('http://localhost:8000/api/login', {
+                    method: 'POST', // Hoặc 'GET' tùy vào API bạn đang sử dụng
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formLoginCandicate),
+                });
+
+                if (response.ok) {
+                    const responseData = await response.json();
+                    console.log('Đăng nhập thành công', responseData);
+                    this.$router.push('/homepage')
+                } else {
+                    console.error('Lỗi từ API khác:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+            }
         },
         checkKeyDown() {
             this.passwordCandicate.isValid = true;
