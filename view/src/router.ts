@@ -10,6 +10,8 @@ const LoginEmployeePage = defineAsyncComponent(() => import("./pages/auth/LoginE
 const RegisterEmployeePage = defineAsyncComponent(() => import("./pages/auth/RegisterEmployeePage.vue"))
 const ResetPasswordCandicate = defineAsyncComponent(() => import("./pages/auth/ResetPasswordCandicate.vue"))
 const ResetPasswordEmployee = defineAsyncComponent(() => import("./pages/auth/ResetPasswordEmployee.vue"))
+const JobDetail = defineAsyncComponent(() => import("./pages/jobs/JobDetail.vue"))
+const JobSearch = defineAsyncComponent(() => import("./pages/jobs/JobSearch.vue"))
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,7 +24,9 @@ const router = createRouter({
     { path: "/loginEmployeePage", component: LoginEmployeePage},
     { path: "/registerCandidatePage", component: RegisterCandicatePage},
     { path: "/resetPasswordCandicate", component: ResetPasswordCandicate},
-    { path: "/resetPasswordEmployee", component: ResetPasswordEmployee}
+    { path: "/resetPasswordEmployee", component: ResetPasswordEmployee},
+    {path: "/jobdetail/:id", component: JobDetail},
+    {path: "/jobsearch", component: JobSearch}
   ],
 }); 
 
