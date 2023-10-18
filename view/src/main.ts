@@ -11,7 +11,7 @@ import JobCard from './components/jobs/JobCard.vue'
 import CategoryCard from './components/jobs/CategoryCard.vue'
 import ExperienceCard from './components/profile/ExperienceCard.vue'
 import CvCard from './components/profile/CvCard.vue'
-
+import CardCompany from './components/company/CardCompany.vue'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -45,5 +45,6 @@ app.component('JobCard', JobCard)
 app.component('CategoryCard', CategoryCard)
 app.component('ExperienceCard', ExperienceCard)
 app.component('CvCard', CvCard)
+app.component('CardCompany', CardCompany)
 
 app.mount('#app')
