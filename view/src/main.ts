@@ -3,6 +3,7 @@ import './style.css'
 import './index.css'
 import App from './App.vue'
 import router from './router.ts'
+import store from './store/index.ts'
 
 // import base component 
 import BaseDialog from './components/ui/BaseDialog.vue'
@@ -34,6 +35,7 @@ library.add(faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronR
 const app = createApp(App)
 
 app.use(router)
+app.use(store)
 
 // add font icon 
 app.component('font-awesome-icon', FontAwesomeIcon)

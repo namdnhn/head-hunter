@@ -162,6 +162,7 @@ export default {
 				error: null,
 			},
 			formIsValid: true,
+            error: null,
 		};
 	},
 	methods: {
@@ -197,34 +198,25 @@ export default {
 			const formRegisterCandicate = {
 				email: this.registerEmailCandicate.value,
 				password: this.registerPasswordCandicate.value,
-				fullname: "To Lam Son",
-				date_of_birth: "2023-10-14T07:22:42.333Z",
+				fullname: "none",
+				date_of_birth: "2023-10-18T18:53:43.235Z",
 				role: "candidate",
-				phone: "0123456789",
+				phone: "none"
 			};
 
+            console.log('form vuex');
+            
 			try {
-				// Sử dụng fetch để gửi yêu cầu đến API khác
-				const response = await fetch(
-					"http://localhost:8000/api/register",
-					{
-						method: "POST", // Hoặc 'GET' tùy vào API bạn đang sử dụng
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify(formRegisterCandicate),
-					}
-				);
-
-				if (response.ok) {
-					const responseData = await response.json();
-					console.log("Đăng kí thành công", responseData);
-                    this.$router.push({ path: '/homepage' });
-				} else {
-					console.error("Lỗi từ API khác:", response.statusText);
-				}
+                // handle register
+                const payload = {
+                    ...formRegisterCandicate,
+                    mode: 'register'
+                }
+                await this.$store.dispatch("auth", payload);
+                console.log('success vuex');
+                
 			} catch (error) {
-				console.error("Lỗi:", error);
+				console.log(error);
 			}
 		},
 		checkKeyDownPassword() {
