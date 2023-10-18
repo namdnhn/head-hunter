@@ -203,8 +203,6 @@ export default {
 				role: "candidate",
 				phone: "none"
 			};
-
-            console.log('form vuex');
             
 			try {
                 // handle register
@@ -213,8 +211,8 @@ export default {
                     mode: 'register'
                 }
                 await this.$store.dispatch("auth", payload);
-                console.log('success vuex');
-                
+                const redirectUrl = '/' + (this.$route.query.redirect || 'homepage');
+                this.$router.push(redirectUrl);
 			} catch (error) {
 				console.log(error);
 			}
