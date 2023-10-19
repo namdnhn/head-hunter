@@ -242,15 +242,6 @@ export default {
 
         }
     },
-    mounted() {
-        const expiresIn = new Date().getTime() + 259200000;
-        localStorage.setItem('expiresIn', expiresIn.toString());
-
-        const res = localStorage.getItem('expiresIn');
-        const test = Number(res)
-        console.log(test);
-        
-    }
 }
 
 </script>

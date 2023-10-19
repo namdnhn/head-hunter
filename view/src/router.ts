@@ -23,7 +23,7 @@ const router = createRouter({
     { path: "/registerEmployeePage", component: RegisterEmployeePage},
     { path: "/loginEmployeePage", component: LoginEmployeePage},
     { path: "/registerCandidatePage", component: RegisterCandicatePage},
-    { path: "/resetPasswordCandicate", component: ResetPasswordCandicate},
+    { path: "/resetPasswordCandidate", component: ResetPasswordCandicate},
     { path: "/resetPasswordEmployee", component: ResetPasswordEmployee},
     {path: "/jobdetail/:id", component: JobDetail},
     {path: "/jobsearch", component: JobSearch}

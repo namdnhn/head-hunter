@@ -1,4 +1,4 @@
-interface AuthPayload {
+type AuthPayload = {
 	email: string;
 	password: string;
 	fullname: string;
@@ -119,4 +119,31 @@ export default {
 	setAutoLogout(state: any) {
 		state.didAutoLogout = true;
 	},
+
+	async fetchUserById(context: any, id: Number) {
+		let apiUrl = await context.rootGetters.getApiUrl;
+		apiUrl += `user/${id}`;
+		const response = await fetch(apiUrl, {
+			method: 'GET',
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+
+		const responseData = await response.json();
+
+		if(!response.ok) {
+			const error = new Error(responseData.message || "Lỗi lấy dữ liệu người dùng");
+			throw error;
+		}
+
+		const payload = {
+			fullname: responseData.fullname,
+			phone: responseData.phone,
+			date_of_birth: responseData.date_of_birth,
+			email: responseData.email,
+		}
+
+		context.commit('setUserInfo', payload);
+	}
 };
