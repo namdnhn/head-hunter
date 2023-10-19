@@ -140,6 +140,7 @@
 				</div>
 			</div>
 		</div>
+        <base-spinner v-if="isLoading"></base-spinner>
 	</section>
 </template>
 
@@ -163,6 +164,7 @@ export default {
 			},
 			formIsValid: true,
             error: null,
+            isLoading: false
 		};
 	},
 	methods: {
@@ -194,13 +196,13 @@ export default {
 			if (!this.formIsValid) {
 				return;
 			}
+            this.isLoading = true
 
 			const formRegisterCandicate = {
 				email: this.registerEmailCandicate.value,
 				password: this.registerPasswordCandicate.value,
 				fullname: "none",
-				date_of_birth: "2023-10-18T18:53:43.235Z",
-				role: "candidate",
+				date_of_birth: new Date().toISOString(),
 				phone: "none"
 			};
             
@@ -216,6 +218,8 @@ export default {
 			} catch (error) {
 				console.log(error);
 			}
+
+            this.isLoading = false
 		},
 		checkKeyDownPassword() {
 			this.registerPasswordCandicate.isValid = true;
@@ -223,6 +227,6 @@ export default {
 		checkKeyDownPasswordConfirm() {
 			this.registerPasswordCandicateConfirm.isValid = true;
 		},
-	},
+	}
 };
 </script>

@@ -116,6 +116,7 @@
                 </div>
             </div>
         </div>
+        <base-spinner v-if="isLoading"></base-spinner>
     </section>
 </template>
 
@@ -137,6 +138,7 @@ export default {
                 isValid: false,
             },
             formIsValid: true,
+            isLoading: false
         };
     },
     methods: {
@@ -160,37 +162,27 @@ export default {
                 return;
             }
 
+            this.isLoading = true;
+
             const formLoginCandicate = {
                 email: this.emailCandicate.value,
                 password: this.passwordCandicate.value,
-                rememberPassword: this.rememberPasswordCandicate.value,
             };
-            // console.log(formLoginCandicate);
             try {
-                // Sử dụng fetch để gửi yêu cầu đến API khác
-                const response = await fetch('http://localhost:8000/api/login', {
-                    method: 'POST', // Hoặc 'GET' tùy vào API bạn đang sử dụng
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formLoginCandicate),
-                });
-
-                if (response.ok) {
-                    const responseData = await response.json();
-                    console.log('Đăng nhập thành công', responseData);
-                    this.$router.push('/homepage')
-                } else {
-                    console.error('Lỗi từ API khác:', response.statusText);
-                }
+                await this.$store.dispatch('auth', {
+                    ...formLoginCandicate,
+                    mode: 'login'
+                })
+                const redirectUrl = '/' + (this.$route.query.redirect || 'homepage');
+                this.$router.push(redirectUrl);
             } catch (error) {
                 console.error('Lỗi:', error);
             }
+            this.isLoading = false;
         },
         checkKeyDown() {
             this.passwordCandicate.isValid = true;
         },
     },
-    watch: {},
 };
 </script>

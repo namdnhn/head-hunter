@@ -9,5 +9,8 @@ export default {
     },
     userId(state: AuthState) { 
         return state.userId;
+    },
+    isAuthenticated(state: AuthState) {
+        return !!state.token;
     }
 }

@@ -1,192 +1,288 @@
 <template>
-    <header class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md z-50">
-        <div class="w-full mx-2 lg:mx-0 lg:w-11/12 flex justify-between">
-            <nav class="flex items-center">
-                <!-- Menu icon  -->
-                <span @click="toggleShowMenu" class="md:hidden w-6 h-6 mr-4 hover:cursor-pointer hover:text-green-600">
-                    <font-awesome-icon icon="fa-solid fa-bars" class="w-6 h-6" />
-                </span>
+	<header
+		class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md z-50"
+	>
+		<div class="w-full mx-2 lg:mx-0 lg:w-11/12 flex justify-between">
+			<nav class="flex items-center">
+				<!-- Menu icon  -->
+				<span
+					@click="toggleShowMenu"
+					class="md:hidden w-6 h-6 mr-4 hover:cursor-pointer hover:text-green-600"
+				>
+					<font-awesome-icon
+						icon="fa-solid fa-bars"
+						class="w-6 h-6"
+					/>
+				</span>
 
-                <!-- Logo -->
-                <a class="mr-10 hover:cursor-pointer">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/HeadHunter_logo.png/480px-HeadHunter_logo.png"
-                        alt="logo" class="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14" />
-                </a>
+				<!-- Logo -->
+				<a class="mr-10 hover:cursor-pointer">
+					<img
+						src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/HeadHunter_logo.png/480px-HeadHunter_logo.png"
+						alt="logo"
+						class="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
+					/>
+				</a>
 
-                <!-- Menu bars on small screen -->
-                <transition name="menu">
-                    <ul v-show="showMenu" class="md:hidden flex flex-col gap-4 absolute top-16 left-0 w-full bg-gray-100">
-                        <li class="mx-2 rounded-md mt-2 p-4 bg-white flex items-center justify-between">
-                            <router-link to="/homepage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</router-link>
-                        </li>
-                        <li class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
-                            @click="toggleMoreInfo('jobs')">
-                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Việc làm
-                            </a>
-                            <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoJobs" />
-                            <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
-                        </li>
-                        <li class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
-                            @click="toggleMoreInfo('companies')">
-                            <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Công ty
-                            </a>
-                            <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoCompanies" />
-                            <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
-                        </li>
-                        <li class="mx-2 rounded-md mb-2 p-4 bg-white flex items-center justify-between"
-                            @click="toggleMoreInfo('profiles')">
-                            <router-link to="/profile" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
-                            </router-link>
-                            <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="!moreInfoProfiles" />
-                            <font-awesome-icon icon="fa-solid fa-chevron-up" v-else />
-                        </li>
-                    </ul>
-                </transition>
+				<!-- Menu bars on small screen -->
+				<transition name="menu">
+					<ul
+						v-show="showMenu"
+						class="md:hidden flex flex-col gap-4 absolute top-16 left-0 w-full bg-gray-100"
+					>
+						<li
+							class="mx-2 rounded-md mt-2 p-4 bg-white flex items-center justify-between"
+						>
+							<router-link
+								to="/homepage"
+								class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+								>Trang chủ</router-link
+							>
+						</li>
+						<li
+							class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
+							@click="toggleMoreInfo('jobs')"
+						>
+							<a
+								class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+								>Việc làm
+							</a>
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-down"
+								v-if="!moreInfoJobs"
+							/>
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-up"
+								v-else
+							/>
+						</li>
+						<li
+							class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
+							@click="toggleMoreInfo('companies')"
+						>
+							<a
+								class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+								>Công ty
+							</a>
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-down"
+								v-if="!moreInfoCompanies"
+							/>
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-up"
+								v-else
+							/>
+						</li>
+						<li
+							class="mx-2 rounded-md mb-2 p-4 bg-white flex items-center justify-between"
+							@click="toggleMoreInfo('profiles')"
+						>
+							<router-link
+								to="/profile"
+								class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+								>Hồ sơ
+							</router-link>
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-down"
+								v-if="!moreInfoProfiles"
+							/>
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-up"
+								v-else
+							/>
+						</li>
+					</ul>
+				</transition>
 
-                <!-- Menu on large screen -->
-                <ul class="hidden md:flex gap-6">
-                    <li>
-                        <router-link to="/homepage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Trang chủ</router-link>
-                    </li>
-                    <li>
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Việc làm
-                            <font-awesome-icon icon="fa-solid fa-chevron-down" />
-                        </a>
-                    </li>
-                    <li>
-                        <a class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Công ty
-                            <font-awesome-icon icon="fa-solid fa-chevron-down" />
-                        </a>
-                    </li>
-                    <li>
-                        <router-link to="/profile" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Hồ sơ
-                        </router-link>
-                    </li>
-                </ul>
-            </nav>
+				<!-- Menu on large screen -->
+				<ul class="hidden md:flex gap-6">
+					<li>
+						<router-link
+							to="/homepage"
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Trang chủ</router-link
+						>
+					</li>
+					<li>
+						<a
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Việc làm
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-down"
+							/>
+						</a>
+					</li>
+					<li>
+						<a
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Công ty
+							<font-awesome-icon
+								icon="fa-solid fa-chevron-down"
+							/>
+						</a>
+					</li>
+					<li>
+						<router-link
+							to="/profile"
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Hồ sơ
+						</router-link>
+					</li>
+				</ul>
+			</nav>
 
-            <!-- login, logout  -->
-            <span class="flex gap-4 items-center" v-if="!loggedIn">
-                <router-link to="/loginCandidatePage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Đăng nhập</router-link>
-                <router-link to="/registerCandidatePage" class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base">Đăng ký</router-link>
-            </span>
+			<!-- login, logout  -->
+			<span class="flex gap-4 items-center" v-if="!isLoggedIn">
+				<router-link
+					to="/loginCandidatePage"
+					class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+					>Đăng nhập</router-link
+				>
+				<router-link
+					to="/registerCandidatePage"
+					class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+					>Đăng ký</router-link
+				>
+			</span>
 
-            <!-- user account info -->
-            <span class="flex gap-4 items-center" v-else>
-                <font-awesome-icon icon="fa-solid fa-bell"
-                    class="hidden md:block text-green-600 text-xl md:text-2xl lg:text-3xl px-3 py-2 bg-slate-100 rounded-full hover:cursor-pointer hover:opacity-90" />
-                <span
-                    class=" relative flex items-center gap-2 py-1 px-2 bg-slate-100 rounded-xl hover:cursor-pointer after:content-[''] after:absolute after:w-full after:h-20"
-                    @mouseover="isShowUserInfo = true" @mouseleave="isShowUserInfo = false">
-                    <img src="https://www.topcv.vn/images/avatar-default.jpg" alt="default avt"
-                        class=" w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover rounded-full">
-                    <p class="hidden lg:block text-xs md:text-sm lg:text-base">Nguyễn Đức Thiện</p>
-                    <font-awesome-icon icon="fa-solid fa-chevron-down" />
-                    <!-- more user account info -->
-                    <transition name="moreInfo">
-                        <ul class="absolute top-12 md:top-14 lg:top-16 right-0 w-72 md:w-80 lg:w-96 rounded-lg shadow-md z-10 bg-white"
-                            v-if="isShowUserInfo">
-                            <base-list icon="fa-solid fa-circle-info" title="Thông tin tài khoản" />
-                            <base-list icon="fa-solid fa-lock" title="Đổi mật khẩu" />
-                            <base-list icon="fa-solid fa-arrow-right-from-bracket" title="Đăng xuất" />
-                        </ul>
-                    </transition>
-                </span>
-            </span>
-
-
-
-        </div>
-    </header>
+			<!-- user account info -->
+			<span class="flex gap-4 items-center" v-else>
+				<font-awesome-icon
+					icon="fa-solid fa-bell"
+					class="hidden md:block text-green-600 text-xl md:text-2xl lg:text-3xl px-3 py-2 bg-slate-100 rounded-full hover:cursor-pointer hover:opacity-90"
+				/>
+				<span
+					class="relative flex items-center gap-2 py-1 px-2 bg-slate-100 rounded-xl hover:cursor-pointer after:content-[''] after:absolute after:w-full after:h-20"
+					@mouseover="isShowUserInfo = true"
+					@mouseleave="isShowUserInfo = false"
+				>
+					<img
+						src="https://www.topcv.vn/images/avatar-default.jpg"
+						alt="default avt"
+						class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover rounded-full"
+					/>
+					<p class="hidden lg:block text-xs md:text-sm lg:text-base">
+						Nguyễn Đức Thiện
+					</p>
+					<font-awesome-icon icon="fa-solid fa-chevron-down" />
+					<!-- more user account info -->
+					<transition name="moreInfo">
+						<ul
+							class="absolute top-12 md:top-14 lg:top-16 right-0 w-72 md:w-80 lg:w-96 rounded-lg shadow-md z-10 bg-white"
+							v-if="isShowUserInfo"
+						>
+							<base-list
+								icon="fa-solid fa-circle-info"
+								title="Thông tin tài khoản"
+							/>
+							<base-list
+								icon="fa-solid fa-lock"
+								title="Đổi mật khẩu"
+							/>
+							<base-list
+								icon="fa-solid fa-arrow-right-from-bracket"
+								title="Đăng xuất"
+							/>
+						</ul>
+					</transition>
+				</span>
+			</span>
+		</div>
+	</header>
 </template>
 
 <script lang="ts">
 import BaseList from "../ui/BaseList.vue";
 export default {
-    components: { BaseList },
-    data() {
-        return {
-            showMenu: false,
-            moreInfoJobs: false,
-            moreInfoCompanies: false,
-            moreInfoProfiles: false,
-            loggedIn: false,
-            isShowUserInfo: false
-        };
-    },
-    methods: {
-        toggleShowMenu() {
-            this.showMenu = !this.showMenu;
-        },
-        toggleMoreInfo(type: string) {
-            switch (type) {
-                case "jobs":
-                    this.moreInfoJobs = !this.moreInfoJobs;
-                    break;
-                case "companies":
-                    this.moreInfoCompanies = !this.moreInfoCompanies;
-                    break;
-                case "profiles":
-                    this.moreInfoProfiles = !this.moreInfoProfiles;
-                    break;
-            }
-        },
-        toggleShowUserInfo() {
-            this.isShowUserInfo = !this.isShowUserInfo;
-            console.log(this.isShowUserInfo);
-        }
-    },
+	components: { BaseList },
+	data() {
+		return {
+			showMenu: false,
+			moreInfoJobs: false,
+			moreInfoCompanies: false,
+			moreInfoProfiles: false,
+			loggedIn: false,
+			isShowUserInfo: false,
+		};
+	},
+	methods: {
+		toggleShowMenu() {
+			this.showMenu = !this.showMenu;
+		},
+		toggleMoreInfo(type: string) {
+			switch (type) {
+				case "jobs":
+					this.moreInfoJobs = !this.moreInfoJobs;
+					break;
+				case "companies":
+					this.moreInfoCompanies = !this.moreInfoCompanies;
+					break;
+				case "profiles":
+					this.moreInfoProfiles = !this.moreInfoProfiles;
+					break;
+			}
+		},
+		toggleShowUserInfo() {
+			this.isShowUserInfo = !this.isShowUserInfo;
+			console.log(this.isShowUserInfo);
+		},
+	},
+	computed: {
+		isLoggedIn() {
+			return this.$store.getters.isAuthenticated;
+		},
+	},
 };
 </script>
 
 <style scoped>
 /* user account more info animate  */
 .moreInfo-enter-from {
-    opacity: 0;
-    transform: translateY(-30px);
+	opacity: 0;
+	transform: translateY(-30px);
 }
 
 .moreInfo-leave-to {
-    opacity: 0;
-    transform: translateY(30px);
+	opacity: 0;
+	transform: translateY(30px);
 }
 
 .moreInfo-enter-to,
 .moreInfo-leave-from {
-    opacity: 1;
-    transform: translateY(0);
+	opacity: 1;
+	transform: translateY(0);
 }
 
 .moreInfo-enter-active {
-    transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 }
 
 .moreInfo-leave-active {
-    transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
 }
 
 /* menu animate  */
 .menu-enter-from {
-    opacity: 0;
-    transform: translateY(-30px);
+	opacity: 0;
+	transform: translateY(-30px);
 }
 
 .menu-leave-to {
-    opacity: 0;
-    transform: translateY(30px);
+	opacity: 0;
+	transform: translateY(30px);
 }
 
 .menu-enter-to,
 .menu-leave-from {
-    opacity: 1;
-    transform: translateY(0);
+	opacity: 1;
+	transform: translateY(0);
 }
 
 .menu-enter-active {
-    transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 }
 
 .menu-leave-active {
-    transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
 }
 </style>
