@@ -140,6 +140,9 @@
 				</div>
 			</div>
 		</div>
+		<base-dialog :show="!!error" title="Đăng kí thất bại!" @close="handleError">
+            <p>{{ error }}<br> Vui lòng thử lại.</p>
+        </base-dialog>
         <base-spinner v-if="isLoading"></base-spinner>
 	</section>
 </template>
@@ -215,8 +218,8 @@ export default {
                 await this.$store.dispatch("auth", payload);
                 const redirectUrl = '/' + (this.$route.query.redirect || 'homepage');
                 this.$router.push(redirectUrl);
-			} catch (error) {
-				console.log(error);
+			} catch (error: any) {
+				this.error = error.message || 'Có lỗi không xác định đã xảy ra!';
 			}
 
             this.isLoading = false
@@ -227,6 +230,9 @@ export default {
 		checkKeyDownPasswordConfirm() {
 			this.registerPasswordCandicateConfirm.isValid = true;
 		},
+		handleError() {
+			this.error = null
+		}
 	}
 };
 </script>

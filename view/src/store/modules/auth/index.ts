@@ -6,7 +6,8 @@ export default {
     state() {
         return {
             token: null,
-            userId: null
+            userId: null,
+            didAutoLogout: false
         }
     },
     actions,

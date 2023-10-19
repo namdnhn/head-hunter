@@ -43,7 +43,12 @@ export default {
 		const responseData = await response.json();
 
 		if (!response.ok) {
-			const error = new Error("Có lỗi xảy ra trong quá trình đăng ký");
+			let error;
+			if (response.status === 404 && mode === 'login') {
+				error = new Error("Email hoặc mật khẩu không chính xác!");
+			} else {
+				error = new Error(responseData.message || "Có lỗi không xác định đã xảy ra!");
+			}
 			throw error;
 		}
 
@@ -51,6 +56,10 @@ export default {
 
 		localStorage.setItem("token", responseData.jwtToken);
 		localStorage.setItem("expiresIn", expiresIn.toString());
+
+		timer = setTimeout(() => {
+			context.dispatch("autoLogout");
+		}, expiresIn);
 
 		if (mode === "register") {
 			localStorage.setItem("userId", responseData.user.id);
@@ -77,9 +86,9 @@ export default {
 			return;
 		}
 
-        timer = setTimeout(() => {
-            context.dispatch('autoLogout');
-        }, expiresIn)
+		timer = setTimeout(() => {
+			context.dispatch("autoLogout");
+		}, expiresIn);
 
 		if (token) {
 			context.commit("setUser", {
@@ -89,22 +98,25 @@ export default {
 		}
 	},
 
-    logout(context: any) {
-        clearTimeout(timer);
+	logout(context: any) {
+		clearTimeout(timer);
 
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('expiresIn');
+		localStorage.removeItem("token");
+		localStorage.removeItem("userId");
+		localStorage.removeItem("expiresIn");
 
-        context.commit('setUser', {
-            token: null,
-            userId: null
-        });
+		context.commit("setUser", {
+			token: null,
+			userId: null,
+		});
+	},
 
-    },
+	autoLogout(context: any) {
+		context.dispatch("logout");
+		context.commit("setLogout");
+	},
 
-    autoLogout(context: any) { 
-        context.dispatch('logout');
-        context.commit('setAutoLogout');
-    }
+	setAutoLogout(state: any) {
+		state.didAutoLogout = true;
+	},
 };

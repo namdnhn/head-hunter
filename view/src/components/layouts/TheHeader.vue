@@ -16,13 +16,13 @@
 				</span>
 
 				<!-- Logo -->
-				<a class="mr-10 hover:cursor-pointer">
+				<router-link to="/homepage" class="mr-10 hover:cursor-pointer">
 					<img
-						src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/HeadHunter_logo.png/480px-HeadHunter_logo.png"
+						src="../../assets/headHunterLogo.png"
 						alt="logo"
 						class="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
 					/>
-				</a>
+				</router-link>
 
 				<!-- Menu bars on small screen -->
 				<transition name="menu">
@@ -182,6 +182,7 @@
 							<base-list
 								icon="fa-solid fa-arrow-right-from-bracket"
 								title="Đăng xuất"
+								@click="logout"
 							/>
 						</ul>
 					</transition>
@@ -226,6 +227,9 @@ export default {
 			this.isShowUserInfo = !this.isShowUserInfo;
 			console.log(this.isShowUserInfo);
 		},
+		logout() {
+			this.$store.dispatch("logout");
+		}
 	},
 	computed: {
 		isLoggedIn() {

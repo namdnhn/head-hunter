@@ -12,5 +12,9 @@ export default {
     setUser(state: authState, payload: authPayload) {
         state.token = payload.token;
         state.userId = payload.userId;
+    },
+    setLogout(state: authState) {
+        state.token = null;
+        state.userId = null;
     }
 }

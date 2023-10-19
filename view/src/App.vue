@@ -13,6 +13,21 @@ import TheHeader from "../src/components/layouts/TheHeader.vue";
 import TheFooter from "../src/components/layouts/TheFooter.vue";
 export default {
     components: { TheHeader, TheFooter },
+    created() {
+        this.$store.dispatch('autoLogin')
+    },
+    computed: {
+        didAutoLogout() {
+            return this.$store.getters.didAutoLogout
+        }
+    },
+    watch: {
+        didAutoLogout(curValue, newValue) {
+            if (curValue && curValue !== newValue) {
+                this.$router.replace('/homepage')
+            }
+        }
+    }
 };
 </script>
 
