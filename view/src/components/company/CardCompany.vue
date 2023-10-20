@@ -1,51 +1,56 @@
-
 <template>
-    <div class="flex flex-col justify-center items-center ">
-            <div class="bg-gray-300 relative flex flex-col items-center rounded-[20px] w-[800px] h-[450px] mx-auto p-4  bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none">
-                <div class="relative flex h-40 w-full justify-center rounded-xl bg-cover" >
-                    <img src="../../pages/data/sun-cover.jpg" class="absolute flex h-60 w-full justify-center rounded-xl bg-cover"> 
-                    <div class="absolute -bottom-32 flex h-[120px] w-[120px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
-                        <img class="h-full w-full rounded-full" src="https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-12.png" alt="" />
-                    </div>
-                </div> 
-                <div class=" hover:cursor-pointer mt-32 flex flex-col items-center" >
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-black">
-                        {{ company.name }}
-                    </h4>
-                    <p class="text-base font-normal text-gray-600"> {{company.description}}</p>
-                </div> 
-                <div class="mt-6 mb-3 flex gap-14 md:!gap-14">
-                    <div class="flex flex-col items-center justify-center">
-                    <p class="text-2xl font-bold text-navy-700 dark:text-black">{{  company.numberJobPost }}</p>
-                    <p class="text-sm font-normal text-gray-600">Job Posts</p>
-                    </div>
-                    <div class="flex flex-col items-center justify-center">
-                    <p class="text-2xl font-bold text-navy-700 dark:text-black">
-                        {{ company.numberFollowers }}
-                    </p>
-                    <p class="text-sm font-normal text-gray-600">Followers</p>
-                    </div>
-                    <div class="flex flex-col items-center justify-center">
-                    <p class="text-2xl font-bold text-navy-700 dark:text-black">
-                        {{ company.numberFollowing }}
-                    </p>
-                    <p class="text-sm font-normal text-gray-600">Following</p>
-                    </div>
-                </div>
-            </div>  
-        </div>
+    <li class="bg-slate-50 border border-sky-800 hover:border-green-600 h-auto  rounded-lg">
+
+        <!-- job desc  -->
+        <span class="pt-20 flex flex-col items-center justify-center mx-4">
+            <img :src="logo" alt="logo company"
+                class="w-20 h-auto hover:cursor-pointer" />
+            <div class="text-center mt-4">
+                <router-link :to="companyDetailPage" class=" text-sky-900 font-bold text-sm md:text-base lg:text-xl hover:cursor-pointer hover:text-green-700">{{ companyName }}</router-link>
+                <p class="text-gray-500 text-xs md:text-xs lg:text-base">{{ companyDescription }}</p>
+                <span class="text-gray-500 text-xs md:text-sm lg:text-base">
+                    <font-awesome-icon :icon="['fas', 'location-dot']" /> {{ companyAddress }}
+                </span>
+            </div>
+        </span>
+
+        <!-- salary and number of position  -->
+        <span class="flex justify-between items-center mx-2 md:mx-4 lg:mx-6 xl:mx-8 mt-10 mb-4 gap-1">
+            <div class="bg-sky-900 p-2 rounded-2xl text-xs md:text-xs lg:text-base text-yellow-100 hover:cursor-pointer hover:bg-sky-700">Đánh giá</div>
+
+            <div class="bg-sky-900 p-2 rounded-2xl text-xs md:text-xs lg:text-base text-yellow-100 hover:cursor-pointer hover:bg-sky-700">Xem công ty</div>
+        </span>
+    </li>
 </template>
 
 <script lang="ts">
-    // import companys from '../.././pages/data/company.ts'
-
-    export default {
-        props:['company'],
-        component:{
-            name:"card-company",
+export default {
+    props: {
+        id: {
+            type: String,
+            required: true,
         },
-        data() {
-            
+        logo: {
+            type: String,
+            required: true,
+        },
+        companyName: {
+            type: String,
+            required: true,
+        },
+        companyDescription: {
+            type: String,
+            required: true,
+        },
+        companyAddress: {
+            type:String,
+            required: true,
+        }
+    },
+    computed: {
+        companyDetailPage() {
+            return "/companyDetailPage" ;
         }
     }
+}
 </script>

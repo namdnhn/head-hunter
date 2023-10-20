@@ -9,8 +9,8 @@
 
                 <!-- Logo -->
                 <a class="mr-10 hover:cursor-pointer">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/HeadHunter_logo.png/480px-HeadHunter_logo.png"
-                        alt="logo" class="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14" />
+                    <img src="./logo.png"
+                        alt="logo" class="rounded-full w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14" />
                 </a>
 
                 <!-- Menu bars on small screen -->
