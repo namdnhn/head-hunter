@@ -10,6 +10,7 @@ type UserInfo = {
     email: string
 }
 
+
 export default {
     token(state: AuthState) {
         return state.token;

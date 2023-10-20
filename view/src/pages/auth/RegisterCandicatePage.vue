@@ -311,6 +311,8 @@ export default {
 				phone: this.phoneCandidate.value,
 			};
 
+            console.log('form vuex');
+            
 			try {
 				// handle register
 				const payload = {
