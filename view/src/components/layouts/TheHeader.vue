@@ -1,5 +1,5 @@
 <template>
-	<header class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md z-50">
+	<header class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md z-30">
 		<div class="w-full mx-2 lg:mx-0 lg:w-11/12 flex justify-between">
 			<nav class="flex items-center">
 				<!-- Menu icon  -->

@@ -1,5 +1,5 @@
 <template>
-    <section class="fixed top-0 left-0 right-0 h-full z-50 bg-lime-50 flex items-center justify-center">
+    <section class="fixed top-0 left-0 right-0 h-full z-40 bg-lime-50 flex items-center justify-center">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-cyan-900">
                 Trang đăng nhập này dành riêng cho ứng viên

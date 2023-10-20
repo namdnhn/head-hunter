@@ -1,6 +1,6 @@
 <template>
 	<teleport to="body">
-		<div class="fixed top-0 left-0 w-full h-screen z-10 backdrop"></div>
+		<div class="fixed top-0 left-0 w-full h-screen z-50 backdrop"></div>
 		<div class="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
 			<div role="status" class=" max-w-min">
 				<svg

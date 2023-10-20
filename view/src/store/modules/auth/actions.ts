@@ -5,7 +5,7 @@ type AuthPayload = {
 	phone: string;
 	mode: string;
 	date_of_birth: string;
-}
+};
 
 let timer: string | number | NodeJS.Timeout | undefined;
 
@@ -44,10 +44,14 @@ export default {
 
 		if (!response.ok) {
 			let error;
-			if (response.status === 404 && mode === 'login') {
+			if (response.status === 404 && mode === "login") {
 				error = new Error("Email hoặc mật khẩu không chính xác!");
 			} else {
-				error = new Error(responseData.message || "Có lỗi không xác định đã xảy ra!");
+				error = new Error(
+					responseData.message || "Có lỗi không xác định đã xảy ra!"
+				);
+                console.log(error);
+                
 			}
 			throw error;
 		}
@@ -55,7 +59,7 @@ export default {
 		const expiresIn = new Date().getTime() + 259200000;
 
 		localStorage.setItem("token", responseData.jwtToken);
-		localStorage.setItem("expiresIn", expiresIn.toString());
+		localStorage.setItem("expiresIn", expiresIn.toString());    
 
 		timer = setTimeout(() => {
 			context.dispatch("autoLogout");
@@ -124,26 +128,30 @@ export default {
 		let apiUrl = await context.rootGetters.getApiUrl;
 		apiUrl += `user/${id}`;
 		const response = await fetch(apiUrl, {
-			method: 'GET',
+			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
 			},
-		})
+		});
 
 		const responseData = await response.json();
 
-		if(!response.ok) {
-			const error = new Error(responseData.message || "Lỗi lấy dữ liệu người dùng");
+		if (!response.ok) {
+			const error = new Error(
+				responseData.message || "Lỗi lấy dữ liệu người dùng"
+			);
 			throw error;
 		}
+
+        const dob = new Date(Date.parse(responseData.date_of_birth)).toLocaleDateString('en-GB')
 
 		const payload = {
 			fullname: responseData.fullname,
 			phone: responseData.phone,
-			date_of_birth: responseData.date_of_birth,
+			date_of_birth: dob,
 			email: responseData.email,
-		}
+		};
 
-		context.commit('setUserInfo', payload);
-	}
+		context.commit("setUserInfo", payload);
+	},
 };

@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-
 import athModule from './modules/auth/index.ts';
 
 const store = createStore({
