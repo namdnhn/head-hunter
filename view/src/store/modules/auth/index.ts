@@ -6,7 +6,14 @@ export default {
     state() {
         return {
             token: null,
-            userId: null
+            userId: null,
+            didAutoLogout: false,
+            userInfo: {
+                fullname: null,
+                phone: null,
+                date_of_birth: null,
+                email: null,
+            }
         }
     },
     actions,
