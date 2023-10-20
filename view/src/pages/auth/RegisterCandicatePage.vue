@@ -9,7 +9,7 @@
 			>
 				Trang đăng ký này dành riêng cho ứng viên
 			</a>
-			<form
+			<div
 				@submit.prevent="submitForm"
 				class="w-full bg-gray- rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-sky-200 dark:border-gray-700"
 			>
@@ -206,7 +206,7 @@
 						</p>
 					</form>
 				</div>
-			</form>
+			</div>
 		</div>
 		<base-dialog
 			:show="!!error"
