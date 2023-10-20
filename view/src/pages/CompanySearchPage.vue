@@ -1,6 +1,6 @@
 
 <template>
-    <section class="pt-20 bg-lime-50" v-for="company in companys">
+    <section class="pt-20 bg-slate-50" v-for="company in companys">
         <card-company :company="company"></card-company>
     </section>
 </template>

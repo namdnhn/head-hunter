@@ -10,7 +10,8 @@ const LoginEmployeePage = defineAsyncComponent(() => import("./pages/auth/LoginE
 const RegisterEmployeePage = defineAsyncComponent(() => import("./pages/auth/RegisterEmployeePage.vue"))
 const ResetPasswordCandicate = defineAsyncComponent(() => import("./pages/auth/ResetPasswordCandicate.vue"))
 const ResetPasswordEmployee = defineAsyncComponent(() => import("./pages/auth/ResetPasswordEmployee.vue"))
-const CompanyListPage = defineAsyncComponent(() => import("./pages/CompanyListPage.vue"))
+const CompanySearchPage = defineAsyncComponent(() => import("./pages/CompanySearchPage.vue"))
+const CompanyDetailPage = defineAsyncComponent(() => import("./pages/CompanyDetail.vue"))
 
 const router = createRouter({
   history: createWebHistory(),
@@ -24,7 +25,8 @@ const router = createRouter({
     { path: "/registerCandicatePage", component: RegisterCandicatePage},
     { path: "/resetPasswordCandicate", component: ResetPasswordCandicate},
     { path: "/resetPasswordEmployee", component: ResetPasswordEmployee},
-    { path: "/companyListPage", component: CompanyListPage},
+    { path: "/companySearchPage", component: CompanySearchPage},
+    { path: "/companyDetailPage", component: CompanyDetailPage}
   ],
 }); 
 
