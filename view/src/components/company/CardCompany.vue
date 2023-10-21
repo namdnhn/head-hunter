@@ -1,12 +1,11 @@
 <template>
     <li class="bg-slate-50 border border-sky-800 hover:border-green-600 h-auto  rounded-lg">
-
         <!-- job desc  -->
         <span class="pt-20 flex flex-col items-center justify-center mx-4">
             <img :src="logo" alt="logo company"
                 class="w-20 h-auto hover:cursor-pointer" />
             <div class="text-center mt-4">
-                <router-link :to="companyDetailPage" class=" text-sky-900 font-bold text-sm md:text-base lg:text-xl hover:cursor-pointer hover:text-green-700">{{ companyName }}</router-link>
+                <router-link :to="companyDetaliLink" class=" text-sky-900 font-bold text-sm md:text-base lg:text-xl hover:cursor-pointer hover:text-green-700">{{ companyName }}</router-link>
                 <p class="text-gray-500 text-xs md:text-xs lg:text-base">{{ companyDescription }}</p>
                 <span class="text-gray-500 text-xs md:text-sm lg:text-base">
                     <font-awesome-icon :icon="['fas', 'location-dot']" /> {{ companyAddress }}
@@ -27,7 +26,7 @@
 export default {
     props: {
         id: {
-            type: String,
+            type: Number,
             required: true,
         },
         logo: {
@@ -48,8 +47,8 @@ export default {
         }
     },
     computed: {
-        companyDetailPage() {
-            return "/companyDetailPage" ;
+        companyDetaliLink() {
+            return "/companydetail/" + this.id;
         }
     }
 }

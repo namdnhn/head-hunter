@@ -3,9 +3,9 @@
         <div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             <div class="flex flex-col gap-4 items-center">
                 <h1 class="flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-bold text-amber-100">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/HeadHunter_logo.png/480px-HeadHunter_logo.png"
+                    <img src="../../assets/logo.png"
                         alt="logo head hunter"
-                        class=" w-12 md:w-14 lg:w-16">
+                        class=" w-12 md:w-14 lg:w-16 rounded-full">
                     Head Hunter
                 </h1>
                 <address class="text-xs md:text-sm lg:text-base text-stone-400">144 Xuân Thủy, Cầu Giấy, Hà Nội</address>
