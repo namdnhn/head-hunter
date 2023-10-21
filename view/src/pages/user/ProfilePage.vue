@@ -664,7 +664,7 @@
 </template>
 
 <script lang="ts">
-import LanguageCard from "../components/profile/LanguageCard.vue";
+import LanguageCard from "../../components/profile/LanguageCard.vue";
 export default {
 	components: {
 		LanguageCard,

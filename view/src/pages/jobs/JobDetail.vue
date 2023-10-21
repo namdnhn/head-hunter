@@ -35,12 +35,12 @@
 							Front-end Developer
 						</h1>
 						<span
-							class="flex gap-1 text-xs lg:text-sm text-sky-900"
+							class="flex items-center gap-1 text-xs lg:text-sm text-sky-900"
 						>
 							<font-awesome-icon
 								icon="fa-solid fa-location-dot"
 							/>
-							<address>Cầu Giấy, Hà Nội</address>
+							<address>Tầng 19, Leadvisors Tower, 643 Phạm Văn Đồng, Bắc Từ Liêm</address>
 						</span>
 					</div>
 
@@ -121,7 +121,7 @@
 		<!-- job description and suggest job -->
 		<div class="px-10 xl:px-40 pt-4 pb-10 flex flex-col lg:flex-row gap-10">
 			<div
-				class="p-4 border border-green-400 rounded-lg flex flex-col justify-between gap-6 lg:basis-3/4"
+				class="p-4 border border-green-400 rounded-lg flex flex-col justify-between gap-6 lg:basis-3/4 h-min"
 			>
 				<div class="flex flex-col gap-6">
 					<ul class="flex gap-6 text-xs md:text-sm lg:text-base">
@@ -383,6 +383,74 @@
 										hàng năm.
 									</p>
 								</li>
+								<li class="flex items-center gap-2">
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+									<p>
+										Thưởng theo hiệu quả công việc (hoàn
+										thành milestone, deadline, ...), thưởng
+										năm, các dịp lễ tết.
+									</p>
+								</li>
+								<li class="flex items-center gap-2">
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+									<p>
+										Môi trường trẻ, năng động, sáng tạo, hỗ
+										trợ tối đa sự phát triển và công việc
+										của nhân viên.
+									</p>
+								</li>
+								<li class="flex items-center gap-2">
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+									<p>
+										Được đào tạo để thường xuyên nâng cao
+										nghiệp vụ. Cơ hội được học hỏi, làm việc
+										với công nghệ mới.
+									</p>
+								</li>
+								<li class="flex items-center gap-2">
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+									<p>
+										Được làm việc trong một môi trường
+										chuyên nghiệp với các đối tác nước
+										ngoài.
+									</p>
+								</li>
+								<li class="flex items-center gap-2">
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+									<p>
+										Được đóng bảo hiểm và các chế độ khác
+										theo Luật lao động; khám sức khỏe định
+										kỳ hàng năm.
+									</p>
+								</li>
+								<li class="flex items-center gap-2">
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+									<p>
+										Được tham gia các câu lạc bộ thể thao:
+										bóng đá, chạy bộ,...
+									</p>
+								</li>
+								<li class="flex items-center gap-2">
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+									<p>
+										Được tham dự các buổi đi chơi, dã ngoại,
+										nghỉ mát,...    
+									</p>
+								</li>
 							</ul>
 						</div>
 					</transition>
@@ -426,7 +494,7 @@
 				</ul>
 
 				<button class="text-xs md:text-sm lg:text-base">
-					Xem thêm
+					<router-link to="/jobsearch">Xem thêm</router-link>
 				</button>
 			</div>
 		</div>

@@ -5,7 +5,7 @@ import store from "./store/index.ts";
 //import page
 const HomePage = defineAsyncComponent(() => import("./pages/HomePage.vue"));
 const ProfilePage = defineAsyncComponent(
-	() => import("./pages/ProfilePage.vue")
+	() => import("./pages/user/ProfilePage.vue")
 );
 const LoginCandicatePage = defineAsyncComponent(
 	() => import("./pages/auth/LoginCandicatePage.vue")
@@ -31,8 +31,8 @@ const JobDetail = defineAsyncComponent(
 const JobSearch = defineAsyncComponent(
 	() => import("./pages/jobs/JobSearch.vue")
 );
-const CompanySearchPage = defineAsyncComponent(() => import("./pages/CompanySearchPage.vue"))
-const CompanyDetailPage = defineAsyncComponent(() => import("./pages/CompanyDetail.vue"))
+const CompanySearchPage = defineAsyncComponent(() => import("./pages/company/CompanySearchPage.vue"))
+const CompanyDetailPage = defineAsyncComponent(() => import("./pages/company/CompanyDetail.vue"))
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -85,9 +85,12 @@ const router = createRouter({
 			path: "/jobsearch",
 			component: JobSearch,
 		},    
-    { path: "/companySearchPage", component: CompanySearchPage},
-    { path: "/companyDetailPage", component: CompanyDetailPage}
+    { path: "/companysearch", component: CompanySearchPage},
+    { path: "/companydetail/:id", component: CompanyDetailPage}
 	],
+    scrollBehavior () {
+        return {top: 0, behavior: 'smooth'}
+    }
 });
 
 router.beforeEach(function (to, _, next) {

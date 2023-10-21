@@ -33,8 +33,6 @@
 					/>
 				</div>
 
-
-
 				<!-- Field  -->
 				<div class="flex flex-col gap-4">
 					<span class="flex items-center justify-between">
@@ -62,42 +60,40 @@
 							v-if="isExpandSkills"
 						>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="html" />
-								<label for="html"
-									>Phát triển web (102)</label
+								<input type="checkbox" id="web" />
+								<label for="web">Phát triển web (102)</label>
+							</li>
+							<li class="flex gap-2 items-center">
+								<input type="checkbox" id="app" />
+								<label for="app"
+									>Phát triển ứng dụng (46)</label
 								>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="vue" />
-								<label for="vue">Phát triển ứng dụng (46)</label>
+								<input type="checkbox" id="security" />
+								<label for="security">Bảo mật (4)</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="node" />
-								<label for="node">Bảo mật (4)</label>
+								<input type="checkbox" id="data" />
+								<label for="data">Khoa học dữ liệu (20)</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="react" />
-								<label for="react">Khoa học dữ liệu (20)</label>
+								<input type="checkbox" id="cloud" />
+								<label for="cloud"
+									>Điện toán đám mây (20)</label
+								>
 							</li>
-                            <li class="flex gap-2 items-center">
-								<input type="checkbox" id="react" />
-								<label for="react">Điện toán đám mây (20)</label>
+							<li class="flex gap-2 items-center">
+								<input type="checkbox" id="network" />
+								<label for="network">Network (20)</label>
 							</li>
-                            <li class="flex gap-2 items-center">
-								<input type="checkbox" id="react" />
-								<label for="react">Network (20)</label>
+							<li class="flex gap-2 items-center">
+								<input type="checkbox" id="ai" />
+								<label for="ai">Trí tuệ nhân tạo (20)</label>
 							</li>
-                            <li class="flex gap-2 items-center">
-								<input type="checkbox" id="react" />
-								<label for="react">Trí tuệ nhân tạo (20)</label>
-							</li>
-                            <li class="flex gap-2 items-center">
-								<input type="checkbox" id="react" />
-								<label for="react">RnD (20)</label>
-							</li>
-                            <li class="flex gap-2 items-center">
-								<input type="checkbox" id="react" />
-								<label for="react">Others</label>
+							<li class="flex gap-2 items-center">
+								<input type="checkbox" id="rnd" />
+								<label for="rnd">RnD (20)</label>
 							</li>
 						</ul>
 					</transition>
@@ -164,10 +160,10 @@
 			</div>
 
 			<div class="basis-3/4">
-                <div
+				<div
 					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
 				>
-					<p>Các công ty nổi bật</p>
+					<p>120 kết quả</p>
 					<button
 						class="px-4 py-2 relative bg-white rounded-md text-gray-600 flex justify-between items-center gap-2"
 						@click="expand('sort')"
@@ -213,38 +209,61 @@
 				</div>
 				<div
 					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
-				>
-				</div>
+				></div>
 
-				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-					<company-search
-						v-for="company in companys"
-						:key="company.id"
+				<ul
+					class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4"
+				>
+					<card-company
+						v-for="company in companies"
 						:id="company.id"
+						:key="company.id"
 						:companyName="company.companyName"
 						:companyDescription="company.companyDescription"
-                        :companyAddress="company.companyAddress"
+						:companyAddress="company.companyAddress"
 						:logo="company.logo"
-					/>
+					></card-company>
 				</ul>
 
-                <div class="mt-4 flex items-center justify-center gap-1 text-xs md:text-sm lg:text-base ">
-                    <!-- <font-awesome-icon icon="fa-solid fa-angles-left" class="p-2 hover:cursor-pointer hover:bg-green-300     rounded-md"/> -->
-                    <span class="border border-cyan-900 py-2 px-4 hover:disabled bg-gray-500   rounded-md">&lt&lt</span>
-                    <span class="border border-cyan-900 py-2 px-4 hover:cursor-pointer hover:bg-cyan-400   rounded-md">1</span>
-                    <span class="border border-cyan-900 py-2 px-4 hover:cursor-pointer hover:bg-cyan-400   rounded-md">2</span>
-                    <span class="border border-cyan-900 py-2 px-4 hover:cursor-pointer hover:bg-cyan-400   rounded-md">3</span>
-                    <span class="border border-cyan-900 py-2 px-4 hover:cursor-pointer hover:bg-cyan-400   rounded-md">4</span>
-                    <span class="border border-cyan-900 py-2 px-4 hover:cursor-pointer hover:bg-cyan-400   rounded-md">>></span>
-                    <!-- <font-awesome-icon icon="fa-solid fa-angles-right" class="p-2 hover:cursor-pointer hover:bg-green-300    rounded-md"/> -->
-                </div>
+				<div
+					class="mt-4 flex items-center justify-center gap-6 text-xs md:text-sm lg:text-base"
+				>
+					<font-awesome-icon
+						icon="fa-solid fa-angles-left"
+						class="p-2 hover:cursor-pointer hover:bg-green-300 rounded-md"
+					/>
+					<span
+						class="py-2 px-4 hover:cursor-pointer hover:bg-green-300 rounded-md"
+						>1</span
+					>
+					<span
+						class="py-2 px-4 hover:cursor-pointer hover:bg-green-300 rounded-md"
+						>2</span
+					>
+					<span
+						class="py-2 px-4 hover:cursor-pointer hover:bg-green-300 rounded-md"
+						>3</span
+					>
+					<span
+						class="py-2 px-4 hover:cursor-pointer hover:bg-green-300 rounded-md"
+						>4</span
+					>
+					<font-awesome-icon
+						icon="fa-solid fa-angles-right"
+						class="p-2 hover:cursor-pointer hover:bg-green-300 rounded-md"
+					/>
+				</div>
 			</div>
 		</div>
 	</main>
 </template>
 
 <script lang="ts">
+import CardCompany from "../../components/company/CardCompany.vue";
 export default {
+	components: {
+		CardCompany,
+	},
 	data() {
 		return {
 			experienceLevel: false,
@@ -255,19 +274,19 @@ export default {
 			isExpandSort: false,
 			nameCompany: "",
 			workLocation: "",
-			companys: [
+			companies: [
 				{
 					id: 1,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
 				},
 				{
 					id: 2,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
 				},
 
@@ -275,49 +294,49 @@ export default {
 					id: 3,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-3.png",
 				},
 				{
 					id: 4,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-4.png",
 				},
 				{
 					id: 5,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-5.png",
 				},
 				{
 					id: 6,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-6.png",
 				},
 				{
 					id: 7,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-7.png",
 				},
 				{
 					id: 8,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-8.png",
 				},
 				{
 					id: 9,
 					companyName: "Sun* INC Company",
 					companyDescription: "Software and Consultancy",
-                    companyAddress:"Ha Noi, Viet Nam",
+					companyAddress: "Ha Noi, Viet Nam",
 					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-9.png",
 				},
 			],

@@ -51,7 +51,6 @@ export default {
 					responseData.message || "Có lỗi không xác định đã xảy ra!"
 				);
                 console.log(error);
-                
 			}
 			throw error;
 		}
