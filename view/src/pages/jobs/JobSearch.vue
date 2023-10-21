@@ -1,9 +1,9 @@
 <template>
 	<main class="pt-16 lg:pt-20 bg-gray-200">
-		<div class="px-20 flex flex-col lg:flex-row gap-6 mt-10">
+		<div class="px-20 flex flex-col lg:flex-row gap-6 mt-10 pb-10">
 			<!-- search engine -->
 			<div
-				class="basis-1/4 bg-white shadow-sm p-4 rounded-lg flex flex-col gap-6"
+				class="basis-1/4 bg-white shadow-sm p-4 rounded-lg flex flex-col gap-6 h-min max-h-min"
 			>
 				<div class="flex justify-between">
 					<h1
@@ -13,6 +13,7 @@
 					</h1>
 					<button
 						class="text-xs md:text-sm lg:text-base text-slate-600"
+						@click="refresh"
 					>
 						Xóa
 					</button>
@@ -22,11 +23,13 @@
 						type="text"
 						placeholder="Vị trí tuyển dụng"
 						class="border border-sky-900 px-4 py-3 rounded-md w-full outline-none focus:border-green-600"
+						v-model="jobPosition"
 					/>
 					<input
 						type="text"
 						placeholder="Địa điểm"
 						class="border border-sky-900 px-4 py-3 rounded-md w-full outline-none focus:border-green-600"
+						v-model="workLocation"
 					/>
 				</div>
 
@@ -293,48 +296,79 @@
 			</div>
 
 			<div class="basis-3/4">
-				<div class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900">
-                    <p>Hiển thị 1 - 10 từ 20 kết quả</p>
+				<div
+					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
+				>
+					<p>20 kết quả</p>
 					<button
 						class="px-4 py-2 relative bg-white rounded-md text-gray-600 flex justify-between items-center gap-2"
-                        @click="expand('sort')"
+						@click="expand('sort')"
 					>
 						<p>Sắp xếp</p>
-						<font-awesome-icon icon="fa-solid fa-chevron-up" v-if="!isExpandSort"/>
-						<font-awesome-icon icon="fa-solid fa-chevron-down" v-else/>
+						<font-awesome-icon
+							icon="fa-solid fa-chevron-up"
+							v-if="!isExpandSort"
+						/>
+						<font-awesome-icon
+							icon="fa-solid fa-chevron-down"
+							v-else
+						/>
 						<transition name="detail">
-						    <ul
-    							class="absolute top-full left-0 right-0 mt-1 shadow-md"
-                                v-if="isExpandSort"    
-    						>
-    							<li>
-    								<button
-    									class="px-4 py-2 relative bg-white text-gray-600 w-full rounded-t-md hover:bg-green-400 hover:text-white"
-    								>
-    									Tên
-    								</button>
-    							</li>
-    							<li>
-    								<button
-    									class="px-4 py-2 relative bg-white text-gray-600 w-full hover:bg-green-400 hover:text-white"
-    								>
-    									Tuyển gấp
-    								</button>
-    							</li>
-    							<li>
-    								<button
-    									class="px-4 py-2 relative bg-white text-gray-600 w-full rounded-b-md hover:bg-green-400 hover:text-white"
-    								>
-    									Ngày đăng
-    								</button>
-    							</li>
-    						</ul>
+							<ul
+								class="absolute top-full left-0 right-0 mt-1 shadow-md"
+								v-if="isExpandSort"
+							>
+								<li>
+									<button
+										class="px-4 py-2 relative bg-white text-gray-600 w-full rounded-t-md hover:bg-green-400 hover:text-white"
+									>
+										Tên
+									</button>
+								</li>
+								<li>
+									<button
+										class="px-4 py-2 relative bg-white text-gray-600 w-full hover:bg-green-400 hover:text-white"
+									>
+										Tuyển gấp
+									</button>
+								</li>
+								<li>
+									<button
+										class="px-4 py-2 relative bg-white text-gray-600 w-full rounded-b-md hover:bg-green-400 hover:text-white"
+									>
+										Ngày đăng
+									</button>
+								</li>
+							</ul>
 						</transition>
 					</button>
 				</div>
 
-                <div class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    
+				<ul
+					class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4"
+				>
+					<job-card
+						v-for="job in jobs"
+						:key="job.id"
+						:id="job.id"
+						:featured="job.featured"
+						:urgent="job.urgent"
+						:level="job.level"
+						:job="job.job"
+						:desc="job.desc"
+						:logo="job.logo"
+						:salary="job.salary"
+						:position="job.position"
+					/>
+				</ul>
+
+                <div class="mt-4 flex items-center justify-center gap-6 text-xs md:text-sm lg:text-base">
+                    <font-awesome-icon icon="fa-solid fa-angles-left" class="p-2 hover:cursor-pointer hover:bg-green-300     rounded-md"/>
+                    <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">1</span>
+                    <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">2</span>
+                    <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">3</span>
+                    <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">4</span>
+                    <font-awesome-icon icon="fa-solid fa-angles-right" class="p-2 hover:cursor-pointer hover:bg-green-300    rounded-md"/>
                 </div>
 			</div>
 		</div>
@@ -351,6 +385,110 @@ export default {
 			isExpandExperience: false,
 			isExpandLevel: false,
 			isExpandSort: false,
+			jobPosition: "",
+			workLocation: "",
+			jobs: [
+				{
+					id: 1,
+					featured: true,
+					urgent: true,
+					level: "Senior",
+					job: "Jr. PHP Developer",
+					desc: "CSS3, HTML5, Javascript, Bootstrap, Jquery",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
+					salary: "$5K - $8K",
+					position: "6",
+				},
+				{
+					id: 2,
+					featured: true,
+					urgent: true,
+					level: "Junior",
+					job: "Frontend Developer",
+					desc: "React, Vue, Angular, CSS, HTML, Javascript",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
+					salary: "$3K - $5K",
+					position: "3",
+				},
+
+				{
+					id: 3,
+					featured: false,
+					urgent: false,
+					level: "Senior",
+					job: "Java Developer",
+					desc: "Java, Spring, Hibernate, SQL",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-3.png",
+					salary: "$6K - $10K",
+					position: "4",
+				},
+				{
+					id: 4,
+					featured: true,
+					urgent: false,
+					level: "Junior",
+					job: "Full Stack Developer",
+					desc: "Node.js, React, MongoDB, Express",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-4.png",
+					salary: "$4K - $7K",
+					position: "2",
+				},
+				{
+					id: 5,
+					featured: false,
+					urgent: true,
+					level: "Senior",
+					job: "Python Developer",
+					desc: "Python, Django, Flask, SQL",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-5.png",
+					salary: "$7K - $12K",
+					position: "2",
+				},
+				{
+					id: 6,
+					featured: false,
+					urgent: false,
+					level: "Junior",
+					job: "UI/UX Designer",
+					desc: "Adobe Creative Suite, Sketch, Figma",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-6.png",
+					salary: "$3K - $6K",
+					position: "1",
+				},
+				{
+					id: 7,
+					featured: true,
+					urgent: false,
+					level: "Senior",
+					job: "DevOps Engineer",
+					desc: "AWS, Docker, Kubernetes, Jenkins",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-7.png",
+					salary: "$8K - $14K",
+					position: "3",
+				},
+				{
+					id: 8,
+					featured: false,
+					urgent: true,
+					level: "Junior",
+					job: "Mobile App Developer",
+					desc: "React Native, Swift, Kotlin, Firebase",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-8.png",
+					salary: "$4K - $8K",
+					position: "2",
+				},
+				{
+					id: 9,
+					featured: false,
+					urgent: false,
+					level: "Senior",
+					job: "Data Scientist",
+					desc: "Python, R, SQL, Machine Learning",
+					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-9.png",
+					salary: "$9K - $15K",
+					position: "2",
+				},
+			],
 		};
 	},
 	methods: {
@@ -375,6 +513,15 @@ export default {
 					this.isExpandSort = !this.isExpandSort;
 					break;
 			}
+		},
+		refresh() {
+			this.isExpandCategory = false;
+			this.isExpandLocation = false;
+			this.isExpandSkills = false;
+			this.isExpandExperience = false;
+			this.isExpandLevel = false;
+			this.jobPosition = "";
+			this.workLocation = "";
 		},
 	},
 };
