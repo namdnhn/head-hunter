@@ -4,9 +4,9 @@ from sqlalchemy.orm import relationship
 import enum
 import database
 
-class UserRole(str, enum.Enum):
-    CANDIDATE = "candidate"
-    HR = "hr"
+# class UserRole(str, enum.Enum):
+#     CANDIDATE = "candidate"
+#     HR = "hr"
 
 
 class UserModel(database.Base):
@@ -16,5 +16,5 @@ class UserModel(database.Base):
     email = Column(String(50), unique=True, index=True)
     password = Column(String(300))
     date_of_birth = Column(DateTime(timezone=True), default=func.now())
-    role = Column(Enum(UserRole))
+    # role = Column(Enum(UserRole))
     phone = Column(String(10))

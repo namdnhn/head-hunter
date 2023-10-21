@@ -238,9 +238,10 @@ export default {
                     job: "Data Engineer",
                     quantity: 125
                 }
-            ]
+            ],
+
         }
-    }
+    },
 }
 
 </script>
