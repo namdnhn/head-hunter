@@ -31,6 +31,8 @@ const JobDetail = defineAsyncComponent(
 const JobSearch = defineAsyncComponent(
 	() => import("./pages/jobs/JobSearch.vue")
 );
+const CompanySearchPage = defineAsyncComponent(() => import("./pages/CompanySearchPage.vue"))
+const CompanyDetailPage = defineAsyncComponent(() => import("./pages/CompanyDetail.vue"))
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -82,7 +84,9 @@ const router = createRouter({
 		{
 			path: "/jobsearch",
 			component: JobSearch,
-		},
+		},    
+    { path: "/companySearchPage", component: CompanySearchPage},
+    { path: "/companyDetailPage", component: CompanyDetailPage}
 	],
 });
 
@@ -95,5 +99,4 @@ router.beforeEach(function (to, _, next) {
 		next();
 	}
 });
-
 export default router;
