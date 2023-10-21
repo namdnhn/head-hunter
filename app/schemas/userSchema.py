@@ -28,3 +28,8 @@ class UpdateUser(BaseModel):
     date_of_birth: Optional[datetime] = None
     role: Optional[UserRole] = None
     phone: Optional[str] = None
+
+class User(RegisterUser):
+    id: int
+    class Config:
+        orm_mode = True
