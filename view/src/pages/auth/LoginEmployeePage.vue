@@ -1,5 +1,5 @@
 <template>
-    <section class="fixed top-0 left-0 right-0 h-full z-50 bg-lime-50 flex items-center justify-center">
+    <section class="fixed top-0 left-0 right-0 h-full z-50 bg-white flex items-center justify-center">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-cyan-900">
             Trang đăng nhập này dành riêng cho nhân viên của các công ty tuyển dụng  
@@ -12,11 +12,11 @@
                 <form class="space-y-4 md:space-y-6" action="#">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-cyan-900">Email của công ty</label>
-                        <input type="email" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="company-name@email.com" required="true" v-model='emailCompanyName.value'>
+                        <input type="email" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="company-name@email.com" required="true" v-model='emailCompanyName.value'>
                     </div>
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-cyan-900">Email của bạn</label>
-                        <input type="email" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@company.com" required="true" v-model="emailEmployee.value">
+                        <input type="email" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@company.com" required="true" v-model="emailEmployee.value">
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-cyan-900">Mật khẩu</label>
@@ -25,7 +25,7 @@
                                 name="password"
                                 id="password"
                                 placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 v-model="passwordEmployee.value"
                                 @input="checkKeyDown"
                             />
