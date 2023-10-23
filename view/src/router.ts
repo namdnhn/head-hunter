@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent } from 'vue';
 import store from "./store/index.ts";
 
 //import page
@@ -33,6 +33,7 @@ const JobSearch = defineAsyncComponent(
 );
 const CompanySearchPage = defineAsyncComponent(() => import("./pages/company/CompanySearchPage.vue"))
 const CompanyDetailPage = defineAsyncComponent(() => import("./pages/company/CompanyDetail.vue"))
+const EmployeeDashboard = defineAsyncComponent(() => import("./pages/dashboard/DashBoard.vue"))
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -86,7 +87,8 @@ const router = createRouter({
 			component: JobSearch,
 		},    
     { path: "/companysearch", component: CompanySearchPage},
-    { path: "/companydetail/:id", component: CompanyDetailPage}
+    { path: "/companydetail/:id", component: CompanyDetailPage},
+	{ path: "/employeedashboard", component: EmployeeDashboard},
 	],
     scrollBehavior () {
         return {top: 0, behavior: 'smooth'}
