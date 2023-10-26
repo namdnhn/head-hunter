@@ -1,5 +1,5 @@
 <template>
-	<header class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md z-30">
+	<header class="h-16 lg:h-20 w-full fixed bg-white flex justify-center shadow-md z-50">
 		<div class="w-full mx-2 lg:mx-0 lg:w-11/12 flex justify-between">
 			<nav class="flex items-center">
 				<!-- Menu icon  -->
@@ -59,11 +59,9 @@
 							<font-awesome-icon icon="fa-solid fa-chevron-down" />
 							<!-- more info job  -->
 							<transition name="moreInfo">
-								<ul class="absolute top-full md:w-64 lg:w-72 rounded-lg shadow-md z-10 bg-white text-black"
+								<ul class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4 text-black"
 									v-if="moreInfoJobs">
-									<router-link to="/jobsearch">
-										<base-list icon="fa-solid fa-magnifying-glass" title="Tìm việc làm" @click="moreInfoJobs=false"/>
-									</router-link>
+								    <base-list icon="fa-solid fa-magnifying-glass" title="Tìm việc làm" @click="moreInfoJobs=false" to="/jobsearch"/>
 									<base-list icon="fa-regular fa-heart" title="Việc làm đã lưu" @click="moreInfoJobs=false"/>
 									<base-list icon="fa-solid fa-briefcase" title="Việc làm đã ứng tuyển" @click="moreInfoJobs=false"/>
 								</ul>
@@ -75,9 +73,9 @@
 							<font-awesome-icon icon="fa-solid fa-chevron-down" />
 							<!-- more info company -->
 							<transition name="moreInfo">
-								<ul class="absolute top-full md:w-64 lg:w-72 rounded-lg shadow-md z-10 bg-white text-black"
+								<ul class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4 text-black"
 									v-if="moreInfoCompanies">
-									<router-link to="/companysearch"><base-list icon="fa-solid fa-building" title="Tìm kiếm công ty" @click="moreInfoCompanies=false"/></router-link>
+									<base-list icon="fa-solid fa-building" title="Tìm kiếm công ty" @click="moreInfoCompanies=false" to="/companysearch"/>
 									<base-list icon="fa-regular fa-heart" title="Công ty đã lưu" @click="moreInfoCompanies=false"/>
 								</ul>
 							</transition>
@@ -115,7 +113,7 @@
 					<font-awesome-icon icon="fa-solid fa-chevron-down" />
 					<!-- more user account info -->
 					<transition name="moreInfo">
-						<ul class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white"
+						<ul class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4"
 							v-if="isShowUserInfo">
 							<base-list icon="fa-solid fa-circle-info" title="Thông tin tài khoản" @click="isShowUserInfo=false"/>
 							<base-list icon="fa-solid fa-lock" title="Đổi mật khẩu" @click="isShowUserInfo=false"/>
