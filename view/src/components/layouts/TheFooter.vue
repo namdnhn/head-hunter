@@ -1,5 +1,5 @@
 <template>
-    <footer class="px-20 pt-20 pb-10 bg-sky-950 flex flex-col gap-20">
+    <footer class="px-20 pt-20 pb-10 bg-sky-950 flex flex-col gap-20 static z-10">
         <div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             <div class="flex flex-col gap-4 items-center">
                 <h1 class="flex items-center gap-2 text-xl md:text-2xl lg:text-3xl font-bold text-amber-100">

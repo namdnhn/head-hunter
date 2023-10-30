@@ -1,9 +1,9 @@
 <template>
     <section class="fixed top-0 left-0 right-0 h-full z-40 bg-white flex items-center justify-center">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-cyan-900">
+            <!-- <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-cyan-900">
                 Trang đăng nhập này dành riêng cho ứng viên
-            </a>
+            </a> -->
             <div @submit.prevent="submitForm"
                 class="w-full bg-gray- rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-sky-200 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
