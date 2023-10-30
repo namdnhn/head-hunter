@@ -103,6 +103,7 @@ const router = createRouter({
 		{ path: "/employeedashboard", component: EmployeeDashboard },
 		{
 			path: "/userdashboard",
+            redirect: "/userdashboard/userinfo",
 			component: UserDashboard,
 			children: [
 				{ path: "/userdashboard/userinfo", component: UserInfo },

@@ -30,8 +30,8 @@
             v-else-if="type === 'suggest'" 
         />
 
-        <div>
-            <span class="flex items-center justify-center gap-2 ">
+        <div class="flex flex-col">
+            <span class="gap-2 ">
                 <h2 class="text-xs md:text-sm lg:text-base font-semibold text-sky-900">{{ title }}</h2>
                 <p class="text-xs lg:text-sm text-slate-500 hover:text-green-600 hover:cursor-pointer">{{ subtitle }}</p>
             </span>

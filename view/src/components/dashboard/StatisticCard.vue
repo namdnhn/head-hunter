@@ -1,5 +1,5 @@
 <template>
-    <div class="py-8 px-4 bg-white rounded-lg  flex justify-between items-center w-full">
+    <div class="py-8 px-4 bg-white rounded-lg flex justify-between items-center w-full">
         <font-awesome-icon :icon="icon"
             class="text-xl md:text-2xl lg:text-3xl xl:text-4xl p-4 rounded-full" :class="color"/>
         <span class="flex flex-col items-end gap-2">
