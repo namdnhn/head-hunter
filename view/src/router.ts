@@ -46,6 +46,18 @@ const UserDashboard = defineAsyncComponent(
 const UserInfo = defineAsyncComponent(
 	() => import("./pages/dashboard/UserInfo.vue")
 );
+const JobSaved = defineAsyncComponent(
+	() => import("./pages/dashboard/JobSaved.vue")
+);
+const CompanySaved = defineAsyncComponent(
+	() => import("./pages/dashboard/CompanySaved.vue")
+);
+const UpdateAccount = defineAsyncComponent(
+	() => import("./pages/dashboard/UpdateAccount.vue")
+);
+const DeleteAccount = defineAsyncComponent(
+	() => import("./pages/dashboard/DeleteAccount.vue")
+);
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -103,10 +115,35 @@ const router = createRouter({
 		{ path: "/employeedashboard", component: EmployeeDashboard },
 		{
 			path: "/userdashboard",
-            redirect: "/userdashboard/userinfo",
+			redirect: "/userdashboard/userinfo",
 			component: UserDashboard,
+			meta: { requiresAuth: true },
 			children: [
-				{ path: "/userdashboard/userinfo", component: UserInfo },
+				{
+					path: "/userdashboard/userinfo",
+					component: UserInfo,
+					meta: { requiresAuth: true },
+				},
+				{
+					path: "/userdashboard/jobsaved",
+					component: JobSaved,
+					meta: { requiresAuth: true },
+				},
+				{
+					path: "/userdashboard/companysaved",
+					component: CompanySaved,
+					meta: { requiresAuth: true },
+				},
+				{
+					path: "/userdashboard/updateaccount",
+					component: UpdateAccount,
+					meta: { requiresAuth: true },
+				},
+				{
+					path: "/userdashboard/deleteaccount",
+					component: DeleteAccount,
+					meta: { requiresAuth: true },
+				},
 			],
 		},
 	],

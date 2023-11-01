@@ -20,7 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo, faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFile, faPenToSquare, faXmark, faAnglesLeft, faAnglesRight, faBuilding, faBookmark, faPalette, faFilePdf, faPaperPlane, faUserCheck, faMessage, faKey, faRightFromBracket, faTrash, faEye, faComment, faHouse, faThumbsUp, faBan, faReply,  } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo, faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFile, faPenToSquare, faXmark, faAnglesLeft, faAnglesRight, faBuilding, faBookmark, faPalette, faFilePdf, faPaperPlane, faUserCheck, faMessage, faKey, faRightFromBracket, faTrash, faEye, faComment, faHouse, faThumbsUp, faBan, faReply, faAnglesDown, faAnglesUp,  } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons/faLinkedin'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons/faGoogle'
@@ -30,7 +30,7 @@ import { faCircleDot } from '@fortawesome/free-regular-svg-icons/faCircleDot'
 
 
 /* add icons to the library */
-library.add(faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo,faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFacebook, faLinkedin, faFile, faGoogle, faPenToSquare, faXmark, faStar, faCircle,faCircleDot, faAnglesLeft, faAnglesRight, faHeart, faBuilding, faBookmark, faPalette, faFilePdf, faPaperPlane, faUserCheck, faMessage, faKey, faRightFromBracket, faTrash, faEye, faComment, faHouse, faThumbsUp, faBan, faReply )
+library.add(faUserSecret, faChevronDown, faBars, faChevronUp, faBell, faChevronRight, faCircleInfo,faArrowRight, faLock, faArrowRightFromBracket, faMagnifyingGlass, faCode, faComputer, faRobot, faDatabase, faUserTie, faLocationDot, faCakeCandles, faUpload, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUser, faWallet, faBriefcase, faFacebook, faLinkedin, faFile, faGoogle, faPenToSquare, faXmark, faStar, faCircle,faCircleDot, faAnglesLeft, faAnglesRight, faHeart, faBuilding, faBookmark, faPalette, faFilePdf, faPaperPlane, faUserCheck, faMessage, faKey, faRightFromBracket, faTrash, faEye, faComment, faHouse, faThumbsUp, faBan, faReply, faAnglesDown, faAnglesUp )
 
 const app = createApp(App)
 

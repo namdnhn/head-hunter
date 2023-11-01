@@ -50,7 +50,7 @@ export default {
 				error = new Error(
 					responseData.message || "Có lỗi không xác định đã xảy ra!"
 				);
-                console.log(error);
+				console.log(error);
 			}
 			throw error;
 		}
@@ -58,11 +58,13 @@ export default {
 		const expiresIn = new Date().getTime() + 259200000;
 
 		localStorage.setItem("token", responseData.jwtToken);
-		localStorage.setItem("expiresIn", expiresIn.toString());    
+		localStorage.setItem("expiresIn", expiresIn.toString());
 
+		clearTimeout(timer);
+		//expiresIn = 3 days
 		timer = setTimeout(() => {
 			context.dispatch("autoLogout");
-		}, expiresIn);
+		}, 259200000);
 
 		if (mode === "register") {
 			localStorage.setItem("userId", responseData.user.id);
@@ -82,16 +84,6 @@ export default {
 	autoLogin(context: any) {
 		const token = localStorage.getItem("token");
 		const userId = localStorage.getItem("userId");
-		const expiresIn = Number(localStorage.getItem("expiresIn"));
-
-		const liveTime = +expiresIn - new Date().getTime();
-		if (liveTime <= 0) {
-			return;
-		}
-
-		timer = setTimeout(() => {
-			context.dispatch("autoLogout");
-		}, expiresIn);
 
 		if (token) {
 			context.commit("setUser", {
@@ -102,6 +94,8 @@ export default {
 	},
 
 	logout(context: any) {
+		console.log("logout");
+
 		clearTimeout(timer);
 
 		localStorage.removeItem("token");
@@ -142,15 +136,50 @@ export default {
 			throw error;
 		}
 
-        const dob = new Date(Date.parse(responseData.date_of_birth)).toLocaleDateString('en-GB')
-
+		// const dob = new Date(
+		// 	Date.parse(responseData.date_of_birth)
+		// ).toLocaleDateString("en-GB");
+        
 		const payload = {
 			fullname: responseData.fullname,
 			phone: responseData.phone,
-			date_of_birth: dob,
+			date_of_birth: responseData.date_of_birth,
 			email: responseData.email,
 		};
 
 		context.commit("setUserInfo", payload);
+	},
+
+	//update info
+	async updateInfo(context: any, payload: AuthPayload) {
+		const apiUrl = await context.rootGetters.getApiUrl;
+		const userId = localStorage.getItem("userId");
+
+		const data = {
+			email: payload.email,
+			password: payload.password,
+			fullname: payload.fullname,
+			date_of_birth: payload.date_of_birth,
+			phone: payload.phone,
+		};
+
+		const response = await fetch(`${apiUrl}user/update/${userId}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		});
+
+		const responseData = await response.json();
+
+		if (!response.ok) {
+			const error = new Error(
+				responseData.message || "Có lỗi không xác định đã xảy ra!"
+			);
+			throw error;
+		}
+
+		context.commit("setUserInfo", data);
 	},
 };
