@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent } from "vue";
 import store from "./store/index.ts";
 
 //import page
@@ -31,9 +31,21 @@ const JobDetail = defineAsyncComponent(
 const JobSearch = defineAsyncComponent(
 	() => import("./pages/jobs/JobSearch.vue")
 );
-const CompanySearchPage = defineAsyncComponent(() => import("./pages/company/CompanySearchPage.vue"))
-const CompanyDetailPage = defineAsyncComponent(() => import("./pages/company/CompanyDetail.vue"))
-const EmployeeDashboard = defineAsyncComponent(() => import("./pages/dashboard/DashBoard.vue"))
+const CompanySearchPage = defineAsyncComponent(
+	() => import("./pages/company/CompanySearchPage.vue")
+);
+const CompanyDetailPage = defineAsyncComponent(
+	() => import("./pages/company/CompanyDetail.vue")
+);
+const EmployeeDashboard = defineAsyncComponent(
+	() => import("./pages/dashboard/DashBoard.vue")
+);
+const UserDashboard = defineAsyncComponent(
+	() => import("./pages/dashboard/UserDashboard.vue")
+);
+const UserInfo = defineAsyncComponent(
+	() => import("./pages/dashboard/UserInfo.vue")
+);
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -85,14 +97,22 @@ const router = createRouter({
 		{
 			path: "/jobsearch",
 			component: JobSearch,
-		},    
-    { path: "/companysearch", component: CompanySearchPage},
-    { path: "/companydetail/:id", component: CompanyDetailPage},
-	{ path: "/employeedashboard", component: EmployeeDashboard},
+		},
+		{ path: "/companysearch", component: CompanySearchPage },
+		{ path: "/companydetail/:id", component: CompanyDetailPage },
+		{ path: "/employeedashboard", component: EmployeeDashboard },
+		{
+			path: "/userdashboard",
+            redirect: "/userdashboard/userinfo",
+			component: UserDashboard,
+			children: [
+				{ path: "/userdashboard/userinfo", component: UserInfo },
+			],
+		},
 	],
-    scrollBehavior () {
-        return {top: 0, behavior: 'smooth'}
-    }
+	scrollBehavior() {
+		return { top: 0, behavior: "smooth" };
+	},
 });
 
 router.beforeEach(function (to, _, next) {

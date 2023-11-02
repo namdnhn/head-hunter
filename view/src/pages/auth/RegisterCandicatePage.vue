@@ -3,12 +3,12 @@
 		class="fixed top-0 left-0 right-0 h-full w-full z-40 bg-white flex items-center justify-center"
 	>
 		<div class="flex flex-col items-center justify-center mx-auto lg:py-0 w-full">
-			<a
+			<!-- <a
 				href="#"
 				class="flex items-center mb-6 text-base md:text-lg lg:text-xl font-semibold text-cyan-900"
 			>
 				Trang đăng ký này dành riêng cho ứng viên
-			</a>
+			</a> -->
 			<div
 				@submit.prevent="submitForm"
 				class="w-full bg-gray- rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-sky-200 dark:border-gray-700"
