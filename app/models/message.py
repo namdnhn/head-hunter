@@ -15,7 +15,7 @@ class MessageModel(database.Base):
     send_at = Column(DateTime(timezone=True), default=func.now())
     conversation_id = Column(Integer, ForeignKey("conversation.id"))
     sender_id = Column(Integer, ForeignKey("user.id"))
-    file_id = Column(Integer, ForeignKey("file.id"))
+    file_id = Column(Integer, ForeignKey("file.id"), nullable=True)
     msg_text = Column(Text)
     msg_type = Column(Enum(MessageType))
     

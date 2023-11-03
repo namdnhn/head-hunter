@@ -16,5 +16,8 @@ class UserModel(database.Base):
     email = Column(String(50), unique=True, index=True)
     password = Column(String(300))
     date_of_birth = Column(DateTime(timezone=True), default=func.now())
-    role = Column(Enum(UserRole))
+    role = Column(Enum(UserRole), default=UserRole.CANDIDATE)
     phone = Column(String(10))
+    
+    conversations = relationship("ConversationModel")
+    participants = relationship("ParticipantModel")

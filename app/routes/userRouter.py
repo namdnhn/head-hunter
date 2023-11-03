@@ -19,7 +19,7 @@ def login(
 
 @router.post("/register")
 def register(user: RegisterUser, db: Session=Depends(getDatabase)):
-    return UserController.create_user(user=user, db=db)
+    return UserController.createUser(user=user, db=db)
 
 @router.post("/logout")
 def logout(response: str = Depends(UserController.logout)):

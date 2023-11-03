@@ -12,3 +12,4 @@ class ConversationModel(database.Base):
     created_by = Column(Integer, ForeignKey("user.id"))
     
     created_by_user = relationship("UserModel")
+    messages = relationship("MessageModel")
