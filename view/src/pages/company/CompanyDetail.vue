@@ -24,7 +24,7 @@
 					</span>
 				</span>
 
-				<div class="flex flex-col items-start  justify-between gap-4">
+				<div class="flex flex-col items-start justify-between gap-4">
 					<div class="flex flex-col gap-2">
 						<h1
 							class="text-xl md:text-2xl lg:text-3xl font-bold text-sky-900"
@@ -68,7 +68,10 @@
 					<button
 						class="border border-red-500 bg-white px-4 py-2 rounded-3xl flex gap-2 items-center text-red-500 font-semibold"
 					>
-                    <font-awesome-icon icon="fa-regular fa-heart" class="text-red-500"/>Theo dõi
+						<font-awesome-icon
+							icon="fa-regular fa-heart"
+							class="text-red-500"
+						/>Theo dõi
 					</button>
 				</div>
 			</div>
@@ -87,14 +90,18 @@
 						>
 							Mô tả
 						</li>
-						<!-- <li class="px-8 py-1 bg-green-600 text-white rounded-xl hover:cursor-pointer hover:bg-green-700"
-                            @click="show('requirement')">
-                            Yêu cầu
-                        </li>
-                        <li class="px-8 py-1 bg-green-600 text-white rounded-xl hover:cursor-pointer hover:bg-green-700"
-                            @click="show('benefit')">
-                            Quyền lợi
-                        </li> -->
+						<li
+							class="px-8 py-1 bg-green-600 text-white rounded-xl hover:cursor-pointer hover:bg-green-700"
+							@click="show('requirement')"
+						>
+							Yêu cầu
+						</li>
+						<li
+							class="px-8 py-1 bg-green-600 text-white rounded-xl hover:cursor-pointer hover:bg-green-700"
+							@click="show('benefit')"
+						>
+							Quyền lợi
+						</li>
 					</ul>
 
 					<!-- Job description paragraph  -->
@@ -160,6 +167,72 @@
 							</p>
 						</div>
 					</transition>
+
+					<!-- Yêu cầu  -->
+					<transition name="detail">
+						<div
+							class="flex flex-col gap-4 text-xs md:text-sm lg:text-base text-sky-950"
+							v-if="isShowRequirement"
+						>
+							<p class="leading-7">
+								Công ty phần mềm đóng một vai trò quan trọng
+								trong cuộc cách mạng công nghệ thông tin và làm
+								thay đổi cách chúng ta làm việc và tương tác với
+								thế giới xung quanh. Một trong những công ty
+								tiên phong và nổi tiếng trong lĩnh vực này chính
+								là Công ty ABC - một nơi nơi sự sáng tạo và khám
+								phá không giới hạn được biến thành các sản phẩm
+								phần mềm xuất sắc. <br />
+
+								Với hơn 20 năm kinh nghiệm trong ngành công
+								nghệ, Công ty ABC đã trở thành một địa chỉ đáng
+								tin cậy cho những dự án phần mềm độc đáo và tùy
+								chỉnh. Chúng tôi tự hào về đội ngũ những chuyên
+								gia phần mềm tài năng, luôn sáng tạo và nắm bắt
+								những cơ hội mới nhất trong ngành. Điều này giúp
+								chúng tôi không ngừng phát triển và mang đến
+								những sản phẩm phần mềm đỉnh cao cho khách hàng
+								của mình. <br />
+
+								Công ty ABC chuyên sâu trong việc phát triển
+								phần mềm cho nhiều lĩnh vực, bao gồm ứng dụng di
+								động, ứng dụng web, phần mềm doanh nghiệp, trí
+								tuệ nhân tạo và nhiều lĩnh vực công nghệ khác.
+								Chúng tôi không chỉ cung cấp các giải pháp phần
+								mềm tùy chỉnh mà còn phát triển và duy trì các
+								sản phẩm phần mềm tiêu chuẩn cao với tầm ảnh
+								hưởng toàn cầu. <br />
+
+								Một trong những giá trị cốt lõi của Công ty ABC
+								là cam kết về chất lượng. Chúng tôi luôn tuân
+								thủ các quy trình kiểm tra chất lượng nghiêm
+								ngặt để đảm bảo rằng sản phẩm của mình hoạt động
+								tốt, an toàn và đáng tin cậy. Chúng tôi luôn
+								lắng nghe ý kiến của khách hàng và sẵn sàng điều
+								chỉnh sản phẩm để đáp ứng nhu cầu cụ thể của họ.
+								<br />
+
+								Bên cạnh việc phát triển phần mềm, Công ty ABC
+								cũng nỗ lực không ngừng trong việc nghiên cứu và
+								phát triển công nghệ mới. Chúng tôi luôn ứng
+								dụng các công nghệ tiên tiến như trí tuệ nhân
+								tạo, học máy và blockchain để mang đến những
+								giải pháp sáng tạo và tương lai cho khách hàng.
+								<br />
+
+								Công ty ABC tự hào là đối tác đáng tin cậy của
+								nhiều doanh nghiệp lớn trên khắp thế giới và
+								luôn sẵn sàng hỗ trợ họ trong việc tận dụng sức
+								mạnh của công nghệ thông tin. Với cam kết về
+								chất lượng, sáng tạo và sự phục vụ tận tâm,
+								chúng tôi hy vọng có thể tiếp tục đồng hành và
+								cùng bạn xây dựng những sản phẩm phần mềm xuất
+								sắc trong tương lai. <br />
+							</p>
+						</div>
+					</transition>
+
+                    <!-- benefit  -->
 				</div>
 
 				<div class="flex gap-4 text-xs md:text-sm lg:text-base">
@@ -266,6 +339,8 @@ export default {
 					this.isShowDescription = false;
 					this.isShowRequirement = true;
 					this.isShowBenefit = false;
+                    console.log('aa');
+                    
 					break;
 				case "benefit":
 					this.isShowDescription = false;

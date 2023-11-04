@@ -58,6 +58,7 @@ const UpdateAccount = defineAsyncComponent(
 const DeleteAccount = defineAsyncComponent(
 	() => import("./pages/dashboard/DeleteAccount.vue")
 );
+const NotFound = defineAsyncComponent(() => import("./pages/404Page.vue"));
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -118,11 +119,13 @@ const router = createRouter({
 			redirect: "/userdashboard/userinfo",
 			component: UserDashboard,
 			meta: { requiresAuth: true },
+            props: true,
 			children: [
 				{
 					path: "/userdashboard/userinfo",
 					component: UserInfo,
 					meta: { requiresAuth: true },
+                    props: true,
 				},
 				{
 					path: "/userdashboard/jobsaved",
@@ -145,6 +148,10 @@ const router = createRouter({
 					meta: { requiresAuth: true },
 				},
 			],
+		},
+		{
+			path: "/:pathMatch(.*)*",
+			component: NotFound,
 		},
 	],
 	scrollBehavior() {

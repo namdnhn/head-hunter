@@ -40,7 +40,10 @@
 							<font-awesome-icon
 								icon="fa-solid fa-location-dot"
 							/>
-							<address>Tầng 19, Leadvisors Tower, 643 Phạm Văn Đồng, Bắc Từ Liêm</address>
+							<address>
+								Tầng 19, Leadvisors Tower, 643 Phạm Văn Đồng,
+								Bắc Từ Liêm
+							</address>
 						</span>
 					</div>
 
@@ -448,7 +451,7 @@
 									/>
 									<p>
 										Được tham dự các buổi đi chơi, dã ngoại,
-										nghỉ mát,...    
+										nghỉ mát,...
 									</p>
 								</li>
 							</ul>
@@ -459,6 +462,7 @@
 				<div class="flex gap-4 text-xs md:text-sm lg:text-base">
 					<button
 						class="bg-green-300 px-4 py-2 rounded-lg font-bold text-sky-900 hover:bg-green-400 hover:cursor-pointer"
+                        @click="showApply"
 					>
 						Ứng tuyển ngay
 					</button>
@@ -498,11 +502,18 @@
 				</button>
 			</div>
 		</div>
+
+		<!-- job application form  -->
+		<base-form :show="!!isShowApply" @close="closeApply"></base-form>
 	</main>
 </template>
 
 <script lang="ts">
+import BaseForm from "../../components/ui/BaseForm.vue";
 export default {
+	components: {
+		BaseForm,
+	},
 	// props nhận được khi click từ một job card
 	props: [
 		"id",
@@ -520,6 +531,7 @@ export default {
 			isShowDescription: true,
 			isShowRequirement: false,
 			isShowBenefit: false,
+            isShowApply: false,
 			jobs: [
 				{
 					id: 1,
@@ -566,6 +578,12 @@ export default {
 					break;
 			}
 		},
+        showApply() {
+            this.isShowApply = true;
+        },
+        closeApply() {
+            this.isShowApply = false
+        }
 	},
 };
 </script>
