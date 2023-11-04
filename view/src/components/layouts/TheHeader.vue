@@ -254,6 +254,7 @@ export default {
 			moreInfoProfiles: false,
 			loggedIn: false,
 			isShowUserInfo: false,
+            userId: null,
 			userInfo: {
 				fullname: "none",
 				phone: "",
@@ -288,9 +289,9 @@ export default {
 		},
 		async getUserInfo() {
 			if (this.isLoggedIn) {
-				const userId = this.$store.getters.userId;
+				this.userId = this.$store.getters.userId;
 				try {
-					await this.$store.dispatch("fetchUserById", userId);
+					await this.$store.dispatch("fetchUserById", this.userId);
 					this.userInfo = this.$store.getters.getUserInfo;
 				} catch (error) {
 					console.log(error);
