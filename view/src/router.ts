@@ -52,12 +52,17 @@ const JobSaved = defineAsyncComponent(
 const CompanySaved = defineAsyncComponent(
 	() => import("./pages/dashboard/CompanySaved.vue")
 );
+
 const UpdateAccount = defineAsyncComponent(
 	() => import("./pages/dashboard/UpdateAccount.vue")
 );
+
 const DeleteAccount = defineAsyncComponent(
 	() => import("./pages/dashboard/DeleteAccount.vue")
 );
+
+const ChatPage = defineAsyncComponent(() => import("./pages/dashboard/ChatPage.vue"));
+
 const NotFound = defineAsyncComponent(() => import("./pages/404Page.vue"));
 
 const router = createRouter({
@@ -119,13 +124,11 @@ const router = createRouter({
 			redirect: "/userdashboard/userinfo",
 			component: UserDashboard,
 			meta: { requiresAuth: true },
-            props: true,
 			children: [
 				{
 					path: "/userdashboard/userinfo",
 					component: UserInfo,
 					meta: { requiresAuth: true },
-                    props: true,
 				},
 				{
 					path: "/userdashboard/jobsaved",
@@ -147,6 +150,11 @@ const router = createRouter({
 					component: DeleteAccount,
 					meta: { requiresAuth: true },
 				},
+                {
+                    path: "/userdashboard/chat",
+                    component: ChatPage,
+                    meta: { requiresAuth: true },
+                },
 			],
 		},
 		{

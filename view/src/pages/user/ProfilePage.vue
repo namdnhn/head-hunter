@@ -1,4 +1,4 @@
- <template>
+<template>
 	<main class="pt-16 lg:pt-20 h-auto w-full">
 		<!-- Introduce  -->
 		<div
@@ -7,18 +7,18 @@
 			<div class="flex flex-col md:flex-row items-center gap-6">
 				<div>
 					<label for="uploadAvt" class="hover:cursor-pointer">
-					    <img
-    						:src="personalInfo.avatarUrl"
-    						alt="candidate avt"
-    						class="w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full"
-    					/>
+						<img
+							:src="personalInfo.avatarUrl"
+							alt="candidate avt"
+							class="w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full"
+						/>
 					</label>
 					<input
 						type="file"
 						@change="handleFileUpload"
 						accept="image/*"
-                        id="uploadAvt"
-                        class="hidden"
+						id="uploadAvt"
+						class="hidden"
 					/>
 				</div>
 				<div
@@ -766,7 +766,7 @@ export default {
 				experience: "1 năm",
 				degree: "Cử nhân CNTT",
 				location: "Hà Nội",
-				avatarUrl: 'https://www.topcv.vn/images/avatar-default.jpg' // set a default image URL here
+				avatarUrl: "https://www.topcv.vn/images/avatar-default.jpg", // set a default image URL here
 			},
 			accountInfo: {
 				fullname: "undefined",

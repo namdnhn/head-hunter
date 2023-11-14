@@ -38,7 +38,7 @@
     				icon="fa-solid fa-user-check"
     				to="/userdashboard/companysaved"
     			></base-list>
-    			<base-list title="Tin nhắn" icon="fa-solid fa-message"></base-list>
+    			<base-list title="Tin nhắn" icon="fa-solid fa-message" to="/userdashboard/chat"></base-list>
     			<base-list
     				title="Cập nhật tài khoản"
     				icon="fa-solid fa-key"
