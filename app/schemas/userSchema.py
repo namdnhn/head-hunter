@@ -7,9 +7,11 @@ from typing import Optional
 #     CANDIDATE = "candidate"
 #     HR = "hr"
 
+
 class Login(BaseModel):
     email: str
     password: str
+
 
 class RegisterUser(Login):
     fullname: str
@@ -20,9 +22,14 @@ class RegisterUser(Login):
     class Config:
         orm_mode = True
 
-class UpdateUser(BaseModel):
+
+class ConfirmPassword(BaseModel):
+    currentPass: str
+
+
+class UpdateUser(ConfirmPassword):
     email: Optional[str] = None
-    password: Optional[str] = None
+    newPassword: Optional[str] = None
     fullname: Optional[str] = None
     date_of_birth: Optional[datetime] = None
     # role: Optional[UserRole] = None
