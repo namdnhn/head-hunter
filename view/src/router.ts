@@ -61,7 +61,9 @@ const DeleteAccount = defineAsyncComponent(
 	() => import("./pages/dashboard/DeleteAccount.vue")
 );
 
-const ChatPage = defineAsyncComponent(() => import("./pages/dashboard/ChatPage.vue"));
+const ChatPage = defineAsyncComponent(
+	() => import("./pages/dashboard/ChatPage.vue")
+);
 
 const NotFound = defineAsyncComponent(() => import("./pages/404Page.vue"));
 
@@ -150,12 +152,12 @@ const router = createRouter({
 					component: DeleteAccount,
 					meta: { requiresAuth: true },
 				},
-                {
-                    path: "/userdashboard/chat",
-                    component: ChatPage,
-                    meta: { requiresAuth: true },
-                },
 			],
+		},
+		{
+			path: "/chat",
+			component: ChatPage,
+			meta: { requiresAuth: true },
 		},
 		{
 			path: "/:pathMatch(.*)*",

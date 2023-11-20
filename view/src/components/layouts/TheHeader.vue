@@ -113,29 +113,27 @@
 								icon="fa-solid fa-chevron-down"
 							/>
 							<!-- more info job  -->
-							<transition name="moreInfo">
-								<ul
-									class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4 text-black"
-									v-if="moreInfoJobs"
-								>
-									<base-list
-										icon="fa-solid fa-magnifying-glass"
-										title="Tìm việc làm"
-										@click="moreInfoJobs = false"
-										to="/jobsearch"
-									/>
-									<base-list
-										icon="fa-regular fa-heart"
-										title="Việc làm đã lưu"
-										@click="moreInfoJobs = false"
-									/>
-									<base-list
-										icon="fa-solid fa-briefcase"
-										title="Việc làm đã ứng tuyển"
-										@click="moreInfoJobs = false"
-									/>
-								</ul>
-							</transition>
+							<ul
+								class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4 text-black"
+								v-if="moreInfoJobs"
+							>
+								<base-list
+									icon="fa-solid fa-magnifying-glass"
+									title="Tìm việc làm"
+									@click="moreInfoJobs = false"
+									to="/jobsearch"
+								/>
+								<base-list
+									icon="fa-regular fa-heart"
+									title="Việc làm đã lưu"
+									@click="moreInfoJobs = false"
+								/>
+								<base-list
+									icon="fa-solid fa-briefcase"
+									title="Việc làm đã ứng tuyển"
+									@click="moreInfoJobs = false"
+								/>
+							</ul>
 						</a>
 					</li>
 					<li>
@@ -148,24 +146,22 @@
 								icon="fa-solid fa-chevron-down"
 							/>
 							<!-- more info company -->
-							<transition name="moreInfo">
-								<ul
-									class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4 text-black"
-									v-if="moreInfoCompanies"
-								>
-									<base-list
-										icon="fa-solid fa-building"
-										title="Tìm kiếm công ty"
-										@click="moreInfoCompanies = false"
-										to="/companysearch"
-									/>
-									<base-list
-										icon="fa-regular fa-heart"
-										title="Công ty đã lưu"
-										@click="moreInfoCompanies = false"
-									/>
-								</ul>
-							</transition>
+							<ul
+								class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4 text-black"
+								v-if="moreInfoCompanies"
+							>
+								<base-list
+									icon="fa-solid fa-building"
+									title="Tìm kiếm công ty"
+									@click="moreInfoCompanies = false"
+									to="/companysearch"
+								/>
+								<base-list
+									icon="fa-regular fa-heart"
+									title="Công ty đã lưu"
+									@click="moreInfoCompanies = false"
+								/>
+							</ul>
 						</a>
 					</li>
 					<li>
@@ -213,29 +209,27 @@
 					</p>
 					<font-awesome-icon icon="fa-solid fa-chevron-down" />
 					<!-- more user account info -->
-					<transition name="moreInfo">
-						<ul
-							class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4"
-							v-if="isShowUserInfo"
-						>
-							<base-list
-								icon="fa-solid fa-circle-info"
-								title="Thông tin tài khoản"
-								@click="isShowUserInfo = false"
-								to="/userdashboard"
-							/>
-							<base-list
-								icon="fa-solid fa-lock"
-								title="Đổi mật khẩu"
-								@click="isShowUserInfo = false"
-							/>
-							<base-list
-								icon="fa-solid fa-arrow-right-from-bracket"
-								title="Đăng xuất"
-								@click="logout"
-							/>
-						</ul>
-					</transition>
+					<ul
+						class="absolute top-full right-0 w-56 md:w-64 lg:w-80 rounded-lg shadow-md z-10 bg-white flex flex-col items-center justify-center px-4"
+						v-if="isShowUserInfo"
+					>
+						<base-list
+							icon="fa-solid fa-circle-info"
+							title="Thông tin tài khoản"
+							@click="isShowUserInfo = false"
+							to="/userdashboard"
+						/>
+						<base-list
+							icon="fa-solid fa-lock"
+							title="Đổi mật khẩu"
+							@click="isShowUserInfo = false"
+						/>
+						<base-list
+							icon="fa-solid fa-arrow-right-from-bracket"
+							title="Đăng xuất"
+							@click="logout"
+						/>
+					</ul>
 				</span>
 			</span>
 		</div>
@@ -254,7 +248,7 @@ export default {
 			moreInfoProfiles: false,
 			loggedIn: false,
 			isShowUserInfo: false,
-            userId: null,
+			userId: null,
 			userInfo: {
 				fullname: "none",
 				phone: "",
