@@ -115,7 +115,6 @@ export default {
 		NotifyCard,
 		AppliedJob,
 	},
-    props: ['userId'],
 	data() {
 		return {
 			applied: [
@@ -146,9 +145,5 @@ export default {
 			],
 		};
 	},
-    mounted() {
-        console.log(this.userId);
-        
-    }
 };
 </script>

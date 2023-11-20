@@ -2,7 +2,9 @@
 	<section
 		class="fixed top-0 left-0 right-0 h-full w-full z-40 bg-white flex items-center justify-center"
 	>
-		<div class="flex flex-col items-center justify-center mx-auto lg:py-0 w-full">
+		<div
+			class="flex flex-col items-center justify-center mx-auto lg:py-0 w-full"
+		>
 			<!-- <a
 				href="#"
 				class="flex items-center mb-6 text-base md:text-lg lg:text-xl font-semibold text-cyan-900"
@@ -19,7 +21,10 @@
 					>
 						Tạo tài khoản và đăng nhập Head Hunter luôn nào!
 					</h1>
-					<form class="space-y-4 md:space-y-6 text-xs md:text-sm lg:text-base" action="#">
+					<form
+						class="space-y-4 md:space-y-6 text-xs md:text-sm lg:text-base"
+						action="#"
+					>
 						<div class="flex gap-4">
 							<span class="basis-1/2">
 								<label
@@ -43,7 +48,7 @@
 								<div>
 									<label
 										for="fullname"
-										class="block mb-2  font-medium text-cyan-900"
+										class="block mb-2 font-medium text-cyan-900"
 										>Họ và tên</label
 									>
 
@@ -62,19 +67,31 @@
 							<span class="basis-1/2">
 								<label
 									for="password"
-									class="block mb-2  font-medium text-cyan-900"
+									class="block mb-2 font-medium text-cyan-900"
 									>Mật khẩu</label
 								>
 								<input
-									type="password"
+									:type="passwordType"
 									name="password"
 									id="password"
 									placeholder="••••••••"
-									class="bg-gray-50 border border-gray-300 text-gray-900  rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+									class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									required="true"
 									v-model="registerPasswordCandicate.value"
 									@input="checkKeyDownPassword"
 								/>
+								<div
+									class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900"
+								>
+									<input
+										type="checkbox"
+										id="show-password"
+										v-model="showPassword"
+									/>
+									<label for="show-password"
+										>Hiện mật khẩu</label
+									>
+								</div>
 								<div>
 									<!-- <label v-if="checkKeyDown()"></label> -->
 									<label
@@ -90,11 +107,11 @@
 							<span class="basis-1/2">
 								<label
 									for="repassword"
-									class="block mb-2  font-medium text-cyan-900"
+									class="block mb-2 font-medium text-cyan-900"
 									>Xác nhận mật khẩu</label
 								>
 								<input
-									type="password"
+									:type="confirmPasswordType"
 									name="repassword"
 									id="repassword"
 									placeholder="••••••••"
@@ -105,6 +122,18 @@
 									"
 									@input="checkKeyDownPasswordConfirm"
 								/>
+								<div
+									class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900"
+								>
+									<input
+										type="checkbox"
+										id="show-confirm-password"
+										v-model="showConfirmPassword"
+									/>
+									<label for="show-confirm-password"
+										>Hiện mật khẩu</label
+									>
+								</div>
 								<div>
 									<!-- <label v-if="checkKeyDown()"></label> -->
 									<label
@@ -164,7 +193,7 @@
 											id="terms"
 											aria-describedby="terms"
 											type="checkbox"
-											class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800 "
+											class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
 											required="true"
 										/>
 									</div>
@@ -258,6 +287,8 @@ export default {
 			formIsValid: true,
 			error: null,
 			isLoading: false,
+			showPassword: false,
+			showConfirmPassword: false,
 		};
 	},
 	methods: {
@@ -311,8 +342,8 @@ export default {
 				phone: this.phoneCandidate.value,
 			};
 
-            console.log('form vuex');
-            
+			console.log("form vuex");
+
 			try {
 				// handle register
 				const payload = {
@@ -324,7 +355,8 @@ export default {
 					"/" + (this.$route.query.redirect || "homepage");
 				this.$router.push(redirectUrl);
 			} catch (error: any) {
-				this.error = error.message || "Có lỗi không xác định đã xảy ra!";
+				this.error =
+					error.message || "Có lỗi không xác định đã xảy ra!";
 			}
 
 			this.isLoading = false;
@@ -337,6 +369,14 @@ export default {
 		},
 		handleError() {
 			this.error = null;
+		},
+	},
+	computed: {
+		passwordType() {
+			return this.showPassword ? "text" : "password";
+		},
+		confirmPasswordType() {
+			return this.showConfirmPassword ? "text" : "password";
 		},
 	},
 };

@@ -66,7 +66,7 @@
 					</div>
 					<div class="flex flex-col gap-1">
 						<label for="letter" class="text-xs lg:text-sm"
-							>Thư giới thiệu:</label
+							>Giới thiệu bản thân:</label
 						>
 						<textarea
 							name="letter"

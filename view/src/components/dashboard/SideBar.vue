@@ -17,44 +17,51 @@
 		</div>
 
 		<transition name="detail">
-		    <div class="w-full flex flex-col items-center gap-1" v-if="isShowNav">
-    			<base-list
-    				title="Thông tin chung"
-    				icon="fa-solid fa-palette"
-    				to="/userdashboard/userinfo"
-    			></base-list>
-    			<base-list
-    				title="Hồ sơ của tôi"
-    				icon="fa-solid fa-user"
-    				to="/profile"
-    			></base-list>
-    			<base-list
-    				title="Tin tuyển dụng đã lưu"
-    				icon="fa-solid fa-bookmark"
-    				to="/userdashboard/jobsaved"
-    			></base-list>
-    			<base-list
-    				title="Công ty đang theo dõi"
-    				icon="fa-solid fa-user-check"
-    				to="/userdashboard/companysaved"
-    			></base-list>
-    			<base-list title="Tin nhắn" icon="fa-solid fa-message"></base-list>
-    			<base-list
-    				title="Cập nhật tài khoản"
-    				icon="fa-solid fa-key"
-    				to="/userdashboard/updateaccount"
-    			></base-list>
-    			<base-list
-    				title="Xóa tài khoản"
-    				icon="fa-solid fa-trash"
-    				to="/userdashboard/deleteaccount"
-    			></base-list>
-    			<base-list
-    				title="Đăng xuất"
-    				icon="fa-solid fa-right-from-bracket"
-    				@click="logout"
-    			></base-list>
-    		</div>
+			<div
+				class="w-full flex flex-col items-center gap-1"
+				v-if="isShowNav"
+			>
+				<base-list
+					title="Thông tin chung"
+					icon="fa-solid fa-palette"
+					to="/userdashboard/userinfo"
+				></base-list>
+				<base-list
+					title="Hồ sơ của tôi"
+					icon="fa-solid fa-user"
+					to="/profile"
+				></base-list>
+				<base-list
+					title="Tin tuyển dụng đã lưu"
+					icon="fa-solid fa-bookmark"
+					to="/userdashboard/jobsaved"
+				></base-list>
+				<base-list
+					title="Công ty đang theo dõi"
+					icon="fa-solid fa-user-check"
+					to="/userdashboard/companysaved"
+				></base-list>
+				<base-list
+					title="Tin nhắn"
+					icon="fa-solid fa-message"
+					to="/chat"
+				></base-list>
+				<base-list
+					title="Cập nhật tài khoản"
+					icon="fa-solid fa-key"
+					to="/userdashboard/updateaccount"
+				></base-list>
+				<base-list
+					title="Xóa tài khoản"
+					icon="fa-solid fa-trash"
+					to="/userdashboard/deleteaccount"
+				></base-list>
+				<base-list
+					title="Đăng xuất"
+					icon="fa-solid fa-right-from-bracket"
+					@click="logout"
+				></base-list>
+			</div>
 		</transition>
 
 		<font-awesome-icon
