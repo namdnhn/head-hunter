@@ -10,11 +10,14 @@
 				>
 					{{ name }}
 				</h5>
-				<p class="flex items-center text-slate-600 text-xs lg:text-sm">
+				<p class="flex items-center text-slate-600 text-xs lg:text-sm" v-if="type==='job'">
 					<font-awesome-icon
 						icon="fa-solid fa-location-dot"
 						class="mr-1"
 					/>{{ location }}
+				</p>
+                <p class="flex items-center text-slate-600 text-xs lg:text-sm" v-else>
+                    {{ position }}
 				</p>
 			</span>
 		</div>
@@ -56,7 +59,7 @@ export default {
 		},
 		location: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		expire: {
 			type: String,
@@ -66,6 +69,10 @@ export default {
 			type: String,
 			required: false,
 		},
+        position: {
+            type: String,
+            required: false
+        }
 	},
 };
 </script>

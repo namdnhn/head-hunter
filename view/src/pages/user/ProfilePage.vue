@@ -902,7 +902,16 @@ export default {
 			try {
 				await this.$store.dispatch("fetchUserById", userId);
 				this.accountInfo = this.$store.getters.getUserInfo;
-				console.log(this.accountInfo);
+				
+                //convert date_of_birth to display
+                const date = new Date(this.accountInfo.date_of_birth);
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1;
+                const dt = date.getDate();
+                const displayDate = dt + "-" + month + "-" + year;
+                this.accountInfo.date_of_birth = displayDate;
+                
+                
 			} catch (error) {
 				console.log(error);
 			}

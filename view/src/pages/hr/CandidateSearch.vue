@@ -9,7 +9,7 @@
 					<h1
 						class="text-xs md:text-sm lg:text-lg font-bold text-sky-950"
 					>
-						Tìm kiếm công ty
+						Tìm ứng viên
 					</h1>
 					<button
 						class="text-xs md:text-sm lg:text-base text-slate-600"
@@ -21,9 +21,9 @@
 				<div class="flex flex-col gap-3">
 					<input
 						type="text"
-						placeholder="Tên công ty"
+						placeholder="Vị trí tuyển dụng"
 						class="border border-sky-900 px-4 py-3 rounded-md w-full outline-none focus:border-green-600"
-						v-model="nameCompany"
+						v-model="jobPosition"
 					/>
 					<input
 						type="text"
@@ -33,67 +33,59 @@
 					/>
 				</div>
 
-				<!-- Field  -->
+				<!-- Experience  -->
 				<div class="flex flex-col gap-4">
 					<span class="flex items-center justify-between">
 						<h1
 							class="text-xs md:text-sm lg:text-base font-semibold"
 						>
-							Lĩnh vực
+							Kinh nghiệm
 						</h1>
 						<font-awesome-icon
 							icon="fa-solid fa-chevron-up"
 							class="text-xs md:text-sm lg:text-base p-1 bg-green-300 rounded-full text-green-900 hover:cursor-pointer"
-							v-if="!isExpandSkills"
-							@click="expand('skills')"
+							v-if="!isExpandExperience"
+							@click="expand('experience')"
 						/>
 						<font-awesome-icon
 							icon="fa-solid fa-chevron-down"
 							class="text-xs md:text-sm lg:text-base p-1 bg-green-300 rounded-full text-green-900 hover:cursor-pointer"
 							v-else
-							@click="expand('skills')"
+							@click="expand('experience')"
 						/>
 					</span>
 					<transition name="detail">
 						<ul
 							class="flex flex-col gap-2 text-slate-600 text-xs md:text-sm lg:text-base"
-							v-if="isExpandSkills"
+							v-if="isExpandExperience"
 						>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="web" />
-								<label for="web">Phát triển web (102)</label>
+								<input type="checkbox" id="less1" />
+								<label for="less1">Dưới 1 năm</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="app" />
-								<label for="app"
-									>Phát triển ứng dụng (46)</label
-								>
+								<input type="checkbox" id="1year" />
+								<label for="1year">1 năm</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="security" />
-								<label for="security">Bảo mật (4)</label>
+								<input type="checkbox" id="2year" />
+								<label for="2year">2 năm</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="data" />
-								<label for="data">Khoa học dữ liệu (20)</label>
+								<input type="checkbox" id="3year" />
+								<label for="3year">3 năm</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="cloud" />
-								<label for="cloud"
-									>Điện toán đám mây (20)</label
-								>
+								<input type="checkbox" id="4year" />
+								<label for="4year">4 năm</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="network" />
-								<label for="network">Network (20)</label>
+								<input type="checkbox" id="5year" />
+								<label for="5year">5 năm</label>
 							</li>
 							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="ai" />
-								<label for="ai">Trí tuệ nhân tạo (20)</label>
-							</li>
-							<li class="flex gap-2 items-center">
-								<input type="checkbox" id="rnd" />
-								<label for="rnd">RnD (20)</label>
+								<input type="checkbox" id="more5" />
+								<label for="more">Trên 5 năm</label>
 							</li>
 						</ul>
 					</transition>
@@ -163,7 +155,7 @@
 				<div
 					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
 				>
-					<p>120 kết quả</p>
+					<p>20 kết quả</p>
 					<button
 						class="px-4 py-2 relative bg-white rounded-md text-gray-600 flex justify-between items-center gap-2"
 						@click="expand('sort')"
@@ -207,22 +199,19 @@
 						</transition>
 					</button>
 				</div>
-				<div
-					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
-				></div>
 
 				<ul
 					class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4"
 				>
-					<card-company
-						v-for="company in companies"
-						:id="company.id"
-						:key="company.id"
-						:companyName="company.companyName"
-						:companyDescription="company.companyDescription"
-						:companyAddress="company.companyAddress"
-						:logo="company.logo"
-					></card-company>
+					<candidate-card
+						v-for="candidate in candidates"
+						:key="candidate.id"
+						:id="candidate.id"
+						:name="candidate.name"
+						:avt="candidate.avt"
+						:job="candidate.job"
+						:location="candidate.location"
+					></candidate-card>
 				</ul>
 
 				<div
@@ -259,85 +248,88 @@
 </template>
 
 <script lang="ts">
-import CardCompany from "../../components/company/CardCompany.vue";
+import CandidateCard from "../../components/candidate/CandidateCard.vue";
 export default {
 	components: {
-		CardCompany,
+		CandidateCard,
 	},
 	data() {
 		return {
-			experienceLevel: false,
-			isExpandLocation: false,
-			isExpandSkills: false,
 			isExpandExperience: false,
 			isExpandLevel: false,
 			isExpandSort: false,
-			nameCompany: "",
+			jobPosition: "",
 			workLocation: "",
-			companies: [
+			candidates: [
 				{
 					id: 1,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
+					name: "To Lam Son",
+					job: "Backend Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Cau Giay, Ha Noi",
 				},
 				{
 					id: 2,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
+					name: "Nguyen Van A",
+					job: "Frontend Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Nam Tu Liem, Ha Noi",
 				},
-
 				{
 					id: 3,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-3.png",
+					name: "Nguyen Van B",
+					job: "Fullstack Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Hoan Kiem, Ha Noi",
 				},
 				{
 					id: 4,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-4.png",
+					name: "Nguyen Van C",
+					job: "Backend Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Cau Giay, Ha Noi",
 				},
 				{
 					id: 5,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-5.png",
+					name: "Nguyen Van D",
+					job: "Frontend Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Nam Tu Liem, Ha Noi",
 				},
 				{
 					id: 6,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-6.png",
+					name: "Nguyen Van E",
+					job: "Fullstack Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Hoan Kiem, Ha Noi",
 				},
 				{
 					id: 7,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-7.png",
+					name: "Nguyen Van F",
+					job: "Backend Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Cau Giay, Ha Noi",
 				},
 				{
 					id: 8,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-8.png",
+					name: "Nguyen Van G",
+					job: "Frontend Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Nam Tu Liem, Ha Noi",
 				},
 				{
 					id: 9,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-9.png",
+					name: "Nguyen Van H",
+					job: "Fullstack Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Hoan Kiem, Ha Noi",
+				},
+				{
+					id: 10,
+					name: "Nguyen Van I",
+					job: "Backend Developer",
+					avt: "https://www.topcv.vn/images/avatar-default.jpg",
+					location: "Cau Giay, Ha Noi",
 				},
 			],
 		};
@@ -345,15 +337,6 @@ export default {
 	methods: {
 		expand(type: String) {
 			switch (type) {
-				case "category":
-					this.experienceLevel = !this.experienceLevel;
-					break;
-				case "location":
-					this.isExpandLocation = !this.isExpandLocation;
-					break;
-				case "skills":
-					this.isExpandSkills = !this.isExpandSkills;
-					break;
 				case "experience":
 					this.isExpandExperience = !this.isExpandExperience;
 					break;
@@ -366,12 +349,9 @@ export default {
 			}
 		},
 		refresh() {
-			this.experienceLevel = false;
-			this.isExpandLocation = false;
-			this.isExpandSkills = false;
 			this.isExpandExperience = false;
 			this.isExpandLevel = false;
-			this.nameCompany = "";
+			this.jobPosition = "";
 			this.workLocation = "";
 		},
 	},

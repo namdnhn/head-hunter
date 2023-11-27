@@ -44,14 +44,14 @@ export default {
 
 		if (!response.ok) {
 			let error;
-			if (response.status === 404 && mode === "login") {
-				error = new Error("Email hoặc mật khẩu không chính xác!");
+			if (responseData.detail === "Incorrect password") {
+				error = new Error("Mật khẩu không chính xác!");
+			} else if (responseData.detail === "Invalid Credentials") {
+				error = new Error("Email không tồn tại!");
 			} else {
-				error = new Error(
-					responseData.message || "Có lỗi không xác định đã xảy ra!"
-				);
-				console.log(error);
+				error = new Error("Lỗi không xác định đã xảy ra!");
 			}
+
 			throw error;
 		}
 
@@ -139,7 +139,7 @@ export default {
 		// const dob = new Date(
 		// 	Date.parse(responseData.date_of_birth)
 		// ).toLocaleDateString("en-GB");
-        
+
 		const payload = {
 			fullname: responseData.fullname,
 			phone: responseData.phone,

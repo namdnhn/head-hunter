@@ -127,11 +127,13 @@
 									icon="fa-regular fa-heart"
 									title="Việc làm đã lưu"
 									@click="moreInfoJobs = false"
+									to="/userdashboard/jobsaved"
 								/>
 								<base-list
 									icon="fa-solid fa-briefcase"
 									title="Việc làm đã ứng tuyển"
 									@click="moreInfoJobs = false"
+									to="/userdashboard/userinfo"
 								/>
 							</ul>
 						</a>
@@ -160,13 +162,14 @@
 									icon="fa-regular fa-heart"
 									title="Công ty đã lưu"
 									@click="moreInfoCompanies = false"
+									to="/userdashboard/companysaved"
 								/>
 							</ul>
 						</a>
 					</li>
 					<li>
 						<router-link
-							to="/profile"
+							:to="profileLink"
 							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
 							>Hồ sơ
 						</router-link>
@@ -190,10 +193,6 @@
 
 			<!-- user account info -->
 			<span class="flex gap-4 items-center" v-else>
-				<font-awesome-icon
-					icon="fa-solid fa-bell"
-					class="hidden md:block text-green-600 text-xl md:text-2xl lg:text-3xl px-3 py-2 bg-slate-100 rounded-full hover:cursor-pointer hover:opacity-90"
-				/>
 				<span
 					class="relative flex items-center gap-2 py-1 px-2 bg-slate-100 rounded-xl hover:cursor-pointer after:content-[''] after:absolute after:w-full after:h-20"
 					@mouseover="isShowUserInfo = true"
@@ -223,6 +222,7 @@
 							icon="fa-solid fa-lock"
 							title="Đổi mật khẩu"
 							@click="isShowUserInfo = false"
+							to="/userdashboard/updateaccount"
 						/>
 						<base-list
 							icon="fa-solid fa-arrow-right-from-bracket"
@@ -298,6 +298,9 @@ export default {
 	computed: {
 		isLoggedIn() {
 			return this.$store.getters.isAuthenticated;
+		},
+		profileLink() {
+			return `/profile/${this.userId}`;
 		},
 	},
 	mounted() {

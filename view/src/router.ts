@@ -34,9 +34,7 @@ const JobSearch = defineAsyncComponent(
 const CompanySearchPage = defineAsyncComponent(
 	() => import("./pages/company/CompanySearchPage.vue")
 );
-const CompanyDetailPage = defineAsyncComponent(
-	() => import("./pages/company/CompanyDetail.vue")
-);
+
 const EmployeeDashboard = defineAsyncComponent(
 	() => import("./pages/dashboard/DashBoard.vue")
 );
@@ -67,6 +65,24 @@ const ChatPage = defineAsyncComponent(
 
 const NotFound = defineAsyncComponent(() => import("./pages/404Page.vue"));
 
+const CandidateSearch = defineAsyncComponent(
+	() => import("./pages//hr/CandidateSearch.vue")
+);
+
+const HrInfo = defineAsyncComponent(() => import("./pages/hr/HrInfo.vue"));
+
+const HrDashboard = defineAsyncComponent(
+	() => import("./pages/hr/HrDashboard.vue")
+);
+
+const CandidateSaved = defineAsyncComponent(
+	() => import("./pages/hr/CandidateSaved.vue")
+);
+
+const HrProfile = defineAsyncComponent(
+	() => import("./pages/hr/HrProfile.vue")
+);
+
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
@@ -76,7 +92,7 @@ const router = createRouter({
 			component: HomePage,
 		},
 		{
-			path: "/profile",
+			path: "/profile/:id",
 			component: ProfilePage,
 			meta: { requiresAuth: true },
 		},
@@ -119,7 +135,6 @@ const router = createRouter({
 			component: JobSearch,
 		},
 		{ path: "/companysearch", component: CompanySearchPage },
-		{ path: "/companydetail/:id", component: CompanyDetailPage },
 		{ path: "/employeedashboard", component: EmployeeDashboard },
 		{
 			path: "/userdashboard",
@@ -155,9 +170,32 @@ const router = createRouter({
 			],
 		},
 		{
+			path: "/companydashboard",
+			redirect: "/companydashboard/companyinfo",
+			component: HrDashboard,
+			children: [
+				{
+					path: "/companydashboard/companyinfo",
+					component: HrInfo,
+				},
+				{
+					path: "/companydashboard/candidatesaved",
+					component: CandidateSaved,
+				},
+			],
+		},
+		{
 			path: "/chat",
 			component: ChatPage,
 			meta: { requiresAuth: true },
+		},
+		{
+			path: "/candidatesearch",
+			component: CandidateSearch,
+		},
+		{
+			path: "/companyprofile/:id",
+			component: HrProfile,
 		},
 		{
 			path: "/:pathMatch(.*)*",
