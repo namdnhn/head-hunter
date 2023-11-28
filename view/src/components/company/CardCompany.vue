@@ -48,7 +48,7 @@ export default {
     },
     computed: {
         companyDetaliLink() {
-            return "/companydetail/" + this.id;
+            return "/companyprofile/" + this.id;
         }
     }
 }

@@ -19,15 +19,15 @@
             <div class="flex flex-col gap-3 items-center text-stone-400">
                 <h1 class="text-sm md:text-base lg:text-lg text-amber-100">Dành cho ứng viên</h1>
                 <ul class="text-xs md:text-sm lg:text-base flex flex-col gap-2 items-center">
-                    <li class="hover:cursor-pointer hover:text-stone-500">
+                    <router-link to="/jobsearch" class="hover:cursor-pointer hover:text-stone-500">
                         Tìm việc
-                    </li>
-                    <li class="hover:cursor-pointer hover:text-stone-500">
+                    </router-link>
+                    <router-link to="/companysearch" class="hover:cursor-pointer hover:text-stone-500">
                         Khám phá doanh nghiệp
-                    </li>
-                    <li class="hover:cursor-pointer hover:text-stone-500">
+                    </router-link>
+                    <router-link to="/profile" class="hover:cursor-pointer hover:text-stone-500">
                         Hồ sơ cá nhân
-                    </li>
+                    </router-link>
                 </ul>
             </div>
 

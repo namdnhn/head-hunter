@@ -70,6 +70,7 @@
                         <label for="level" class="text-xs md:text-sm mb-2">Trình độ</label>
                         <select name="level" id="level"
                             class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                            <option value="">Tất cả</option>
                             <option value="">Intern</option>
                             <option value="">Fresher</option>
                             <option value="">Junior</option>
@@ -82,6 +83,7 @@
                         <label for="experience" class="text-xs md:text-sm mb-2">Kinh nghiệm làm việc</label>
                         <select name="experience" id="experience"
                             class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                            <option value="">Tất cả</option>
                             <option value="">Dưới 1 năm</option>
                             <option value="">1 năm</option>
                             <option value="">2 năm</option>
@@ -97,6 +99,7 @@
                         <label for="salary" class="text-xs md:text-sm mb-2">Mức lương</label>
                         <select name="salary" id="salary"
                             class="p-2 border rounded-md min-w-full text-xs md:text-sm lg:text-base">
+                            <option value="">Tất cả</option>
                             <option value="">Dưới 10 triệu</option>
                             <option value="">10 - 15 triệu</option>
                             <option value="">15 - 20 triệu</option>

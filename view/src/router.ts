@@ -34,9 +34,7 @@ const JobSearch = defineAsyncComponent(
 const CompanySearchPage = defineAsyncComponent(
 	() => import("./pages/company/CompanySearchPage.vue")
 );
-const CompanyDetailPage = defineAsyncComponent(
-	() => import("./pages/company/CompanyDetail.vue")
-);
+
 const EmployeeDashboard = defineAsyncComponent(
 	() => import("./pages/dashboard/DashBoard.vue")
 );
@@ -67,6 +65,28 @@ const ChatPage = defineAsyncComponent(
 
 const NotFound = defineAsyncComponent(() => import("./pages/404Page.vue"));
 
+const CandidateSearch = defineAsyncComponent(
+	() => import("./pages/company/CandidateSearch.vue")
+);
+
+const CompanyInfo = defineAsyncComponent(
+	() => import("./pages/company/CompanyInfo.vue")
+);
+
+const CompanyDashboard = defineAsyncComponent(
+	() => import("./pages/company/CompanyDashboard.vue")
+);
+
+const CandidateSaved = defineAsyncComponent(
+	() => import("./pages/company/CandidateSaved.vue")
+);
+
+const CompanyProfile = defineAsyncComponent(
+	() => import("./pages/company/CompanyProfile.vue")
+);
+
+const UpdateCompanyInfo = defineAsyncComponent(() => import("./pages/company/UpdateInfo.vue"))
+
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
@@ -76,7 +96,7 @@ const router = createRouter({
 			component: HomePage,
 		},
 		{
-			path: "/profile",
+			path: "/profile/:id",
 			component: ProfilePage,
 			meta: { requiresAuth: true },
 		},
@@ -119,7 +139,6 @@ const router = createRouter({
 			component: JobSearch,
 		},
 		{ path: "/companysearch", component: CompanySearchPage },
-		{ path: "/companydetail/:id", component: CompanyDetailPage },
 		{ path: "/employeedashboard", component: EmployeeDashboard },
 		{
 			path: "/userdashboard",
@@ -155,9 +174,40 @@ const router = createRouter({
 			],
 		},
 		{
+			path: "/companydashboard",
+			redirect: "/companydashboard/companyinfo",
+			component: CompanyDashboard,
+			children: [
+				{
+					path: "/companydashboard/companyinfo",
+					component: CompanyInfo,
+				},
+				{
+					path: "/companydashboard/candidatesaved",
+					component: CandidateSaved,
+				},
+                {
+                    path: '/companydashboard/updatecompany',
+                    component: UpdateCompanyInfo,
+                },
+                {
+                    path: '/companydashboard/deleteaccount',
+                    component: DeleteAccount,
+                }
+			],
+		},
+		{
 			path: "/chat",
 			component: ChatPage,
 			meta: { requiresAuth: true },
+		},
+		{
+			path: "/candidatesearch",
+			component: CandidateSearch,
+		},
+		{
+			path: "/companyprofile/:id",
+			component: CompanyProfile,
 		},
 		{
 			path: "/:pathMatch(.*)*",

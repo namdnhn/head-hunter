@@ -55,14 +55,14 @@
 					v-model="currentPassword.value"
 					@input="currentPassword.isValid = true"
 				/>
-                <div class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900">
-                    <input
-                        type="checkbox"
-                        id="show-current-password"
-                        v-model="showCurrentPassword"
-                    />
-                    <label for="show-current-password">Hiện mật khẩu</label>
-                </div>
+				<div class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900">
+					<input
+						type="checkbox"
+						id="show-current-password"
+						v-model="showCurrentPassword"
+					/>
+					<label for="show-current-password">Hiện mật khẩu</label>
+				</div>
 				<span
 					class="text-xs lg:text-sm text-red-500"
 					v-if="!currentPassword.isValid"
@@ -78,7 +78,7 @@
 					v-model="registerPasswordCandicate.value"
 					@input="registerPasswordCandicate.isValid = true"
 				/>
-                <div class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900">
+				<div class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900">
 					<input
 						type="checkbox"
 						id="show-new-password"
@@ -101,7 +101,7 @@
 					v-model="registerPasswordCandicateConfirm.value"
 					@input="registerPasswordCandicateConfirm.isValid = true"
 				/>
-                <div class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900">
+				<div class="mt-1 flex gap-1 text-xs lg:text-sm text-sky-900">
 					<input
 						type="checkbox"
 						id="show-confirm-password"
@@ -184,9 +184,9 @@ export default {
 			error: null,
 			isLoading: false,
 			success: false,
-            showCurrentPassword: false,
-            showConfirmPassword: false,
-            showNewPassword: false,
+			showCurrentPassword: false,
+			showConfirmPassword: false,
+			showNewPassword: false,
 		};
 	},
 	methods: {
@@ -239,9 +239,10 @@ export default {
 		async getUserInfo() {
 			try {
 				const data = this.$store.getters.getUserInfo;
-				data.date_of_birth = new Date(data.date_of_birth)
-					.toISOString()
-					.slice(0, 10);
+				data.date_of_birth = new Date(
+					data.date_of_birth
+				).toLocaleDateString("en-CA"); // 'en-CA' format is yyyy-mm-dd
+
 				this.registerEmailCandicate.value = data.email;
 				this.dobCandidate.value = data.date_of_birth;
 				this.fullnameCandidate.value = data.fullname;
@@ -290,16 +291,16 @@ export default {
 	mounted() {
 		this.getUserInfo();
 	},
-    computed: {
-        currentPasswordType() {
-            return this.showCurrentPassword ? "text" : "password";
-        },
-        newPasswordType() {
-            return this.showNewPassword ? "text" : "password";
-        },
-        confirmPasswordType() {
-            return this.showConfirmPassword ? "text" : "password";
-        },
-    }
+	computed: {
+		currentPasswordType() {
+			return this.showCurrentPassword ? "text" : "password";
+		},
+		newPasswordType() {
+			return this.showNewPassword ? "text" : "password";
+		},
+		confirmPasswordType() {
+			return this.showConfirmPassword ? "text" : "password";
+		},
+	},
 };
 </script>

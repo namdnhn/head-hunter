@@ -462,7 +462,7 @@
 				<div class="flex gap-4 text-xs md:text-sm lg:text-base">
 					<button
 						class="bg-green-300 px-4 py-2 rounded-lg font-bold text-sky-900 hover:bg-green-400 hover:cursor-pointer"
-                        @click="showApply"
+						@click="showApply"
 					>
 						Ứng tuyển ngay
 					</button>
@@ -497,9 +497,11 @@
 					></job-card>
 				</ul>
 
-				<button class="text-xs md:text-sm lg:text-base">
-					<router-link to="/jobsearch">Xem thêm</router-link>
-				</button>
+				<router-link
+					to="/jobsearch"
+					class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full text-center"
+					>Xem thêm</router-link
+				>
 			</div>
 		</div>
 
@@ -531,7 +533,7 @@ export default {
 			isShowDescription: true,
 			isShowRequirement: false,
 			isShowBenefit: false,
-            isShowApply: false,
+			isShowApply: false,
 			jobs: [
 				{
 					id: 1,
@@ -578,12 +580,12 @@ export default {
 					break;
 			}
 		},
-        showApply() {
-            this.isShowApply = true;
-        },
-        closeApply() {
-            this.isShowApply = false
-        }
+		showApply() {
+			this.isShowApply = true;
+		},
+		closeApply() {
+			this.isShowApply = false;
+		},
 	},
 };
 </script>

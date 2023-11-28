@@ -1,45 +1,21 @@
 <template>
-	<main class="pt-16 lg:pt-20 w-full">
-		<section class="py-10 w-full">
-			<div class="container w-full">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="col-sm-10 col-sm-offset-1 text-center">
-							<div class="four_zero_four_bg">
-								<h1
-									class="text-center text-green-500 font-bold text-5xl"
-								>
-									404
-								</h1>
-							</div>
-
-							<div
-								class="flex flex-col justify-center items-center gap-4"
-							>
-								<h3
-									class="text-xl md:text-2xl lg:text-2xl text-green-700"
-								>
-									Trang bạn tìm kiếm không tồn tại!
-								</h3>
-
-								<router-link
-									to="/"
-									class="bg-green-300 p-4 max-w-max rounded-lg text-sky-900 hover:cursor-pointer hover:bg-green-400 hover:text-sky-900"
-									>Trở về trang chủ</router-link
-								>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+	<main
+		class="pt-16 lg:pt-20 w-full four_zero_four_bg flex flex-col justify-end items-center gap-4"
+	>
+		<h1 class="text-5xl mb-14 text-sky-900">Trang không tồn tại</h1>
+		<router-link
+			to="/homepage"
+			class="text-2xl py-2 px-4 rounded-xl bg-green-400 text-sky-900 font-bold hover:cursor-pointer hover:bg-green-500 hover:text-sky-950 mb-10"
+			>Quay về trang chủ</router-link
+		>
 	</main>
 </template>
 
 <style scoped>
 .four_zero_four_bg {
 	background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-	height: 400px;
+	height: 800px;
 	background-position: center;
+	width: 100%;
 }
 </style>
