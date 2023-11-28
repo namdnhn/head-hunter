@@ -66,22 +66,26 @@ const ChatPage = defineAsyncComponent(
 const NotFound = defineAsyncComponent(() => import("./pages/404Page.vue"));
 
 const CandidateSearch = defineAsyncComponent(
-	() => import("./pages//hr/CandidateSearch.vue")
+	() => import("./pages/company/CandidateSearch.vue")
 );
 
-const HrInfo = defineAsyncComponent(() => import("./pages/hr/HrInfo.vue"));
+const CompanyInfo = defineAsyncComponent(
+	() => import("./pages/company/CompanyInfo.vue")
+);
 
-const HrDashboard = defineAsyncComponent(
-	() => import("./pages/hr/HrDashboard.vue")
+const CompanyDashboard = defineAsyncComponent(
+	() => import("./pages/company/CompanyDashboard.vue")
 );
 
 const CandidateSaved = defineAsyncComponent(
-	() => import("./pages/hr/CandidateSaved.vue")
+	() => import("./pages/company/CandidateSaved.vue")
 );
 
-const HrProfile = defineAsyncComponent(
-	() => import("./pages/hr/HrProfile.vue")
+const CompanyProfile = defineAsyncComponent(
+	() => import("./pages/company/CompanyProfile.vue")
 );
+
+const UpdateCompanyInfo = defineAsyncComponent(() => import("./pages/company/UpdateInfo.vue"))
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -172,16 +176,24 @@ const router = createRouter({
 		{
 			path: "/companydashboard",
 			redirect: "/companydashboard/companyinfo",
-			component: HrDashboard,
+			component: CompanyDashboard,
 			children: [
 				{
 					path: "/companydashboard/companyinfo",
-					component: HrInfo,
+					component: CompanyInfo,
 				},
 				{
 					path: "/companydashboard/candidatesaved",
 					component: CandidateSaved,
 				},
+                {
+                    path: '/companydashboard/updatecompany',
+                    component: UpdateCompanyInfo,
+                },
+                {
+                    path: '/companydashboard/deleteaccount',
+                    component: DeleteAccount,
+                }
 			],
 		},
 		{
@@ -195,7 +207,7 @@ const router = createRouter({
 		},
 		{
 			path: "/companyprofile/:id",
-			component: HrProfile,
+			component: CompanyProfile,
 		},
 		{
 			path: "/:pathMatch(.*)*",

@@ -96,7 +96,7 @@
 <script lang="ts">
 import StatisticCard from "../../components/dashboard/StatisticCard.vue";
 import NotifyCard from "../../components/dashboard/NotifyCard.vue";
-import CandidateApplied from "../../components/hr/CandidateApplied.vue";
+import CandidateApplied from "../../components/company/CandidateApplied.vue";
 export default {
 	components: {
 		StatisticCard,

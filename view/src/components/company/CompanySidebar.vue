@@ -9,11 +9,8 @@
 				class="w-32 h-32 rounded-full"
 			/>
 			<h2 class="text-sm md:text-base lg:text-lg font-bold text-sky-900">
-				Nguyen Duc Thien
+				Sun* Inc
 			</h2>
-			<p class="text-xs md:text-sm lg:text-base text-slate-500">
-				Front-end Developer
-			</p>
 		</div>
 
 		<transition name="detail">
@@ -24,27 +21,32 @@
 				<base-list
 					title="Thông tin chung"
 					icon="fa-solid fa-palette"
-					to="/hrdashboard/hrinfo"
+					to="/companydashboard/companyinfo"
 				></base-list>
 				<base-list
 					title="Hồ sơ công ty"
 					icon="fa-solid fa-user"
-					to="/hrprofile"
+					to="/companyprofile"
 				></base-list>
 				<base-list
 					title="Ứng viên đã lưu"
 					icon="fa-solid fa-bookmark"
-					to="/hrdashboard/candidatesaved"
+					to="/companydashboard/candidatesaved"
 				></base-list>
 				<base-list
 					title="Tin nhắn"
 					icon="fa-solid fa-message"
 					to="/chat"
 				></base-list>
+                <base-list
+					title="Cập nhật thông tin công ty"
+					icon="fa-solid fa-message"
+					to="/companydashboard/updatecompany"
+				></base-list>
 				<base-list
 					title="Xóa tài khoản"
 					icon="fa-solid fa-trash"
-					to="/hrdashboard/deleteaccount"
+					to="/companydashboard/deleteaccount"
 				></base-list>
 				<base-list
 					title="Đăng xuất"
