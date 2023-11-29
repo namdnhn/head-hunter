@@ -7,27 +7,34 @@
 			<div class="grid grid-cols-2 justify-center gap-4">
 				<div class="flex flex-col text-sm text-gray-700 gap-1">
 					<label for="logo" id="logo">Logo</label>
-					<input
-						type="file"
-						@change="previewImage"
-						id="logo"
-						ref="fileInput"
-					/>
-					<div
-						v-if="imagePreview"
-						class="flex justify-center items-center gap-4"
-					>
-						<img
-							:src="imagePreview"
-							alt="Image preview"
-							class="w-28 h-28 rounded-full mt-1 self-center border-2"
-						/>
-						<button
-							class="w-6 h-6 flex items-center justify-center text-white rounded-full bg-red-500"
-							@click="deleteImage"
-						>
-							X
-						</button>
+
+                    <div v-if="uploadedImage && !imagePreview" class="">
+                        <img :src="uploadedImage" alt="logo" class="max-h-48">
+                    </div>
+
+					<div>
+					    <input
+    						type="file"
+    						@change="previewImage"
+    						id="logo"
+    						ref="fileInput"
+    					/>
+    					<div
+    						v-if="imagePreview"
+    						class="flex items-center gap-4"
+    					>
+    						<img
+    							:src="imagePreview"
+    							alt="Image preview"
+    							class="mt-1 self-center border-2 max-h-48"
+    						/>
+    						<button
+    							class="w-6 h-6 flex items-center justify-center text-white rounded-full bg-red-500"
+    							@click="deleteImage"
+    						>
+    							X
+    						</button>
+    					</div>
 					</div>
 				</div>
 				<div>
@@ -98,6 +105,7 @@
 			</div>
 			<button
 				class="mt-4 py-2 px-6 bg-green-500 rounded-xl text-white hover:bg-green-600"
+				@click="uploadImage"
 			>
 				Xác nhận
 			</button>
@@ -107,17 +115,27 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL,
+} from "firebase/storage";
+import firebase from "../../../services/app"; 
 
 export default defineComponent({
 	data() {
 		return {
 			imagePreview: null as string | null,
+			imageFile: null as File | null,
+            uploadedImage: null as string | null,
 		};
 	},
 	methods: {
 		previewImage(event: Event) {
 			const file = (event.target as HTMLInputElement).files?.[0];
 			if (file) {
+				this.imageFile = file;
 				const reader = new FileReader();
 				reader.onload = (e) => {
 					this.imagePreview = e.target?.result as string | null;
@@ -127,7 +145,44 @@ export default defineComponent({
 		},
 		deleteImage() {
 			this.imagePreview = null;
+			this.imageFile = null;
 			(this.$refs.fileInput as HTMLInputElement).value = "";
+		},
+		async uploadImage() {
+			if (this.imageFile) {
+				const storage = getStorage(firebase);
+				const storageRef = ref(
+					storage,
+					"images/" + this.imageFile.name
+				);
+
+				const uploadTask = uploadBytesResumable(
+					storageRef,
+					this.imageFile
+				);
+
+				uploadTask.on(
+					"state_changed",
+					(snapshot) => {
+						const progress =
+							(snapshot.bytesTransferred / snapshot.totalBytes) *
+							100;
+						console.log("Upload is " + progress + "% done");
+					},
+					(error) => {
+						console.error("Upload failed:", error);
+					},
+					() => {
+						getDownloadURL(uploadTask.snapshot.ref).then(
+							(downloadURL) => {
+								console.log("File available at", downloadURL);
+                                this.uploadedImage = downloadURL;
+                                this.deleteImage();
+							}
+						);
+					}
+				);
+			}
 		},
 	},
 });

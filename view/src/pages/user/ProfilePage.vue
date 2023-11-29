@@ -5,20 +5,32 @@
 			class="bg-gray-100 px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-6 justify-between items-center"
 		>
 			<div class="flex flex-col md:flex-row items-center gap-6">
-				<div>
+				<div class="flex flex-col gap-2 items-center">
 					<label for="uploadAvt" class="hover:cursor-pointer">
 						<img
-							:src="personalInfo.avatarUrl"
+							:src="
+								uploadedImage ||
+								imagePreview ||
+								personalInfo.avatarUrl
+							"
 							alt="candidate avt"
 							class="w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full"
 						/>
 					</label>
+					<button
+						class="bg-green-400 px-2 py-1 rounded text-sky-900 max-w-fit"
+						v-if="imagePreview"
+						@click="uploadImage"
+					>
+						Lưu
+					</button>
 					<input
 						type="file"
-						@change="handleFileUpload"
+						@change="previewImage"
 						accept="image/*"
 						id="uploadAvt"
 						class="hidden"
+						ref="fileInput"
 					/>
 				</div>
 				<div
@@ -72,15 +84,6 @@
 						</li>
 					</ul>
 				</div>
-			</div>
-
-			<div class="flex flex-col h-full justify-between">
-				<!-- <font-awesome-icon icon="fa-solid fa-pen-to-square" class="text-3xl"/> -->
-				<span
-					class="p-4 bg-sky-900 rounded-lg text-yellow-100 hover:cursor-pointer hover:opacity-95 text-xs md:text-sm lg:text-base"
-					>Đăng CV
-					<font-awesome-icon icon="fa-solid fa-upload" class="ml-2" />
-				</span>
 			</div>
 		</div>
 
@@ -596,41 +599,40 @@
 						>
 							CV
 						</h1>
-						<font-awesome-icon
-							icon="fa-solid fa-pen-to-square"
-							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
-							@click="editCV"
-						/>
 					</span>
 
-					<ul class="flex flex-col gap-4">
-						<cv-card
-							v-for="card in cv"
-							:key="card.id"
-							:id="card.id"
-							v-model:fileName="card.fileName"
-							v-model:time="card.time"
-							:isEditting="isEdittingCV"
-							@delete-cv="deleteCV"
-						></cv-card>
-					</ul>
-
-					<!-- Save   -->
-					<div class="flex gap-4">
-						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingCV"
-							@click="saveCV"
+					<div class="flex justify-between items-center">
+						<a
+							href="https://firebasestorage.googleapis.com/v0/b/head-hunter-b9ee2.appspot.com/o/pdfs%2FTesting.pdf?alt=media&token=bc08c0bf-054e-4363-85c2-49d5ed9f879c"
+							target="_blank"
+							class="flex gap-2 items-center text-xs md:text-sm lg:text-base text-sky-900 font-semibold hover:cursor-pointer"
 						>
-							Lưu
-						</button>
+							<font-awesome-icon
+								icon="fa-solid fa-file-lines"
+								class="bg-slate-200 text-xl text-green-600 p-4 w-6 rounded-lg"
+							/>
+							CV Backend
+						</a>
 
+						<font-awesome-icon
+							icon="fa-solid fa-xmark"
+							class="text-green-700 hover:cursor-pointer"
+						/>
+					</div>
+
+					<div class="flex flex-col items-start gap-2">
+						<input
+							type="file"
+							@change="handleFileUpload"
+							accept=".pdf"
+							ref="pdfInput"
+						/>
 						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingCV"
-							@click="addCV"
+							@click="uploadFile"
+							v-if="selectedFile"
+							class="bg-green-400 px-2 py-1 rounded-lg text-sky-900"
 						>
-							Thêm
+							Tải lên
 						</button>
 					</div>
 				</div>
@@ -665,6 +667,13 @@
 
 <script lang="ts">
 import LanguageCard from "../../components/profile/LanguageCard.vue";
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL,
+} from "firebase/storage";
+import firebase from "../../../services/app";
 export default {
 	components: {
 		LanguageCard,
@@ -780,6 +789,10 @@ export default {
 			isEdittingSkills: false,
 			isEdittingLanguage: false,
 			isEdittingCV: false,
+			imagePreview: null as string | null,
+			imageFile: null as File | null,
+			uploadedImage: null as string | null,
+			selectedFile: null as File | null,
 		};
 	},
 	methods: {
@@ -887,31 +900,109 @@ export default {
 		deleteCV(id: Number) {
 			this.cv = this.cv.filter((cv) => cv.id !== id);
 		},
+		previewImage(event: Event) {
+			const file = (event.target as HTMLInputElement).files?.[0];
+			if (file) {
+				this.imageFile = file;
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					this.imagePreview = e.target?.result as string | null;
+				};
+				reader.readAsDataURL(file);
+			}
+		},
+		deleteImage() {
+			this.imagePreview = null;
+			this.imageFile = null;
+			(this.$refs.fileInput as HTMLInputElement).value = "";
+		},
+		async uploadImage() {
+			if (this.imageFile) {
+				const storage = getStorage(firebase);
+				const storageRef = ref(
+					storage,
+					"images/" + this.imageFile.name
+				);
+
+				const uploadTask = uploadBytesResumable(
+					storageRef,
+					this.imageFile
+				);
+
+				uploadTask.on(
+					"state_changed",
+					(snapshot) => {
+						const progress =
+							(snapshot.bytesTransferred / snapshot.totalBytes) *
+							100;
+						console.log("Upload is " + progress + "% done");
+					},
+					(error) => {
+						console.error("Upload failed:", error);
+					},
+					() => {
+						getDownloadURL(uploadTask.snapshot.ref).then(
+							(downloadURL) => {
+								console.log("File available at", downloadURL);
+								this.uploadedImage = downloadURL;
+								this.deleteImage();
+							}
+						);
+					}
+				);
+			}
+		},
 		handleFileUpload(event: any) {
-			const file = event.target.files[0];
-			const reader = new FileReader();
-			reader.onload = () => {
-				if (reader.result != null) {
-					this.personalInfo.avatarUrl = reader.result as string;
+			this.selectedFile = event.target.files[0];
+		},
+		uploadFile() {
+			if (this.selectedFile) {
+				this.uploadPDF(this.selectedFile);
+			} else {
+				console.error("No file selected for upload");
+			}
+		},
+		async uploadPDF(file: any) {
+			const storage = getStorage();
+			const storageRef = ref(storage, "pdfs/" + file.name);
+
+			const uploadTask = uploadBytesResumable(storageRef, file);
+
+			uploadTask.on(
+				"state_changed",
+				(snapshot) => {
+					const progress =
+						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log("Upload is " + progress + "% done");
+				},
+				(error) => {
+					console.error("Upload failed:", error);
+				},
+				() => {
+					getDownloadURL(uploadTask.snapshot.ref).then(
+						(downloadURL) => {
+							console.log("File available at", downloadURL);
+							this.selectedFile = null;
+							(this.$refs.pdfInput as HTMLInputElement).value =
+								"";
+						}
+					);
 				}
-			};
-			reader.readAsDataURL(file);
+			);
 		},
 		async getAccountInfo() {
 			const userId = this.$store.getters.userId;
 			try {
 				await this.$store.dispatch("fetchUserById", userId);
 				this.accountInfo = this.$store.getters.getUserInfo;
-				
-                //convert date_of_birth to display
-                const date = new Date(this.accountInfo.date_of_birth);
-                const year = date.getFullYear();
-                const month = date.getMonth() + 1;
-                const dt = date.getDate();
-                const displayDate = dt + "-" + month + "-" + year;
-                this.accountInfo.date_of_birth = displayDate;
-                
-                
+
+				//convert date_of_birth to display
+				const date = new Date(this.accountInfo.date_of_birth);
+				const year = date.getFullYear();
+				const month = date.getMonth() + 1;
+				const dt = date.getDate();
+				const displayDate = dt + "-" + month + "-" + year;
+				this.accountInfo.date_of_birth = displayDate;
 			} catch (error) {
 				console.log(error);
 			}
