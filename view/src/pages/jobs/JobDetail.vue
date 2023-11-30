@@ -47,31 +47,6 @@
 						</span>
 					</div>
 
-					<div class="flex gap-10">
-						<div>
-							<label
-								class="text-xs md:text-sm lg:text-base font-medium"
-								>Vai trò</label
-							>
-							<p
-								class="text-base md:text-lg lg:text-xl font-semibold text-sky-900"
-							>
-								Developer
-							</p>
-						</div>
-						<div>
-							<label
-								class="text-xs md:text-sm lg:text-base font-medium"
-								>Kinh nghiệm</label
-							>
-							<p
-								class="text-base md:text-lg lg:text-xl font-semibold text-sky-900"
-							>
-								7 năm
-							</p>
-						</div>
-					</div>
-
 					<div class="flex flex-col gap-2">
 						<h2 class="text-xs md:text-sm lg:text-base font-medium">
 							Kỹ năng
@@ -124,7 +99,7 @@
 		<!-- job description and suggest job -->
 		<div class="px-10 xl:px-40 pt-4 pb-10 flex flex-col lg:flex-row gap-10">
 			<div
-				class="p-4 border border-green-400 rounded-lg flex flex-col justify-between gap-6 lg:basis-3/4 h-min"
+				class="p-4 border border-green-400 rounded-lg flex flex-col justify-between gap-6 lg:basis-2/3 h-min"
 			>
 				<div class="flex flex-col gap-6">
 					<ul class="flex gap-6 text-xs md:text-sm lg:text-base">
@@ -474,7 +449,7 @@
 				</div>
 			</div>
 
-			<div class="flex flex-col gap-4 lg:basis-1/4">
+			<div class="flex flex-col gap-4 lg:basis-1/3">
 				<h1
 					class="text-base md:text-lg lg:text-xl font-bold text-sky-900 mb-4"
 				>

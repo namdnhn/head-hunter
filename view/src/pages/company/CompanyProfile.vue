@@ -188,12 +188,12 @@
 						>
 							Xem các công việc hiện có
 						</button>
-						<button
+						<router-link
 							class="border border-green-300 px-4 py-2 rounded-lg text-sky-900 font-semibold hover:cursor-pointer hover:border-green-500"
-							@click="showApply"
+							to="/companyprofile/recruitmentpost"
 						>
 							Tạo tin tuyển dụng mới
-						</button>
+						</router-link>
 					</div>
 				</div>
 			</div>
@@ -230,17 +230,11 @@
 				</router-link>
 			</div>
 		</div>
-		<!-- job application form  -->
-		<recruit-form :show="!!isShowApply" @close="closeApply"></recruit-form>
 	</main>
 </template>
 
 <script lang="ts">
-import RecruitForm from '../../components/ui/RecruitForm.vue'
 export default {
-    components: {
-        RecruitForm
-    },
 	data() {
 		return {
 			jobs: [
@@ -292,7 +286,6 @@ export default {
 			introduce:
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
 			isEdittingIntroduce: false,
-			isShowApply: false,
 		};
 	},
 	methods: {
@@ -302,14 +295,6 @@ export default {
 		saveIntroduce() {
 			this.isEdittingIntroduce = false;
 		},
-		showApply() {
-			this.isShowApply = true;
-            console.log('dkmmm');
-            
-		},
-        closeApply() {
-            this.isShowApply = false;
-        }
 	},
 };
 </script>

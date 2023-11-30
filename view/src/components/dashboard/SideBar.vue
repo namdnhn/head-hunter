@@ -1,6 +1,6 @@
 <template>
 	<nav
-		class="h-full py-8 px-4 flex flex-col gap-6 items-center bg-white lg:basis-2/5 xl:basis-1/5 w-full overflow-x-scroll min-h-screen max-h-screen overflow-y-auto"
+		class="h-full py-8 px-4 flex flex-col gap-6 items-center bg-white lg:basis-2/5 xl:basis-1/5 w-full"
 	>
 		<div class="flex flex-col justify-center items-center gap-2">
 			<img
