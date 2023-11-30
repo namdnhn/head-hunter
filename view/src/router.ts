@@ -85,7 +85,13 @@ const CompanyProfile = defineAsyncComponent(
 	() => import("./pages/company/CompanyProfile.vue")
 );
 
-const UpdateCompanyInfo = defineAsyncComponent(() => import("./pages/company/UpdateInfo.vue"))
+const UpdateCompanyInfo = defineAsyncComponent(
+	() => import("./pages/company/UpdateInfo.vue")
+);
+
+const RecruitmentPost = defineAsyncComponent(
+	() => import("./pages/company/RecruitmentPost.vue")
+);
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -186,14 +192,14 @@ const router = createRouter({
 					path: "/companydashboard/candidatesaved",
 					component: CandidateSaved,
 				},
-                {
-                    path: '/companydashboard/updatecompany',
-                    component: UpdateCompanyInfo,
-                },
-                {
-                    path: '/companydashboard/deleteaccount',
-                    component: DeleteAccount,
-                }
+				{
+					path: "/companydashboard/updatecompany",
+					component: UpdateCompanyInfo,
+				},
+				{
+					path: "/companydashboard/deleteaccount",
+					component: DeleteAccount,
+				},
 			],
 		},
 		{
@@ -208,6 +214,10 @@ const router = createRouter({
 		{
 			path: "/companyprofile/:id",
 			component: CompanyProfile,
+		},
+		{
+			path: "/companyprofile/recruitmentpost",
+			component: RecruitmentPost,
 		},
 		{
 			path: "/:pathMatch(.*)*",
