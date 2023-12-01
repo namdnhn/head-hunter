@@ -10,6 +10,7 @@ class CreateCv(BaseModel):
     education: str
     achivement: str
     activity: str
+    image_path: str
 
     class Config:
         orm_mode = True
@@ -23,3 +24,4 @@ class UpdateCv(CreateCv):
     education: Optional[str]
     achivement: Optional[str]
     activity: Optional[str]
+    image_path: Optional[str]

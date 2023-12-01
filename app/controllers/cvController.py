@@ -8,17 +8,12 @@ from database import getDatabase
 
 class CvController:
     def createCv(
-        imgFile: UploadFile,
         cv: CreateCv = Depends(),
         db: Session = Depends(getDatabase),
     ):
-        if imgFile.content_type.startswith("image"):
-            file_path = f"public/{imgFile.filename}"
-            with open(file_path, "wb") as image_file:
-                image_file.write(imgFile.file.read())
         db_cv = CvModel(
             user_id=cv.user_id,
-            image_path=file_path,
+            image_path=cv.image_path,
             experience=cv.experience,
             position=cv.position,
             skill=cv.skill,
@@ -38,17 +33,11 @@ class CvController:
         return db.query(CvModel).filter(CvModel.user_id == userId).all()
 
     def updateCv(
-        imgFile: Optional[UploadFile],
         cvId: int,
         cv: UpdateCv,
         db: Session = Depends(getDatabase),
     ):
         dbCv = db.query(CvModel).filter(CvModel.id == cvId).first()
-        if imgFile.content_type.startswith("image"):
-            file_path = f"public/{imgFile.filename}"
-            with open(file_path, "wb") as image_file:
-                image_file.write(imgFile.file.read())
-            dbCv.image_path = file_path
         if cv.user_id is not None:
             dbCv.user_id = cv.user_id
         if cv.experience is not None:
@@ -63,6 +52,9 @@ class CvController:
             dbCv.achivement = cv.achivement
         if cv.activity is not None:
             dbCv.activity = cv.activity
+        if cv.image_path is not None:
+            dbCv.image_path = cv.image_path
+
         db.commit()
         return {"msg": "Updated"}
 
