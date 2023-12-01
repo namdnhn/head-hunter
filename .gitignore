@@ -2,3 +2,4 @@ head-hunter-env/
 __pycache__/
 app/.env
 app/public/*
+.DS_Store
