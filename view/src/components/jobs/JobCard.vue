@@ -1,5 +1,5 @@
 <template>
-    <li class=" border border-sky-800 hover:border-green-600 h-auto  rounded-lg">
+    <li class=" border border-sky-800 hover:border-green-600 h-auto rounded-lg bg-white">
 
         <!-- job desc tag  -->
         <span class="flex justify-between items-center text-xs md:text-sm">

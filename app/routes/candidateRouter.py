@@ -20,6 +20,10 @@ async def createCandidate(request: CandidateCreate, db: Session=Depends(getDatab
 def getcandidateById(candidateId: int, db: Session=Depends(getDatabase)):
     return candidateController.getcandidateById(candidateId=candidateId, db=db)
 
+@router.get("/candidate/info/{candidate_id}")
+def getcandidateInfo(candidate_id: int, db: Session=Depends(getDatabase)):
+    return candidateController.getCandidateInfo(candidate_id=candidate_id, db=db)
+
 @router.put("/candidate/update/{candidateId}")
 def updatecandidate(candidateId: int, candidate: CandidateUpdate, db: Session = Depends(getDatabase)):
     return candidateController.updateCandidate(candidateId=candidateId, candidate=candidate, db=db)

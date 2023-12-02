@@ -1,29 +1,45 @@
-from fastapi import APIRouter, Depends
-from controllers.jobController import JobController
-from schemas.jobSchema import JobCreate, UpdateJob
+from typing import Optional
+from fastapi import APIRouter, Depends, UploadFile
 from sqlalchemy.orm import Session
+from controllers.jobController import JobController
 from database import getDatabase
-
+from schemas.jobSchema import CreateJob, UpdateJob
 
 router = APIRouter(
     prefix="/job",
-    tags=["job"],
+    tags=["Job"],
     responses={404: {"description": "Not found"}},
 )
 
-@router.post("/")
-async def createJob(request: JobCreate, db: Session=Depends(getDatabase)):
-    # print("go here")
-    return JobController.createJob(request=request, db=db)
 
-@router.get("/job/{jobId}")
-def getJobById(jobId: int, db: Session=Depends(getDatabase)):
-    return JobController.getJobById(jobId=jobId, db=db)
+@router.get("/{jobId}")
+def get_job_by_job_id(jobId: int, db: Session = Depends(getDatabase)):
+    return JobController.getJobByJobId(jobId=jobId, db=db)
 
-@router.put("/job/update/{jobId}")
-def updateJob(jobId: int, job: UpdateJob, db: Session = Depends(getDatabase)):
+
+@router.get("/company/{companyId}")
+def get_job_by_company_id(companyId: int, db: Session = Depends(getDatabase)):
+    return JobController.getJobByCompanyId(companyId=companyId, db=db)
+
+
+@router.post("/create")
+def create_job(job: CreateJob = Depends(), db: Session = Depends(getDatabase)
+):
+    return JobController.createJob(job=job, db=db)
+
+
+@router.put("/update/{jobId}")
+def update_job(
+    jobId: int,
+    job: UpdateJob = Depends(),
+    db: Session = Depends(getDatabase),
+):
     return JobController.updateJob(jobId=jobId, job=job, db=db)
 
-@router.delete("/job/delete/{jobId}")
-def deleteJob(jobId: int, db: Session = Depends(getDatabase)):
+
+@router.delete("/delete/{jobId}")
+def delete_cv(
+    jobId: int,
+    db: Session = Depends(getDatabase),
+):
     return JobController.deleteJob(jobId=jobId, db=db)

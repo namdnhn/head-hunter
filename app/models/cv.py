@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import ARRAY, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -7,6 +7,7 @@ class CvModel(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("user.id"))
     image_path = Column(String(100))
+    pdf_path = Column(String(100))
     location = Column(String(100))
     position = Column(String(300))
     skill = Column(String(300))
@@ -25,7 +26,7 @@ class Experience(Base):
     cv_id = Column(Integer, ForeignKey("cv.id"))
     company = Column(String(100))
     time = Column(String(100))
-    position = Column(String(100))
+    # position = Column(String(100))
 
     # Define the relationship to CvModel
     cv = relationship("CvModel", back_populates="experiences")

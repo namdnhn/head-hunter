@@ -7,7 +7,7 @@ from fastapi.security import HTTPBearer
 from fastapi import Depends, HTTPException, status
 from passlib.context import CryptContext
 from models.user import UserModel
-from schemas.userSchema import RegisterUser, Login, UpdateUser
+from schemas.userSchema import ConfirmPassword, RegisterUser, Login, UpdateUser
 from dotenv import load_dotenv
 import os
 from fastapi.security import HTTPBearer
@@ -42,7 +42,6 @@ def isTokenInvalidated(token=Depends(reusable_oauth2)):
 
 def verifyToken(db: Session = Depends(getDatabase), data=Depends(reusable_oauth2)):
     try:
-        print(data)
         isTokenInvalidated(token=data)
         payload = jwt.decode(
             data.credentials, os.getenv("SECRET_KEY"), algorithms=os.getenv("ALGORITHM")
@@ -70,6 +69,7 @@ def verifyToken(db: Session = Depends(getDatabase), data=Depends(reusable_oauth2
         )
     return user
 
+
 # hashing password
 pwd_cxt = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -92,13 +92,15 @@ class UserController:
     def getUserById(userId: int, db: Session = Depends(getDatabase)):
         return db.query(UserModel).filter(UserModel.id == userId).first()
 
-    def createUser(user: RegisterUser, db: Session = Depends(getDatabase)):
+    def createUser(user: UserModel, db: Session = Depends(getDatabase)):
         db_user = UserModel(
             fullname=user.fullname,
+            image_path=user.image_path,
             email=user.email,
             password=bcrypt(user.password),
             date_of_birth=user.date_of_birth,
-            # role=user.role,
+            gender=user.gender,
+            role=user.role,
             phone=user.phone,
         )
         db.add(db_user)
@@ -152,12 +154,16 @@ class UserController:
 
     def updateUser(userId: int, user: UpdateUser, db: Session):
         dbUserId = db.query(UserModel).filter(UserModel.id == userId).first()
+        if not verify(dbUserId.password, user.currentPass):
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=f"Incorrect password"
+            )
         if user.fullname is not None:
             dbUserId.fullname = user.fullname
         if user.email is not None:
             dbUserId.email = user.email
-        if user.password is not None:
-            dbUserId.password = user.password
+        if user.newPassword is not None:
+            dbUserId.password = bcrypt(user.newPassword)
         if user.date_of_birth is not None:
             dbUserId.date_of_birth = user.date_of_birth
         # if user.role is not None:
@@ -167,7 +173,12 @@ class UserController:
         db.commit()
         return {"msg": "Updated"}
 
-    def deleteUser(userId: int, db: Session):
+    def deleteUser(userId: int, password: ConfirmPassword, db: Session):
+        dbUserId = db.query(UserModel).filter(UserModel.id == userId).first()
+        if not verify(dbUserId.password, password.currentPass):
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=f"Incorrect password"
+            )
         dbUserId = db.query(UserModel).filter(UserModel.id == userId).first()
         db.delete(dbUserId)
         db.commit()

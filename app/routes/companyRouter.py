@@ -12,9 +12,9 @@ router = APIRouter(
 )
 
 @router.post("/")
-async def createCompany(request: CompanyCreate, db: Session=Depends(getDatabase)):
+async def create_company(request: CompanyCreate, db: Session=Depends(getDatabase)):
     return CompanyController.createCompany(request=request, db=db)
 
-@router.get("/company/{companyId}")
-def getCompanyById(companyId: int, db: Session=Depends(getDatabase)):
+@router.get("/{companyId}")
+def get_company_by_id(companyId: int, db: Session=Depends(getDatabase)):
     return CompanyController.getCompanyById(companyId=companyId, db=db)

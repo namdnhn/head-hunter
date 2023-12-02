@@ -1,28 +1,45 @@
+from enum import Enum
 from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
 
-# class UserRole(str, Enum):
-#     CANDIDATE = "candidate"
-#     HR = "hr"
+class UserRole(str, Enum):
+    CANDIDATE = "candidate"
+    HR = "hr"
+
+class Gender(str, Enum):
+    MALE = "male"
+    FEMALE = "female"
+    OTHER = "other"
+
 
 class Login(BaseModel):
     email: str
     password: str
 
-class RegisterUser(Login):
+
+class RegisterUser(BaseModel):
     fullname: str
+    image_path: str
+    email: str
+    password: str
     date_of_birth: datetime
-    # role: UserRole
+    gender: Gender
+    role: UserRole
     phone: str
 
     class Config:
         orm_mode = True
 
-class UpdateUser(BaseModel):
+
+class ConfirmPassword(BaseModel):
+    currentPass: str
+
+
+class UpdateUser(ConfirmPassword):
     email: Optional[str] = None
-    password: Optional[str] = None
+    newPassword: Optional[str] = None
     fullname: Optional[str] = None
     date_of_birth: Optional[datetime] = None
     # role: Optional[UserRole] = None

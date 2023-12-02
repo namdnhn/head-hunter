@@ -1,32 +1,39 @@
-from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel
-from models.company import CompanyModel
-from models.post import PostModel
+from models.job import LevelJob
+from datetime import datetime
 
-class JobCreate(BaseModel):
+class CreateJob(BaseModel):
     company_id: int
-    position: str
+    quantity: int
+    level: LevelJob
+    role: str
+    address: str
+    skills: str
     description: str
+    demand: str
     posting_date: datetime
     deadline: datetime
-    location: str
-    job_requirement: str
     salary: int
+    benefit: str
     job_status: bool
-
-class Job(JobCreate):
-    id: int
+    urgent: bool
     class Config:
         orm_mode = True
 
-class UpdateJob(BaseModel):
-    company_id: Optional[int] = None
-    position: Optional[str] = None
-    description: Optional[str] = None
-    posting_date: Optional[datetime] = None
-    deadline: Optional[datetime] = None
-    location: Optional[str] = None
-    job_requirement: Optional[str] = None
-    salary: Optional[int] = None
-    job_status: Optional[bool] = None
+
+class UpdateJob(CreateJob):
+    company_id: Optional[int]
+    quantity: Optional[int]
+    level: Optional[LevelJob]
+    role: Optional[str]
+    address: Optional[str]
+    skills: Optional[str]
+    description: Optional[str]
+    demand: Optional[str]
+    posting_date: Optional[datetime]
+    deadline: Optional[datetime]
+    salary: Optional[int]
+    benefit: Optional[str]
+    job_status: Optional[bool]
+    urgent: Optional[bool]

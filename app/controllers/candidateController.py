@@ -1,55 +1,80 @@
 from fastapi import Depends, HTTPException
-from models.cv import CvModel
-from models.company import CompanyModel
+from schemas.candidateSchema import CandidateCreate
+from models.cv import CvModel, Education, Experience
 from models.user import UserModel
 from models.candidate import CandidateModel
-# from schemas.candidateSchema import candidateCreate, Updatecandidate
 from database import getDatabase
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import joinedload
+from fastapi import Depends, HTTPException, status
 
 
 class candidateController:
     @staticmethod
-    # def createCandidate(request: candidateCreate, db: Session):
-    #     newcandidate = CandidateModel(
-    #         user_id = request.user_id,
-    #         company_id=request.company_id,
-    #     )
-    #     db.add(newcandidate)
-    #     db.commit()
-    #     db.refresh(newcandidate)
-    #     return newcandidate
+    def createCandidate(request: CandidateCreate, db: Session):
+        newcandidate = CandidateModel(
+            user_id = request.user_id,
+            cv_id=request.cv_id,
+        )
+        db.add(newcandidate)
+        db.commit()
+        db.refresh(newcandidate)
+        return newcandidate
     
-    # def getcandidateById(candidateId: int, db: Session = Depends(getDatabase)):
-    #     return db.query(candidateModel).filter(candidateModel.id == candidateId).first()
-
-    def getCandidateInfo(candidateId: int, db: Session = Depends(getDatabase)):
-        candidate = (
-            db.query(UserModel, CvModel)
-            .join(CandidateModel, UserModel.id == CandidateModel.user_id)
-            .join(CvModel, CvModel.id == CandidateModel.cv_id)
-            .filter(UserModel.id == candidateId)
+    def getcandidateById(candidateId: int, db: Session = Depends(getDatabase)):
+        return db.query(CandidateModel).filter(CandidateModel.id == candidateId).first()
+    
+    def getCandidateInfo(candidate_id: int, db: Session = Depends(getDatabase)):
+    # Query user information
+        candidate = db.query(CandidateModel).filter(CandidateModel.id == candidate_id).first()
+        user = db.query(UserModel).filter(UserModel.id == candidate.user_id).first()
+        if user is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found",
+            )
+        cv = (
+            db.query(CvModel)
+            .filter(CvModel.user_id == user.id)
             .first()
         )
+        experiences = db.query(Experience).filter(Experience.cv_id == cv.id)
+        educations = db.query(Education).filter(Education.cv_id == cv.id)
+        # # Query CV information with related experiences and educations
+        # return cv,experiences, educations
+        if cv is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="CV not found",
+            )
 
-        if not candidate:
-            raise HTTPException(status_code=404, detail="Candidate not found")
-
-        # Format the candidate information as per the specified structure
+        # Format the result
         candidate_info = {
-            "name": candidate.UserModel.fullname,
-            "position": candidate.CvModel.position,
-            "location": candidate.location,  # You may need to retrieve this information from the user model
-            "date_of_birth": candidate.UserModel.date_of_birth.strftime("%d-%m-%Y"),
-            "skills": candidate.CvModel.skill.split(", "),
-            "email": candidate.UserModel.email,
-            "phone_number": candidate.UserModel.phone,
-            "gender": candidate.UserModel.gender,  # You may need to retrieve this information from the user model
-            "degree": candidate.CvModel.degree,  # You may need to retrieve this information from the user model
-            "experience": candidate.CvModel.experience,  # You need to fetch this information from the database
-            "education": candidate.CvModel.education,  # You need to fetch this information from the database
-            "language": candidate.CvModel.language,  # You may need to retrieve this information from the user model
-            "cv": [candidate.CvModel.image_path],  # Assuming image_path is the URL for the PDF
+            "name": user.fullname,
+            "position": cv.position,
+            "location": cv.location,
+            "date_of_birth": user.date_of_birth.strftime("%d-%m-%Y"),
+            "skills": cv.skill.split(','),  # Assuming skills are stored as a comma-separated string
+            "email": user.email,
+            "phone_number": user.phone,
+            "gender": user.gender,
+            "degree": cv.degree,
+            "experience": [
+                {"company": exp.company, "time": exp.time}
+                for exp in experiences
+            ],
+            # "experience": experiences,
+            "education": [
+                {
+                    "school": edu.school,
+                    "time": edu.time,
+                    "department": edu.department,
+                }
+                for edu in educations
+            ],
+            # "education": educations,
+            "language": cv.language.split(','),  # Assuming languages are stored as a comma-separated string
+            "cv": [cv.pdf_path],  # Assuming there's one PDF URL for simplicity
         }
 
         return candidate_info

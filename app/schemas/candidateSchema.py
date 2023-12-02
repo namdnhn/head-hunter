@@ -5,6 +5,14 @@ class CandidateCreate(BaseModel):
     user_id: int
     cv_id: int
 
+class Experience(BaseModel):
+    company: str
+    time: str
+
+class Skill(BaseModel):
+    company: str
+    time: str
+
 # class Hr(HrCreate):
 #     id: int
 #     class Config:
