@@ -218,9 +218,8 @@
 						v-for="company in companies"
 						:id="company.id"
 						:key="company.id"
-						:companyName="company.companyName"
-						:companyDescription="company.companyDescription"
-						:companyAddress="company.companyAddress"
+						:name="company.name"
+						:address="company.address"
 						:logo="company.logo"
 					></card-company>
 				</ul>
@@ -276,68 +275,10 @@ export default {
 			workLocation: "",
 			companies: [
 				{
-					id: 1,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-				},
-				{
-					id: 2,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
-				},
-
-				{
-					id: 3,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-3.png",
-				},
-				{
-					id: 4,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-4.png",
-				},
-				{
-					id: 5,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-5.png",
-				},
-				{
-					id: 6,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-6.png",
-				},
-				{
-					id: 7,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-7.png",
-				},
-				{
-					id: 8,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-8.png",
-				},
-				{
-					id: 9,
-					companyName: "Sun* INC Company",
-					companyDescription: "Software and Consultancy",
-					companyAddress: "Ha Noi, Viet Nam",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-9.png",
+					id: "",
+					name: "",
+					address: "",
+					logo: "",
 				},
 			],
 		};
@@ -374,6 +315,18 @@ export default {
 			this.nameCompany = "";
 			this.workLocation = "";
 		},
+		async getCompanies() {
+			try {
+				this.companies = await this.$store.dispatch(
+					"companies/getCompanies"
+				);
+			} catch (err) {
+				console.log(err);
+			}
+		},
+	},
+	mounted() {
+		this.getCompanies();
 	},
 };
 </script>

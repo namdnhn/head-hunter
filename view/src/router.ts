@@ -139,6 +139,7 @@ const router = createRouter({
 		{
 			path: "/jobdetail/:id",
 			component: JobDetail,
+            props: true,
 		},
 		{
 			path: "/jobsearch",
@@ -216,8 +217,9 @@ const router = createRouter({
 			component: CompanyProfile,
 		},
 		{
-			path: "/companyprofile/recruitmentpost",
+			path: "/companyprofile/:id/recruitmentpost",
 			component: RecruitmentPost,
+            props: true,
 		},
 		{
 			path: "/:pathMatch(.*)*",

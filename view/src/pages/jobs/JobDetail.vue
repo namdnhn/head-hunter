@@ -6,20 +6,20 @@
 				<span class="flex flex-col gap-4 items-center">
 					<span class="flex flex-col items-center gap-2">
 						<img
-							src="https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-12.png"
+							:src="current_job.company_logo"
 							alt="company logo"
 							class="w-28 h-auto"
 						/>
 						<p
 							class="font-bold text-xs md:text-sm lg:text-base text-sky-900"
 						>
-							Công ty ABC
+							{{ current_job.company_name }}
 						</p>
 					</span>
 					<p
 						class="px-3 py-1 bg-orange-400 rounded-lg text-xs lg:text-sm text-white"
 					>
-						Đang tuyển 4 vị trí
+						Đang tuyển {{ current_job.quantity }} vị trí
 					</p>
 				</span>
 
@@ -27,12 +27,12 @@
 					<div class="flex flex-col gap-2">
 						<span
 							class="bg-green-200 px-3 py-1 rounded-lg text-green-700 font-semibold text-xs lg:text-sm max-w-max"
-							>Senior</span
+							>{{ current_job.level }}</span
 						>
 						<h1
 							class="text-xl md:text-2xl lg:text-3xl font-bold text-sky-900"
 						>
-							Front-end Developer
+							{{ current_job.role }}
 						</h1>
 						<span
 							class="flex items-center gap-1 text-xs lg:text-sm text-sky-900"
@@ -41,57 +41,22 @@
 								icon="fa-solid fa-location-dot"
 							/>
 							<address>
-								Tầng 19, Leadvisors Tower, 643 Phạm Văn Đồng,
-								Bắc Từ Liêm
+								{{ current_job.address }}
 							</address>
 						</span>
 					</div>
 
 					<div class="flex flex-col gap-2">
-						<h2 class="text-xs md:text-sm lg:text-base font-medium">
-							Kỹ năng
-						</h2>
-						<ul
-							class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 items-center justify-center"
+						<h2
+							class="text-xs md:text-sm lg:text-base font-bold text-red-500"
 						>
-							<li
-								class="px-2 py-1 bg-green-200 rounded-lg text-xs text-green-700 flex gap-1 justify-center"
-							>
-								<font-awesome-icon
-									icon="fa-regular fa-star"
-									class="text-yellow-500"
-								/>
-								<p>HTML5</p>
-							</li>
-							<li
-								class="px-2 py-1 bg-green-200 rounded-lg text-xs text-green-700 flex gap-1 justify-center"
-							>
-								<font-awesome-icon
-									icon="fa-regular fa-star"
-									class="text-yellow-500"
-								/>
-								<p>CSS3</p>
-							</li>
-							<li
-								class="px-2 py-1 bg-green-200 rounded-lg text-xs text-green-700 flex gap-1 justify-center"
-							>
-								<font-awesome-icon
-									icon="fa-regular fa-star"
-									class="text-yellow-500"
-								/>
-								<p>Javascript</p>
-							</li>
-							<li
-								class="px-2 py-1 bg-green-200 rounded-lg text-xs text-green-700 flex gap-1 justify-center"
-							>
-								<font-awesome-icon
-									icon="fa-regular fa-star"
-									class="text-yellow-500"
-								/>
-								<p>NodeJS</p>
-							</li>
-						</ul>
+							Lương: {{ current_job.salary }}
+						</h2>
 					</div>
+
+					<p class="text-sm italic text-gray-700">
+						Ngày hết hạn: {{ current_job.deadline }}
+					</p>
 				</div>
 			</div>
 		</div>
@@ -129,48 +94,11 @@
 							class="flex flex-col gap-4 text-xs md:text-sm lg:text-base text-sky-950"
 							v-if="isShowDescription"
 						>
-							<p class="leading-7">
-								Themezhub Web provides equal employment
-								opportunities to all qualified individuals
-								without regard to race, color, religion, sex,
-								gender identity, sexual orientation, pregnancy,
-								age, national origin, physical or mental
-								disability, military or veteran status, genetic
-								information, or any other protected
-								classification. Equal employment opportunity
-								includes, but is not limited to, hiring,
-								training, promotion, demotion, transfer, leaves
-								of absence, and termination. Thynk Web takes
-								allegations of discrimination, harassment, and
-								retaliation seriously, and will promptly
-								investigate when such behavior is reported.
-							</p>
-							<p class="leading-7">
-								Our company is seeking to hire a skilled Web
-								Developer to help with the development of our
-								current projects. Your duties will primarily
-								revolve around building software by writing
-								code, as well as modifying software to fix
-								errors, adapt it to new hardware, improve its
-								performance, or upgrade interfaces. You will
-								also be involved in directing system testing and
-								validation procedures, and also working with
-								customers or departments on technical issues
-								including software system design and
-								maintenance.
-							</p>
-							<p class="leading-7">
-								We are looking for a Senior Web Developer to
-								build and maintain functional web pages and
-								applications. Senior Web Developer will be
-								leading junior developers, refining website
-								specifications, and resolving technical issues.
-								He/She should have extensive experience building
-								web pages from scratch and in-depth knowledge of
-								at least one of the following programming
-								languages: Javascript, Ruby, or PHP. He/She will
-								ensure our web pages are up and running and
-								cover both internal and customer needs.
+							<p
+								class="leading-7"
+								v-for="desc in current_job.description"
+							>
+								{{ desc }}
 							</p>
 						</div>
 					</transition>
@@ -191,44 +119,16 @@
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
 								>
-									<li class="flex items-center gap-2">
+									<li
+										class="flex items-center gap-2"
+										v-for="require in current_job.demand
+											.require"
+									>
 										<font-awesome-icon
 											icon="fa-regular fa-circle-dot"
 										/>
 										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
+											{{ require }}
 										</p>
 									</li>
 								</ul>
@@ -244,43 +144,15 @@
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
 								>
-									<li class="flex items-center gap-2">
+									<li
+										class="flex items-center gap-2"
+										v-for="job in current_job.demand.job"
+									>
 										<font-awesome-icon
 											icon="fa-regular fa-circle-dot"
 										/>
 										<p>
-											Write clean, maintainable and
-											efficient code.
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
+											{{ job }}
 										</p>
 									</li>
 								</ul>
@@ -296,43 +168,16 @@
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
 								>
-									<li class="flex items-center gap-2">
+									<li
+										class="flex items-center gap-2"
+										v-for="skill in current_job.demand
+											.degree_skill"
+									>
 										<font-awesome-icon
 											icon="fa-regular fa-circle-dot"
 										/>
 										<p>
-											Write clean, maintainable and
-											efficient code.
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
-										</p>
-									</li>
-									<li class="flex items-center gap-2">
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											Candidate must have a Bachelors or
-											Masters degree in Computer. (B.tech,
-											Bsc or BCA/MCA)
+											{{ skill }}
 										</p>
 									</li>
 								</ul>
@@ -349,84 +194,15 @@
 							<ul
 								class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
 							>
-								<li class="flex items-center gap-2">
+								<li
+									class="flex items-center gap-2"
+									v-for="benefit in current_job.benefit"
+								>
 									<font-awesome-icon
 										icon="fa-regular fa-circle-dot"
 									/>
 									<p>
-										Chính sách phúc lợi đa dạng, hấp dẫn:
-										thưởng nghỉ mát, sinh nhật, thưởng năm
-										học mới, thưởng 20/11 & thưởng tết
-										nguyên đán; Chế độ khám sức khỏe định kỳ
-										hàng năm.
-									</p>
-								</li>
-								<li class="flex items-center gap-2">
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										Thưởng theo hiệu quả công việc (hoàn
-										thành milestone, deadline, ...), thưởng
-										năm, các dịp lễ tết.
-									</p>
-								</li>
-								<li class="flex items-center gap-2">
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										Môi trường trẻ, năng động, sáng tạo, hỗ
-										trợ tối đa sự phát triển và công việc
-										của nhân viên.
-									</p>
-								</li>
-								<li class="flex items-center gap-2">
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										Được đào tạo để thường xuyên nâng cao
-										nghiệp vụ. Cơ hội được học hỏi, làm việc
-										với công nghệ mới.
-									</p>
-								</li>
-								<li class="flex items-center gap-2">
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										Được làm việc trong một môi trường
-										chuyên nghiệp với các đối tác nước
-										ngoài.
-									</p>
-								</li>
-								<li class="flex items-center gap-2">
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										Được đóng bảo hiểm và các chế độ khác
-										theo Luật lao động; khám sức khỏe định
-										kỳ hàng năm.
-									</p>
-								</li>
-								<li class="flex items-center gap-2">
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										Được tham gia các câu lạc bộ thể thao:
-										bóng đá, chạy bộ,...
-									</p>
-								</li>
-								<li class="flex items-center gap-2">
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										Được tham dự các buổi đi chơi, dã ngoại,
-										nghỉ mát,...
+										{{ benefit }}
 									</p>
 								</li>
 							</ul>
@@ -464,11 +240,11 @@
 						:featured="job.featured"
 						:urgent="job.urgent"
 						:level="job.level"
-						:logo="job.logo"
-						:job="job.job"
-						:desc="job.desc"
+						:company_logo="job.company_logo"
+						:role="job.role"
+						:company_name="job.company_name"
 						:salary="job.salary"
-						:position="job.position"
+						:quantity="job.quantity"
 					></job-card>
 				</ul>
 
@@ -492,17 +268,7 @@ export default {
 		BaseForm,
 	},
 	// props nhận được khi click từ một job card
-	props: [
-		"id",
-		"featured",
-		"urgent",
-		"level",
-		"logo",
-		"job",
-		"desc",
-		"salary",
-		"position",
-	],
+	props: ["id"],
 	data() {
 		return {
 			isShowDescription: true,
@@ -515,24 +281,43 @@ export default {
 					featured: true,
 					urgent: true,
 					level: "Senior",
-					job: "Jr. PHP Developer",
-					desc: "CSS3, HTML5, Javascript, Bootstrap, Jquery",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
+					role: "Jr. PHP Developer",
+					company_name: "ABC Company",
+					company_logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
 					salary: "$5K - $8K",
-					position: "6",
+					quantity: "6",
 				},
 				{
 					id: 2,
 					featured: true,
 					urgent: true,
 					level: "Junior",
-					job: "Frontend Developer",
-					desc: "React, Vue, Angular, CSS, HTML, Javascript",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
+					role: "Frontend Developer",
+					company_name: "SBC Company",
+					company_logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
 					salary: "$3K - $5K",
-					position: "3",
+					quantity: "3",
 				},
 			],
+			current_job: {
+				level: "",
+				role: "",
+				demand: {
+					require: [],
+					job: [],
+					degree_skill: [],
+				},
+				salary: "",
+				benefit: [],
+				urgent: null,
+				company_name: "",
+				company_logo: "",
+				quantity: "",
+				address: "",
+				description: [],
+				posting_date: "",
+				deadline: "",
+			},
 		};
 	},
 	methods: {
@@ -561,6 +346,20 @@ export default {
 		closeApply() {
 			this.isShowApply = false;
 		},
+		async getJob(id: String) {
+			// call api to get job detail
+			try {
+				this.current_job = await this.$store.dispatch(
+					"jobs/getJob",
+					id
+				);
+			} catch (err) {
+				console.log(err);
+			}
+		},
+	},
+	mounted() {
+		this.getJob(this.id);
 	},
 };
 </script>

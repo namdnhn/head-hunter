@@ -299,7 +299,7 @@
 				<div
 					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
 				>
-					<p>20 kết quả</p>
+					<p>{{ jobs.length }} kết quả</p>
 					<button
 						class="px-4 py-2 relative bg-white rounded-md text-gray-600 flex justify-between items-center gap-2"
 						@click="expand('sort')"
@@ -355,10 +355,11 @@
 						:urgent="job.urgent"
 						:level="job.level"
 						:job="job.job"
-						:desc="job.desc"
-						:logo="job.logo"
+						:company_name="job.company_name"
+						:company_logo="job.company_logo"
 						:salary="job.salary"
-						:position="job.position"
+						:role="job.role"
+                        :quantity="job.quantity"
 					/>
 				</ul>
 
@@ -387,108 +388,18 @@ export default {
 			isExpandSort: false,
 			jobPosition: "",
 			workLocation: "",
-			jobs: [
-				{
-					id: 1,
-					featured: true,
-					urgent: true,
-					level: "Senior",
-					job: "Jr. PHP Developer",
-					desc: "CSS3, HTML5, Javascript, Bootstrap, Jquery",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-					salary: "$5K - $8K",
-					position: "6",
-				},
-				{
-					id: 2,
-					featured: true,
-					urgent: true,
-					level: "Junior",
-					job: "Frontend Developer",
-					desc: "React, Vue, Angular, CSS, HTML, Javascript",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
-					salary: "$3K - $5K",
-					position: "3",
-				},
-
-				{
-					id: 3,
-					featured: false,
-					urgent: false,
-					level: "Senior",
-					job: "Java Developer",
-					desc: "Java, Spring, Hibernate, SQL",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-3.png",
-					salary: "$6K - $10K",
-					position: "4",
-				},
-				{
-					id: 4,
-					featured: true,
-					urgent: false,
-					level: "Junior",
-					job: "Full Stack Developer",
-					desc: "Node.js, React, MongoDB, Express",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-4.png",
-					salary: "$4K - $7K",
-					position: "2",
-				},
-				{
-					id: 5,
-					featured: false,
-					urgent: true,
-					level: "Senior",
-					job: "Python Developer",
-					desc: "Python, Django, Flask, SQL",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-5.png",
-					salary: "$7K - $12K",
-					position: "2",
-				},
-				{
-					id: 6,
-					featured: false,
-					urgent: false,
-					level: "Junior",
-					job: "UI/UX Designer",
-					desc: "Adobe Creative Suite, Sketch, Figma",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-6.png",
-					salary: "$3K - $6K",
-					position: "1",
-				},
-				{
-					id: 7,
-					featured: true,
-					urgent: false,
-					level: "Senior",
-					job: "DevOps Engineer",
-					desc: "AWS, Docker, Kubernetes, Jenkins",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-7.png",
-					salary: "$8K - $14K",
-					position: "3",
-				},
-				{
-					id: 8,
-					featured: false,
-					urgent: true,
-					level: "Junior",
-					job: "Mobile App Developer",
-					desc: "React Native, Swift, Kotlin, Firebase",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-8.png",
-					salary: "$4K - $8K",
-					position: "2",
-				},
-				{
-					id: 9,
-					featured: false,
-					urgent: false,
-					level: "Senior",
-					job: "Data Scientist",
-					desc: "Python, R, SQL, Machine Learning",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-9.png",
-					salary: "$9K - $15K",
-					position: "2",
-				},
-			],
+			jobs: [{
+                id: "",
+                featured: false,
+                urgent: false,
+                level: "",
+                job: "",
+                company_name: "",
+                company_logo: "",
+                salary: "",
+                role: "",
+                quantity: ""
+            }],
 		};
 	},
 	methods: {
@@ -523,7 +434,18 @@ export default {
 			this.jobPosition = "";
 			this.workLocation = "";
 		},
+        async getJobs() {
+            // call api to get jobs
+            try {
+                this.jobs = await this.$store.dispatch("jobs/getJobs");
+            } catch (err) {
+                console.log(err);
+            }
+        }
 	},
+    mounted() {
+        this.getJobs();
+    }
 };
 </script>
 

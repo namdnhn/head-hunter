@@ -174,6 +174,13 @@
 							>Hồ sơ
 						</router-link>
 					</li>
+                    <li>
+						<router-link
+							to="/chat"
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Tin nhắn
+						</router-link>
+					</li>
 				</ul>
 			</nav>
 

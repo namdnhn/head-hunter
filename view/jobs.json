@@ -1,0 +1,495 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "level": "Junior",
+      "role": "Backend Developer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "1000$",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "Sun* Inc",
+      "company_logo": "https://salt.topdev.vn/6kkZjujQ-qZ_DlnZ7oooEfxIFFhrD7sxuIUhg3OQ-Ac/fit/256/1000/ce/1/aHR0cHM6Ly9hc3NldHMudG9wZGV2LnZuL2ZpbGVzL2xvZ29zLzk1MjM3NTU3MjU4OWM5NTRmNjRiYWZjMWVjMTRhNGY3LnBuZw",
+      "quantity": 4,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    },
+    {
+      "id": 2,
+      "level": "Junior",
+      "role": "Frontend Developer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "2000$",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "Viettel",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Viettel_logo_2021.svg/2560px-Viettel_logo_2021.svg.png",
+      "quantity": 3,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    },
+    {
+      "id": 3,
+      "level": "Senior",
+      "role": "Fullstack Developer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "3000$",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": 5,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    },
+    {
+      "id": 4,
+      "level": "Intern",
+      "role": "DevOps Engineer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "3.000.000 VNĐ",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": 10,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    },
+    {
+      "id": "1701500942711",
+      "level": "dasdas",
+      "role": "dasdas",
+      "demand": {
+        "require": [
+          "sdasdas"
+        ],
+        "job": [
+          "dasda"
+        ],
+        "degree_skills": [
+          "sdasd"
+        ]
+      },
+      "salary": "dasdas",
+      "benefit": [
+        "adasdas"
+      ],
+      "urgent": true,
+      "featured": false,
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": "dasd",
+      "address": "asda",
+      "description": [
+        "dasda"
+      ],
+      "posting_date": 1701500942711,
+      "deadline": "2023-12-13"
+    },
+    {
+      "id": "1701500942716",
+      "level": "dasdas",
+      "role": "dasdas",
+      "demand": {
+        "require": [
+          "sdasdas"
+        ],
+        "job": [
+          "dasda"
+        ],
+        "degree_skills": [
+          "sdasd"
+        ]
+      },
+      "salary": "dasdas",
+      "benefit": [
+        "adasdas"
+      ],
+      "urgent": true,
+      "featured": false,
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": "dasd",
+      "address": "asda",
+      "description": [
+        "dasda"
+      ],
+      "posting_date": 1701500942716,
+      "deadline": "2023-12-13"
+    },
+    {
+      "id": "1701501236366",
+      "level": "Senior",
+      "role": "Backend Developer",
+      "demand": {
+        "require": [
+          "Có khả năng hiểu biết về API",
+          "Biết ngôn ngữ Java, Python"
+        ],
+        "job": [
+          "Thảo luận với Frontend về API"
+        ],
+        "degree_skill": [
+          "Tốt nghiệp đại học chuyên ngành CNTT",
+          "Có kỹ năng giao tiếp tốt"
+        ]
+      },
+      "salary": "2000$",
+      "benefit": [
+        "Được làm việc trong môi trường năng động, sáng tạo"
+      ],
+      "urgent": true,
+      "featured": false,
+      "company_name": "Viettel",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Viettel_logo_2021.svg/2560px-Viettel_logo_2021.svg.png",
+      "quantity": "5",
+      "address": "Cau Giay, Ha Noi",
+      "description": [
+        "Viết API"
+      ],
+      "posting_date": 1701501236366,
+      "deadline": "2023-12-12"
+    },
+    {
+      "id": "1701501864913",
+      "level": "Intern",
+      "role": "Frontend Developer",
+      "demand": {
+        "require": [
+          "3+ years' experience in building front-end systems in ReactJS or VueJS.",
+          "Strong knowledge of CSS and CSS framework (Bootstrap, ElementUI,...), experience in transforming Figma designs into reusable web components."
+        ],
+        "job": [
+          "Contribute to the ideation, technical design, implementation, and testing of product features that empower our business and deliver impact to our customers.",
+          "Integrate front-end interfaces with back-end systems, APIs, and database services in close collaboration with back-end developers."
+        ],
+        "degree_skill": [
+          "Tốt nghiệp đại học CNTT"
+        ]
+      },
+      "salary": "3.000.000 VNĐ",
+      "benefit": [
+        "Provide lunch at the company, monthly parking tickets.",
+        "Provide computers, working devices."
+      ],
+      "urgent": false,
+      "featured": false,
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": "9",
+      "address": "Cau Giay, Ha Noi",
+      "description": [
+        "Design and develop web front-end for realtime communication platform",
+        "Collaborate with cross-functional teams to translate design concepts into functional and responsive front-end interfaces using ReactJS, VueJS."
+      ],
+      "posting_date": 1701501864913,
+      "deadline": "2023-12-05"
+    }
+  ],
+  "featured_jobs": [
+    {
+      "id": 1,
+      "level": "Junior",
+      "role": "Backend Developer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "1000$",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "Sun* Inc",
+      "company_logo": "data:image/png;base64,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",
+      "quantity": 4,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    },
+    {
+      "id": 2,
+      "level": "Junior",
+      "role": "Frontend Developer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "2000$",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "Viettel",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Viettel_logo_2021.svg/2560px-Viettel_logo_2021.svg.png",
+      "quantity": 3,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    },
+    {
+      "id": 3,
+      "level": "Senior",
+      "role": "Fullstack Developer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "3000$",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": 5,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    },
+    {
+      "id": 4,
+      "level": "Intern",
+      "role": "DevOps Engineer",
+      "demand": {
+        "require": [
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ],
+        "job": [
+          "Write clean, maintainable and efficient code.",
+          "Design robust, scalable and secure features."
+        ],
+        "degree_skill": [
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)",
+          "Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)"
+        ]
+      },
+      "salary": "3.000.000 VNĐ",
+      "benefit": [
+        "Chính sách phúc lợi đa dạng, hấp dẫn: thưởng nghỉ mát, sinh nhật, thưởng năm học mới, thưởng 20/11 & thưởng tết nguyên đán; Chế độ khám sức khỏe định kỳ hàng năm.",
+        "Được làm việc trong môi trường năng động, chuyên nghiệp, có cơ hội thăng tiến cao.",
+        "Được tham gia các hoạt động teambuilding, du lịch hàng năm."
+      ],
+      "urgent": true,
+      "featured": "true",
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": 10,
+      "address": "Cầu Giấy, Hà Nội",
+      "description": [
+        "Themezhub Web provides equal employment opportunities to all qualified individuals without regard to race, color, religion, sex, gender identity, sexual orientation, pregnancy, age, national origin, physical or mental disability, military or veteran status, genetic information, or any other protected classification. Equal employment opportunity includes, but is not limited to, hiring, training, promotion, demotion, transfer, leaves of absence, and termination. Thynk Web takes allegations of discrimination, harassment, and retaliation seriously, and will promptly investigate when such behavior is reported.",
+        "Our company is seeking to hire a skilled Web Developer to help with the development of our current projects. Your duties will primarily revolve around building software by writing code, as well as modifying software to fix errors, adapt it to new hardware, improve its performance, or upgrade interfaces. You will also be involved in directing system testing and validation procedures, and also working with customers or departments on technical issues including software system design and maintenance.",
+        "We are looking for a Senior Web Developer to build and maintain functional web pages and applications. Senior Web Developer will be leading junior developers, refining website specifications, and resolving technical issues. He/She should have extensive experience building web pages from scratch and in-depth knowledge of at least one of the following programming languages: Javascript, Ruby, or PHP. He/She will ensure our web pages are up and running and cover both internal and customer needs."
+      ],
+      "posting_date": "2023-12-01T14:48:42",
+      "deadline": "2023-12-01T14:48:42"
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "name": "FPT",
+      "address": "Cầu Giấy, Hà Nội",
+      "founded_year": "1999",
+      "employee_quantity": "1000",
+      "description": [
+        "FPT Telecom – Công ty thành viên có lợi nhuận lớn nhất, quản lý số thành viên đông đảo nhất trong Tập đoàn FPT. Đồng thời FPT Telecom cũng là đơn vị FPT đạt nhiều giải thưởng Sao Khuê nhất trong 3 năm liền, lọt TOP FAST 500 – Doanh nghiệp tăng trưởng nhanh nhất. Hiện nay, FPT Telecom đang ngày càng lớn mạnh và phát triển không ngừng. Với tiêu chí “Sáng tạo – Tăng trưởng”, chúng tôi đã có mặt tại tại 59 tỉnh, thành trên toàn quốc.",
+        "Ở FPT Telecom bạn sẽ tìm thấy sức trẻ, lòng nhiệt huyết và tinh thần dám đương đầu với thử thách. Hãy cho chúng tôi thấy được sự cam kết và tiềm năng của bạn để giúp chúng tôi đạt được những mục tiêu chiến lược của công ty, chúng tôi sẽ mở ra cho bạn cơ hội để vươn tới những mục tiêu phát triển sự nghiệp của bản thân bạn!"
+      ],
+      "contact": "fpt@gmail.com",
+      "job_quantity": "10"
+    },
+    {
+      "id": 2,
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Viettel_logo_2021.svg/2560px-Viettel_logo_2021.svg.png",
+      "name": "Viettel",
+      "address": "Cầu Giấy, Hà Nội",
+      "founded_year": "1999",
+      "employee_quantity": "1000",
+      "description": [
+        "Tổng Công ty Viễn thông Viettel thuộc Tập đoàn Công nghiệp - Viễn thông Quân đội là Doanh nghiệp hàng đầu tại Việt Nam về Viễn thông và Công nghệ thông tin. Hiện nay, chúng tôi có nhu cầu tuyển ứng viên trong lĩnh vực kinh doanh cho Khối Cơ quan, Trung tâm thuộc Tổng Công ty và các Viettel Tỉnh/Tp"
+      ],
+      "contact": "viettel@gmail.com",
+      "job_quantity": "12"
+    },
+    {
+      "id": 3,
+      "logo": "https://salt.topdev.vn/6kkZjujQ-qZ_DlnZ7oooEfxIFFhrD7sxuIUhg3OQ-Ac/fit/256/1000/ce/1/aHR0cHM6Ly9hc3NldHMudG9wZGV2LnZuL2ZpbGVzL2xvZ29zLzk1MjM3NTU3MjU4OWM5NTRmNjRiYWZjMWVjMTRhNGY3LnBuZw",
+      "name": "Sun* Inc",
+      "address": "Cầu Giấy, Hà Nội",
+      "founded_year": "1999",
+      "employee_quantity": "1000",
+      "description": [
+        "Sun* Inc. (Sun Asterisk Inc.) – Là một Digital Creative Studio, Sun* luôn đề cao tinh thần làm chủ sản phẩm, tư duy sáng tạo trong mỗi dự án để mang đến những trải nghiệm 'Awesome' nhất cho end-user."
+      ],
+      "contact": "fpt@gmail.com",
+      "job_quantity": "12"
+    },
+    {
+      "id": 4,
+      "logo": "https://cdn-new.topcv.vn/unsafe/135x/filters:format(webp)/https://static.topcv.vn/company_logos/YVVFSY05ZUhqjlVHtBl2kOD1a189WFj0_1652947920____d78c5dd2ab820dcbb9a367b40e712067.jpg",
+      "name": "MISA",
+      "address": "Cầu Giấy, Hà Nội",
+      "founded_year": "1999",
+      "employee_quantity": "1000",
+      "description": [
+        "Trong suốt hành trình 29 năm tiên phong, MISA tự hào là doanh nghiệp công nghệ hàng đầu Việt Nam cung cấp giải pháp chuyển đổi số tài chính, kế toán & quản trị doanh nghiệp, doanh nghiệp công nghệ thông tin xuất sắc nhất khu vực Châu Á - Châu Đại Dương (2019), TOP 3 công ty công nghệ uy tín năm 2023. Chúng tôi có 3000 nhân sự tại Hà Nội, Đà Nẵng, Buôn Ma Thuột, TP.HCM và Cần Thơ; Phát triển gần 60 sản phẩm, ứng dụng cho 350.000 khách hàng là cơ quan nhà nước, doanh nghiệp, hộ kinh doanh và 3.5 triệu khách hàng cá nhân tại Việt Nam và 22 quốc gia trên thế giới."
+      ],
+      "contact": "sun@gmail.com",
+      "job_quantity": "20"
+    }
+  ]
+}
