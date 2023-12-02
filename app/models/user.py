@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Enum
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 import enum
+from datetime import datetime
 import database
 
 # class UserRole(str, enum.Enum):
@@ -15,6 +16,7 @@ class UserModel(database.Base):
     fullname = Column(String(50))
     email = Column(String(50), unique=True, index=True)
     password = Column(String(300))
-    date_of_birth = Column(DateTime(timezone=True), default=func.now())
+    date_of_birth = Column(DateTime)
     # role = Column(Enum(UserRole))
+    gender = Column(String(10))
     phone = Column(String(10))

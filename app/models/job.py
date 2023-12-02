@@ -13,7 +13,7 @@ class JobModel(database.Base):
     deadline = Column(DateTime(timezone=True), default=func.now())
     location = Column(String(250))
     job_requirement = Column(String(250))
-    Salary = Column(Integer)
+    salary = Column(Integer)
     job_status = Column(Boolean)
 
     company = relationship("CompanyModel")
