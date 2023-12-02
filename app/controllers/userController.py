@@ -92,13 +92,15 @@ class UserController:
     def getUserById(userId: int, db: Session = Depends(getDatabase)):
         return db.query(UserModel).filter(UserModel.id == userId).first()
 
-    def createUser(user: RegisterUser, db: Session = Depends(getDatabase)):
+    def createUser(user: UserModel, db: Session = Depends(getDatabase)):
         db_user = UserModel(
             fullname=user.fullname,
+            image_path=user.image_path,
             email=user.email,
             password=bcrypt(user.password),
             date_of_birth=user.date_of_birth,
-            # role=user.role,
+            gender=user.gender,
+            role=user.role,
             phone=user.phone,
         )
         db.add(db_user)
