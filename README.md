@@ -1,7 +1,7 @@
 # head-hunter
 ## Hướng dẫn cài đặt môi trường cho back-end
 - Cần cài đặt Python và MySQL sẵn trong máy
-- Truy cập vào folder app trong project, tạo một file .env có nội dung giống trong file .env example và sửa lại các thông tin tương ứng với máy của người dùng. Chú ý tạo thêm một database tên head-hunter.
+- Truy cập vào folder app trong project, tạo một file .env có nội dung giống trong file .env example và sửa lại các thông tin tương ứng với máy của người dùng.
 - Tạo môi trường ảo: ```python -m venv head-hunter-env```
 - Kích hoạt môi trường ảo:
   + Với Windows: ```head-hunter-env\Scripts\activate```
