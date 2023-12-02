@@ -4,13 +4,17 @@ from pydantic import BaseModel
 
 class CreateCv(BaseModel):
     user_id: int
-    experience: str
+    image_path: str
+    pdf_path: str
+    location: str
+    # experience: str
+    # education: str
+    degree: str
     position: str
     skill: str
-    education: str
     achivement: str
     activity: str
-    image_path: str
+    language: str
 
     class Config:
         orm_mode = True
@@ -18,10 +22,14 @@ class CreateCv(BaseModel):
 
 class UpdateCv(CreateCv):
     user_id: Optional[int]
+    image_path: Optional[str]
+    pdf_path: str
+    location: Optional[str]
     experience: Optional[str]
+    education: Optional[str]
+    degree: Optional[str]
     position: Optional[str]
     skill: Optional[str]
-    education: Optional[str]
     achivement: Optional[str]
     activity: Optional[str]
-    image_path: Optional[str]
+    language: Optional[str]

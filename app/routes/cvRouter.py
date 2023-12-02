@@ -23,9 +23,8 @@ def get_cv_by_user_id(userId: int, db: Session = Depends(getDatabase)):
 
 
 @router.post("/create")
-def create_cv(cv: CreateCv = Depends(), db: Session = Depends(getDatabase)):
-    return CvController.createCv(cv=cv, db=db)
-
+def create_cv(experiences: list[dict], educations: list[dict], cv: CreateCv = Depends(), db: Session = Depends(getDatabase)):
+    return CvController.createCv(experiences=experiences, educations=educations, cv=cv, db=db)
 
 @router.put("/update/{cvId}")
 def update_cv(
