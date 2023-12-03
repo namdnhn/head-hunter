@@ -4,6 +4,9 @@ import store from "./store/index.ts";
 
 //import page
 const HomePage = defineAsyncComponent(() => import("./pages/HomePage.vue"));
+const ContactPage = defineAsyncComponent(() => import("./pages/about/ContactPage.vue"))
+const IntroductionPage = defineAsyncComponent(() => import("./pages/about/IntroductionPage.vue"))
+const SupportPage = defineAsyncComponent(() => import("./pages/about/SupportPage.vue"))
 const ProfilePage = defineAsyncComponent(
 	() => import("./pages/user/ProfilePage.vue")
 );
@@ -100,6 +103,18 @@ const router = createRouter({
 		{
 			path: "/homepage",
 			component: HomePage,
+		},
+		{
+			path:"/introductionpage",
+			component: IntroductionPage,
+		},
+		{
+			path:"/supportpage",
+			component: SupportPage,
+		},
+		{
+			path:"/contactpage",
+			component: ContactPage,
 		},
 		{
 			path: "/profile/:id",
