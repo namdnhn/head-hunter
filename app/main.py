@@ -18,6 +18,7 @@ app.include_router(userRouter.router, prefix="/api")
 app.include_router(hrRouter.router, prefix="/api")
 app.include_router(candidateRouter.router, prefix="/api")
 app.include_router(cvRouter.router, prefix="/api")
+app.include_router(jobRouter.router, prefix="/api")
 
 # app.include_router(messageRouter.router)
 
