@@ -11,6 +11,9 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+@router.get("") 
+def get_all_job_available(page: int = 1, size: int = 10, db: Session = Depends(getDatabase)):
+    return JobController.getAllJobAvailable(page=page, size=size, db=db)
 
 @router.get("/{jobId}")
 def get_job_by_job_id(jobId: int, db: Session = Depends(getDatabase)):
