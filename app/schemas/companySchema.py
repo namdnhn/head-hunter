@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
 class CompanyCreate(BaseModel):
+    user_id: int
     job_quantity: int
     name: str
     address: str
