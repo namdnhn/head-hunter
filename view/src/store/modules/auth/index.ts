@@ -13,6 +13,12 @@ export default {
                 phone: null,
                 date_of_birth: null,
                 email: null,
+            },
+            companyInfo: {
+                email: null,
+                name: null,
+                companyId: null,
+                accountId: null
             }
         }
     },

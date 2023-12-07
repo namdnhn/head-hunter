@@ -112,12 +112,12 @@ const router = createRouter({
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/registerEmployeePage",
+			path: "/register/employee",
 			component: RegisterEmployeePage,
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/loginEmployeePage",
+			path: "/login/employee",
 			component: LoginEmployeePage,
 			meta: { requiresUnAuth: true },
 		},

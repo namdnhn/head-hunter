@@ -281,6 +281,39 @@
       ],
       "posting_date": 1701501864913,
       "deadline": "2023-12-05"
+    },
+    {
+      "id": "1701504409130",
+      "level": "Junior",
+      "role": "Backend Developer",
+      "demand": {
+        "require": [
+          "Có khả năng hiểu biết về Java",
+          "HTML, CSS"
+        ],
+        "job": [
+          "Viết API",
+          "Viết API"
+        ],
+        "degree_skill": [
+          "Tốt nghiệp đại học CNTT"
+        ]
+      },
+      "salary": "2000$",
+      "benefit": [
+        "Làm việc trong môi trường năng động, sáng tạo"
+      ],
+      "urgent": true,
+      "featured": false,
+      "company_name": "FPT",
+      "company_logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/FPT_logo_2010.svg/2560px-FPT_logo_2010.svg.png",
+      "quantity": "9",
+      "address": "Cau Giay, Ha Noi",
+      "description": [
+        "Viết API"
+      ],
+      "posting_date": 1701504409130,
+      "deadline": "2023-12-14"
     }
   ],
   "featured_jobs": [

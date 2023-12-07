@@ -182,4 +182,46 @@ export default {
 
 		context.commit("setUserInfo", data);
 	},
+
+	//register company
+	async registerCompany(context: any, payload: any) {
+		let apiUrl = await context.rootGetters.getApiUrl;
+		apiUrl += "register";
+		const response = await fetch(apiUrl, {
+			method: "POST",
+			body: JSON.stringify({
+				fullname: "string",
+				image_path: "string",
+				email: payload.email,
+				password: payload.password,
+				date_of_birth: "2023-12-07T02:50:26.348Z",
+				gender: "male",
+				role: "hr",
+				phone: "string",
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const responseData = await response.json();
+
+		if (!response.ok) {
+			const error = new Error(
+				responseData.message || "Failed to create company."
+			);
+			throw error;
+		}
+
+		const companyInfo = {
+			accountId: responseData.accountId,
+			companyId: payload.companyId,
+			email: responseData.email,
+			name: responseData.name,
+		};
+
+		context.commit("setCompanyInfo", companyInfo);
+
+        return responseData;
+	},
 };
