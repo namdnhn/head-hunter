@@ -9,6 +9,7 @@ class CompanyController:
     @staticmethod
     def createCompany(request: CompanyCreate, db: Session):
         newCompany = CompanyModel(
+            user_id=request.user_id,
             job_quantity=request.job_quantity,
             name=request.name,
             address=request.address,

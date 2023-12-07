@@ -2,8 +2,10 @@ from typing import Optional
 from schemas.jobSchema import CreateJob, UpdateJob
 from models.job import JobModel
 from sqlalchemy.orm import Session
-from fastapi import Depends, UploadFile
+from fastapi import Depends
 from database import getDatabase
+from datetime import datetime
+
 
 
 class JobController:
@@ -37,6 +39,10 @@ class JobController:
 
     def getJobByCompanyId(companyId: int, db: Session = Depends(getDatabase)):
         return db.query(JobModel).filter(JobModel.company_id == companyId).all()
+    
+    def getAllJobAvailable(page: int = 1, size: int = 10, db: Session = Depends(getDatabase)):
+        skip = page * size
+        return db.query(JobModel).filter(JobModel.deadline < datetime.now()).offset(skip).limit(size).all()
 
     def updateJob(
         jobId: int,
