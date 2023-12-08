@@ -23,20 +23,19 @@ def get_cv_by_user_id(userId: int, db: Session = Depends(getDatabase)):
 
 
 @router.post("/create")
-def create_cv(
-    imgFile: UploadFile, cv: CreateCv = Depends(), db: Session = Depends(getDatabase)
-):
-    return CvController.createCv(imgFile=imgFile, cv=cv, db=db)
+def create_cv(experiences: list[dict], educations: list[dict], cv: CreateCv, db: Session = Depends(getDatabase)):
+    return CvController.createCv(experiences=experiences, educations=educations, cv=cv, db=db)
 
 
 @router.put("/update/{cvId}")
 def update_cv(
+    experiences: list[dict],
+    educations: list[dict],
     cvId: int,
-    imgFile: Optional[UploadFile],
-    cv: UpdateCv = Depends(),
+    cv: UpdateCv,
     db: Session = Depends(getDatabase),
 ):
-    return CvController.updateCv(cvId=cvId, imgFile=imgFile, cv=cv, db=db)
+    return CvController.updateCv(experiences=experiences, educations=educations, cvId=cvId, cv=cv, db=db)
 
 
 @router.delete("/delete/{cvId}")

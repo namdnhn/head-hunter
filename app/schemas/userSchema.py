@@ -1,11 +1,17 @@
+from enum import Enum
 from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
 
-# class UserRole(str, Enum):
-#     CANDIDATE = "candidate"
-#     HR = "hr"
+class UserRole(str, Enum):
+    CANDIDATE = "candidate"
+    HR = "hr"
+
+class Gender(str, Enum):
+    MALE = "male"
+    FEMALE = "female"
+    OTHER = "other"
 
 
 class Login(BaseModel):
@@ -13,10 +19,14 @@ class Login(BaseModel):
     password: str
 
 
-class RegisterUser(Login):
+class RegisterUser(BaseModel):
     fullname: str
+    image_path: str
+    email: str
+    password: str
     date_of_birth: datetime
-    # role: UserRole
+    gender: Gender
+    role: UserRole
     phone: str
 
     class Config:

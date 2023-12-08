@@ -1,18 +1,18 @@
 <template>
 	<nav
-		class="h-full py-8 px-4 flex flex-col gap-6 items-center bg-white lg:basis-2/5 xl:basis-1/5 w-full overflow-x-scroll min-h-screen max-h-screen overflow-y-auto"
+		class="h-full py-8 px-4 flex flex-col gap-6 items-center bg-white lg:basis-2/5 xl:basis-1/5 w-full"
 	>
 		<div class="flex flex-col justify-center items-center gap-2">
 			<img
-				src="https://scontent.fhan14-2.fna.fbcdn.net/v/t1.15752-9/380473750_705477890924386_4811766216330519987_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeGFmilbrwjAiwoz971chM1LE5bf8IYqo6oTlt_whiqjqh0Iwl9C4uRPI-ZC7gMedieRRXim92lupTLVVeUE-nxV&_nc_ohc=AuDbYUxThqkAX-QdQEU&_nc_ht=scontent.fhan14-2.fna&oh=03_AdSOy_wvf3J7K-ii0QH99UV-lHuv1HBENNtAqOpozA7T7g&oe=6561863A"
+				src="https://www.topcv.vn/images/avatar-default.jpg"
 				alt="avt"
 				class="w-32 h-32 rounded-full"
 			/>
 			<h2 class="text-sm md:text-base lg:text-lg font-bold text-sky-900">
-				Nguyen Duc Thien
+				To Lam Son
 			</h2>
 			<p class="text-xs md:text-sm lg:text-base text-slate-500">
-				Front-end Developer
+				Backend Developer
 			</p>
 		</div>
 
@@ -29,7 +29,7 @@
 				<base-list
 					title="Hồ sơ của tôi"
 					icon="fa-solid fa-user"
-					to="/profile"
+					:to="profileLink"
 				></base-list>
 				<base-list
 					title="Tin tuyển dụng đã lưu"
@@ -93,6 +93,7 @@ export default {
 			isLoading: false,
 			error: null,
 			isShowNav: true,
+            userId: this.$store.getters.userId,
 		};
 	},
 	methods: {
@@ -105,7 +106,7 @@ export default {
 				this.error = error.message;
 			}
 			this.isLoading = false;
-			this.$router.push("/loginCandidatePage");
+			this.$router.push("/homepage");
 		},
 		confirmErr() {
 			this.error = null;
@@ -114,6 +115,11 @@ export default {
 			this.isShowNav = !this.isShowNav;
 		},
 	},
+    computed: {
+        profileLink() {
+            return '/candidate/' + this.userId + '/profile';
+        }
+    },
 };
 </script>
 

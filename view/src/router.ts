@@ -4,6 +4,15 @@ import store from "./store/index.ts";
 
 //import page
 const HomePage = defineAsyncComponent(() => import("./pages/HomePage.vue"));
+const ContactPage = defineAsyncComponent(
+	() => import("./pages/about/ContactPage.vue")
+);
+const IntroductionPage = defineAsyncComponent(
+	() => import("./pages/about/IntroductionPage.vue")
+);
+const SupportPage = defineAsyncComponent(
+	() => import("./pages/about/SupportPage.vue")
+);
 const ProfilePage = defineAsyncComponent(
 	() => import("./pages/user/ProfilePage.vue")
 );
@@ -80,6 +89,9 @@ const CompanyDashboard = defineAsyncComponent(
 const CandidateSaved = defineAsyncComponent(
 	() => import("./pages/company/CandidateSaved.vue")
 );
+const CandidateApplied = defineAsyncComponent(
+	() => import("./components/company/CandidateApplied.vue")
+);
 
 const CompanyProfile = defineAsyncComponent(
 	() => import("./pages/company/CompanyProfile.vue")
@@ -89,8 +101,15 @@ const UpdateCompanyInfo = defineAsyncComponent(
 	() => import("./pages/company/UpdateInfo.vue")
 );
 
+
 const ChatBox = defineAsyncComponent(
 	() => import("./pages/dashboard/ChatBox.vue")
+
+const RecruitmentPost = defineAsyncComponent(
+	() => import("./pages/company/RecruitmentPost.vue")
+);
+const EditRecruitmentPost = defineAsyncComponent(
+	() => import("./pages/company/EditRecruitmentPost.vue")
 );
 
 const router = createRouter({
@@ -102,27 +121,39 @@ const router = createRouter({
 			component: HomePage,
 		},
 		{
-			path: "/profile/:id",
+			path: "/introductionpage",
+			component: IntroductionPage,
+		},
+		{
+			path: "/supportpage",
+			component: SupportPage,
+		},
+		{
+			path: "/contactpage",
+			component: ContactPage,
+		},
+		{
+			path: "/candidate/:id/profile",
 			component: ProfilePage,
 			meta: { requiresAuth: true },
 		},
 		{
-			path: "/loginCandidatePage",
+			path: "/login",
 			component: LoginCandicatePage,
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/registerEmployeePage",
+			path: "/register/company",
 			component: RegisterEmployeePage,
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/loginEmployeePage",
+			path: "/login/company",
 			component: LoginEmployeePage,
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/registerCandidatePage",
+			path: "/register/candidate",
 			component: RegisterCandicatePage,
 			meta: { requiresUnAuth: true },
 		},
@@ -139,6 +170,7 @@ const router = createRouter({
 		{
 			path: "/jobdetail/:id",
 			component: JobDetail,
+			props: true,
 		},
 		{
 			path: "/jobsearch",
@@ -193,6 +225,11 @@ const router = createRouter({
 					component: CandidateSaved,
 				},
 				{
+
+					path: "/companydashboard/candidateapplied",
+					component: CandidateApplied,
+				},
+				{
 					path: "/companydashboard/updatecompany",
 					component: UpdateCompanyInfo,
 				},
@@ -221,6 +258,16 @@ const router = createRouter({
 		{
 			path: "/companyprofile/:id",
 			component: CompanyProfile,
+		},
+		{
+			path: "/companyprofile/:id/recruitmentpost",
+			component: RecruitmentPost,
+			props: true,
+		},
+		{
+			path: "/companyprofile/:id/editrecruitmentpost",
+			component: EditRecruitmentPost,
+			props: true,
 		},
 		{
 			path: "/:pathMatch(.*)*",

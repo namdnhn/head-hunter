@@ -103,16 +103,19 @@
 							Đăng nhập
 						</button>
 
-						<p class="text-sm font-light text-cyan-800">
+						<p class="text-sm font-light text-cyan-800 flex flex-col gap-1">
 							Bạn chưa có tài khoản ?
-							<a
+							<span
 								href="#"
-								class="font-bold text-primary-600 hover:underline dark:text-primary-500"
+								class="font-bold text-primary-600 dark:text-primary-500 flex gap-4 items-center"
 							>
-								<router-link to="./registerCandidatePage"
-									>Đăng ký ngay !</router-link
+								<router-link to="/register/candidate" class="hover:underline"
+									>Đăng ký ứng viên</router-link
 								>
-							</a>
+                                <router-link to="/register/company" class="hover:underline"
+									>Đăng ký doanh nghiệp</router-link
+								>
+							</span>
 						</p>
 					</form>
 				</div>

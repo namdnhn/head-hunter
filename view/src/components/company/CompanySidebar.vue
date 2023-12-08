@@ -26,12 +26,17 @@
 				<base-list
 					title="Hồ sơ công ty"
 					icon="fa-solid fa-user"
-					to="/companyprofile"
+					:to="profileCompanyLink"
 				></base-list>
 				<base-list
 					title="Ứng viên đã lưu"
 					icon="fa-solid fa-bookmark"
 					to="/companydashboard/candidatesaved"
+				></base-list>
+				<base-list
+					title="Ứng viên đã ứng tuyển"
+					icon="fa-solid fa-bookmark"
+					to="/companydashboard/candidateapplied"
 				></base-list>
 				<base-list
 					title="Tin nhắn"
@@ -85,6 +90,7 @@ export default {
 			isLoading: false,
 			error: null,
 			isShowNav: true,
+			companyId: this.$store.getters.companyId,
 		};
 	},
 	methods: {
@@ -97,7 +103,7 @@ export default {
 				this.error = error.message;
 			}
 			this.isLoading = false;
-			this.$router.push("/loginCandidatePage");
+			this.$router.push("/homepage");
 		},
 		confirmErr() {
 			this.error = null;
@@ -106,6 +112,11 @@ export default {
 			this.isShowNav = !this.isShowNav;
 		},
 	},
+	computed: {
+        profileCompanyLink() {
+            return `/companyprofile/${this.companyId}`;
+        }
+    },
 };
 </script>
 

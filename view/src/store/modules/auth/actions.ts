@@ -18,10 +18,13 @@ export default {
 		if (mode === "register") {
 			apiUrl += "register";
 			data = {
+				fullname: payload.fullname,
+				image_path: "string",
 				email: payload.email,
 				password: payload.password,
-				fullname: payload.fullname,
 				date_of_birth: payload.date_of_birth,
+				gender: "male",
+				role: "candidate",
 				phone: payload.phone,
 			};
 		} else if (mode === "login") {
@@ -59,6 +62,7 @@ export default {
 
 		localStorage.setItem("token", responseData.jwtToken);
 		localStorage.setItem("expiresIn", expiresIn.toString());
+		localStorage.setItem("role", responseData.role);
 
 		clearTimeout(timer);
 		//expiresIn = 3 days
@@ -78,18 +82,59 @@ export default {
 				token: responseData.jwtToken,
 				userId: responseData.id,
 			});
+
+			context.commit("setUserInfo", {
+				fullname: responseData.fullname,
+				phone: responseData.phone,
+				date_of_birth: responseData.date_of_birth,
+				email: responseData.email,
+			});
+
+			if (responseData.role === "hr") {
+				//get company by user id
+				let api = await context.rootGetters.getApiUrl;
+				api += `company/user/${responseData.id}`;
+
+				const response = await fetch(api, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				});
+
+				const responseCompanyData = await response.json();
+
+				if (!response.ok) {
+					const error = new Error(
+						responseCompanyData.message || "Lỗi lấy dữ liệu công ty"
+					);
+					throw error;
+				}
+
+				localStorage.setItem("companyId", responseCompanyData.id);
+
+				context.commit("setCompanyId", responseCompanyData.id);
+				context.commit("setCompanyInfo", {
+					name: responseCompanyData.name,
+					email: responseCompanyData.email,
+				});
+			}
 		}
 	},
 
 	autoLogin(context: any) {
 		const token = localStorage.getItem("token");
 		const userId = localStorage.getItem("userId");
+        const companyId = localStorage.getItem("companyId");
 
 		if (token) {
-			context.commit("setUser", {
-				token: token,
-				userId: userId,
-			});
+            context.commit("setUser", {
+                token: token,
+                userId: userId,
+            });
+            if (companyId) {
+                context.commit("setCompanyId", companyId)
+            }
 		}
 	},
 
@@ -101,6 +146,8 @@ export default {
 		localStorage.removeItem("token");
 		localStorage.removeItem("userId");
 		localStorage.removeItem("expiresIn");
+		localStorage.removeItem("role");
+		localStorage.removeItem("companyId");
 
 		context.commit("setUser", {
 			token: null,
@@ -140,14 +187,30 @@ export default {
 		// 	Date.parse(responseData.date_of_birth)
 		// ).toLocaleDateString("en-GB");
 
-		const payload = {
-			fullname: responseData.fullname,
-			phone: responseData.phone,
-			date_of_birth: responseData.date_of_birth,
-			email: responseData.email,
-		};
+		//is candidate
+		if (responseData.role === "candidate") {
+			const payload = {
+				fullname: responseData.fullname,
+				phone: responseData.phone,
+				date_of_birth: responseData.date_of_birth,
+				email: responseData.email,
+			};
 
-		context.commit("setUserInfo", payload);
+			context.commit("setUserInfo", payload);
+
+		}
+
+        //is hr
+		if (responseData.role === "hr") {
+			const payload = {
+				fullname: responseData.fullname,
+				email: responseData.email,
+			};
+
+			context.commit("setCompanyInfo", payload);
+		}
+
+		return responseData;
 	},
 
 	//update info
@@ -181,5 +244,48 @@ export default {
 		}
 
 		context.commit("setUserInfo", data);
+	},
+
+	//register company
+	async registerCompany(context: any, payload: any) {
+		let apiUrl = await context.rootGetters.getApiUrl;
+		apiUrl += "register";
+
+		const response = await fetch(apiUrl, {
+			method: "POST",
+			body: JSON.stringify({
+				fullname: payload.fullname,
+				image_path: "string",
+				email: payload.email,
+				password: payload.password,
+				date_of_birth: "2023-12-07T08:16:46.167Z",
+				gender: "male",
+				role: "hr",
+				phone: "string",
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const responseData = await response.json();
+
+		if (!response.ok) {
+			const error = new Error(
+				responseData.message || "Failed to create company."
+			);
+			throw error;
+		}
+
+		const companyInfo = {
+			accountId: responseData.accountId,
+			companyId: payload.companyId,
+			email: responseData.email,
+			name: responseData.name,
+		};
+
+		context.commit("setCompanyInfo", companyInfo);
+
+		return responseData.user;
 	},
 };

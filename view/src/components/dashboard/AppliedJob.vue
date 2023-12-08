@@ -1,77 +1,78 @@
 <template>
-	<div class="flex justify-between items-center gap-2">
+	<div
+		class="p-4 border border-slate-400 rounded-lg flex justify-between items-center"
+	>
 		<div class="flex gap-2 items-center">
-			<img
-				src="https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png"
-				alt="company logo"
-				class="w-12 h-12"
-			/>
-			<span>
-				<h1
-					class="text-sm md:text-base lg:text-lg text-sky-900 font-semibold hover:cursor-pointer"
+			<img :src="logo" alt="job logo" class="w-12 h-12 lg:w-16 lg:h-16" />
+			<span class="flex flex-col items-start justify-center">
+				<h5
+					class="text-xs md:text-sm lg:text-base font-semibold text-sky-900 hover:cursor-pointer hover:text-green-700"
 				>
 					{{ name }}
-				</h1>
-				<p class="text-xs lg:text-sm text-slate-500">
-					{{ location }}
+				</h5>
+				<p class="flex items-center text-slate-600 text-xs lg:text-sm" v-if="type==='job'">
+					<font-awesome-icon
+						icon="fa-solid fa-location-dot"
+						class="mr-1"
+					/>{{ location }}
+				</p>
+                <p class="flex items-center text-slate-600 text-xs lg:text-sm" v-else>
+                    {{ position }}
 				</p>
 			</span>
 		</div>
 
-		<p class="text-xs md:text-sm lg:text-base text-slate-500">
-			Ứng tuyển vào {{ time }}
+		<p class="text-xs md:text-sm lg:text-base text-slate-500" v-if="expire">
+			Hết hạn vào {{ expire }}
 		</p>
 
-		<span
-			class="p-2 bg-green-700 rounded-lg text-white w-20 md:w-24 text-xs md:text-sm lg:text-base text-center"
-			v-if="status === 'Chấp nhận'"
-			>{{ status }}</span
-		>
-		<span
-			class="p-2 bg-yellow-400 rounded-lg text-white w-20 md:w-24 text-xs md:text-sm lg:text-base text-center"
-			v-else-if="status === 'Đang chờ'"
-			>{{ status }}</span
-		>
-		<span
-			class="p-2 bg-red-500 rounded-lg text-white w-20 md:w-24 text-xs md:text-sm lg:text-base text-center"
-			v-else-if="status === 'Từ chối'"
-			>{{ status }}</span
-		>
-
-		<font-awesome-icon
-			icon="fa-solid fa-eye"
-			class="p-2 bg-blue-100 text-blue-500 rounded-full text-sm md:text-base lg:text-lg hover:cursor-pointer"
-		/>
+		<div class="flex items-center gap-4">
+			<font-awesome-icon
+				icon="fa-solid fa-xmark"
+				class="py-1 px-2 text-white bg-red-500 hover:cursor-pointer rounded-full text-xs md:text-sm lg:text-base"
+			/>
+			<button
+				class="px-2 py-1 lg:px-4 lg:py-2 border rounded-md border-slate-400 text-sky-900 hover:bg-slate-200 text-xs md:text-sm lg:text-base"
+			>
+				Xem hồ sơ ứng viên
+			</button>
+			<button
+				class="px-2 py-1 lg:px-4 lg:py-2 rounded-md border bg-green-300 text-sky-900 hover:bg-green-400 text-xs md:text-sm lg:text-base"
+				v-if="type === 'job'"
+			>
+				Ứng tuyển nhanh
+			</button>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 export default {
 	props: {
+		logo: {
+			type: String,
+			required: true,
+		},
 		name: {
 			type: String,
 			required: true,
 		},
 		location: {
 			type: String,
-			required: true,
+			required: false,
 		},
-		time: {
+		expire: {
 			type: String,
-			required: true,
+			required: false,
 		},
-		status: {
+		type: {
 			type: String,
-			required: true,
+			required: false,
 		},
-		logo: {
-			type: String,
-			required: true,
-		},
-		id: {
-			type: Number,
-			required: true,
-		},
+        position: {
+            type: String,
+            required: false
+        }
 	},
 };
 </script>

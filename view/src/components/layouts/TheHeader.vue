@@ -59,6 +59,7 @@
 						<li
 							class="mx-2 rounded-md p-4 bg-white flex items-center justify-between"
 							@click="toggleMoreInfo('companies')"
+							v-if="!isCompany"
 						>
 							<a
 								class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
@@ -103,7 +104,7 @@
 							>Trang chủ</router-link
 						>
 					</li>
-					<li>
+					<li v-if="!isCompany">
 						<a
 							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base relative"
 							@mouseover="moreInfoJobs = true"
@@ -138,7 +139,7 @@
 							</ul>
 						</a>
 					</li>
-					<li>
+					<li v-if="!isCompany">
 						<a
 							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base relative"
 							@mouseover="moreInfoCompanies = true"
@@ -169,9 +170,23 @@
 					</li>
 					<li>
 						<router-link
-							:to="profileLink"
+							:to="candidateProfileLink"
 							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							v-if="!isCompany"
 							>Hồ sơ
+						</router-link>
+						<router-link
+							:to="companyProfileLink"
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							v-if="isCompany"
+							>Hồ sơ
+						</router-link>
+					</li>
+					<li>
+						<router-link
+							to="/chat"
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Tin nhắn
 						</router-link>
 					</li>
 				</ul>
@@ -180,12 +195,12 @@
 			<!-- login, logout  -->
 			<span class="flex gap-4 items-center" v-if="!isLoggedIn">
 				<router-link
-					to="/loginCandidatePage"
+					to="/login"
 					class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
 					>Đăng nhập</router-link
 				>
 				<router-link
-					to="/registerCandidatePage"
+					to="/register/candidate"
 					class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
 					>Đăng ký</router-link
 				>
@@ -203,8 +218,11 @@
 						alt="default avt"
 						class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover rounded-full"
 					/>
-					<p class="lg:block text-xs md:text-sm lg:text-base">
+					<p class="lg:block text-xs md:text-sm lg:text-base" v-if="!isCompany">
 						{{ userInfo.fullname }}
+					</p>
+                    <p class="lg:block text-xs md:text-sm lg:text-base" v-if="isCompany">
+						{{ companyInfo.name }}
 					</p>
 					<font-awesome-icon icon="fa-solid fa-chevron-down" />
 					<!-- more user account info -->
@@ -217,12 +235,21 @@
 							title="Thông tin tài khoản"
 							@click="isShowUserInfo = false"
 							to="/userdashboard"
+							v-if="!isCompany"
+						/>
+						<base-list
+							icon="fa-solid fa-circle-info"
+							title="Thông tin tài khoản"
+							@click="isShowUserInfo = false"
+							to="/companydashboard"
+							v-if="isCompany"
 						/>
 						<base-list
 							icon="fa-solid fa-lock"
 							title="Đổi mật khẩu"
 							@click="isShowUserInfo = false"
 							to="/userdashboard/updateaccount"
+							v-if="!isCompany"
 						/>
 						<base-list
 							icon="fa-solid fa-arrow-right-from-bracket"
@@ -233,6 +260,9 @@
 				</span>
 			</span>
 		</div>
+        <base-dialog :show="!!error" title="Có lỗi xảy ra!">
+            <p>Vui lòng thử lại sau.</p>
+        </base-dialog>
 	</header>
 </template>
 
@@ -255,6 +285,12 @@ export default {
 				date_of_birth: "",
 				email: "",
 			},
+			companyInfo: {
+				name: "none",
+				email: "",
+			},
+			companyId: null,
+            error: null
 		};
 	},
 	methods: {
@@ -280,15 +316,39 @@ export default {
 		},
 		logout() {
 			this.$store.dispatch("logout");
+			this.$router.push("/homepage");
+            window.location.reload();
 		},
 		async getUserInfo() {
 			if (this.isLoggedIn) {
 				this.userId = this.$store.getters.userId;
+				this.companyId = this.$store.getters.companyId;
+                
 				try {
-					await this.$store.dispatch("fetchUserById", this.userId);
-					this.userInfo = this.$store.getters.getUserInfo;
-				} catch (error) {
+					const res = await this.$store.dispatch(
+						"fetchUserById",
+						this.userId
+					);
+
+					//if company
+					if (res.role === "candidate") {
+						this.userInfo = {
+							fullname: res.fullname,
+							phone: res.phone,
+							date_of_birth: res.date_of_birth,
+							email: res.email,
+						};
+					} else if (res.role === "hr") {
+						this.companyInfo = {
+							name: res.fullname,
+							email: res.email,
+						};
+                        
+					}
+				} catch (error: any) {
+					//if candidate
 					console.log(error);
+                    this.error = error;
 				}
 			} else {
 				return;
@@ -299,8 +359,14 @@ export default {
 		isLoggedIn() {
 			return this.$store.getters.isAuthenticated;
 		},
-		profileLink() {
-			return `/profile/${this.userId}`;
+		candidateProfileLink() {
+			return `/candidate/${this.userId}/profile`;
+		},
+		companyProfileLink() {
+			return `/companyprofile/${this.companyId}`;
+		},
+		isCompany() {
+			return this.$store.getters.isCompany;
 		},
 	},
 	mounted() {
@@ -308,6 +374,9 @@ export default {
 	},
 	watch: {
 		isLoggedIn() {
+			this.getUserInfo();
+		},
+		isCompany() {
 			this.getUserInfo();
 		},
 	},

@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="fixed top-0 left-0 right-0 h-full w-full z-40 bg-white flex items-center justify-center"
+		class="fixed top-0 left-0 right-0 h-full w-full z-50 bg-white flex items-center justify-center"
 	>
 		<div
 			class="flex flex-col items-center justify-center mx-auto lg:py-0 w-full"
@@ -222,17 +222,31 @@
 							Đăng ký
 						</button>
 
-						<p class="text-sm font-light text-cyan-800">
-							Bạn đã có tài khoản ?
-							<a
-								href="#"
-								class="font-bold text-primary-600 hover:underline dark:text-primary-500"
-							>
-								<router-link to="./loginCandidatePage"
-									>Đăng nhập ngay !</router-link
+						<div class="text-sm font-light text-cyan-800 flex flex-col gap-2">
+							<span class="flex items-center gap-2">
+								<p>Bạn đã có tài khoản?</p>
+								<a
+									href="#"
+									class="font-bold text-primary-600 hover:underline dark:text-primary-500"
 								>
-							</a>
-						</p>
+									<router-link to="/login"
+										>Đăng nhập ngay!</router-link
+									>
+								</a>
+							</span>
+
+							<span class="flex items-center gap-2">
+								<p>Bạn là doanh nghiệp?</p>
+								<a
+									href="#"
+									class="font-bold text-primary-600 hover:underline dark:text-primary-500"
+								>
+									<router-link to="/register/company"
+										>Đăng ký doanh nghiệp!</router-link
+									>
+								</a>
+							</span>
+						</div>
 					</form>
 				</div>
 			</div>

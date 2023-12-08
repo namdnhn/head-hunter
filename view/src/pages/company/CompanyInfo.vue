@@ -4,7 +4,7 @@
 			Thông tin người dùng
 		</h1>
 		<div
-			class="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4"
+			class="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-4"
 		>
 			<!-- Applied job -->
 			<statistic-card
@@ -23,20 +23,7 @@
 			></statistic-card>
 
 			<!-- Viewd profile  -->
-			<statistic-card
-				icon="fa-solid fa-eye"
-				color="bg-blue-100 text-blue-500"
-				title="1.2k"
-				subtitle="Lượt xem hồ sơ"
-			></statistic-card>
-
-			<!-- reviewd  -->
-			<statistic-card
-				icon="fa-solid fa-comment"
-				color="bg-red-100 text-red-500"
-				title="23"
-				subtitle="Lượt đánh giá"
-			></statistic-card>
+			
 		</div>
 
 		<!-- notification and applied job -->
@@ -78,16 +65,14 @@
 					Ứng viên đang ứng tuyển
 				</h1>
 
-				<candidate-applied
-					v-for="apply in applied"
-					:key="apply.id"
-					:id="apply.id"
-					:name="apply.name"
-					:logo="apply.logo"
-					:time="apply.time"
-					:position="apply.position"
-					:status="apply.status"
-				></candidate-applied>
+				<applied-job
+				v-for="candidate in candidates"
+				:key="candidate.id"
+				:logo="candidate.logo"
+				:name="candidate.name"
+				:position="candidate.position"
+                type="candidate"
+			></applied-job>
 			</div>
 		</div>
 	</div>
@@ -97,15 +82,17 @@
 import StatisticCard from "../../components/dashboard/StatisticCard.vue";
 import NotifyCard from "../../components/dashboard/NotifyCard.vue";
 import CandidateApplied from "../../components/company/CandidateApplied.vue";
+import AppliedJob from "../../components/dashboard/AppliedJob.vue"
 export default {
 	components: {
 		StatisticCard,
 		NotifyCard,
 		CandidateApplied,
+		AppliedJob
 	},
 	data() {
 		return {
-			applied: [
+			candidates: [
 				{
 					id: 1,
 					name: "Nguyen Duc Thien",

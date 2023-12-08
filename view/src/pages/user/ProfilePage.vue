@@ -1,24 +1,37 @@
 <template>
 	<main class="pt-16 lg:pt-20 h-auto w-full">
 		<!-- Introduce  -->
+
 		<div
 			class="bg-gray-100 px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-6 justify-between items-center"
 		>
 			<div class="flex flex-col md:flex-row items-center gap-6">
-				<div>
+				<div class="flex flex-col gap-2 items-center">
 					<label for="uploadAvt" class="hover:cursor-pointer">
 						<img
-							:src="personalInfo.avatarUrl"
+							:src="
+								uploadedImage ||
+								imagePreview ||
+								personalInfo.avatarUrl
+							"
 							alt="candidate avt"
 							class="w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full"
 						/>
 					</label>
+					<button
+						class="bg-green-400 px-2 py-1 rounded text-sky-900 max-w-fit"
+						v-if="imagePreview"
+						@click="uploadImage"
+					>
+						Lưu
+					</button>
 					<input
 						type="file"
-						@change="handleFileUpload"
+						@change="previewImage"
 						accept="image/*"
 						id="uploadAvt"
 						class="hidden"
+						ref="fileInput"
 					/>
 				</div>
 				<div
@@ -60,27 +73,7 @@
 							/>{{ accountInfo.date_of_birth }}
 						</li>
 					</ul>
-
-					<!-- skills  -->
-					<ul class="grid grid-cols-3 gap-4 mt-4 text-center">
-						<li
-							class="text-gray-500 bg-gray-200 text-xs md:text-sm lg:text-base py-1 px-4 rounded-lg"
-							v-for="skill in skills"
-							:key="skill.id"
-						>
-							{{ skill.name }}
-						</li>
-					</ul>
 				</div>
-			</div>
-
-			<div class="flex flex-col h-full justify-between">
-				<!-- <font-awesome-icon icon="fa-solid fa-pen-to-square" class="text-3xl"/> -->
-				<span
-					class="p-4 bg-sky-900 rounded-lg text-yellow-100 hover:cursor-pointer hover:opacity-95 text-xs md:text-sm lg:text-base"
-					>Đăng CV
-					<font-awesome-icon icon="fa-solid fa-upload" class="ml-2" />
-				</span>
 			</div>
 		</div>
 
@@ -89,7 +82,7 @@
 			class="px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row lg:gap-10"
 		>
 			<!-- User info  -->
-			<div class="lg:basis-2/3">
+			<div class="" v-if="hasCvProfile">
 				<!-- introduce  -->
 				<div
 					class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10"
@@ -114,7 +107,7 @@
 						class="text-xs md:text-sm lg:text-base text-gray-600"
 						v-if="!isEdittingIntroduce"
 					>
-						{{ introduce }}
+						{{ cvProfile.introduce }}
 					</p>
 
 					<textarea
@@ -123,7 +116,7 @@
 						rows="5"
 						cols="10"
 						class="p-2 border border-sky-950 text-xs md:text-sm lg:text-base"
-						v-model="introduce"
+						v-model="cvProfile.introduce"
 						v-else
 					></textarea>
 
@@ -166,13 +159,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.email }}
+									{{ cvProfile.email }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.email"
+									v-model="cvProfile.email"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -191,13 +184,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ accountInfo.phone }}
+									{{ cvProfile.phone }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.phoneNumber"
+									v-model="cvProfile.phone"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -216,13 +209,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.gender }}
+									{{ cvProfile.gender }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.gender"
+									v-model="cvProfile.gender"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -241,13 +234,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ accountInfo.date_of_birth }}
+									{{ cvProfile.date_of_birth }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="accountInfo.date_of_birth"
+									v-model="cvProfile.date_of_birth"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -266,13 +259,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.insight }}
+									{{ cvProfile.role }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.insight"
+									v-model="cvProfile.role"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -291,13 +284,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.experience }}
+									{{ cvProfile.year_experience }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.experience"
+									v-model="cvProfile.year_experience"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -316,13 +309,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.degree }}
+									{{ cvProfile.degree }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.degree"
+									v-model="cvProfile.degree"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -341,13 +334,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.location }}
+									{{ cvProfile.current_address }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.location"
+									v-model="cvProfile.current_address"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -388,13 +381,12 @@
 
 					<ul class="flex flex-col gap-4">
 						<experience-card
-							v-for="company in companies"
+							v-for="company in cvProfile.experiences"
 							:key="company.id"
 							:id="company.id"
 							:isEditting="isEdittingJobs"
-							v-model:name="company.name"
-							v-model:duration="company.duration"
-							v-model:role="company.role"
+							v-model:name="company.company"
+							v-model:duration="company.time"
 							@delete-experience="deleteCompany"
 						></experience-card>
 					</ul>
@@ -439,13 +431,12 @@
 
 					<ul class="flex flex-col gap-4">
 						<experience-card
-							v-for="education in educations"
+							v-for="education in cvProfile.educations"
 							:key="education.id"
 							:id="education.id"
 							:isEditting="isEdittingEducation"
-							v-model:name="education.name"
-							v-model:duration="education.duration"
-							v-model:role="education.role"
+							v-model:name="education.school"
+							v-model:duration="education.time"
 							@delete-experience="deleteEducation"
 						></experience-card>
 					</ul>
@@ -488,32 +479,30 @@
 						/>
 					</span>
 
-					<ul
-						class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-					>
-						<li
-							class="py-2 px-4 text-center bg-green-300 text-sky-950 font-bold rounded-xl text-xs md:text-sm lg:text-base flex items-center justify-center gap-2"
-							v-for="skill in skills"
-							:key="skill.id"
-						>
-							<p v-if="!isEdittingSkills" class="text-center">
-								{{ skill.name }}
-							</p>
+					<div class="flex flex-col gap-4">
+						<div class="grid grid-cols-2">
+							<label for="skill">Ngôn ngữ lập trình: </label>
 							<input
 								type="text"
-								class="text-xs md:text-sm lg:text-base border border-sky-950 px-2 py-1 w-full"
-								v-else
-								v-model="skill.name"
-							/>
-
-							<font-awesome-icon
-								icon="fa-solid fa-xmark"
-								class="text-green-700 text-xs md:text-sm lg:text-base hover:cursor-pointer"
-								@click="deleteSkills(skill.id)"
+								id="skill"
+								class="border px-2 py-1 rounded border-black"
 								v-if="isEdittingSkills"
+								v-model="cvProfile.skill"
 							/>
-						</li>
-					</ul>
+							<p v-else>{{ cvProfile.skill }}</p>
+						</div>
+						<div class="grid grid-cols-2">
+							<label for="language">Ngoại ngữ: </label>
+							<input
+								type="text"
+								id="language"
+								class="border px-2 py-1 rounded border-black"
+								v-if="isEdittingSkills"
+								v-model="cvProfile.language"
+							/>
+							<p v-else>{{ cvProfile.language }}</p>
+						</div>
+					</div>
 
 					<!-- Save   -->
 					<div class="flex gap-4">
@@ -523,65 +512,6 @@
 							@click="saveSkills"
 						>
 							Lưu
-						</button>
-
-						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingSkills"
-							@click="addSkills"
-						>
-							Thêm
-						</button>
-					</div>
-				</div>
-
-				<!-- Language  -->
-				<div
-					class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10"
-				>
-					<span class="flex justify-between">
-						<h1
-							class="text-base md:text-lg lg:text-xl font-bold text-sky-900"
-						>
-							Ngôn ngữ
-						</h1>
-						<font-awesome-icon
-							icon="fa-solid fa-pen-to-square"
-							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
-							@click="editLanguage"
-						/>
-					</span>
-
-					<ul
-						class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6"
-					>
-						<language-card
-							v-for="language in languages"
-							:key="language.id"
-							:id="language.id"
-							:isEditting="isEdittingLanguage"
-							v-model:name="language.name"
-							v-model:level="language.level"
-							@delete-language="deleteLanguage"
-						></language-card>
-					</ul>
-
-					<!-- Save   -->
-					<div class="flex gap-4">
-						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingLanguage"
-							@click="saveLanguage"
-						>
-							Lưu
-						</button>
-
-						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingLanguage"
-							@click="addLanguage"
-						>
-							Thêm
 						</button>
 					</div>
 				</div>
@@ -603,41 +533,68 @@
 						/>
 					</span>
 
-					<ul class="flex flex-col gap-4">
-						<cv-card
-							v-for="card in cv"
-							:key="card.id"
-							:id="card.id"
-							v-model:fileName="card.fileName"
-							v-model:time="card.time"
-							:isEditting="isEdittingCV"
-							@delete-cv="deleteCV"
-						></cv-card>
-					</ul>
-
-					<!-- Save   -->
-					<div class="flex gap-4">
-						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingCV"
-							@click="saveCV"
+					<div class="flex justify-between items-center">
+						<a
+							v-if="cvProfile.cv"
+							:href="cvProfile.cv"
+							target="_blank"
+							class="flex gap-2 items-center text-xs md:text-sm lg:text-base text-sky-900 font-semibold hover:cursor-pointer"
 						>
-							Lưu
-						</button>
+							<font-awesome-icon
+								icon="fa-solid fa-file-lines"
+								class="bg-slate-200 text-xl text-green-600 p-4 w-6 rounded-lg"
+							/>
+							My CV
+						</a>
 
+						<font-awesome-icon
+							icon="fa-solid fa-xmark"
+							class="text-green-700 hover:cursor-pointer"
+							v-if="isEdittingCV && cvProfile.cv"
+							@click="deleteCv"
+						/>
+					</div>
+
+					<div
+						class="flex flex-col items-start gap-2"
+						v-if="isEdittingCV"
+					>
+						<input
+							type="file"
+							@change="handleFileUpload"
+							accept=".pdf"
+							ref="pdfInput"
+						/>
 						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingCV"
-							@click="addCV"
+							@click="uploadFile"
+							v-if="selectedFile"
+							class="bg-green-400 px-2 py-1 rounded-lg text-sky-900"
 						>
-							Thêm
+							Tải lên
 						</button>
 					</div>
 				</div>
 			</div>
 
+			<div
+				class="h-96 w-full flex justify-center items-center"
+				v-if="!hasCvProfile"
+			>
+				<h1
+					class="text-base md:text-lg lg:text-xl xl:text-2xl flex gap-1 text-sky-900 font-bold"
+				>
+					Bạn chưa có CV nào,
+					<p
+						class="text-red-500 hover:cursor-pointer hover:text-red-600"
+						@click="addCvProfile"
+					>
+						hãy tạo CV ngay bây giờ!
+					</p>
+				</h1>
+			</div>
+
 			<!-- suggest jobs  -->
-			<div class="lg:basis-1/3">
+			<div class="lg:basis-1/3 hidden">
 				<h1
 					class="text-base md:text-lg lg:text-xl font-bold text-sky-900 mb-4"
 				>
@@ -660,11 +617,19 @@
 				</ul>
 			</div>
 		</div>
+		<base-spinner v-if="isLoading"></base-spinner>
 	</main>
 </template>
 
 <script lang="ts">
 import LanguageCard from "../../components/profile/LanguageCard.vue";
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL,
+} from "firebase/storage";
+import firebase from "../../../services/app";
 export default {
 	components: {
 		LanguageCard,
@@ -743,12 +708,6 @@ export default {
 				{ id: 1, fileName: "CV1.pdf", time: "12-12-2021" },
 				{ id: 2, fileName: "CV2.pdf", time: "12-12-2021" },
 			],
-			skills: [
-				{ id: 1, name: "Java" },
-				{ id: 2, name: "Python" },
-				{ id: 3, name: "VueJS" },
-				{ id: 4, name: "NodeJS" },
-			],
 			languages: [
 				{ id: 1, name: "English", level: "Advance" },
 				{ id: 2, name: "Japanese", level: "Basic" },
@@ -780,6 +739,31 @@ export default {
 			isEdittingSkills: false,
 			isEdittingLanguage: false,
 			isEdittingCV: false,
+			imagePreview: null as string | null,
+			imageFile: null as File | null,
+			uploadedImage: null as string | null,
+			selectedFile: null as File | null,
+			cvProfile: {
+				introduce: "default",
+				email: "",
+				phone: "",
+				gender: "",
+				date_of_birth: "",
+				role: "",
+				year_experience: "",
+				degree: "",
+				current_address: "",
+				experiences: [{ id: 1, cv_id: 1, time: "", company: "" }],
+				educations: [
+					{ school: "", cv_id: 1, id: 1, time: "", department: "" },
+				],
+				skill: "",
+				language: "",
+				cv: "",
+				avatar: "",
+			},
+			hasCvProfile: false,
+			isLoading: false,
 		};
 	},
 	methods: {
@@ -800,18 +784,19 @@ export default {
 		},
 		saveJobs() {
 			this.isEdittingJobs = false;
+            console.log(this.cvProfile);
+            
 		},
 		addCompany() {
 			const newCompany = {
-				id: this.companies.length + 1,
-				name: "Tên công ty",
-				role: "Vai trò",
-				duration: "Thời gian làm việc",
+				id: this.cvProfile.experiences.length + 1,
+				company: "Tên công ty",
+				time: "Thời gian làm việc",
 			};
-			this.companies.push(newCompany);
+			this.cvProfile.experiences.push(newCompany);
 		},
 		deleteCompany(id: Number) {
-			this.companies = this.companies.filter(
+			this.cvProfile.experiences = this.cvProfile.experiences.filter(
 				(company) => company.id !== id
 			);
 		},
@@ -823,15 +808,15 @@ export default {
 		},
 		addEducation() {
 			const newEducation = {
-				id: this.educations.length + 1,
-				name: "Tên trường",
-				role: "Ngành",
-				duration: "Thời gian học",
+				id: this.cvProfile.educations.length + 1,
+				school: "Tên trường",
+				department: "Ngành học",
+				time: "Thời gian học",
 			};
-			this.educations.push(newEducation);
+			this.cvProfile.educations.push(newEducation);
 		},
 		deleteEducation(id: Number) {
-			this.educations = this.educations.filter(
+			this.cvProfile.educations = this.cvProfile.educations.filter(
 				(education) => education.id !== id
 			);
 		},
@@ -841,21 +826,8 @@ export default {
 		deleteSkills(id: Number) {
 			this.skills = this.skills.filter((skill) => skill.id !== id);
 		},
-		addSkills() {
-			const newSkill = {
-				id: this.skills.length + 1,
-				name: "Kỹ năng",
-			};
-			this.skills.push(newSkill);
-		},
 		saveSkills() {
 			this.isEdittingSkills = false;
-		},
-		editLanguage() {
-			this.isEdittingLanguage = true;
-		},
-		saveLanguage() {
-			this.isEdittingLanguage = false;
 		},
 		addLanguage() {
 			const newLanguage = {
@@ -876,45 +848,155 @@ export default {
 		saveCV() {
 			this.isEdittingCV = false;
 		},
-		addCV() {
-			const newCV = {
-				id: this.cv.length + 1,
-				fileName: "Tên CV",
-				time: "Thời gian",
-			};
-			this.cv.push(newCV);
+		deleteCv() {
+			this.cvProfile.cv = "";
 		},
-		deleteCV(id: Number) {
-			this.cv = this.cv.filter((cv) => cv.id !== id);
+		previewImage(event: Event) {
+			const file = (event.target as HTMLInputElement).files?.[0];
+			if (file) {
+				this.imageFile = file;
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					this.imagePreview = e.target?.result as string | null;
+				};
+				reader.readAsDataURL(file);
+			}
+		},
+		deleteImage() {
+			this.imagePreview = null;
+			this.imageFile = null;
+			(this.$refs.fileInput as HTMLInputElement).value = "";
+		},
+		async uploadImage() {
+			if (this.imageFile) {
+				const storage = getStorage(firebase);
+				const storageRef = ref(
+					storage,
+					"images/" + this.imageFile.name
+				);
+
+				const uploadTask = uploadBytesResumable(
+					storageRef,
+					this.imageFile
+				);
+
+				uploadTask.on(
+					"state_changed",
+					(snapshot) => {
+						const progress =
+							(snapshot.bytesTransferred / snapshot.totalBytes) *
+							100;
+						console.log("Upload is " + progress + "% done");
+					},
+					(error) => {
+						console.error("Upload failed:", error);
+					},
+					() => {
+						getDownloadURL(uploadTask.snapshot.ref).then(
+							(downloadURL) => {
+								console.log("File available at", downloadURL);
+								this.uploadedImage = downloadURL;
+								this.deleteImage();
+							}
+						);
+					}
+				);
+			}
 		},
 		handleFileUpload(event: any) {
-			const file = event.target.files[0];
-			const reader = new FileReader();
-			reader.onload = () => {
-				if (reader.result != null) {
-					this.personalInfo.avatarUrl = reader.result as string;
-				}
-			};
-			reader.readAsDataURL(file);
+			this.selectedFile = event.target.files[0];
+		},
+		async uploadFile() {
+			if (this.selectedFile) {
+				await this.uploadPDF(this.selectedFile);
+				this.isEdittingCV = false;
+				this.cvFileName = this.selectedFile.name;
+			} else {
+				console.error("No file selected for upload");
+			}
+		},
+		async uploadPDF(file: any) {
+			this.isLoading = true;
+			const storage = getStorage();
+			const storageRef = ref(storage, "pdfs/" + file.name);
+
+			const uploadTask = uploadBytesResumable(storageRef, file);
+
+			const uploadPromise = new Promise((resolve, reject) => {
+				uploadTask.on(
+					"state_changed",
+					(snapshot) => {
+						const progress =
+							(snapshot.bytesTransferred / snapshot.totalBytes) *
+							100;
+						console.log("Upload is " + progress + "% done");
+					},
+					(error) => {
+						console.error("Upload failed:", error);
+						reject(error);
+					},
+					() => {
+						getDownloadURL(uploadTask.snapshot.ref).then(
+							(downloadURL) => {
+								console.log("File available at", downloadURL);
+								this.cvProfile.cv = downloadURL;
+								this.selectedFile = null;
+								(
+									this.$refs.pdfInput as HTMLInputElement
+								).value = "";
+								resolve(downloadURL);
+							}
+						);
+					}
+				);
+			});
+
+			try {
+				await uploadPromise;
+			} catch (error) {
+				console.error("Upload failed:", error);
+			} finally {
+				this.isLoading = false;
+			}
 		},
 		async getAccountInfo() {
 			const userId = this.$store.getters.userId;
 			try {
 				await this.$store.dispatch("fetchUserById", userId);
 				this.accountInfo = this.$store.getters.getUserInfo;
-				
-                //convert date_of_birth to display
-                const date = new Date(this.accountInfo.date_of_birth);
-                const year = date.getFullYear();
-                const month = date.getMonth() + 1;
-                const dt = date.getDate();
-                const displayDate = dt + "-" + month + "-" + year;
-                this.accountInfo.date_of_birth = displayDate;
-                
-                
+
+				//convert date_of_birth to display
+				const date = new Date(this.accountInfo.date_of_birth);
+				const year = date.getFullYear();
+				const month = date.getMonth() + 1;
+				const dt = date.getDate();
+				const displayDate = dt + "-" + month + "-" + year;
+				this.accountInfo.date_of_birth = displayDate;
 			} catch (error) {
 				console.log(error);
 			}
+		},
+		async getProfile() {
+			const userId = this.$store.getters.userId;
+			try {
+				this.cvProfile = await this.$store.dispatch(
+					"cv/getCvByUserId",
+					userId
+				);
+
+				//convert date_of_birth to display
+				this.cvProfile.date_of_birth = this.accountInfo.date_of_birth;
+
+				if (this.cvProfile) {
+					this.hasCvProfile = true;
+				}
+				console.log(this.cvProfile);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async addCvProfile() {
+			this.hasCvProfile = true;
 		},
 	},
 	computed: {
@@ -924,6 +1006,7 @@ export default {
 	},
 	mounted() {
 		this.getAccountInfo();
+		this.getProfile();
 	},
 	watch: {
 		isLoggedIn() {

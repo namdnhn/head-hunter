@@ -1,162 +1,389 @@
 <template>
-    <section class="fixed top-0 left-0 right-0 h-full z-50 bg-white flex items-center justify-center">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-cyan-900">
-            Trang đăng ký này dành riêng cho nhân viên của công ty  
-        </a>
-        <div @submit.prevent="submitForm" class="w-full bg-gray- rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-sky-200 dark:border-gray-700">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-cyan-900">
-                    Tạo tài khoản và đăng nhập Head Hunter luôn nào !
-                </h1>
-                <form class="space-y-4 md:space-y-6" action="#">
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-cyan-900">Email của công ty</label>
-                        <input type="email" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="company-name@email.com" required="true" v-model="registerEmailCompany.value">
-                    </div>
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-cyan-900">Email của bạn</label>
-                        <input type="email" name="email" id="email" class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="email@company.com" required="true"
-                        v-model="registerEmailEmployee.value">
-                    </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-cyan-900">Mật khẩu</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" required="true"
-                        v-model="registerPasswordEmployee.value" @input="checkKeyDownPassword">
-                    </div>
-                    <div>
-                            <!-- <label v-if="checkKeyDown()"></label> -->
-                            <label
-                                class="block mb-2 text-sm font-medium text-red-500"
-                                v-if="!registerPasswordEmployee.isValid"
-                                >Mật khẩu của bạn quá ngắn, hãy đăng ký mật khẩu với ít nhất 8 ký tự !</label
-                            >
-                        </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-cyan-900">Xác nhận mật khẩu</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" required="true"
-                        v-model="registerPasswordEmployeeConfirm.value" @input="checkKeyDownPasswordConfirm">
-                    </div>
-                    <div>
-                            <!-- <label v-if="checkKeyDown()"></label> -->
-                            <label
-                                class="block mb-2 text-sm font-medium text-red-500"
-                                v-if="!registerPasswordEmployeeConfirm.isValid"
-                                >Mật khẩu không khớp với mật khẩu đăng ký</label
-                            >
-                        </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-cyan-900">Mã xác nhận của công ty</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" required="true">
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-start">
-                            
-                            <div class="flex items-start">
-                      <div class="flex items-center h-5">
-                        <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="true">
-                      </div>
-                      <div class="ml-3 text-sm">
-                        <label for="terms" class="font-light text-cyan-900">Tôi đồng ý với <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#" required="true">Điều khoản và điều kiện của Head Hunter</a></label>
-                      </div>
-                  </div>
-                        </div>
-                    </div>
+	<section
+		class="fixed top-0 left-0 right-0 h-full z-50 bg-white flex items-center justify-center"
+	>
+		<div
+			class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 max-h-screen"
+		>
+			<div
+				@submit.prevent="submitForm"
+				class="w-full bg-gray- rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-sky-200 dark:border-gray-700 max-h-screen"
+			>
+				<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+					<h1
+						class="text-xl font-bold leading-tight tracking-tight md:text-2xl text-cyan-900"
+					>
+						Tạo tài khoản và đăng nhập Head Hunter luôn nào !
+					</h1>
+					<form
+						class="grid grid-cols-2 items-center gap-4"
+						action="#"
+					>
+						<div>
+							<label
+								for="email"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Email:
+							</label>
+							<input
+								type="email"
+								name="email"
+								id="email"
+								class="bg-cyan-600 border border-gray-300 text-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								placeholder="company-name@email.com"
+								required="true"
+								v-model="email.value"
+								@input="email.error = ''"
+							/>
+							<span
+								class="text-xs lg:text-sm text-red-500"
+								v-if="email.error"
+								>{{ email.error }}</span
+							>
+						</div>
+						<div>
+							<label
+								for="password"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Mật khẩu</label
+							>
+							<input
+								type="password"
+								name="password"
+								id="password"
+								placeholder="••••••••"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								v-model="password.value"
+								@input="password.error = ''"
+							/>
+							<span
+								class="text-xs lg:text-sm text-red-500"
+								v-if="password.error"
+								>{{ password.error }}</span
+							>
+						</div>
+						<div>
+							<label
+								for="repassword"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Xác nhận mật khẩu</label
+							>
+							<input
+								type="password"
+								name="repassword"
+								id="repassword"
+								placeholder="••••••••"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								v-model="repassword.value"
+								@input="repassword.error = ''"
+							/>
+							<span
+								class="text-xs lg:text-sm text-red-500"
+								v-if="repassword.error"
+								>{{ repassword.error }}</span
+							>
+						</div>
 
-                    <button type="submit" class="w-full text-white bg-cyan-800 hover:bg-cyan-900 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Đăng ký</button>
+						<div>
+							<label
+								for="company_name"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Tên công ty</label
+							>
+							<input
+								type="text"
+								name="company_name"
+								id="company_name"
+								placeholder="Công ty ABC"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								v-model="company_name.value"
+								@input="company_name.error = ''"
+							/>
+							<span
+								class="text-xs lg:text-sm text-red-500"
+								v-if="company_name.error"
+								>{{ company_name.error }}</span
+							>
+						</div>
 
+						<div>
+							<label
+								for="address"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Địa chỉ:
+							</label>
+							<input
+								type="text"
+								name="address"
+								id="address"
+								placeholder="Cau Giay, Ha Noi"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								v-model="address"
+							/>
+						</div>
 
-                    <p class="text-sm font-light text-cyan-800">
-                        Bạn đã có tài khoản ? <a href="#" class="font-bold text-primary-600 hover:underline dark:text-primary-500">
-                            <router-link to="./loginEmployeePage">
-                            Đăng nhập ngay !
-                            </router-link>
-                        </a>
-                    </p>
-                </form>
-            </div>
-        </div>
-    </div>
-  </section>
+						<div>
+							<label
+								for="founded_year"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Năm thành lập:
+							</label>
+							<input
+								type="number"
+								name="founded_year"
+								id="founded_year"
+								placeholder="1880"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								v-model="founded_year"
+							/>
+						</div>
+
+						<div>
+							<label
+								for="employee_quantity"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Số lượng nhân viên:
+							</label>
+							<input
+								type="number"
+								name="employee_quantity"
+								id="employee_quantity"
+								placeholder="1000+"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								v-model="employee_quantity"
+							/>
+						</div>
+
+						<div>
+							<label
+								for="contact"
+								class="block mb-2 text-sm font-medium text-cyan-900"
+								>Liên hệ:
+							</label>
+							<input
+								type="text"
+								name="contact"
+								id="contact"
+								placeholder="company@gmail.com"
+								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								v-model="contact"
+							/>
+						</div>
+
+						<button
+							type="submit"
+							class="w-full text-white bg-cyan-800 hover:bg-cyan-900 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 col-span-2"
+						>
+							Đăng ký
+						</button>
+
+						<div
+							class="text-sm font-light text-cyan-800 col-span-2 flex flex-col gap-2"
+						>
+							<span class="flex items-center gap-2">
+								<p>Bạn đã có tài khoản?</p>
+								<a
+									href="#"
+									class="font-bold text-primary-600 hover:underline dark:text-primary-500"
+								>
+									<router-link to="/login">
+										Đăng nhập ngay!
+									</router-link>
+								</a>
+							</span>
+
+							<span class="flex items-center gap-2">
+								<p>Bạn là ứng viên?</p>
+								<a
+									href="#"
+									class="font-bold text-primary-600 hover:underline dark:text-primary-500"
+								>
+									<router-link to="/register/candidate">
+										Đăng ký ứng viên!
+									</router-link>
+								</a>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<base-dialog
+			:show="success"
+			title="Đăng ký thành công!"
+			@close="closeDialog"
+		>
+			<p>Bạn có thể sử dụng tài khoản này để đăng nhập doanh nghiệp.</p>
+		</base-dialog>
+        <base-dialog
+			:show="!!error"
+			title="Đăng ký thất bại!"
+			@close="closeDialog"
+		>
+			<p>Email đã tồn tại!</p>
+		</base-dialog>
+		<base-spinner v-if="isLoading"></base-spinner>
+	</section>
 </template>
 
-
 <script lang="ts">
-    export default {
-        data() {
-            return {
-            registerEmailCompany: {
-                value: "",
-                isValid: true
-            },
-            registerEmailEmployee: {
-                value: "",
-                isValid: true,
-            },
-            registerPasswordEmployee: {
-                value: "",
-                isValid: true,
-                error: null,
-            },
-            registerPasswordEmployeeConfirm: {
-                value: "",
-                isValid: true,
-                error: null,
-            },
-            codeConfirm: {
-                value:"", 
-                isValid: true,
-            }, 
-            formIsValid: true,
-        };
-        },
-        methods: {
-            validateForm() {
-                this.formIsValid = true;
-            if(this.registerEmailCompany.value === ""){
-                this.registerEmailCompany.isValid = false; 
-                this.formIsValid = false; 
-            }
-            if(this.registerEmailEmployee.value === ""){
-                this.registerEmailEmployee.isValid = false; 
-                this.formIsValid = false; 
-            }
-            if (
-                this.registerPasswordEmployee.value === "" ||
-                this.registerPasswordEmployee.value.length < 8
-            ) {
-                this.registerPasswordEmployee.isValid = false;
-                this.formIsValid = false;
-            }
-            if (
-                this.registerPasswordEmployeeConfirm.value === "" ||
-                this.registerPasswordEmployeeConfirm.value.length < 8 ||
-                this.registerPasswordEmployeeConfirm.value != this.registerPasswordEmployee.value
-            ) {
-                this.registerPasswordEmployeeConfirm.isValid = false;
-                this.formIsValid = false;
-            }
-            }, 
-            submitForm() {
-            this.validateForm();
-            if (!this.formIsValid) {
-                return;
-            }
+import BaseDialog from "../../components/ui/BaseDialog.vue";
+export default {
+	components: {
+		BaseDialog,
+	},
+	data() {
+		return {
+			email: {
+				value: "",
+				error: "",
+			},
+			password: {
+				value: "",
+				error: "",
+			},
+			repassword: {
+				value: "",
+				error: "",
+			},
+			company_name: {
+				value: "",
+				error: "",
+			},
+			address: "",
+			founded_year: "",
+			employee_quantity: "",
+			contact: "",
+			isLoading: false,
+			success: false,
+			error: "",
+		};
+	},
+	methods: {
+		async submitForm() {
+			if (this.isFormValid) {
+				const formRegister = {
+					fullname: this.company_name.value,
+					image_path: "string",
+					email: this.email.value,
+					password: this.password.value,
+					date_of_birth: "2023-12-07T02:50:26.348Z",
+					gender: "male",
+					role: "hr",
+					phone: "string",
+				};
+				const formCreateCompany = {
+					job_quantity: 0,
+					name: this.company_name.value,
+					address: this.address,
+					founded_year: this.founded_year,
+					employee_quantity: this.employee_quantity,
+					description: "abc",
+					contact: this.contact,
+				};
 
-            const formLoginCandicate = {
-                first: this.registerEmailCompany,
-                second: this.registerEmailEmployee,
-                third: this.registerPasswordEmployee,
-                fourth: this.codeConfirm,
-            };
-            console.log(formLoginCandicate);
-        },
-        checkKeyDownPassword() {
-            this.registerPasswordEmployee.isValid = true;
-        },
-        checkKeyDownPasswordConfirm() {
-            this.registerPasswordEmployeeConfirm.isValid = true;
-        }
-        }
-    }
+				let user_id;
+
+				this.isLoading = true;
+				try {
+					const res = await this.$store.dispatch(
+						"registerCompany",
+						formRegister
+					);
+
+					user_id = res.id;
+					console.log(user_id);
+					console.log("register success");
+				} catch (err: any) {
+					console.log(err);
+					this.error = err;
+                    this.isLoading = false;
+                    return;
+				}
+
+				try {
+					await this.$store.dispatch("companies/createCompany", {
+						...formCreateCompany,
+						user_id,
+					});
+
+					console.log("create company success");
+					this.success = true;
+					this.resetForm();
+				} catch (err: any) {
+					console.log(err);
+					this.error = err;
+					return;
+				}
+
+				this.isLoading = false;
+			}
+		},
+		resetForm() {
+			this.email.value = "";
+			this.password.value = "";
+			this.repassword.value = "";
+			this.company_name.value = "";
+			this.address = "";
+			this.founded_year = "";
+			this.employee_quantity = "";
+			this.contact = "";
+		},
+		closeDialog() {
+			if (this.success) {
+                this.success = false;
+                this.$router.push("/login");
+            }
+			this.error = "";
+		},
+	},
+	computed: {
+		isFormValid() {
+			if (this.email.value === "") {
+				this.email.error = "Email không được để trống";
+			} else {
+				this.email.error = "";
+			}
+
+			if (this.password.value === "") {
+				this.password.error = "Mật khẩu không được để trống";
+			} else if (this.password.value.length < 6) {
+				this.password.error = "Mật khẩu phải có ít nhất 6 ký tự";
+			} else {
+				this.password.error = "";
+			}
+
+			if (this.repassword.value === "") {
+				this.repassword.error = "Xác nhận mật khẩu không được để trống";
+			} else if (this.repassword.value !== this.password.value) {
+				this.repassword.error = "Xác nhận mật khẩu không khớp";
+			} else {
+				this.repassword.error = "";
+			}
+
+			if (this.company_name.value === "") {
+				this.company_name.error = "Tên công ty không được để trống";
+			} else {
+				this.company_name.error = "";
+			}
+
+			if (
+				this.email.error === "" &&
+				this.password.error === "" &&
+				this.repassword.error === "" &&
+				this.company_name.error === ""
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+	},
+};
 </script>
+
+<style scoped>
+.form-register {
+	min-width: 1000px;
+}
+</style>
