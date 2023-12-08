@@ -26,7 +26,7 @@
 				<base-list
 					title="Hồ sơ công ty"
 					icon="fa-solid fa-user"
-					to="/companyprofile"
+					to="/companyprofile/4"
 				></base-list>
 				<base-list
 					title="Ứng viên đã lưu"
