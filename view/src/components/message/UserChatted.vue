@@ -1,5 +1,6 @@
 <template>
-	<router-link :to="getRouterLink"
+	<router-link
+		:to="getRouterLink"
 		class="w-full bg-slate-100 hover:bg-sky-100 hover:cursor-pointer p-2 rounded-lg flex justify-between items-center"
 	>
 		<div class="flex gap-2 items-center">
@@ -15,22 +16,92 @@
 					{{ fullname }}
 				</h2>
 				<p class="lg:text-sm text-xs text-slate-500">
-					Đã gửi một nhãn dán
+					{{ lastMessage.content }}
 				</p>
 			</div>
 		</div>
-		<p class="lg:text-sm text-xs text-slate-500">25 phút</p>
+		<p class="lg:text-sm text-xs text-slate-500">
+			{{ formattedTimestamp }}
+		</p>
 	</router-link>
 </template>
 
 <script lang="ts">
+import { getLastMessage } from "../../../services/message";
+import { getDatabase, ref, onValue } from "firebase/database";
 export default {
-	props: ['fullname', 'user_id'],
+	data() {
+		return {
+			conv_id: 0,
+			lastMessage: { content: "", timestamp: 0 },
+		};
+	},
+	props: ["fullname", "user_id"],
 	computed: {
 		getRouterLink(): string {
 			return `/chat/${this.user_id}`;
 		},
+		formattedTimestamp(): string {
+			// Chuyển đổi timestamp thành dạng giờ đọc được ở đây
+			const date = new Date(this.lastMessage.timestamp); // Nhân 1000 để chuyển đổi từ giây sang mili giây
+			// const hours = date.getHours();
+			// const minutes = "0" + date.getMinutes();
+			// const seconds = "0" + date.getSeconds();
+			// const formattedTime =
+			// 	hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+			return date.toLocaleString('en-GB');
+		},
 	},
-}
-</script>
+	mounted() {
+		console.log("UserId: ", this.user_id);
+		if (this.user_id > 0) this.getConversationId();
+		if (this.conv_id > 0) this.getLastMessage();
+	},
+	methods: {
+		async getConversationId() {
+			console.log("Thực hiện");
+			const user_id = localStorage.getItem("userId");
+			const receiver_id = this.user_id;
+			const getConversationId = await fetch(
+				`http://localhost:8000/api/chat/conversation/${user_id}/${receiver_id}`
+			);
+			const conv_id = await getConversationId.json();
+			this.conv_id = conv_id;
+			console.log("conv_id: ", this.conv_id);
+		},
+		async getLastMessage() {
+			const message = await getLastMessage(this.conv_id);
+			if (message !== null) {
+				this.lastMessage = message;
+				console.log("Đây nè", this.lastMessage);
+			} else {
+				console.log("Không có tin nhắn cuối cùng");
+			}
 
+			const messagesRef = ref(
+				getDatabase(),
+				`conversations/${this.conv_id}/messages`
+			);
+
+			onValue(messagesRef, async () => {
+				const message = await getLastMessage(this.conv_id);
+				if (message !== null) {
+					this.lastMessage = message;
+				}
+			});
+		},
+	},
+	watch: {
+		user_id(newUserId, oldUserId) {
+			if (newUserId !== oldUserId) {
+				this.getConversationId();
+			}
+		},
+		conv_id(newConverId, oldConverId) {
+			if (newConverId !== oldConverId) {
+				this.getLastMessage();
+			}
+		},
+	},
+};
+</script>
