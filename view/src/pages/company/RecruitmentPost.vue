@@ -37,14 +37,27 @@
 							>{{ level.errorMessage }}</span
 						>
 					</span>
-					<input
+					<!-- <input
 						type="text"
 						id="level"
 						placeholder="VD: Senior"
 						class="border border-gray-300 p-2 rounded-md w-full"
 						@input="level.errorMessage = ''"
 						v-model="level.value"
-					/>
+					/> -->
+					<select
+						name=""
+						id="level"
+						class="border border-gray-300 p-2 rounded-md w-full"
+						v-model="level.value"
+					>
+						<option value="intern">Intern</option>
+						<option value="junior">Junior</option>
+						<option value="middle">Middle</option>
+						<option value="senior">Senior</option>
+						<option value="lead">Lead</option>
+						<option value="manager">Manager</option>
+					</select>
 				</div>
 
 				<div class="flex flex-col gap-1">
@@ -122,7 +135,11 @@
 					>
 						<span class="flex gap-2 items-center">
 							<label for="urgent">Tuyển gấp</label>
-							<input type="checkbox" id="urgent" v-model="urgent"/>
+							<input
+								type="checkbox"
+								id="urgent"
+								v-model="urgent"
+							/>
 						</span>
 						<span class="flex gap-2 items-center">
 							<label for="">Ngày hết hạn</label>
@@ -313,8 +330,15 @@
 				</button>
 			</form>
 		</section>
-        <base-dialog :show="createSuccess" title="Tạo tin tuyển dụng thành công!" @close="confirm">
-            <p>Tin tuyển dụng của bạn đã được đăng.</p>
+		<base-dialog
+			:show="createSuccess"
+			title="Tạo tin tuyển dụng thành công!"
+			@close="confirm"
+		>
+			<p>Tin tuyển dụng của bạn đã được đăng.</p>
+		</base-dialog>
+        <base-dialog :show="!!createError" title="Tạo tin tuyển dụng thất bại!" @close="confirmError">
+            <p>{{ createError }}</p>
         </base-dialog>
 	</main>
 </template>
@@ -327,7 +351,7 @@ export default {
 			newSkill: "",
 			skills: { value: [] as string[], isValid: true, errorMessage: "" },
 			role: { value: "", isValid: true, errorMessage: "" },
-			level: { value: "", isValid: true, errorMessage: "" },
+			level: { value: "intern", isValid: true, errorMessage: "" },
 			quantity: { value: "", isValid: true, errorMessage: "" },
 			address: { value: "", isValid: true, errorMessage: "" },
 			salary: { value: "", isValid: true, errorMessage: "" },
@@ -351,14 +375,15 @@ export default {
 			},
 			benefit: { value: [""], isValid: true, errorMessage: "" },
 			deadline: { value: "", isValid: true, errorMessage: "" },
-            urgent: false,
+			urgent: false,
 			companyInfo: {
 				company_name: "",
 				company_logo: "",
 				company_id: "",
 			},
-            isLoading: false,
-            createSuccess: false,
+			isLoading: false,
+			createSuccess: false,
+            createError: null
 		};
 	},
 	methods: {
@@ -450,43 +475,136 @@ export default {
 		},
 		async handleSubmit() {
 			if (!this.validate()) {
-                console.log('form invalid');
-                
-                return;
-            };
-            this.isLoading = true;
+				console.log("form invalid");
+
+				return;
+			}
+			this.isLoading = true;
 			// logic here
 			try {
-                await this.$store.dispatch("jobs/createJob", {
-                    id: new Date().getTime().toString(),
-                    level: this.level.value,
-                    role: this.role.value,
-                    demand: {
-                        require: this.demand.require.value,
-                        job: this.demand.job.value,
-                        degree_skill: this.demand.degree_skills.value,
-                    },
-                    salary: this.salary.value,
-                    benefit: this.benefit.value,
-                    urgent: this.urgent,
-                    featured: false,
-                    company_name: this.companyInfo.company_name,
-                    company_logo: this.companyInfo.company_logo,
-                    quantity: this.quantity.value,
-                    address: this.address.value,
-                    description: this.description.value,
-                    posting_date: new Date().getTime(),
-                    deadline: this.deadline.value,
-                });
+				let require = "";
 
-                console.log('create job success');
-                this.createSuccess = true;
-                this.resetForm();
-            } catch (err) {
-                console.log(err);
-            }
+				for (let i = 0; i < this.demand.require.value.length; i++) {
+					require += `
+                                    
+                                    <li
+										class="flex items-center gap-2"
+									>
+										<font-awesome-icon
+											icon="fa-regular fa-circle-dot"
+										/>
+                                        
+										<p>${this.demand.require.value[i]}</p>
+                                        
+									</li>
+                                    
+                                    `;
+				}
 
-            this.isLoading = false;
+				let job_detail = "";
+				for (let i = 0; i < this.demand.job.value.length; i++) {
+					job_detail += `
+                                    
+                                    <li
+										class="flex items-center gap-2"
+									>
+
+										<font-awesome-icon
+											icon="fa-regular fa-circle-dot"
+										/>
+
+										<p>
+											${this.demand.job.value[i]}
+										</p>
+
+									</li>
+                                    
+                                    `;
+				}
+
+				let degree_skill = "";
+				for (
+					let i = 0;
+					i < this.demand.degree_skills.value.length;
+					i++
+				) {
+					degree_skill += `
+
+                                    <li
+										class="flex items-center gap-2"
+									>
+										<font-awesome-icon
+											icon="fa-regular fa-circle-dot"
+										/>
+										<p>
+											${this.demand.degree_skills.value[i]}
+										</p>
+
+									</li>
+                                    
+                                    `;
+				}
+
+				let description = "";
+				for (let i = 0; i < this.description.value.length; i++) {
+					description += ` 
+                            <p class="leading-7">
+                                ${this.description.value[i]}
+                            </p>
+                            `;
+				}
+
+				let benefit = "";
+				for (let i = 0; i < this.benefit.value.length; i++) {
+					benefit += ` 
+                                <li
+									class="flex items-center gap-2"
+								>
+
+									<font-awesome-icon
+										icon="fa-regular fa-circle-dot"
+									/>
+
+									<p>
+										${this.benefit.value[i]}
+									</p>
+
+								</li> 
+                                
+                                `;
+				}
+
+				const formData = {
+					company_id: Number(this.$store.getters.companyId),
+					level: this.level.value.toLowerCase(),
+					role: this.role.value,
+					require: require,
+					job_detail: job_detail,
+					degree_skill: degree_skill,
+					salary: this.salary.value,
+					benefit: benefit,
+					urgent: this.urgent,
+					featured: false,
+					company_name: this.companyInfo.company_name || "default",
+					company_logo: this.companyInfo.company_logo || "default",
+					quantity: Number(this.quantity.value),
+					address: this.address.value,
+					description: description,
+					posting_date: new Date().toISOString(),
+					deadline: new Date(this.deadline.value).toISOString(),
+				};
+
+				await this.$store.dispatch("jobs/createJob", formData);
+
+				console.log("create job success");
+				this.createSuccess = true;
+				this.resetForm();
+			} catch (err: any) {
+				console.log(err);
+                this.createError = err
+			}
+
+			this.isLoading = false;
 		},
 		addDescription() {
 			this.description.value.push("");
@@ -520,22 +638,24 @@ export default {
 		removeDescription(index: number) {
 			this.description.value.splice(index, 1);
 		},
-        resetForm() {
-            this.skills.value = [];
-            this.role.value = "";
-            this.level.value = "";
-            this.quantity.value = "";
-            this.address.value = "";
-            this.salary.value = "";
-            this.description.value = [""];
-            this.demand.require.value = [""];
-            this.demand.job.value = [""];
-            this.demand.degree_skills.value = [""];
-            this.benefit.value = [""];
-            this.deadline.value = "";
-            this.urgent = false;
+		resetForm() {
+			this.skills.value = [];
+			this.role.value = "";
+			this.level.value = "";
+			this.quantity.value = "";
+			this.address.value = "";
+			this.salary.value = "";
+			this.description.value = [""];
+			this.demand.require.value = [""];
+			this.demand.job.value = [""];
+			this.demand.degree_skills.value = [""];
+			this.benefit.value = [""];
+			this.deadline.value = "";
+			this.urgent = false;
+		},
+        confirmError() {
+            this.createError = null
         },
-
 		async getCompanyInfo() {
 			try {
 				const res = await this.$store.dispatch(
@@ -547,19 +667,18 @@ export default {
 					company_logo: res.logo,
 					company_id: this.id,
 				};
-                console.log(this.companyInfo);
-                
+				console.log(this.companyInfo);
 			} catch (err) {
 				console.log(err);
 			}
 		},
 
-        confirm() {
-            this.createSuccess = false;
-        }
+		confirm() {
+			this.createSuccess = false;
+		},
 	},
-    mounted() {
-        this.getCompanyInfo();
-    }
+	mounted() {
+		this.getCompanyInfo();
+	},
 };
 </script>

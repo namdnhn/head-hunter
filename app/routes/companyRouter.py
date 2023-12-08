@@ -18,3 +18,7 @@ async def create_company(request: CompanyCreate, db: Session=Depends(getDatabase
 @router.get("/{companyId}")
 def get_company_by_id(companyId: int, db: Session=Depends(getDatabase)):
     return CompanyController.getCompanyById(companyId=companyId, db=db)
+
+@router.get("/user/{userId}")
+def get_company_by_id(userId: int, db: Session=Depends(getDatabase)):
+    return CompanyController.getCompanyByUserId(userId=userId, db=db)

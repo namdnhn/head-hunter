@@ -72,17 +72,6 @@
 							/>{{ accountInfo.date_of_birth }}
 						</li>
 					</ul>
-
-					<!-- skills  -->
-					<ul class="grid grid-cols-3 gap-4 mt-4 text-center">
-						<li
-							class="text-gray-500 bg-gray-200 text-xs md:text-sm lg:text-base py-1 px-4 rounded-lg"
-							v-for="skill in skills"
-							:key="skill.id"
-						>
-							{{ skill.name }}
-						</li>
-					</ul>
 				</div>
 			</div>
 		</div>
@@ -92,7 +81,7 @@
 			class="px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row lg:gap-10"
 		>
 			<!-- User info  -->
-			<div class="lg:basis-2/3">
+			<div class="" v-if="hasCvProfile">
 				<!-- introduce  -->
 				<div
 					class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10"
@@ -169,13 +158,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.email }}
+									{{ cvProfile.email }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.email"
+									v-model="cvProfile.email"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -194,13 +183,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ accountInfo.phone }}
+									{{ cvProfile.phone }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.phoneNumber"
+									v-model="cvProfile.phone"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -219,13 +208,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.gender }}
+									{{ cvProfile.gender }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.gender"
+									v-model="cvProfile.gender"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -244,13 +233,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ accountInfo.date_of_birth }}
+									{{ cvProfile.date_of_birth }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="accountInfo.date_of_birth"
+									v-model="cvProfile.date_of_birth"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -269,13 +258,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.insight }}
+									{{ cvProfile.role }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.insight"
+									v-model="cvProfile.role"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -294,13 +283,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.experience }}
+									{{ cvProfile.year_experience }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.experience"
+									v-model="cvProfile.year_experience"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -319,13 +308,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.degree }}
+									{{ cvProfile.degree }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.degree"
+									v-model="cvProfile.degree"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -344,13 +333,13 @@
 									class="text-xs md:text-sm lg:text-base text-sky-800 font-semibold"
 									v-if="!isEdittingPersonalInfo"
 								>
-									{{ personalInfo.location }}
+									{{ cvProfile.current_address }}
 								</h5>
 								<input
 									type="text"
 									class="text-xs md:text-sm lg:text-base px-2 py-1 w-full border border-sky-950"
 									v-else
-									v-model="personalInfo.location"
+									v-model="cvProfile.current_address"
 								/>
 
 								<p class="text-xs lg:text-sm text-gray-500">
@@ -638,8 +627,25 @@
 				</div>
 			</div>
 
+			<div
+				class="h-96 w-full flex justify-center items-center"
+				v-if="!hasCvProfile"
+			>
+				<h1
+					class="text-base md:text-lg lg:text-xl xl:text-2xl flex gap-1 text-sky-900 font-bold"
+				>
+					Bạn chưa có CV nào,
+					<p
+						class="text-red-500 hover:cursor-pointer hover:text-red-600"
+						@click="addCvProfile"
+					>
+						hãy tạo CV ngay bây giờ!
+					</p>
+				</h1>
+			</div>
+
 			<!-- suggest jobs  -->
-			<div class="lg:basis-1/3">
+			<div class="lg:basis-1/3 hidden">
 				<h1
 					class="text-base md:text-lg lg:text-xl font-bold text-sky-900 mb-4"
 				>
@@ -793,6 +799,25 @@ export default {
 			imageFile: null as File | null,
 			uploadedImage: null as string | null,
 			selectedFile: null as File | null,
+			cvProfile: {
+				introduce: "default",
+				email: "",
+				phone: "",
+				gender: "",
+				date_of_birth: "",
+				role: "",
+				year_experience: "",
+				degree: "",
+				current_address: "",
+				experiences: [],
+				educations: [],
+				skill: "",
+				language: "",
+				cv: "",
+				avatar: "",
+			},
+
+			hasCvProfile: false,
 		};
 	},
 	methods: {
@@ -1007,6 +1032,28 @@ export default {
 				console.log(error);
 			}
 		},
+		async getCv() {
+			const userId = this.$store.getters.userId;
+			try {
+				this.cvProfile = await this.$store.dispatch(
+					"cv/getCvByUserId",
+					userId
+				);
+
+				//convert date_of_birth to display
+				this.cvProfile.date_of_birth = this.accountInfo.date_of_birth;
+
+				if (this.cvProfile) {
+					this.hasCvProfile = true;
+				}
+				console.log(this.cvProfile);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async addCvProfile() {
+			this.hasCvProfile = true;
+		},
 	},
 	computed: {
 		isLoggedIn() {
@@ -1015,6 +1062,7 @@ export default {
 	},
 	mounted() {
 		this.getAccountInfo();
+		this.getCv();
 	},
 	watch: {
 		isLoggedIn() {

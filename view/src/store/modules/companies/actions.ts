@@ -48,6 +48,7 @@ export default {
 		const response = await fetch(apiUrl, {
 			method: "POST",
 			body: JSON.stringify({
+                user_id: payload.user_id,
 				job_quantity: 0,
 				name: payload.name,
 				address: payload.address,
@@ -60,7 +61,6 @@ export default {
 				"Content-Type": "application/json",
 			},
 		});
-
 
 		const responseData = await response.json();
 

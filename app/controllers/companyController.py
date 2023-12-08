@@ -25,3 +25,6 @@ class CompanyController:
 
     def getCompanyById(companyId: int, db: Session = Depends(getDatabase)):
         return db.query(CompanyModel).filter(CompanyModel.id == companyId).first()
+    
+    def getCompanyByUserId(userId: int, db: Session = Depends(getDatabase)):
+        return db.query(CompanyModel).filter(CompanyModel.user_id == userId).first()

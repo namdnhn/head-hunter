@@ -1,6 +1,6 @@
 export default {
-	async getJobs() {
-		let apiUrl = "http://localhost:3000/jobs";
+	async getJobs(_: any) {
+		let apiUrl = "http://localhost:8000/api/job";
 
 		const response = await fetch(apiUrl, {
 			method: "GET",
@@ -18,10 +18,13 @@ export default {
 			throw error;
 		}
 
+        console.log(responseData);
+        
+        
 		return responseData;
 	},
 	async getJob(_: any, id: any) {
-		let apiUrl = "http://localhost:3000/jobs/" + id;
+		let apiUrl = "http://localhost:8000/api/job/" + id;
 
 		const response = await fetch(apiUrl, {
 			method: "GET",
@@ -46,7 +49,7 @@ export default {
 		return responseData;
 	},
 	async getFeaturedJobs() {
-		let apiUrl = "http://localhost:3000/featured_jobs";
+		let apiUrl = "http://localhost:8000/api/job";
 		const response = await fetch(apiUrl, {
 			method: "GET",
 			headers: {
@@ -63,28 +66,41 @@ export default {
 			throw error;
 		}
 
-		return responseData;
-	},
-    async createJob(_: any, jobData: any) {
-        let apiUrl = "http://localhost:3000/jobs";
+        let featured_jobs = []
 
-        const response = await fetch(apiUrl, {
-            method: "POST",
-            body: JSON.stringify(jobData),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        const responseData = await response.json();
-
-        if (!response.ok) {
-            const error = new Error(
-                responseData.message || "Failed to create job."
-            );
-            throw error;
+        for (let i = 0; i < responseData.length; i++) {
+            if (responseData[i].featured) {
+                featured_jobs.push(responseData[i])
+            }
         }
 
-        return responseData;
-    }
+		return featured_jobs;
+	},
+	async createJob(_: any, jobData: any) {
+		let apiUrl = "http://localhost:8000/api/job/create";
+
+        console.log(jobData);
+        
+
+		const response = await fetch(apiUrl, {
+			method: "POST",
+			body: JSON.stringify(jobData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		console.log(response);
+
+		const responseData = await response.json();
+
+		if (!response.ok) {
+			const error = new Error(
+				responseData.message || "Failed to create job."
+			);
+			throw error;
+		}
+
+		return responseData;
+	},
 };

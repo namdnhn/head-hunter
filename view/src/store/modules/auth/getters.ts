@@ -23,5 +23,11 @@ export default {
     },
     getUserInfo(state: { userInfo: UserInfo }) {
         return state.userInfo;
+    },
+    isCompany(state: any) {
+        return !!state.companyId
+    },
+    companyId(state: any) {
+        return state.companyId;
     }
 }

@@ -35,7 +35,7 @@ class CvController:
     def createCv(
         experiences: list[dict],
         educations: list[dict],
-        cv: CreateCv = Depends(),
+        cv: CreateCv,
         db: Session = Depends(getDatabase),
     ):
         # Assuming cv.experience and cv.education are strings representing JSON arrays
@@ -49,15 +49,19 @@ class CvController:
         )    
         db_cv = CvModel(
             user_id=cv.user_id,
-            image_path=cv.image_path,
-            pdf_path=cv.pdf_path,
-            location=cv.location,
-            position=cv.position,
-            skill=cv.skill,
-            degree=cv.degree,
-            achivement=cv.achivement,
-            activity=cv.activity,
-            language=cv.language
+            introduce=cv.introduce or '',
+            email=cv.email or '',
+            phone=cv.phone or '',
+            gender=cv.gender or '',
+            date_of_birth=cv.date_of_birth or '',
+            role=cv.role or '',
+            year_experience=cv.year_experience or '',
+            degree=cv.degree or '',
+            current_address=cv.current_address or '',
+            skill=cv.skill or '',
+            language=cv.language or '',
+            cv=cv.cv or '',
+            avatar=cv.avatar or ''
         )
         db.add(db_cv)
         db.commit()
@@ -67,8 +71,8 @@ class CvController:
         for exp in experiences:
             db_exp = Experience(
                 cv_id=db_cv.id,
-                company=exp['company'],
-                time=exp['time']  
+                company=exp.get('company', ''),
+                time=exp.get('time', '')  
             )
             db.add(db_exp)
 
@@ -76,9 +80,9 @@ class CvController:
         for edu in educations:
             db_edu = Education(
                 cv_id=db_cv.id,
-                school=edu['school'],
-                time=edu['time'],
-                department=edu['department']    
+                school=edu.get('school', ''),
+                time=edu.get('time', ''),
+                department=edu.get('department', '')    
             )
             db.add(db_edu)
 
@@ -119,21 +123,33 @@ class CvController:
         dbCv = db.query(CvModel).filter(CvModel.id == cvId).first()
         if cv.user_id is not None:
             dbCv.user_id = cv.user_id
-        if cv.experience is not None:
-            dbCv.experience = cv.experience
-        if cv.position is not None:
-            dbCv.position = cv.position
+        if cv.introduce is not None:
+            dbCv.introduce = cv.introduce
+        if cv.email is not None:
+            dbCv.email = cv.email
+        if cv.phone is not None:
+            dbCv.phone = cv.phone
+        if cv.gender is not None:
+            dbCv.gender = cv.gender
+        if cv.date_of_birth is not None:
+            dbCv.date_of_birth = cv.date_of_birth
+        if cv.role is not None:
+            dbCv.role = cv.role
+        if cv.year_experience is not None:
+            dbCv.year_experience = cv.year_experience
+        if cv.degree is not None:
+            dbCv.degree = cv.degree
+        if cv.current_address is not None:
+            dbCv.current_address = cv.current_address
         if cv.skill is not None:
             dbCv.skill = cv.skill
-        if cv.education is not None:
-            dbCv.education = cv.education
-        if cv.achivement is not None:
-            dbCv.achivement = cv.achivement
-        if cv.activity is not None:
-            dbCv.activity = cv.activity
-        if cv.image_path is not None:
-            dbCv.image_path = cv.image_path
-
+        if cv.language is not None:
+            dbCv.language = cv.language
+        if cv.cv is not None:
+            dbCv.cv = cv.cv
+        if cv.avatar is not None:
+            dbCv.avatar = cv.avatar
+        
         db.commit()
         return {"msg": "Updated"}
 

@@ -117,27 +117,27 @@ const router = createRouter({
 			component: ContactPage,
 		},
 		{
-			path: "/profile/:id",
+			path: "/candidate/:id/profile",
 			component: ProfilePage,
 			meta: { requiresAuth: true },
 		},
 		{
-			path: "/loginCandidatePage",
+			path: "/login",
 			component: LoginCandicatePage,
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/register/employee",
+			path: "/register/company",
 			component: RegisterEmployeePage,
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/login/employee",
+			path: "/login/company",
 			component: LoginEmployeePage,
 			meta: { requiresUnAuth: true },
 		},
 		{
-			path: "/registerCandidatePage",
+			path: "/register/candidate",
 			component: RegisterCandicatePage,
 			meta: { requiresUnAuth: true },
 		},

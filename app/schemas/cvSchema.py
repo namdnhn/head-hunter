@@ -1,20 +1,23 @@
 from typing import Optional
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class CreateCv(BaseModel):
     user_id: int
-    image_path: str
-    pdf_path: str
-    location: str
-    # experience: str
-    # education: str
+    introduce: str
+    email: str
+    phone: str
+    gender: str
+    date_of_birth: datetime
+    role: str
+    year_experience: str
     degree: str
-    position: str
+    current_address: str
     skill: str
-    achivement: str
-    activity: str
     language: str
+    cv: str
+    avatar: str
 
     class Config:
         orm_mode = True
@@ -22,14 +25,16 @@ class CreateCv(BaseModel):
 
 class UpdateCv(CreateCv):
     user_id: Optional[int]
-    image_path: Optional[str]
-    pdf_path: str
-    location: Optional[str]
-    experience: Optional[str]
-    education: Optional[str]
+    introduce: Optional[str]
+    email: Optional[str]
+    phone: Optional[str]
+    gender: Optional[str]
+    date_of_birth: Optional[datetime]
+    role: Optional[str]
+    year_experience: Optional[str]
     degree: Optional[str]
-    position: Optional[str]
+    current_address: Optional[str]
     skill: Optional[str]
-    achivement: Optional[str]
-    activity: Optional[str]
     language: Optional[str]
+    cv: Optional[str]
+    avatar: Optional[str]

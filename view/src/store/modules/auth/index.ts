@@ -14,11 +14,11 @@ export default {
                 date_of_birth: null,
                 email: null,
             },
+            companyId: null,
             companyInfo: {
-                email: null,
                 name: null,
-                companyId: null,
-                accountId: null
+                email: null,
+                
             }
         }
     },

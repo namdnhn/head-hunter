@@ -18,10 +18,13 @@ export default {
 		if (mode === "register") {
 			apiUrl += "register";
 			data = {
+				fullname: payload.fullname,
+				image_path: "string",
 				email: payload.email,
 				password: payload.password,
-				fullname: payload.fullname,
 				date_of_birth: payload.date_of_birth,
+				gender: "male",
+				role: "candidate",
 				phone: payload.phone,
 			};
 		} else if (mode === "login") {
@@ -59,6 +62,7 @@ export default {
 
 		localStorage.setItem("token", responseData.jwtToken);
 		localStorage.setItem("expiresIn", expiresIn.toString());
+		localStorage.setItem("role", responseData.role);
 
 		clearTimeout(timer);
 		//expiresIn = 3 days
@@ -78,6 +82,43 @@ export default {
 				token: responseData.jwtToken,
 				userId: responseData.id,
 			});
+
+			context.commit("setUserInfo", {
+				fullname: responseData.fullname,
+				phone: responseData.phone,
+				date_of_birth: responseData.date_of_birth,
+				email: responseData.email,
+			});
+
+			if (responseData.role === "hr") {
+				//get company by user id
+				let api = await context.rootGetters.getApiUrl;
+				api += `company/user/${responseData.id}`;
+
+				const response = await fetch(api, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				});
+
+				const responseCompanyData = await response.json();
+
+				if (!response.ok) {
+					const error = new Error(
+						responseCompanyData.message || "Lỗi lấy dữ liệu công ty"
+					);
+					throw error;
+				}
+
+				localStorage.setItem("companyId", responseCompanyData.id);
+
+				context.commit("setCompanyId", responseCompanyData.id);
+				context.commit("setCompanyInfo", {
+					name: responseCompanyData.name,
+					email: responseCompanyData.email,
+				});
+			}
 		}
 	},
 
@@ -86,10 +127,10 @@ export default {
 		const userId = localStorage.getItem("userId");
 
 		if (token) {
-			context.commit("setUser", {
-				token: token,
-				userId: userId,
-			});
+            context.commit("setUser", {
+                token: token,
+                userId: userId,
+            });
 		}
 	},
 
@@ -101,6 +142,8 @@ export default {
 		localStorage.removeItem("token");
 		localStorage.removeItem("userId");
 		localStorage.removeItem("expiresIn");
+		localStorage.removeItem("role");
+		localStorage.removeItem("companyId");
 
 		context.commit("setUser", {
 			token: null,
@@ -140,14 +183,31 @@ export default {
 		// 	Date.parse(responseData.date_of_birth)
 		// ).toLocaleDateString("en-GB");
 
-		const payload = {
-			fullname: responseData.fullname,
-			phone: responseData.phone,
-			date_of_birth: responseData.date_of_birth,
-			email: responseData.email,
-		};
+		//is candidate
+		if (responseData.role === "candidate") {
+			const payload = {
+				fullname: responseData.fullname,
+				phone: responseData.phone,
+				date_of_birth: responseData.date_of_birth,
+				email: responseData.email,
+			};
 
-		context.commit("setUserInfo", payload);
+			context.commit("setUserInfo", payload);
+
+		}
+
+		if (responseData.role === "hr") {
+			const payload = {
+				fullname: responseData.fullname,
+				email: responseData.email,
+			};
+
+			context.commit("setCompanyInfo", payload);
+
+            context.commit("setCompanyId", responseData.company_id)
+		}
+
+		return responseData;
 	},
 
 	//update info
@@ -187,14 +247,17 @@ export default {
 	async registerCompany(context: any, payload: any) {
 		let apiUrl = await context.rootGetters.getApiUrl;
 		apiUrl += "register";
+
+		console.log(payload);
+
 		const response = await fetch(apiUrl, {
 			method: "POST",
 			body: JSON.stringify({
-				fullname: "string",
+				fullname: payload.fullname,
 				image_path: "string",
 				email: payload.email,
 				password: payload.password,
-				date_of_birth: "2023-12-07T02:50:26.348Z",
+				date_of_birth: "2023-12-07T08:16:46.167Z",
 				gender: "male",
 				role: "hr",
 				phone: "string",
@@ -203,6 +266,8 @@ export default {
 				"Content-Type": "application/json",
 			},
 		});
+
+		console.log(response);
 
 		const responseData = await response.json();
 
@@ -222,6 +287,6 @@ export default {
 
 		context.commit("setCompanyInfo", companyInfo);
 
-        return responseData;
+		return responseData.user;
 	},
 };

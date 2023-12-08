@@ -177,27 +177,61 @@
 							Đăng ký
 						</button>
 
-						<p class="text-sm font-light text-cyan-800 col-span-2">
-							Bạn đã có tài khoản ?
-							<a
-								href="#"
-								class="font-bold text-primary-600 hover:underline dark:text-primary-500"
-							>
-								<router-link to="/login/employee">
-									Đăng nhập ngay !
-								</router-link>
-							</a>
-						</p>
+						<div
+							class="text-sm font-light text-cyan-800 col-span-2 flex flex-col gap-2"
+						>
+							<span class="flex items-center gap-2">
+								<p>Bạn đã có tài khoản?</p>
+								<a
+									href="#"
+									class="font-bold text-primary-600 hover:underline dark:text-primary-500"
+								>
+									<router-link to="/login">
+										Đăng nhập ngay!
+									</router-link>
+								</a>
+							</span>
+
+							<span class="flex items-center gap-2">
+								<p>Bạn là ứng viên?</p>
+								<a
+									href="#"
+									class="font-bold text-primary-600 hover:underline dark:text-primary-500"
+								>
+									<router-link to="/register/candidate">
+										Đăng ký ứng viên!
+									</router-link>
+								</a>
+							</span>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+		<base-dialog
+			:show="success"
+			title="Đăng ký thành công!"
+			@close="closeDialog"
+		>
+			<p>Bạn có thể sử dụng tài khoản này để đăng nhập doanh nghiệp.</p>
+		</base-dialog>
+        <base-dialog
+			:show="!!error"
+			title="Đăng ký thất bại!"
+			@close="closeDialog"
+		>
+			<p>Email đã tồn tại!</p>
+		</base-dialog>
 		<base-spinner v-if="isLoading"></base-spinner>
 	</section>
 </template>
 
 <script lang="ts">
+import BaseDialog from "../../components/ui/BaseDialog.vue";
 export default {
+	components: {
+		BaseDialog,
+	},
 	data() {
 		return {
 			email: {
@@ -217,17 +251,19 @@ export default {
 				error: "",
 			},
 			address: "",
-			founded_year: 0,
-			employee_quantity: 0,
+			founded_year: "",
+			employee_quantity: "",
 			contact: "",
 			isLoading: false,
+			success: false,
+			error: "",
 		};
 	},
 	methods: {
 		async submitForm() {
 			if (this.isFormValid) {
 				const formRegister = {
-					fullname: "string",
+					fullname: this.company_name.value,
 					image_path: "string",
 					email: this.email.value,
 					password: this.password.value,
@@ -246,17 +282,23 @@ export default {
 					contact: this.contact,
 				};
 
-				let user_id = "";
+				let user_id;
 
 				this.isLoading = true;
 				try {
-					const res = await this.$store.dispatch("registerCompany", {
-						formRegister,
-					});
-					user_id = res.user_id;
+					const res = await this.$store.dispatch(
+						"registerCompany",
+						formRegister
+					);
+
+					user_id = res.id;
+					console.log(user_id);
 					console.log("register success");
-				} catch (err) {
+				} catch (err: any) {
 					console.log(err);
+					this.error = err;
+                    this.isLoading = false;
+                    return;
 				}
 
 				try {
@@ -266,9 +308,12 @@ export default {
 					});
 
 					console.log("create company success");
+					this.success = true;
 					this.resetForm();
-				} catch (err) {
+				} catch (err: any) {
 					console.log(err);
+					this.error = err;
+					return;
 				}
 
 				this.isLoading = false;
@@ -280,9 +325,16 @@ export default {
 			this.repassword.value = "";
 			this.company_name.value = "";
 			this.address = "";
-			this.founded_year = 0;
-			this.employee_quantity = 0;
+			this.founded_year = "";
+			this.employee_quantity = "";
 			this.contact = "";
+		},
+		closeDialog() {
+			if (this.success) {
+                this.success = false;
+                this.$router.push("/login");
+            }
+			this.error = "";
 		},
 	},
 	computed: {

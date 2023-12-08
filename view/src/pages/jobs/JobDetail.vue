@@ -93,13 +93,9 @@
 						<div
 							class="flex flex-col gap-4 text-xs md:text-sm lg:text-base text-sky-950"
 							v-if="isShowDescription"
+                            v-html="current_job.description"
 						>
-							<p
-								class="leading-7"
-								v-for="desc in current_job.description"
-							>
-								{{ desc }}
-							</p>
+                            
 						</div>
 					</transition>
 
@@ -118,19 +114,9 @@
 								</h1>
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
+                                    v-html="current_job.require"
 								>
-									<li
-										class="flex items-center gap-2"
-										v-for="require in current_job.demand
-											.require"
-									>
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											{{ require }}
-										</p>
-									</li>
+									
 								</ul>
 							</span>
 
@@ -143,18 +129,8 @@
 								</h1>
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
+                                    v-html="current_job.job_detail"
 								>
-									<li
-										class="flex items-center gap-2"
-										v-for="job in current_job.demand.job"
-									>
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											{{ job }}
-										</p>
-									</li>
 								</ul>
 							</span>
 
@@ -167,19 +143,8 @@
 								</h1>
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
+                                    v-html="current_job.degree_skill"
 								>
-									<li
-										class="flex items-center gap-2"
-										v-for="skill in current_job.demand
-											.degree_skill"
-									>
-										<font-awesome-icon
-											icon="fa-regular fa-circle-dot"
-										/>
-										<p>
-											{{ skill }}
-										</p>
-									</li>
 								</ul>
 							</span>
 						</div>
@@ -193,18 +158,8 @@
 						>
 							<ul
 								class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
+                                v-html="current_job.benefit"
 							>
-								<li
-									class="flex items-center gap-2"
-									v-for="benefit in current_job.benefit"
-								>
-									<font-awesome-icon
-										icon="fa-regular fa-circle-dot"
-									/>
-									<p>
-										{{ benefit }}
-									</p>
-								</li>
 							</ul>
 						</div>
 					</transition>
@@ -283,7 +238,8 @@ export default {
 					level: "Senior",
 					role: "Jr. PHP Developer",
 					company_name: "ABC Company",
-					company_logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
+					company_logo:
+						"https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
 					salary: "$5K - $8K",
 					quantity: "6",
 				},
@@ -294,27 +250,27 @@ export default {
 					level: "Junior",
 					role: "Frontend Developer",
 					company_name: "SBC Company",
-					company_logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
+					company_logo:
+						"https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-2.png",
 					salary: "$3K - $5K",
 					quantity: "3",
 				},
 			],
 			current_job: {
+                id: "",
 				level: "",
 				role: "",
-				demand: {
-					require: [],
-					job: [],
-					degree_skill: [],
-				},
+				require: "",
+				job_detail: "",
+				degree_skill: "",
 				salary: "",
-				benefit: [],
-				urgent: null,
+				benefit: "",
+				urgent: false,
 				company_name: "",
 				company_logo: "",
 				quantity: "",
 				address: "",
-				description: [],
+				description: "",
 				posting_date: "",
 				deadline: "",
 			},
@@ -353,6 +309,8 @@ export default {
 					"jobs/getJob",
 					id
 				);
+                console.log(this.current_job);
+                
 			} catch (err) {
 				console.log(err);
 			}

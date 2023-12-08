@@ -27,6 +27,9 @@ export default {
 	setUserInfo(state: { userInfo: UserInfo }, payload: UserInfo) {
 		state.userInfo = payload;
 	},
+    setCompanyId(state: any, id: any) {
+        state.companyId = id;
+    },
     setCompanyInfo(state: any, payload: any) {
         state.companyInfo = payload;
     }

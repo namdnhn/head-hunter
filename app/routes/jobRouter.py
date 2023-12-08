@@ -26,7 +26,7 @@ def get_job_by_company_id(companyId: int, db: Session = Depends(getDatabase)):
 
 
 @router.post("/create")
-def create_job(job: CreateJob = Depends(), db: Session = Depends(getDatabase)
+def create_job(job: CreateJob, db: Session = Depends(getDatabase)
 ):
     return JobController.createJob(job=job, db=db)
 
@@ -34,7 +34,7 @@ def create_job(job: CreateJob = Depends(), db: Session = Depends(getDatabase)
 @router.put("/update/{jobId}")
 def update_job(
     jobId: int,
-    job: UpdateJob = Depends(),
+    job: UpdateJob,
     db: Session = Depends(getDatabase),
 ):
     return JobController.updateJob(jobId=jobId, job=job, db=db)

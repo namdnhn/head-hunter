@@ -5,35 +5,41 @@ from datetime import datetime
 
 class CreateJob(BaseModel):
     company_id: int
-    quantity: int
     level: LevelJob
     role: str
+    require: str
+    job_detail: str
+    degree_skill: str
+    salary: str
+    benefit: str
+    urgent: bool
+    featured: bool
+    company_name: str
+    company_logo: str
+    quantity: int
     address: str
-    skills: str
     description: str
-    demand: str
     posting_date: datetime
     deadline: datetime
-    salary: int
-    benefit: str
-    job_status: bool
-    urgent: bool
     class Config:
         orm_mode = True
 
 
 class UpdateJob(CreateJob):
     company_id: Optional[int]
-    quantity: Optional[int]
     level: Optional[LevelJob]
     role: Optional[str]
+    require: Optional[str]
+    job_detail: Optional[str]
+    degree_skill: Optional[str]
+    salary: Optional[str]
+    benefit: Optional[str]
+    urgent: Optional[bool]
+    featured: Optional[bool]
+    company_name: Optional[str]
+    company_logo: Optional[str]
+    quantity: Optional[int]
     address: Optional[str]
-    skills: Optional[str]
     description: Optional[str]
-    demand: Optional[str]
     posting_date: Optional[datetime]
     deadline: Optional[datetime]
-    salary: Optional[int]
-    benefit: Optional[str]
-    job_status: Optional[bool]
-    urgent: Optional[bool]
