@@ -86,6 +86,13 @@
 						>
 							Quyền lợi
 						</li>
+						<!-- edit recruitment post -->
+						<div>
+							<router-link :to="editRecuitmentPostLink" class="px-4 py-1 bg-blue-500 text-white rounded-xl hover:cursor-pointer hover:bg-blue-600 ml-80">
+							Chỉnh sửa tin tuyển dụng
+						</router-link>
+						</div>
+						
 					</ul>
 
 					<!-- Job description paragraph  -->
@@ -164,7 +171,7 @@
 						</div>
 					</transition>
 				</div>
-
+				
 				<div class="flex gap-4 text-xs md:text-sm lg:text-base">
 					<button
 						class="bg-green-300 px-4 py-2 rounded-lg font-bold text-sky-900 hover:bg-green-400 hover:cursor-pointer"
@@ -177,6 +184,7 @@
 					>
 						Lưu tin
 					</button>
+					
 				</div>
 			</div>
 
@@ -319,6 +327,11 @@ export default {
 	mounted() {
 		this.getJob(this.id);
 	},
+	computed:{
+		editRecuitmentPostLink(){
+			return "/companyprofile/:id/editrecruitmentpost"
+		}
+	}
 };
 </script>
 
