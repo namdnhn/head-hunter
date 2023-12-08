@@ -11,15 +11,3 @@ class Conversation(ConversationCreate):
     
     class Config:
         orm_mode = True
-    
-class MessageCreate(BaseModel):
-    sender_id: int
-    conversation_id: int
-    content: str
-    
-class Message(MessageCreate):
-    id: int
-    timestamp: datetime
-    
-    class Config:
-        orm_mode = True

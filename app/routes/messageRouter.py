@@ -1,9 +1,8 @@
 from fastapi import APIRouter, WebSocket, Depends
 from fastapi.responses import HTMLResponse
 from database import getDatabase
-from schemas.messageSchema import MessageCreate, Message, ConversationCreate
 from sqlalchemy.orm import Session
-from models.message import MessageModel, ConversationModel, ConversationMemberModel
+from models.message import ConversationModel, ConversationMemberModel
 from models.user import UserModel
 
 
@@ -115,27 +114,3 @@ async def get_conversation(
             return result.conversation_id
     return createConversation(user_id=user_id, receiver_id=receiver_id, db=db)
 
-
-@router.get("/messages/{conversation}", response_model=list[Message])
-async def get_messages(conversation: int, db: Session = Depends(getDatabase)):
-    messages = (
-        db.query(MessageModel)
-        .filter((MessageModel.conversation_id == conversation))
-        .all()
-    )
-    db.close()
-    return messages
-
-
-@router.post("/message/")
-async def send_message(request: MessageCreate, db: Session = Depends(getDatabase)):
-    newMessage = MessageModel(
-        sender_id=request.sender_id,
-        conversation_id=request.conversation_id,
-        content=request.content,
-    )
-    db.add(newMessage)
-    db.commit()
-    db.refresh(newMessage)
-    db.close()
-    return {"message": "Message sent successfully"}

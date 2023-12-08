@@ -20,14 +20,3 @@ class ConversationMemberModel(database.Base):
     
     conversation_member = relationship("ConversationModel")
     member_member = relationship("UserModel")
-    
-class MessageModel(database.Base):
-    __tablename__ = "message"
-    id = Column(Integer, primary_key=True, index=True)
-    sender_id = Column(Integer, ForeignKey("user.id"))
-    conversation_id = Column(Integer, ForeignKey("conversation.id"))
-    content = Column(String(255), nullable=False)
-    timestamp = Column(DateTime, default=func.now())
-
-    sender_user = relationship("UserModel")
-    conversation_conversation = relationship("ConversationModel")

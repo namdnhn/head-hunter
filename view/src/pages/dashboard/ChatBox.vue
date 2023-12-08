@@ -50,6 +50,15 @@
 
 <script lang="ts">
 import MessageCard from "../../components/message/MessageCard.vue";
+import {
+	getDatabase,
+	ref,
+	push,
+	set,
+	onValue,
+	serverTimestamp,
+} from "firebase/database";
+import { database } from "../../../services/app";
 export default {
 	components: {
 		MessageCard,
@@ -92,34 +101,44 @@ export default {
 			);
 			const conv_id = await getConversationId.json();
 			this.conv_id = conv_id;
-			const response = await fetch(
-				`http://localhost:8000/api/chat/messages/${conv_id}`,
-				{
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
+			const messagesRef = ref(
+				getDatabase(),
+				`conversations/${conv_id}/messages`
 			);
-			const data = await response.json();
-			this.messages = data;
-			console.log(data);
+
+			// Listen for changes to the messages node
+			onValue(messagesRef, (snapshot) => {
+				const data = snapshot.val();
+				// Update the component's state with the new messages data
+				this.messages = data ? Object.values(data) : [];
+			});
+			// const response = await fetch(
+			// 	`http://localhost:8000/api/chat/messages/${conv_id}`,
+			// 	{
+			// 		method: "GET",
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 		},
+			// 	}
+			// );
+			// const data = await response.json();
+			// this.messages = data;
+			// console.log(data);
 		},
 		async sendMessage() {
 			const sender_id = localStorage.getItem("userId");
 			const conversation = this.conv_id;
 			const newMessage = this.newMessage;
 			try {
-				await fetch(`http://localhost:8000/api/chat/message`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						sender_id: Number(sender_id),
-						conversation_id: Number(conversation),
-						content: newMessage,
-					}),
+				const messagesRef = ref(
+					database,
+					`conversations/${conversation}/messages`
+				);
+				const newMessageRef = push(messagesRef);
+				await set(newMessageRef, {
+					sender_id: Number(sender_id),
+					content: newMessage,
+					timestamp: serverTimestamp(),
 				});
 				this.newMessage = "";
 			} catch (error) {
