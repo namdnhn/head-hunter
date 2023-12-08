@@ -104,6 +104,9 @@ const UpdateCompanyInfo = defineAsyncComponent(
 const RecruitmentPost = defineAsyncComponent(
 	() => import("./pages/company/RecruitmentPost.vue")
 );
+const EditRecruitmentPost = defineAsyncComponent(
+	() => import("./pages/company/EditRecruitmentPost.vue")
+);
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -247,6 +250,11 @@ const router = createRouter({
 		{
 			path: "/companyprofile/:id/recruitmentpost",
 			component: RecruitmentPost,
+			props: true,
+		},
+		{
+			path: "/companyprofile/:id/editrecruitmentpost",
+			component: EditRecruitmentPost,
 			props: true,
 		},
 		{

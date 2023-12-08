@@ -314,8 +314,8 @@ export default {
 			this.isShowUserInfo = !this.isShowUserInfo;
 			console.log(this.isShowUserInfo);
 		},
-		async logout() {
-			await this.$store.dispatch("logout");
+		logout() {
+			this.$store.dispatch("logout");
 			this.$router.push("/homepage");
             window.location.reload();
 		},
