@@ -26,7 +26,7 @@
 				<base-list
 					title="Hồ sơ công ty"
 					icon="fa-solid fa-user"
-					to="/companyprofile/4"
+					:to="profileCompanyLink"
 				></base-list>
 				<base-list
 					title="Ứng viên đã lưu"
@@ -90,6 +90,7 @@ export default {
 			isLoading: false,
 			error: null,
 			isShowNav: true,
+			companyId: this.$store.getters.companyId,
 		};
 	},
 	methods: {
@@ -111,6 +112,11 @@ export default {
 			this.isShowNav = !this.isShowNav;
 		},
 	},
+	computed: {
+        profileCompanyLink() {
+            return `/companyprofile/${this.companyId}`;
+        }
+    },
 };
 </script>
 
