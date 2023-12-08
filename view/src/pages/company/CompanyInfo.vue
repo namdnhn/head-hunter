@@ -65,16 +65,14 @@
 					Ứng viên đang ứng tuyển
 				</h1>
 
-				<candidate-applied
-					v-for="apply in applied"
-					:key="apply.id"
-					:id="apply.id"
-					:name="apply.name"
-					:logo="apply.logo"
-					:time="apply.time"
-					:position="apply.position"
-					:status="apply.status"
-				></candidate-applied>
+				<applied-job
+				v-for="candidate in candidates"
+				:key="candidate.id"
+				:logo="candidate.logo"
+				:name="candidate.name"
+				:position="candidate.position"
+                type="candidate"
+			></applied-job>
 			</div>
 		</div>
 	</div>
@@ -84,15 +82,17 @@
 import StatisticCard from "../../components/dashboard/StatisticCard.vue";
 import NotifyCard from "../../components/dashboard/NotifyCard.vue";
 import CandidateApplied from "../../components/company/CandidateApplied.vue";
+import AppliedJob from "../../components/dashboard/AppliedJob.vue"
 export default {
 	components: {
 		StatisticCard,
 		NotifyCard,
 		CandidateApplied,
+		AppliedJob
 	},
 	data() {
 		return {
-			applied: [
+			candidates: [
 				{
 					id: 1,
 					name: "Nguyen Duc Thien",
