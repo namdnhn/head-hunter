@@ -68,12 +68,12 @@
 						>Năm thành lập</label
 					>
 					<input
-						type="text"
+						type="number"
 						name="dob"
 						id="dob"
 						class="border border-gray-300 p-2 rounded-md w-full"
 						placeholder="Năm thành lập"
-						value="1990"
+						value=""
 					/>
 				</div>
 				<div>
@@ -81,12 +81,12 @@
 						>Số lượng nhân viên</label
 					>
 					<input
-						type="text"
+						type="number"
 						name="emp_quantity"
 						id="emp_quantity"
 						class="border border-gray-300 p-2 rounded-md w-full"
 						placeholder="Số lượng nhân viên"
-						value="10000+"
+						value=""
 					/>
 				</div>
 				<div>
