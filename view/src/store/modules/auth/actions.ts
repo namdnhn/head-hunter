@@ -125,12 +125,16 @@ export default {
 	autoLogin(context: any) {
 		const token = localStorage.getItem("token");
 		const userId = localStorage.getItem("userId");
+        const companyId = localStorage.getItem("companyId");
 
 		if (token) {
             context.commit("setUser", {
                 token: token,
                 userId: userId,
             });
+            if (companyId) {
+                context.commit("setCompanyId", companyId)
+            }
 		}
 	},
 
@@ -179,6 +183,9 @@ export default {
 			throw error;
 		}
 
+        console.log(responseData);
+        
+
 		// const dob = new Date(
 		// 	Date.parse(responseData.date_of_birth)
 		// ).toLocaleDateString("en-GB");
@@ -196,6 +203,7 @@ export default {
 
 		}
 
+        //is hr
 		if (responseData.role === "hr") {
 			const payload = {
 				fullname: responseData.fullname,
@@ -203,8 +211,6 @@ export default {
 			};
 
 			context.commit("setCompanyInfo", payload);
-
-            context.commit("setCompanyId", responseData.company_id)
 		}
 
 		return responseData;

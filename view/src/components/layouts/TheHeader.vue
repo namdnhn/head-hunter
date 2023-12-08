@@ -218,8 +218,11 @@
 						alt="default avt"
 						class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover rounded-full"
 					/>
-					<p class="lg:block text-xs md:text-sm lg:text-base">
+					<p class="lg:block text-xs md:text-sm lg:text-base" v-if="!isCompany">
 						{{ userInfo.fullname }}
+					</p>
+                    <p class="lg:block text-xs md:text-sm lg:text-base" v-if="isCompany">
+						{{ companyInfo.name }}
 					</p>
 					<font-awesome-icon icon="fa-solid fa-chevron-down" />
 					<!-- more user account info -->
@@ -313,14 +316,14 @@ export default {
 		},
 		async logout() {
 			await this.$store.dispatch("logout");
-			window.location.reload();
 			this.$router.push("/homepage");
+            window.location.reload();
 		},
 		async getUserInfo() {
 			if (this.isLoggedIn) {
 				this.userId = this.$store.getters.userId;
 				this.companyId = this.$store.getters.companyId;
-
+                
 				try {
 					const res = await this.$store.dispatch(
 						"fetchUserById",
@@ -335,11 +338,12 @@ export default {
 							date_of_birth: res.date_of_birth,
 							email: res.email,
 						};
-					} else if (res.role === "company") {
+					} else if (res.role === "hr") {
 						this.companyInfo = {
-							name: res.name,
+							name: res.fullname,
 							email: res.email,
 						};
+                        
 					}
 				} catch (error: any) {
 					//if candidate
