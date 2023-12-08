@@ -6,7 +6,7 @@ from database import Base, engine
 from routes import companyRouter, userRouter, hrRouter, jobRouter, candidateRouter, cvRouter
 from models.application import ApplicationModel
 from models.post import PostModel
-from models.message import MessageModel, ConversationMemberModel, ConversationModel
+from models.message import ConversationMemberModel, ConversationModel
 from fastapi import Depends
 from controllers.userController import reusable_oauth2, isTokenInvalidated
 from fastapi.middleware.cors import CORSMiddleware
