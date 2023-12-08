@@ -117,7 +117,7 @@ export default {
 	},
     computed: {
         profileLink() {
-            return '/profile/' + this.userId;
+            return '/candidate/' + this.userId + '/profile';
         }
     },
 };

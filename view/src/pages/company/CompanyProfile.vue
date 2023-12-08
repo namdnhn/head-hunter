@@ -128,11 +128,11 @@
 						</button>
 					</div>
 					<div class="flex gap-4 text-xs md:text-sm lg:text-base">
-						<button
+						<router-link :to="jobsearch"
 							class="bg-green-300 px-4 py-2 rounded-lg font-bold text-sky-900 hover:bg-green-400 hover:cursor-pointer"
 						>
 							Xem các công việc hiện có
-						</button>
+					</router-link>
 						<router-link
 							class="border border-green-300 px-4 py-2 rounded-lg text-sky-900 font-semibold hover:cursor-pointer hover:border-green-500"
 							:to="recruitmentLink"
@@ -252,7 +252,10 @@ export default {
     computed: {
         recruitmentLink() {
             return `/companyprofile/${this.$route.params.id || this.id}/recruitmentpost`
-        }
+        },
+		jobsearch(){
+			return `/jobsearch`
+		}
     }
 };
 </script>
