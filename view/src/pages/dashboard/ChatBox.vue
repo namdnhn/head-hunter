@@ -109,21 +109,8 @@ export default {
 			// Listen for changes to the messages node
 			onValue(messagesRef, (snapshot) => {
 				const data = snapshot.val();
-				// Update the component's state with the new messages data
 				this.messages = data ? Object.values(data) : [];
 			});
-			// const response = await fetch(
-			// 	`http://localhost:8000/api/chat/messages/${conv_id}`,
-			// 	{
-			// 		method: "GET",
-			// 		headers: {
-			// 			"Content-Type": "application/json",
-			// 		},
-			// 	}
-			// );
-			// const data = await response.json();
-			// this.messages = data;
-			// console.log(data);
 		},
 		async sendMessage() {
 			const sender_id = localStorage.getItem("userId");
@@ -139,6 +126,7 @@ export default {
 					sender_id: Number(sender_id),
 					content: newMessage,
 					timestamp: serverTimestamp(),
+					realtime: new Date().getTime()
 				});
 				this.newMessage = "";
 			} catch (error) {
