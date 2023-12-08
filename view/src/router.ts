@@ -101,6 +101,10 @@ const UpdateCompanyInfo = defineAsyncComponent(
 	() => import("./pages/company/UpdateInfo.vue")
 );
 
+
+const ChatBox = defineAsyncComponent(
+	() => import("./pages/dashboard/ChatBox.vue")
+
 const RecruitmentPost = defineAsyncComponent(
 	() => import("./pages/company/RecruitmentPost.vue")
 );
@@ -221,6 +225,7 @@ const router = createRouter({
 					component: CandidateSaved,
 				},
 				{
+
 					path: "/companydashboard/candidateapplied",
 					component: CandidateApplied,
 				},
@@ -237,6 +242,13 @@ const router = createRouter({
 		{
 			path: "/chat",
 			component: ChatPage,
+			children: [
+				{
+					path: "/chat/:id",
+					component: ChatBox,
+					props: true,
+				},
+			],
 			meta: { requiresAuth: true },
 		},
 		{
