@@ -4,9 +4,15 @@ import store from "./store/index.ts";
 
 //import page
 const HomePage = defineAsyncComponent(() => import("./pages/HomePage.vue"));
-const ContactPage = defineAsyncComponent(() => import("./pages/about/ContactPage.vue"))
-const IntroductionPage = defineAsyncComponent(() => import("./pages/about/IntroductionPage.vue"))
-const SupportPage = defineAsyncComponent(() => import("./pages/about/SupportPage.vue"))
+const ContactPage = defineAsyncComponent(
+	() => import("./pages/about/ContactPage.vue")
+);
+const IntroductionPage = defineAsyncComponent(
+	() => import("./pages/about/IntroductionPage.vue")
+);
+const SupportPage = defineAsyncComponent(
+	() => import("./pages/about/SupportPage.vue")
+);
 const ProfilePage = defineAsyncComponent(
 	() => import("./pages/user/ProfilePage.vue")
 );
@@ -83,6 +89,9 @@ const CompanyDashboard = defineAsyncComponent(
 const CandidateSaved = defineAsyncComponent(
 	() => import("./pages/company/CandidateSaved.vue")
 );
+const CandidateApplied = defineAsyncComponent(
+	() => import("./components/company/CandidateApplied.vue")
+);
 
 const CompanyProfile = defineAsyncComponent(
 	() => import("./pages/company/CompanyProfile.vue")
@@ -105,15 +114,15 @@ const router = createRouter({
 			component: HomePage,
 		},
 		{
-			path:"/introductionpage",
+			path: "/introductionpage",
 			component: IntroductionPage,
 		},
 		{
-			path:"/supportpage",
+			path: "/supportpage",
 			component: SupportPage,
 		},
 		{
-			path:"/contactpage",
+			path: "/contactpage",
 			component: ContactPage,
 		},
 		{
@@ -154,7 +163,7 @@ const router = createRouter({
 		{
 			path: "/jobdetail/:id",
 			component: JobDetail,
-            props: true,
+			props: true,
 		},
 		{
 			path: "/jobsearch",
@@ -209,6 +218,10 @@ const router = createRouter({
 					component: CandidateSaved,
 				},
 				{
+					path: "/companydashboard/candidateapplied",
+					component: CandidateApplied,
+				},
+				{
 					path: "/companydashboard/updatecompany",
 					component: UpdateCompanyInfo,
 				},
@@ -234,7 +247,7 @@ const router = createRouter({
 		{
 			path: "/companyprofile/:id/recruitmentpost",
 			component: RecruitmentPost,
-            props: true,
+			props: true,
 		},
 		{
 			path: "/:pathMatch(.*)*",

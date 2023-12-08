@@ -34,6 +34,11 @@
 					to="/companydashboard/candidatesaved"
 				></base-list>
 				<base-list
+					title="Ứng viên đã ứng tuyển"
+					icon="fa-solid fa-bookmark"
+					to="/companydashboard/candidateapplied"
+				></base-list>
+				<base-list
 					title="Tin nhắn"
 					icon="fa-solid fa-message"
 					to="/chat"
