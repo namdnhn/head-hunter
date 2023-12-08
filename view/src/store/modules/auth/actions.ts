@@ -183,9 +183,6 @@ export default {
 			throw error;
 		}
 
-        console.log(responseData);
-        
-
 		// const dob = new Date(
 		// 	Date.parse(responseData.date_of_birth)
 		// ).toLocaleDateString("en-GB");
@@ -254,8 +251,6 @@ export default {
 		let apiUrl = await context.rootGetters.getApiUrl;
 		apiUrl += "register";
 
-		console.log(payload);
-
 		const response = await fetch(apiUrl, {
 			method: "POST",
 			body: JSON.stringify({
@@ -272,8 +267,6 @@ export default {
 				"Content-Type": "application/json",
 			},
 		});
-
-		console.log(response);
 
 		const responseData = await response.json();
 

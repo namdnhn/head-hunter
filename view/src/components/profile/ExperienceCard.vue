@@ -24,26 +24,6 @@
 				<ul
 					class="flex mt-1 md:mt-0 flex-col md:flex-row gap-2 lg:gap-4 text-xs lg:text-sm text-gray-500"
 				>
-					<li>
-						<h3
-							class="text-sky-800 font-semibold"
-							v-if="!isEditting"
-						>
-							{{ role }}
-						</h3>
-						<input
-							type="text"
-							class="text-xs md:text-sm lg:text-base px-2 py-1 mb-1 border border-sky-950 text-black w-full"
-							v-else
-							:value="role"
-							@input="
-								$emit(
-									'update:role',
-									($event.target as HTMLInputElement).value
-								)
-							"
-						/>
-					</li>
 
 					<li v-if="!isEditting">
 						{{ duration }}
@@ -86,10 +66,6 @@ export default {
 			required: true,
 		},
 		name: {
-			type: String,
-			required: true,
-		},
-		role: {
 			type: String,
 			required: true,
 		},

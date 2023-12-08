@@ -46,7 +46,7 @@ class CvController:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="User not found",
-        )    
+            )
         db_cv = CvModel(
             user_id=cv.user_id,
             introduce=cv.introduce or '',
@@ -72,7 +72,7 @@ class CvController:
             db_exp = Experience(
                 cv_id=db_cv.id,
                 company=exp.get('company', ''),
-                time=exp.get('time', '')  
+                time=exp.get('time', '')
             )
             db.add(db_exp)
 
@@ -82,7 +82,7 @@ class CvController:
                 cv_id=db_cv.id,
                 school=edu.get('school', ''),
                 time=edu.get('time', ''),
-                department=edu.get('department', '')    
+                department=edu.get('department', '')
             )
             db.add(db_edu)
 
@@ -113,10 +113,12 @@ class CvController:
         )
 
     def getCvByUserId(userId: int, db: Session = Depends(getDatabase)):
-        return db.query(CvModel).filter(CvModel.user_id == userId).all()
+        return db.query(CvModel).options(joinedload(CvModel.experiences), joinedload(CvModel.educations)).filter(CvModel.user_id == userId).first()
 
     def updateCv(
         cvId: int,
+        experiences: list[dict],
+        educations: list[dict],
         cv: UpdateCv,
         db: Session = Depends(getDatabase),
     ):
@@ -149,7 +151,22 @@ class CvController:
             dbCv.cv = cv.cv
         if cv.avatar is not None:
             dbCv.avatar = cv.avatar
-        
+
+        # Update experiences
+        for exp in experiences:
+            db_exp = db.query(Experience).filter(Experience.id == exp['id']).first()
+            if db_exp:
+                db_exp.company = exp.get('company', db_exp.company)
+                db_exp.time = exp.get('time', db_exp.time)
+
+        # Update educations
+        for edu in educations:
+            db_edu = db.query(Education).filter(Education.id == edu['id']).first()
+            if db_edu:
+                db_edu.school = edu.get('school', db_edu.school)
+                db_edu.time = edu.get('time', db_edu.time)
+                db_edu.department = edu.get('department', db_edu.department)
+
         db.commit()
         return {"msg": "Updated"}
 

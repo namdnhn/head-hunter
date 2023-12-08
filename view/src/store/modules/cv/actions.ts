@@ -3,9 +3,6 @@ export default {
 		let apiUrl = await context.rootGetters.getApiUrl;
 		apiUrl += `cv/user/${userId}`;
 
-        console.log(apiUrl);
-        
-
 		const response = await fetch(apiUrl, {
 			method: "GET",
 			headers: {
@@ -23,7 +20,7 @@ export default {
 
 		context.commit("setCv", responseData);
 
-        return responseData[0];
+        return responseData;
         
 
 	},
