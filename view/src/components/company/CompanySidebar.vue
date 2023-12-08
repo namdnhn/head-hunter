@@ -102,7 +102,7 @@ export default {
 				this.error = error.message;
 			}
 			this.isLoading = false;
-			this.$router.push("/loginCandidatePage");
+			this.$router.push("/homepage");
 		},
 		confirmErr() {
 			this.error = null;
