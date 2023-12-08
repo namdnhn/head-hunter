@@ -1,5 +1,5 @@
 <template>
-	<div
+	<router-link :to="getRouterLink"
 		class="w-full bg-slate-100 hover:bg-sky-100 hover:cursor-pointer p-2 rounded-lg flex justify-between items-center"
 	>
 		<div class="flex gap-2 items-center">
@@ -12,7 +12,7 @@
 				<h2
 					class="lg:text-base md:text-sm text-xs font-bold text-sky-900"
 				>
-					Nguyễn Đức Thiện
+					{{ fullname }}
 				</h2>
 				<p class="lg:text-sm text-xs text-slate-500">
 					Đã gửi một nhãn dán
@@ -20,6 +20,17 @@
 			</div>
 		</div>
 		<p class="lg:text-sm text-xs text-slate-500">25 phút</p>
-	</div>
+	</router-link>
 </template>
+
+<script lang="ts">
+export default {
+	props: ['fullname', 'user_id'],
+	computed: {
+		getRouterLink(): string {
+			return `/chat/${this.user_id}`;
+		},
+	},
+}
+</script>
 

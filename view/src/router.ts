@@ -85,7 +85,13 @@ const CompanyProfile = defineAsyncComponent(
 	() => import("./pages/company/CompanyProfile.vue")
 );
 
-const UpdateCompanyInfo = defineAsyncComponent(() => import("./pages/company/UpdateInfo.vue"))
+const UpdateCompanyInfo = defineAsyncComponent(
+	() => import("./pages/company/UpdateInfo.vue")
+);
+
+const ChatBox = defineAsyncComponent(
+	() => import("./pages/dashboard/ChatBox.vue")
+);
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -186,19 +192,26 @@ const router = createRouter({
 					path: "/companydashboard/candidatesaved",
 					component: CandidateSaved,
 				},
-                {
-                    path: '/companydashboard/updatecompany',
-                    component: UpdateCompanyInfo,
-                },
-                {
-                    path: '/companydashboard/deleteaccount',
-                    component: DeleteAccount,
-                }
+				{
+					path: "/companydashboard/updatecompany",
+					component: UpdateCompanyInfo,
+				},
+				{
+					path: "/companydashboard/deleteaccount",
+					component: DeleteAccount,
+				},
 			],
 		},
 		{
 			path: "/chat",
 			component: ChatPage,
+			children: [
+				{
+					path: "/chat/:id",
+					component: ChatBox,
+					props: true,
+				},
+			],
 			meta: { requiresAuth: true },
 		},
 		{
