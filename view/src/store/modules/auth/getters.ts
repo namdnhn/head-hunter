@@ -29,5 +29,8 @@ export default {
     },
     companyId(state: any) {
         return state.companyId;
+    },
+    isCandidate(state: any) {
+        return !!state.userInfo
     }
 }

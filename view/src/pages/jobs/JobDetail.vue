@@ -62,9 +62,11 @@
 		</div>
 
 		<!-- job description and suggest job -->
-		<div class="px-10 xl:px-40 pt-4 pb-10 flex flex-col lg:flex-row gap-10">
+		<div
+			class="px-10 xl:px-40 pt-4 pb-10 flex flex-col lg:flex-row gap-10 w-full"
+		>
 			<div
-				class="p-4 border border-green-400 rounded-lg flex flex-col justify-between gap-6 lg:basis-2/3 h-min"
+				class="p-4 border border-green-400 rounded-lg flex flex-col justify-between gap-6 w-full"
 			>
 				<div class="flex flex-col gap-6">
 					<ul class="flex gap-6 text-xs md:text-sm lg:text-base">
@@ -87,12 +89,14 @@
 							Quyền lợi
 						</li>
 						<!-- edit recruitment post -->
-						<div>
-							<router-link :to="editRecuitmentPostLink" class="px-4 py-1 bg-blue-500 text-white rounded-xl hover:cursor-pointer hover:bg-blue-600 ml-80">
-							Chỉnh sửa tin tuyển dụng
-						</router-link>
-						</div>
-						
+						<!-- <div class="">
+							<router-link
+								:to="editRecuitmentPostLink"
+								class="px-4 py-1 bg-blue-500 text-white rounded-xl hover:cursor-pointer hover:bg-blue-600 ml-80"
+							>
+								Chỉnh sửa tin tuyển dụng
+							</router-link>
+						</div> -->
 					</ul>
 
 					<!-- Job description paragraph  -->
@@ -100,10 +104,8 @@
 						<div
 							class="flex flex-col gap-4 text-xs md:text-sm lg:text-base text-sky-950"
 							v-if="isShowDescription"
-                            v-html="current_job.description"
-						>
-                            
-						</div>
+							v-html="current_job.description"
+						></div>
 					</transition>
 
 					<!-- Yêu cầu  -->
@@ -121,10 +123,8 @@
 								</h1>
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
-                                    v-html="current_job.require"
-								>
-									
-								</ul>
+									v-html="current_job.require"
+								></ul>
 							</span>
 
 							<!-- Công việc cần làm  -->
@@ -136,9 +136,8 @@
 								</h1>
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
-                                    v-html="current_job.job_detail"
-								>
-								</ul>
+									v-html="current_job.job_detail"
+								></ul>
 							</span>
 
 							<!-- Bằng cấp và kĩ năng  -->
@@ -150,9 +149,8 @@
 								</h1>
 								<ul
 									class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
-                                    v-html="current_job.degree_skill"
-								>
-								</ul>
+									v-html="current_job.degree_skill"
+								></ul>
 							</span>
 						</div>
 					</transition>
@@ -165,30 +163,35 @@
 						>
 							<ul
 								class="text-xs md:text-sm lg:text-base flex flex-col gap-2"
-                                v-html="current_job.benefit"
-							>
-							</ul>
+								v-html="current_job.benefit"
+							></ul>
 						</div>
 					</transition>
 				</div>
-				
+
 				<div class="flex gap-4 text-xs md:text-sm lg:text-base">
 					<button
 						class="bg-green-300 px-4 py-2 rounded-lg font-bold text-sky-900 hover:bg-green-400 hover:cursor-pointer"
 						@click="showApply"
+						v-if="!isApplied"
 					>
 						Ứng tuyển ngay
+					</button>
+					<button
+						class="bg-green-300 px-4 py-2 rounded-lg font-bold text-sky-900 hover:bg-green-400 hover:cursor-pointer"
+						v-else
+					>
+						Đã ứng tuyển
 					</button>
 					<button
 						class="border border-green-300 px-4 py-2 rounded-lg text-sky-900 font-semibold hover:cursor-pointer hover:border-green-500"
 					>
 						Lưu tin
 					</button>
-					
 				</div>
 			</div>
 
-			<div class="flex flex-col gap-4 lg:basis-1/3">
+			<!-- <div class="flex flex-col gap-4 lg:basis-1/3">
 				<h1
 					class="text-base md:text-lg lg:text-xl font-bold text-sky-900 mb-4"
 				>
@@ -216,11 +219,15 @@
 					class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full text-center"
 					>Xem thêm</router-link
 				>
-			</div>
+			</div> -->
 		</div>
 
 		<!-- job application form  -->
-		<base-form :show="!!isShowApply" @close="closeApply"></base-form>
+		<base-form
+			:show="!!isShowApply"
+			:jobId="id"
+			@close="closeApply"
+		></base-form>
 	</main>
 </template>
 
@@ -265,7 +272,7 @@ export default {
 				},
 			],
 			current_job: {
-                id: "",
+				id: "",
 				level: "",
 				role: "",
 				require: "",
@@ -282,6 +289,8 @@ export default {
 				posting_date: "",
 				deadline: "",
 			},
+			isApplied: false,
+            companyId: "",
 		};
 	},
 	methods: {
@@ -317,21 +326,47 @@ export default {
 					"jobs/getJob",
 					id
 				);
-                console.log(this.current_job);
-                
 			} catch (err) {
 				console.log(err);
 			}
 		},
+		async checkIfApplied() {
+			const res = await fetch(
+				"https://head-hunter-b9ee2-default-rtdb.asia-southeast1.firebasedatabase.app/applied.json"
+			);
+			const responseData = await res.json();
+
+			const user_id = localStorage.getItem("userId");
+			const job_id = this.id;
+
+			for (const key in responseData) {
+				if (
+					responseData[key].user_id === user_id &&
+					responseData[key].job_id === job_id && responseData[key].job_status === "pending"
+				) {
+					this.isApplied = true;
+					console.log(this.isApplied);
+					break;
+				}
+			}
+		},
+
+
 	},
 	mounted() {
 		this.getJob(this.id);
+		this.checkIfApplied();
 	},
-	computed:{
-		editRecuitmentPostLink(){
-			return "/companyprofile/:id/editrecruitmentpost"
-		}
-	}
+	// watch: {
+	// 	isApplied() {
+	// 		this.checkIfApplied();
+	// 	},
+	// },
+	computed: {
+		editRecuitmentPostLink() {
+			return `/companyprofile/${this.current_job.id}/editrecruitmentpost`;
+		},
+	},
 };
 </script>
 

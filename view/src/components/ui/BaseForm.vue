@@ -30,38 +30,37 @@
 						Thông tin hồ sơ
 					</h2>
 					<div class="flex flex-col gap-1">
-						<label for="fullname" class="text-xs lg:text-sm"
-							>Họ và tên:</label
-						>
+						<span class="flex gap-1 items-center">
+							<label for="fullname" class="text-xs lg:text-sm"
+								>Họ và tên:</label
+							>
+							<span class="text-red-500 text-xs lg:text-sm">{{
+								nameInvalidMessage
+							}}</span>
+						</span>
 						<input
 							type="text"
 							id="fullname"
 							class="p-2 border border-black rounded-lg text-xs md:text-sm lg:text-base"
 							v-model="userInfo.fullname"
+							@input="nameInvalidMessage = ''"
 						/>
 					</div>
 					<div class="flex flex-col gap-1">
-						<label for="email" class="text-xs lg:text-sm"
-							>Email:</label
-						>
+						<span class="flex gap-1 items-center">
+							<label for="email" class="text-xs lg:text-sm"
+								>Email:</label
+							>
+							<span class="text-red-500 text-xs lg:text-sm">{{
+								emailInvalidMessage
+							}}</span>
+						</span>
 						<input
 							type="email"
 							id="email"
 							class="p-2 border border-black rounded-lg text-xs md:text-sm lg:text-base"
 							v-model="userInfo.email"
-						/>
-					</div>
-					<div class="flex flex-col gap-1">
-						<label
-							for="resume"
-							class="text-xs lg:text-sm inline-block max-w-max"
-							>CV của bạn:</label
-						>
-						<input
-							type="file"
-							id="resume"
-							class="text-xs lg:text-sm max-w-max"
-							accept=".pdf"
+							@input="emailInvalidMessage = ''"
 						/>
 					</div>
 					<div class="flex flex-col gap-1">
@@ -74,6 +73,7 @@
 							cols="30"
 							rows="5"
 							class="p-2 border border-black rounded-md text-xs md:text-sm lg:text-base"
+							v-model="introduce"
 						></textarea>
 					</div>
 					<p class="text-xs lg:text-sm italic">
@@ -85,11 +85,19 @@
 					</p>
 					<button
 						class="bg-green-400 text-sky-900 font-bold p-2 rounded-lg hover:cursor-pointer hover:bg-green-500 hover:text-sky-950 text-xs md:text-sm lg:text-base"
-						@click="tryClose"
+						@click="submitForm"
 					>
 						Nộp đơn
 					</button>
 				</form>
+				<base-spinner v-if="isLoading"></base-spinner>
+				<base-dialog
+					:show="!!success"
+					:title="success"
+					@close="confirm"
+				>
+					<p>Chúc bạn may mắn!</p>
+				</base-dialog>
 			</div>
 		</transition>
 	</teleport>
@@ -102,6 +110,10 @@ export default {
 			type: Boolean,
 			required: true,
 		},
+		jobId: {
+			type: String,
+			required: true,
+		},
 	},
 	data() {
 		return {
@@ -109,6 +121,12 @@ export default {
 				fullname: "",
 				email: "",
 			},
+			introduce: "",
+			nameInvalidMessage: "",
+			emailInvalidMessage: "",
+			isLoading: false,
+			success: "",
+			companyId: "",
 		};
 	},
 	emits: ["close"],
@@ -121,14 +139,70 @@ export default {
 			this.userInfo.fullname = data.fullname;
 			this.userInfo.email = data.email;
 		},
+		async submitForm() {
+			if (!this.validate()) {
+				return;
+			}
+			const formData = {
+				fullname: this.userInfo.fullname,
+				email: this.userInfo.email,
+				introduce: this.introduce,
+				job_id: this.jobId,
+				company_id: this.companyId.toString(),
+				user_id: localStorage.getItem("userId"),
+				job_status: "pending",
+			};
+
+			try {
+				this.isLoading = true;
+				const res = await fetch(
+					"https://head-hunter-b9ee2-default-rtdb.asia-southeast1.firebasedatabase.app/applied.json",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(formData),
+					}
+				);
+
+				const responseData = await res.json();
+				console.log(responseData);
+				this.success = "Nộp đơn thành công";
+			} catch (err) {
+				console.log(err);
+			}
+			this.isLoading = false;
+		},
 		validate() {
 			if (!this.userInfo.fullname) {
+				this.nameInvalidMessage = "Vui lòng nhập họ và tên";
 				return false;
 			}
 			if (!this.userInfo.email) {
+				this.emailInvalidMessage = "Vui lòng nhập email";
 				return false;
 			}
 			return true;
+		},
+		confirm() {
+			this.success = "";
+			this.tryClose();
+		},
+		async getJobInfo() {
+			const res = await fetch(
+				`http://localhost:8000/api/job/${this.jobId}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const responseData = await res.json();
+
+			this.companyId = responseData.company_id;
 		},
 	},
 	computed: {
@@ -138,6 +212,7 @@ export default {
 	},
 	mounted() {
 		this.getUserInfo();
+		this.getJobInfo();
 	},
 };
 </script>

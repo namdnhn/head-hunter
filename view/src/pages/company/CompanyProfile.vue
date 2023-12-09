@@ -7,14 +7,14 @@
 				<span class="flex flex-col gap-4 items-center">
 					<span class="flex flex-col items-center gap-4">
 						<img
-							:src="current_company.logo"
+							:src="company_info.logo"
 							alt="company logo"
-							class="w-28 h-auto"
+							class="h-28 w-28 rounded-full"
 						/>
 						<p
 							class="px-3 py-1 bg-orange-400 rounded-lg text-xs lg:text-sm text-white"
 						>
-							Đang tuyển {{ current_company.job_quantity }} công
+							Đang tuyển {{ company_info.job_quantity }} công
 							việc
 						</p>
 					</span>
@@ -25,7 +25,7 @@
 						<h1
 							class="text-xl md:text-2xl lg:text-3xl font-bold text-sky-900"
 						>
-							{{ current_company.name }}
+							{{ company_info.name }}
 						</h1>
 						<span
 							class="flex items-center gap-1 text-xs lg:text-base text-sky-900"
@@ -33,7 +33,7 @@
 							<font-awesome-icon
 								icon="fa-solid fa-location-dot"
 							/>
-							<address>{{ current_company.address }}</address>
+							<address>{{ company_info.address }}</address>
 						</span>
 					</div>
 					<div class="flex gap-16">
@@ -45,7 +45,7 @@
 							<p
 								class="text-sm md:text-base lg:text-lg font-semibold text-sky-900"
 							>
-								{{ current_company.founded_year }}
+								{{ company_info.founded_year }}
 							</p>
 						</div>
 						<div>
@@ -56,7 +56,7 @@
 							<p
 								class="text-sm md:text-base lg:text-lg font-semibold text-sky-900"
 							>
-								{{ current_company.employee_quantity }}
+								{{ company_info.employee_quantity }}
 							</p>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 			class="px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row lg:gap-10"
 		>
 			<!-- User info  -->
-			<div class="lg:basis-2/3">
+			<div class="w-full">
 				<!-- introduce  -->
 				<div
 					class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10"
@@ -89,53 +89,26 @@
 						>
 							Giới thiệu
 						</h1>
-
-						<!-- click to edit  -->
-						<font-awesome-icon
-							icon="fa-solid fa-pen-to-square"
-							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
-							@click="editIntroduce"
-						/>
 					</span>
 
 					<!-- Paragraph  -->
 					<p
 						class="text-xs md:text-sm lg:text-base text-gray-600"
-						v-if="!isEdittingIntroduce"
-						v-for="para in current_company.description"
 					>
-						{{ para }}
+						{{ company_info.description }}
 					</p>
-
-					<textarea
-						name="introduce"
-						id="introduce"
-						rows="5"
-						cols="10"
-						class="p-2 border border-sky-950 text-xs md:text-sm lg:text-base"
-						v-model="introduce"
-						v-else
-					></textarea>
-
-					<!-- Save   -->
-					<div class="flex gap-4">
-						<button
-							class="px-4 py-2 bg-green-400 rounded-xl text-sky-900 text-xs md:text-sm lg:text-base hover:cursor-pointer hover:opacity-90"
-							v-if="isEdittingIntroduce"
-							@click="saveIntroduce"
-						>
-							Lưu
-						</button>
-					</div>
+                    
 					<div class="flex gap-4 text-xs md:text-sm lg:text-base">
-						<router-link :to="jobsearch"
+						<router-link
+							:to="jobsearch"
 							class="bg-green-300 px-4 py-2 rounded-lg font-bold text-sky-900 hover:bg-green-400 hover:cursor-pointer"
 						>
 							Xem các công việc hiện có
-					</router-link>
+						</router-link>
 						<router-link
 							class="border border-green-300 px-4 py-2 rounded-lg text-sky-900 font-semibold hover:cursor-pointer hover:border-green-500"
 							:to="recruitmentLink"
+                            v-if="isCompany"
 						>
 							Tạo tin tuyển dụng mới
 						</router-link>
@@ -144,7 +117,7 @@
 			</div>
 
 			<!-- công việc đang tuyển dụng  -->
-			<div class="flex flex-col gap-4 lg:basis-1/3">
+			<!-- <div class="flex flex-col gap-4 lg:basis-1/3">
 				<h1
 					class="text-base md:text-lg lg:text-xl font-bold text-sky-900 mb-4"
 				>
@@ -174,14 +147,14 @@
 				>
 					Xem thêm
 				</router-link>
-			</div>
+			</div> -->
 		</div>
 	</main>
 </template>
 
 <script lang="ts">
 export default {
-    props: ['id'],
+	props: ["id"],
 	data() {
 		return {
 			jobs: [
@@ -226,6 +199,19 @@ export default {
 					job_quantity: "",
 				},
 			],
+			isLoading: false,
+			company_info: {
+				address: "",
+				contact: "",
+				description: "",
+				employee_quantity: 0,
+				founded_year: 0,
+				id: 0,
+				job_quantity: 0,
+				logo: "",
+				name: "",
+				user_id: 0,
+			},
 		};
 	},
 	methods: {
@@ -235,27 +221,48 @@ export default {
 		saveIntroduce() {
 			this.isEdittingIntroduce = false;
 		},
-		async getCompany(id: any) {
+		async getCompanyInfo() {
 			try {
-				this.current_company = await this.$store.dispatch(
-					"companies/getCompany",
-					id
+				this.isLoading = true;
+				const res = await fetch(
+					`http://localhost:8000/api/company/${this.id}`,
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+						},
+					}
 				);
+
+				const responseData = await res.json();
+				this.company_info = responseData;
+				console.log(this.company_info);
 			} catch (error) {
 				console.log(error);
 			}
+			this.isLoading = false;
 		},
 	},
 	mounted() {
-		this.getCompany(this.$route.params.id || this.id);
+		this.getCompanyInfo();
 	},
-    computed: {
-        recruitmentLink() {
-            return `/companyprofile/${this.$route.params.id || this.id}/recruitmentpost`
-        },
-		jobsearch(){
-			return `/jobsearch`
-		}
+	computed: {
+		recruitmentLink() {
+			return `/companyprofile/${
+				this.$route.params.id || this.id
+			}/recruitmentpost`;
+		},
+		jobsearch() {
+			return `/jobsearch`;
+		},
+        isCompany() {
+			return this.$store.getters.isCompany;
+		},
+	},
+    watch: {
+        isCompany() {
+			this.getCompanyInfo();
+		},
     }
 };
 </script>

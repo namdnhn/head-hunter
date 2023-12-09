@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Response
 from sqlalchemy.orm import Session
 from database import getDatabase
 from controllers.userController import UserController, verifyToken
-from schemas.userSchema import ConfirmPassword, RegisterUser, Login, UpdateUser
+from schemas.userSchema import ConfirmPassword, RegisterUser, Login, UpdateUser, UpdateUser2
 from models.user import UserModel
 
 router = APIRouter(
@@ -43,10 +43,14 @@ def get_all_user(db: Session = Depends(getDatabase)):
 def get_user_by_id(userId: int, db: Session = Depends(getDatabase)):
     return UserController.getUserById(userId=userId, db=db)
 
+@router.put("/user/update/profile/{userId}")
+def update_user2(userId: int, user: UpdateUser2, db: Session = Depends(getDatabase)):
+    return UserController.updateUser2(userId=userId, user=user, db=db)
 
 @router.put("/user/update/{userId}")
 def update_user(userId: int, user: UpdateUser, db: Session = Depends(getDatabase)):
     return UserController.updateUser(userId=userId, user=user, db=db)
+
 
 
 @router.delete("/user/delete/{userId}")

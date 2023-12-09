@@ -163,7 +163,7 @@
 				<div
 					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
 				>
-					<p>120 kết quả</p>
+					<p>{{ companies.length }} kết quả</p>
 					<button
 						class="px-4 py-2 relative bg-white rounded-md text-gray-600 flex justify-between items-center gap-2"
 						@click="expand('sort')"
@@ -224,7 +224,7 @@
 					></card-company>
 				</ul>
 
-				<div
+				<!-- <div
 					class="mt-4 flex items-center justify-center gap-6 text-xs md:text-sm lg:text-base"
 				>
 					<font-awesome-icon
@@ -251,7 +251,7 @@
 						icon="fa-solid fa-angles-right"
 						class="p-2 hover:cursor-pointer hover:bg-green-300 rounded-md"
 					/>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</main>
@@ -317,9 +317,16 @@ export default {
 		},
 		async getCompanies() {
 			try {
-				this.companies = await this.$store.dispatch(
-					"companies/getCompanies"
-				);
+				const res = await fetch("http://localhost:8000/api/company/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				});
+
+				const responseData = await res.json();
+
+				this.companies = responseData;
 			} catch (err) {
 				console.log(err);
 			}

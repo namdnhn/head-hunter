@@ -14,3 +14,4 @@ class CompanyModel(database.Base):
     employee_quantity = Column(Integer)
     description = Column(String(300))
     contact = Column(String(50))
+    logo = Column(String(300))

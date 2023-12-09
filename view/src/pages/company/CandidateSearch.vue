@@ -155,7 +155,7 @@
 				<div
 					class="flex justify-between items-center w-full text-xs lg:text-sm font-semibold text-sky-900"
 				>
-					<p>20 kết quả</p>
+					<p>{{ candidates.length }} kết quả</p>
 					<button
 						class="px-4 py-2 relative bg-white rounded-md text-gray-600 flex justify-between items-center gap-2"
 						@click="expand('sort')"
@@ -207,14 +207,14 @@
 						v-for="candidate in candidates"
 						:key="candidate.id"
 						:id="candidate.id"
-						:name="candidate.name"
-						:avt="candidate.avt"
+						:name="candidate.fullname"
+						:avt="candidate.image_path"
 						:job="candidate.job"
 						:location="candidate.location"
 					></candidate-card>
 				</ul>
 
-				<div
+				<!-- <div
 					class="mt-4 flex items-center justify-center gap-6 text-xs md:text-sm lg:text-base"
 				>
 					<font-awesome-icon
@@ -241,7 +241,7 @@
 						icon="fa-solid fa-angles-right"
 						class="p-2 hover:cursor-pointer hover:bg-green-300 rounded-md"
 					/>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</main>
@@ -260,78 +260,7 @@ export default {
 			isExpandSort: false,
 			jobPosition: "",
 			workLocation: "",
-			candidates: [
-				{
-					id: 1,
-					name: "To Lam Son",
-					job: "Backend Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Cau Giay, Ha Noi",
-				},
-				{
-					id: 2,
-					name: "Nguyen Van A",
-					job: "Frontend Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Nam Tu Liem, Ha Noi",
-				},
-				{
-					id: 3,
-					name: "Nguyen Van B",
-					job: "Fullstack Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Hoan Kiem, Ha Noi",
-				},
-				{
-					id: 4,
-					name: "Nguyen Van C",
-					job: "Backend Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Cau Giay, Ha Noi",
-				},
-				{
-					id: 5,
-					name: "Nguyen Van D",
-					job: "Frontend Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Nam Tu Liem, Ha Noi",
-				},
-				{
-					id: 6,
-					name: "Nguyen Van E",
-					job: "Fullstack Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Hoan Kiem, Ha Noi",
-				},
-				{
-					id: 7,
-					name: "Nguyen Van F",
-					job: "Backend Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Cau Giay, Ha Noi",
-				},
-				{
-					id: 8,
-					name: "Nguyen Van G",
-					job: "Frontend Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Nam Tu Liem, Ha Noi",
-				},
-				{
-					id: 9,
-					name: "Nguyen Van H",
-					job: "Fullstack Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Hoan Kiem, Ha Noi",
-				},
-				{
-					id: 10,
-					name: "Nguyen Van I",
-					job: "Backend Developer",
-					avt: "https://www.topcv.vn/images/avatar-default.jpg",
-					location: "Cau Giay, Ha Noi",
-				},
-			],
+			candidates: [],
 		};
 	},
 	methods: {
@@ -354,6 +283,25 @@ export default {
 			this.jobPosition = "";
 			this.workLocation = "";
 		},
+		async getAllCandidate() {
+			try {
+				const res = await fetch("http://localhost:8000/api/user/all");
+				const data = await res.json();
+
+				for (let i = 0; i < data.length; i++) {
+					if (data[i].role === "candidate") {
+                        this.candidates.push(data[i]);
+                    }
+				}
+
+				console.log(this.candidates);
+			} catch (err) {
+				console.log(err);
+			}
+		},
+	},
+	mounted() {
+		this.getAllCandidate();
 	},
 };
 </script>

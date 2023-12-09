@@ -38,9 +38,19 @@ class ConfirmPassword(BaseModel):
 
 
 class UpdateUser(ConfirmPassword):
+    fullname: Optional[str] = None
     email: Optional[str] = None
     newPassword: Optional[str] = None
     fullname: Optional[str] = None
     date_of_birth: Optional[datetime] = None
     # role: Optional[UserRole] = None
+    phone: Optional[str] = None
+
+class UpdateUser2(BaseModel):
+    fullname: Optional[str] = None
+    image_path: Optional[str] = None
+    email: Optional[str] = None
+    date_of_birth: Optional[datetime] = None
+    gender: Optional[Gender] = None
+    role: Optional[UserRole] = None
     phone: Optional[str] = None

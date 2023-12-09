@@ -108,6 +108,10 @@ const EditRecruitmentPost = defineAsyncComponent(
 	() => import("./pages/company/EditRecruitmentPost.vue")
 );
 
+const CompanyJobs = defineAsyncComponent(
+	() => import("./pages/company/JobList.vue")
+);
+
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
@@ -131,6 +135,7 @@ const router = createRouter({
 		{
 			path: "/candidate/:id/profile",
 			component: ProfilePage,
+            props: true,
 			meta: { requiresAuth: true },
 		},
 		{
@@ -246,6 +251,7 @@ const router = createRouter({
 		{
 			path: "/companyprofile/:id",
 			component: CompanyProfile,
+            props: true,
 		},
 		{
 			path: "/companyprofile/:id/recruitmentpost",
@@ -257,6 +263,11 @@ const router = createRouter({
 			component: EditRecruitmentPost,
 			props: true,
 		},
+        {
+            path: "/company/:id/jobs",
+            component: CompanyJobs,
+            props: true,
+        },
 		{
 			path: "/:pathMatch(.*)*",
 			component: NotFound,

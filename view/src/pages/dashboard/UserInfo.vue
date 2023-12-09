@@ -21,7 +21,6 @@
 				title="120"
 				subtitle="Công việc đã lưu"
 			></statistic-card>
-			
 		</div>
 
 		<!-- notification and applied job -->
@@ -81,8 +80,7 @@
 					:id="apply.id"
 					:name="apply.name"
 					:logo="apply.logo"
-					:time="apply.time"
-					:location="apply.location"
+					:position="apply.role"
 					:status="apply.status"
 				></applied-job>
 			</div>
@@ -102,33 +100,55 @@ export default {
 	},
 	data() {
 		return {
-			applied: [
-				{
-					id: 1,
-					name: "Sun* Inc",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-					location: "Cau Giay, Ha Noi",
-					time: "23/10/2023",
-					status: "Chấp nhận",
-				},
-				{
-					id: 2,
-					name: "Sun* Inc",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-					location: "Cau Giay, Ha Noi",
-					time: "23/10/2023",
-					status: "Đang chờ",
-				},
-				{
-					id: 3,
-					name: "Sun* Inc",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-					location: "Cau Giay, Ha Noi",
-					time: "23/10/2023",
-					status: "Từ chối",
-				},
-			],
+			applied: [],
+			listApp: [],
 		};
+	},
+	methods: {
+		async getListApplied() {
+			const userId = localStorage.getItem("userId");
+			const res = await fetch(
+				`https://head-hunter-b9ee2-default-rtdb.asia-southeast1.firebasedatabase.app/applied.json?orderBy="user_id"&equalTo="${userId}"`
+			);
+
+			const responseData = await res.json();
+
+			for (const key in responseData) {
+				this.listApp.push({
+					job_id: responseData[key].job_id,
+					job_status: responseData[key].job_status,
+				});
+			}
+		},
+
+		async getJobApplied() {
+			for (const key in this.listApp) {
+				const res = await fetch(
+					"http://localhost:8000/api/job/" + this.listApp[key].job_id
+				);
+				const responseData = await res.json();
+				console.log(responseData);
+				let status = "";
+				if (this.listApp[key].job_status == "pending") {
+					status = "Đang chờ";
+				} else if (this.listApp[key].job_status === "approved") {
+					status = "Đã chấp nhận";
+				} else if (this.listApp[key].job_status === "denied") {
+					status = "Đã từ chối";
+				}
+				this.applied.push({
+                    id: this.listApp[key].job_id,
+					name: responseData.company_name,
+					logo: responseData.company_logo,
+					role: responseData.role,
+					status: status,
+				});
+			}
+		},
+	},
+	async mounted() {
+		await this.getListApplied();
+		await this.getJobApplied();
 	},
 };
 </script>

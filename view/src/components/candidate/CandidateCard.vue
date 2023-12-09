@@ -45,7 +45,7 @@ export default {
 	},
     computed: {
         profileLink(): string {
-            return `/profile/${this.id}`;
+            return `/candidate/${this.id}/profile`;
         },
     },
 };

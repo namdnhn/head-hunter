@@ -4,12 +4,12 @@
 	>
 		<div class="flex flex-col justify-center items-center gap-2">
 			<img
-				src="https://scontent.fhan14-2.fna.fbcdn.net/v/t1.15752-9/380473750_705477890924386_4811766216330519987_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeGFmilbrwjAiwoz971chM1LE5bf8IYqo6oTlt_whiqjqh0Iwl9C4uRPI-ZC7gMedieRRXim92lupTLVVeUE-nxV&_nc_ohc=AuDbYUxThqkAX-QdQEU&_nc_ht=scontent.fhan14-2.fna&oh=03_AdSOy_wvf3J7K-ii0QH99UV-lHuv1HBENNtAqOpozA7T7g&oe=6561863A"
+				:src="company_info.logo || 'https://www.topcv.vn/images/avatar-default.jpg'"
 				alt="avt"
 				class="w-32 h-32 rounded-full"
 			/>
 			<h2 class="text-sm md:text-base lg:text-lg font-bold text-sky-900">
-				Sun* Inc
+				{{ company_info.name  }}
 			</h2>
 		</div>
 
@@ -91,6 +91,7 @@ export default {
 			error: null,
 			isShowNav: true,
 			companyId: this.$store.getters.companyId,
+            company_info: {},
 		};
 	},
 	methods: {
@@ -117,6 +118,24 @@ export default {
             return `/companyprofile/${this.companyId}`;
         }
     },
+    methods: {
+        async getCompanyInfo() {
+            const companyId = localStorage.getItem("companyId");
+            const res = await fetch(`http://localhost:8000/api/company/${companyId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            
+            const responseData = await res.json();
+            this.company_info = responseData;
+            console.log(this.company_info);
+        }
+    },
+    mounted() {
+        this.getCompanyInfo();
+    }
 };
 </script>
 

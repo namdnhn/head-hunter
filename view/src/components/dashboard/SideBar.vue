@@ -4,16 +4,16 @@
 	>
 		<div class="flex flex-col justify-center items-center gap-2">
 			<img
-				src="https://www.topcv.vn/images/avatar-default.jpg"
+				:src="
+					user_info.image_path ||
+					'https://www.topcv.vn/images/avatar-default.jpg'
+				"
 				alt="avt"
 				class="w-32 h-32 rounded-full"
 			/>
 			<h2 class="text-sm md:text-base lg:text-lg font-bold text-sky-900">
-				To Lam Son
+				{{ user_info.fullname }}
 			</h2>
-			<p class="text-xs md:text-sm lg:text-base text-slate-500">
-				Backend Developer
-			</p>
 		</div>
 
 		<transition name="detail">
@@ -93,7 +93,11 @@ export default {
 			isLoading: false,
 			error: null,
 			isShowNav: true,
-            userId: this.$store.getters.userId,
+			userId: this.$store.getters.userId,
+			user_info: {
+				fullname: "",
+				image_path: "",
+			},
 		};
 	},
 	methods: {
@@ -114,12 +118,35 @@ export default {
 		showNav() {
 			this.isShowNav = !this.isShowNav;
 		},
+		async getUserInfo() {
+			const userId = localStorage.getItem("userId");
+			const res = await fetch(
+				`http://localhost:8000/api/user/${userId}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const responseData = await res.json();
+
+			this.user_info = responseData;
+
+			if (this.user_info.image_path === "string") {
+				this.user_info.image_path = "";
+			}
+		},
 	},
-    computed: {
-        profileLink() {
-            return '/candidate/' + this.userId + '/profile';
-        }
-    },
+	computed: {
+		profileLink() {
+			return "/candidate/" + this.userId + "/profile";
+		},
+	},
+	mounted() {
+		this.getUserInfo();
+	},
 };
 </script>
 

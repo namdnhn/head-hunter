@@ -1,5 +1,7 @@
 <template>
-	<div class="p-8 md:basis-3/5 lg:basis-4/5 flex flex-col gap-10 min-h-screen max-h-screen overflow-y-auto">
+	<div
+		class="p-8 md:basis-3/5 lg:basis-4/5 flex flex-col gap-10 min-h-screen max-h-screen overflow-y-auto"
+	>
 		<h1 class="text-lg md:text-xl lg:text-2xl text-sky-900 font-bold">
 			Thông tin người dùng
 		</h1>
@@ -23,7 +25,6 @@
 			></statistic-card>
 
 			<!-- Viewd profile  -->
-			
 		</div>
 
 		<!-- notification and applied job -->
@@ -66,13 +67,15 @@
 				</h1>
 
 				<applied-job
-				v-for="candidate in candidates"
-				:key="candidate.id"
-				:logo="candidate.logo"
-				:name="candidate.name"
-				:position="candidate.position"
-                type="candidate"
-			></applied-job>
+					v-for="candidate in applied"
+					:key="candidate.id"
+                    :id="candidate.id"
+					:logo="candidate.logo"
+					:name="candidate.name"
+					:position="candidate.position"
+                    :status="candidate.status"
+					type="candidate"
+				></applied-job>
 			</div>
 		</div>
 	</div>
@@ -82,43 +85,88 @@
 import StatisticCard from "../../components/dashboard/StatisticCard.vue";
 import NotifyCard from "../../components/dashboard/NotifyCard.vue";
 import CandidateApplied from "../../components/company/CandidateApplied.vue";
-import AppliedJob from "../../components/dashboard/AppliedJob.vue"
+import AppliedJob from "../../components/dashboard/AppliedJob.vue";
 export default {
 	components: {
 		StatisticCard,
 		NotifyCard,
 		CandidateApplied,
-		AppliedJob
+		AppliedJob,
 	},
 	data() {
 		return {
 			candidates: [
-				{
-					id: 1,
-					name: "Nguyen Duc Thien",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-					position: "Backend Developer",
-					time: "23/10/2023",
-					status: "Chấp nhận",
-				},
-				{
-					id: 2,
-					name: "Nguyen Van A",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-					position: "Backend Developer",
-					time: "23/10/2023",
-					status: "Đang chờ",
-				},
-				{
-					id: 3,
-					name: "Hoang Van B",
-					logo: "https://themezhub.net/jobstock-landing-2.2/jobstock/assets/img/l-1.png",
-					position: "Backend Developer",
-					time: "23/10/2023",
-					status: "Từ chối",
-				},
 			],
+			company_info: {},
+			applied: [],
+			listApp: [],
 		};
+	},
+	methods: {
+		async getCompanyInfo() {
+			const companyId = localStorage.getItem("companyId");
+			const res = await fetch(
+				`http://localhost:8000/api/company/${companyId}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const responseData = await res.json();
+			this.company_info = responseData;
+		},
+		async getListApplied() {
+			const companyId = localStorage.getItem("companyId");
+			const res = await fetch(
+				`https://head-hunter-b9ee2-default-rtdb.asia-southeast1.firebasedatabase.app/applied.json?orderBy="company_id"&equalTo="${companyId}"`
+			);
+
+			const responseData = await res.json();
+
+
+			for (const key in responseData) {
+				this.listApp.push({
+					job_id: responseData[key].job_id,
+					job_status: responseData[key].job_status,
+                    user_id: responseData[key].user_id,
+				});
+			}
+		},
+		async getJobApplied() {
+			for (const key in this.listApp) {
+				const res = await fetch(
+					"http://localhost:8000/api/user/" +
+						Number(this.listApp[key].user_id)
+				);
+				const responseData = await res.json();
+				console.log(responseData);
+				let status = "";
+				if (this.listApp[key].job_status == "pending") {
+					status = "Đang chờ";
+				} else if (this.listApp[key].job_status === "approved") {
+					status = "Đã chấp nhận";
+				} else if (this.listApp[key].job_status === "denied") {
+					status = "Đã từ chối";
+				}
+				this.applied.push({
+					id: this.listApp[key].user_id,
+					name: responseData.fullname,
+					logo: responseData.image_path,
+					role: responseData.role,
+					status: status,
+				});
+			}
+
+			console.log(this.applied);
+		},
+	},
+	async mounted() {
+		await this.getCompanyInfo();
+		await this.getListApplied();
+		await this.getJobApplied();
 	},
 };
 </script>

@@ -189,6 +189,20 @@
 							>Tin nhắn
 						</router-link>
 					</li>
+                    <li v-if="isCompany">
+						<router-link
+							:to="companyJobLink"
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Công việc đã đăng
+						</router-link>
+					</li>
+                    <li v-if="isCompany">
+						<router-link
+							to="/candidatesearch"
+							class="hover:text-green-700 hover:cursor-pointer text-xs md:text-sm lg:text-base"
+							>Ứng viên
+						</router-link>
+					</li>
 				</ul>
 			</nav>
 
@@ -214,7 +228,7 @@
 					@mouseleave="isShowUserInfo = false"
 				>
 					<img
-						src="https://www.topcv.vn/images/avatar-default.jpg"
+						:src=" image_path || 'https://www.topcv.vn/images/avatar-default.jpg'"
 						alt="default avt"
 						class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-cover rounded-full"
 					/>
@@ -290,7 +304,8 @@ export default {
 				email: "",
 			},
 			companyId: null,
-            error: null
+            error: null,
+            image_path: "https://www.topcv.vn/images/avatar-default.jpg",
 		};
 	},
 	methods: {
@@ -330,6 +345,9 @@ export default {
 						this.userId
 					);
 
+                    this.image_path = res.image_path;
+                    
+
 					//if company
 					if (res.role === "candidate") {
 						this.userInfo = {
@@ -368,6 +386,9 @@ export default {
 		isCompany() {
 			return this.$store.getters.isCompany;
 		},
+        companyJobLink() {
+            return `/company/${this.companyId}/jobs`
+        }
 	},
 	mounted() {
 		this.getUserInfo();

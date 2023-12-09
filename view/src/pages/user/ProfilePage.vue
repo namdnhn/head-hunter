@@ -9,11 +9,7 @@
 				<div class="flex flex-col gap-2 items-center">
 					<label for="uploadAvt" class="hover:cursor-pointer">
 						<img
-							:src="
-								uploadedImage ||
-								imagePreview ||
-								personalInfo.avatarUrl
-							"
+							:src="uploadedImage || imagePreview || image_path"
 							alt="candidate avt"
 							class="w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full"
 						/>
@@ -79,15 +75,15 @@
 
 		<!-- Detail info and suggest jobs  -->
 		<div
-			class="px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row lg:gap-10"
+			class="px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row lg:gap-10 w-full"
 		>
 			<!-- User info  -->
-			<div class="" v-if="hasCvProfile">
+			<div class="w-full">
 				<!-- introduce  -->
 				<div
-					class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10"
+					class="p-4 border border-green-400 rounded-lg flex flex-col gap-4 mb-10 w-full"
 				>
-					<span class="flex justify-between">
+					<span class="flex justify-between w-full">
 						<h1
 							class="text-base md:text-lg lg:text-xl font-bold text-sky-900"
 						>
@@ -99,6 +95,7 @@
 							icon="fa-solid fa-pen-to-square"
 							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
 							@click="editIntroduce"
+							v-if="!isCompany"
 						/>
 					</span>
 
@@ -146,6 +143,7 @@
 							icon="fa-solid fa-pen-to-square"
 							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
 							@click="editPersonalInfo"
+							v-if="!isCompany"
 						/>
 					</span>
 					<ul class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -376,6 +374,7 @@
 							icon="fa-solid fa-pen-to-square"
 							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
 							@click="editJobs"
+							v-if="!isCompany"
 						/>
 					</span>
 
@@ -426,6 +425,7 @@
 							icon="fa-solid fa-pen-to-square"
 							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
 							@click="editEducation"
+							v-if="!isCompany"
 						/>
 					</span>
 
@@ -476,6 +476,7 @@
 							icon="fa-solid fa-pen-to-square"
 							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
 							@click="editSkills"
+							v-if="!isCompany"
 						/>
 					</span>
 
@@ -530,6 +531,7 @@
 							icon="fa-solid fa-pen-to-square"
 							class="text-xs md:text-sm lg:text-base text-green-700 hover:cursor-pointer"
 							@click="editCV"
+							v-if="!isCompany"
 						/>
 					</span>
 
@@ -576,7 +578,7 @@
 				</div>
 			</div>
 
-			<div
+			<!-- <div
 				class="h-96 w-full flex justify-center items-center"
 				v-if="!hasCvProfile"
 			>
@@ -591,10 +593,10 @@
 						hãy tạo CV ngay bây giờ!
 					</p>
 				</h1>
-			</div>
+			</div> -->
 
 			<!-- suggest jobs  -->
-			<div class="lg:basis-1/3 hidden">
+			<!-- <div class="lg:basis-1/3 hidden">
 				<h1
 					class="text-base md:text-lg lg:text-xl font-bold text-sky-900 mb-4"
 				>
@@ -615,7 +617,7 @@
 						:position="job.position"
 					></job-card>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 		<base-spinner v-if="isLoading"></base-spinner>
 	</main>
@@ -634,6 +636,7 @@ export default {
 	components: {
 		LanguageCard,
 	},
+	props: ["id"],
 	data() {
 		return {
 			companies: [
@@ -744,7 +747,7 @@ export default {
 			uploadedImage: null as string | null,
 			selectedFile: null as File | null,
 			cvProfile: {
-				introduce: "default",
+				introduce: "",
 				email: "",
 				phone: "",
 				gender: "",
@@ -753,10 +756,8 @@ export default {
 				year_experience: "",
 				degree: "",
 				current_address: "",
-				experiences: [{ id: 1, cv_id: 1, time: "", company: "" }],
-				educations: [
-					{ school: "", cv_id: 1, id: 1, time: "", department: "" },
-				],
+				experiences: [{ time: "", company: "", role: "" }],
+				educations: [{ school: "", time: "", department: "" }],
 				skill: "",
 				language: "",
 				cv: "",
@@ -764,6 +765,7 @@ export default {
 			},
 			hasCvProfile: false,
 			isLoading: false,
+			image_path: "https://www.topcv.vn/images/avatar-default.jpg",
 		};
 	},
 	methods: {
@@ -784,8 +786,7 @@ export default {
 		},
 		saveJobs() {
 			this.isEdittingJobs = false;
-            console.log(this.cvProfile);
-            
+			console.log(this.cvProfile);
 		},
 		addCompany() {
 			const newCompany = {
@@ -869,6 +870,7 @@ export default {
 		},
 		async uploadImage() {
 			if (this.imageFile) {
+                this.isLoading = true
 				const storage = getStorage(firebase);
 				const storageRef = ref(
 					storage,
@@ -880,28 +882,40 @@ export default {
 					this.imageFile
 				);
 
-				uploadTask.on(
-					"state_changed",
-					(snapshot) => {
-						const progress =
-							(snapshot.bytesTransferred / snapshot.totalBytes) *
-							100;
-						console.log("Upload is " + progress + "% done");
-					},
-					(error) => {
-						console.error("Upload failed:", error);
-					},
-					() => {
-						getDownloadURL(uploadTask.snapshot.ref).then(
-							(downloadURL) => {
-								console.log("File available at", downloadURL);
-								this.uploadedImage = downloadURL;
-								this.deleteImage();
+				try {
+					await new Promise((resolve, reject) => {
+						uploadTask.on(
+							"state_changed",
+							(snapshot) => {
+								const progress =
+									(snapshot.bytesTransferred /
+										snapshot.totalBytes) *
+									100;
+								console.log("Upload is " + progress + "% done");
+							},
+							(error) => {
+								console.error("Upload failed:", error);
+								reject(error);
+							},
+							() => {
+								resolve(uploadTask.snapshot);
 							}
 						);
-					}
-				);
+					});
+
+					const downloadURL = await getDownloadURL(
+						uploadTask.snapshot.ref
+					);
+					console.log("File available at", downloadURL);
+					this.uploadedImage = downloadURL;
+					this.image_path = downloadURL;
+					await this.updateImagePath();
+					this.deleteImage();
+				} catch (error) {
+					console.error("Upload failed:", error);
+				}
 			}
+            this.isLoading = false
 		},
 		handleFileUpload(event: any) {
 			this.selectedFile = event.target.files[0];
@@ -960,10 +974,10 @@ export default {
 			}
 		},
 		async getAccountInfo() {
-			const userId = this.$store.getters.userId;
 			try {
-				await this.$store.dispatch("fetchUserById", userId);
+				await this.$store.dispatch("fetchUserById", this.id);
 				this.accountInfo = this.$store.getters.getUserInfo;
+				console.log(this.accountInfo);
 
 				//convert date_of_birth to display
 				const date = new Date(this.accountInfo.date_of_birth);
@@ -978,15 +992,54 @@ export default {
 		},
 		async getProfile() {
 			const userId = this.$store.getters.userId;
+			console.log(this.id);
 			try {
-				this.cvProfile = await this.$store.dispatch(
+				const result = await this.$store.dispatch(
 					"cv/getCvByUserId",
-					userId
+					this.id
 				);
 
-				//convert date_of_birth to display
-				this.cvProfile.date_of_birth = this.accountInfo.date_of_birth;
+				if (result) {
+					this.cvProfile = result;
+					this.cvProfile.date_of_birth =
+						this.accountInfo.date_of_birth;
+				} else {
+					const formData = {
+						experiences: [{ time: "", company: "", role: "" }],
+						educations: [{ school: "", time: "", department: "" }],
+						cv: {
+							user_id: this.id,
+							introduce: "",
+							email: this.accountInfo.email,
+							phone: this.accountInfo.phone,
+							gender: "",
+							date_of_birth: this.accountInfo.date_of_birth,
+							role: "",
+							year_experience: "",
+							degree: "",
+							current_address: "",
+							skill: "",
+							language: "",
+							cv: "",
+							avatar: "",
+						},
+					};
+					const resCreateCv = await fetch(
+						"http://localhost:8000/api/cv/create",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify(formData),
+						}
+					);
+					const responseData = await resCreateCv.json();
+					console.log(responseData);
+					this.cvProfile = responseData;
+				}
 
+				//convert date_of_birth to display
 				if (this.cvProfile) {
 					this.hasCvProfile = true;
 				}
@@ -998,18 +1051,54 @@ export default {
 		async addCvProfile() {
 			this.hasCvProfile = true;
 		},
+		async getImagePath() {
+			const res = await fetch(
+				`http://localhost:8000/api/user/${this.id}`
+			);
+
+			const responseData = await res.json();
+
+			this.image_path = responseData.image_path;
+		},
+		async updateImagePath() {
+			const formData = {
+				image_path: this.image_path,
+			};
+
+			const res = await fetch(
+				`http://localhost:8000/api/user/update/profile/${this.id}`,
+				{
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(formData),
+				}
+			);
+
+			const responseData = await res.json();
+
+			console.log(responseData);
+		},
 	},
 	computed: {
 		isLoggedIn() {
 			return this.$store.getters.isAuthenticated;
 		},
+		isCompany() {
+			return this.$store.getters.isCompany;
+		},
 	},
 	mounted() {
 		this.getAccountInfo();
 		this.getProfile();
+		this.getImagePath();
 	},
 	watch: {
 		isLoggedIn() {
+			this.getAccountInfo();
+		},
+		isCompany() {
 			this.getAccountInfo();
 		},
 	},

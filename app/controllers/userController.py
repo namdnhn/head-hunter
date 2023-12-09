@@ -7,7 +7,7 @@ from fastapi.security import HTTPBearer
 from fastapi import Depends, HTTPException, status
 from passlib.context import CryptContext
 from models.user import UserModel
-from schemas.userSchema import ConfirmPassword, RegisterUser, Login, UpdateUser
+from schemas.userSchema import ConfirmPassword, RegisterUser, Login, UpdateUser, UpdateUser2
 from dotenv import load_dotenv
 import os
 from fastapi.security import HTTPBearer
@@ -172,6 +172,20 @@ class UserController:
             dbUserId.phone = user.phone
         db.commit()
         return {"msg": "Updated"}
+    
+    @staticmethod
+    def updateUser2(userId: int, user: UpdateUser2, db: Session):
+        user_in_db = db.query(UserModel).filter(UserModel.id == userId).first()
+        if not user_in_db:
+            return None  # or raise an exception
+
+        for var, value in vars(user).items():
+            if value is not None:  # we only update fields that are provided in the request
+                setattr(user_in_db, var, value)
+
+        db.commit()
+        db.refresh(user_in_db)
+        return user_in_db
 
     def deleteUser(userId: int, password: ConfirmPassword, db: Session):
         dbUserId = db.query(UserModel).filter(UserModel.id == userId).first()

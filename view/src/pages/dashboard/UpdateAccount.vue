@@ -8,34 +8,7 @@
 		</h1>
 		<div
 			class="w-full p-10 bg-white rounded-xl flex flex-col gap-4 text-xs md:text-sm lg:text-base"
-		>	
-			<div v-if="uploadedImage && !imagePreview" class="">
-                        <img :src="uploadedImage" alt="logo" class="max-h-48">
-            </div>
-			<div>
-				<input
-    				type="file"
-    				@change="previewImage"
-    				id="logo"
-    				ref="fileInput"
-    				/>
-    			<div
-    					v-if="imagePreview"
-    					class="flex items-center gap-4"
-    				>
-    			<img
-    					:src="imagePreview"
-    					alt="Image preview"
-    					class="mt-1 self-center border-2 max-h-48"
-    					/>
-    						<button
-    							class="w-6 h-6 flex items-center justify-center text-white rounded-full bg-red-500"
-    							@click="deleteImage"
-    						>
-    							X
-    						</button>
-    					</div>
-					</div>
+		>
 			<div class="flex flex-col gap-1 w-full">
 				<label for="fullname">Họ và tên:</label>
 				<input
@@ -174,7 +147,7 @@ export default {
 		return {
 			imagePreview: null as string | null,
 			imageFile: null as File | null,
-            uploadedImage: null as string | null,
+			uploadedImage: null as string | null,
 			dob: new Date().toISOString().slice(0, 10),
 			registerEmailCandicate: {
 				value: "",
@@ -218,9 +191,9 @@ export default {
 			showConfirmPassword: false,
 			showNewPassword: false,
 		};
-		
 	},
-	methods: {previewImage(event: Event) {
+	methods: {
+		previewImage(event: Event) {
 			const file = (event.target as HTMLInputElement).files?.[0];
 			if (file) {
 				this.imageFile = file;
@@ -264,8 +237,8 @@ export default {
 						getDownloadURL(uploadTask.snapshot.ref).then(
 							(downloadURL) => {
 								console.log("File available at", downloadURL);
-                                this.uploadedImage = downloadURL;
-                                this.deleteImage();
+								this.uploadedImage = downloadURL;
+								this.deleteImage();
 							}
 						);
 					}

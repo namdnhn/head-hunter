@@ -337,9 +337,13 @@
 		>
 			<p>Tin tuyển dụng của bạn đã được đăng.</p>
 		</base-dialog>
-        <base-dialog :show="!!createError" title="Tạo tin tuyển dụng thất bại!" @close="confirmError">
-            <p>{{ createError }}</p>
-        </base-dialog>
+		<base-dialog
+			:show="!!createError"
+			title="Tạo tin tuyển dụng thất bại!"
+			@close="confirmError"
+		>
+			<p>{{ createError }}</p>
+		</base-dialog>
 	</main>
 </template>
 
@@ -376,14 +380,14 @@ export default {
 			benefit: { value: [""], isValid: true, errorMessage: "" },
 			deadline: { value: "", isValid: true, errorMessage: "" },
 			urgent: false,
-			companyInfo: {
+			company_info: {
 				company_name: "",
 				company_logo: "",
 				company_id: "",
 			},
 			isLoading: false,
 			createSuccess: false,
-            createError: null
+			createError: null,
 		};
 	},
 	methods: {
@@ -585,8 +589,8 @@ export default {
 					benefit: benefit,
 					urgent: this.urgent,
 					featured: false,
-					company_name: this.companyInfo.company_name || "default",
-					company_logo: this.companyInfo.company_logo || "default",
+					company_name: this.company_info.name || "default",
+					company_logo: this.company_info.logo || "default",
 					quantity: Number(this.quantity.value),
 					address: this.address.value,
 					description: description,
@@ -596,12 +600,14 @@ export default {
 
 				await this.$store.dispatch("jobs/createJob", formData);
 
+                await this.updateCompanyInfo();
+
 				console.log("create job success");
 				this.createSuccess = true;
 				this.resetForm();
 			} catch (err: any) {
 				console.log(err);
-                this.createError = err
+				this.createError = err;
 			}
 
 			this.isLoading = false;
@@ -653,26 +659,50 @@ export default {
 			this.deadline.value = "";
 			this.urgent = false;
 		},
-        confirmError() {
-            this.createError = null
-        },
+		confirmError() {
+			this.createError = null;
+		},
 		async getCompanyInfo() {
+			const companyId = localStorage.getItem("companyId");
 			try {
-				const res = await this.$store.dispatch(
-					"companies/getCompany",
-					this.id
+				this.isLoading = true;
+				const res = await fetch(
+					`http://localhost:8000/api/company/${companyId}`,
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+						},
+					}
 				);
-				this.companyInfo = {
-					company_name: res.name,
-					company_logo: res.logo,
-					company_id: this.id,
-				};
-				console.log(this.companyInfo);
+
+				const responseData = await res.json();
+				this.company_info = responseData;
+			} catch (error) {
+				console.log(error);
+			}
+			this.isLoading = false;
+		},
+		async updateCompanyInfo() {
+			this.isLoading = true;
+			try {
+				const res = await fetch(
+					`http://localhost:8000/api/company/${this.company_info.id}`,
+					{
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							job_quantity:
+								Number(this.company_info.job_quantity) + 1,
+						}),
+					}
+				);
 			} catch (err) {
 				console.log(err);
 			}
 		},
-
 		confirm() {
 			this.createSuccess = false;
 		},

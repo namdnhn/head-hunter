@@ -337,9 +337,13 @@
 		>
 			<p>Tin tuyển dụng của bạn đã được chỉnh sửa thành công.</p>
 		</base-dialog>
-        <base-dialog :show="!!createError" title="Tạo tin tuyển dụng thất bại!" @close="confirmError">
-            <p>{{ createError }}</p>
-        </base-dialog>
+		<base-dialog
+			:show="!!createError"
+			title="Tạo tin tuyển dụng thất bại!"
+			@close="confirmError"
+		>
+			<p>{{ createError }}</p>
+		</base-dialog>
 	</main>
 </template>
 
@@ -383,7 +387,7 @@ export default {
 			},
 			isLoading: false,
 			createSuccess: false,
-            createError: null
+			createError: null,
 		};
 	},
 	methods: {
@@ -601,7 +605,7 @@ export default {
 				this.resetForm();
 			} catch (err: any) {
 				console.log(err);
-                this.createError = err
+				this.createError = err;
 			}
 
 			this.isLoading = false;
@@ -653,9 +657,9 @@ export default {
 			this.deadline.value = "";
 			this.urgent = false;
 		},
-        confirmError() {
-            this.createError = null
-        },
+		confirmError() {
+			this.createError = null;
+		},
 		async getCompanyInfo() {
 			try {
 				const res = await this.$store.dispatch(

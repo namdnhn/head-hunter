@@ -56,6 +56,7 @@ export default {
 				employee_quantity: payload.employee_quantity || 0,
 				description: "",
 				contact: payload.contact || "",
+                logo: payload.logo || "",
 			}),
 			headers: {
 				"Content-Type": "application/json",

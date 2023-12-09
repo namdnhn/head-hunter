@@ -363,14 +363,14 @@
 					/>
 				</ul>
 
-                <div class="mt-4 flex items-center justify-center gap-6 text-xs md:text-sm lg:text-base">
+                <!-- <div class="mt-4 flex items-center justify-center gap-6 text-xs md:text-sm lg:text-base">
                     <font-awesome-icon icon="fa-solid fa-angles-left" class="p-2 hover:cursor-pointer hover:bg-green-300     rounded-md"/>
                     <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">1</span>
                     <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">2</span>
                     <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">3</span>
                     <span class="py-2 px-4 hover:cursor-pointer hover:bg-green-300   rounded-md">4</span>
                     <font-awesome-icon icon="fa-solid fa-angles-right" class="p-2 hover:cursor-pointer hover:bg-green-300    rounded-md"/>
-                </div>
+                </div> -->
 			</div>
 		</div>
 	</main>
