@@ -4,7 +4,7 @@ from models.candidate import CandidateModel
 from database import Base, engine
 
 # from routes import companyRouter, userRouter, hrRouter, cvRouter, jobRouter
-from routes import companyRouter, userRouter, hrRouter, jobRouter, candidateRouter, cvRouter, messageRouter
+from routes import companyRouter, userRouter, hrRouter, jobRouter, candidateRouter, cvRouter, messageRouter, dataRouter
 
 from models.application import ApplicationModel
 from models.post import PostModel
@@ -22,9 +22,8 @@ app.include_router(hrRouter.router, prefix="/api")
 app.include_router(candidateRouter.router, prefix="/api")
 app.include_router(cvRouter.router, prefix="/api")
 app.include_router(messageRouter.router, prefix="/api")
-
 app.include_router(jobRouter.router, prefix="/api")
-
+app.include_router(dataRouter.router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
