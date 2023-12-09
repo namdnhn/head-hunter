@@ -629,7 +629,7 @@ import {
 	uploadBytesResumable,
 	getDownloadURL,
 } from "firebase/storage";
-import firebase from "../../../services/app";
+import {app} from "../../../services/app";
 export default {
 	components: {
 		LanguageCard,
@@ -869,7 +869,7 @@ export default {
 		},
 		async uploadImage() {
 			if (this.imageFile) {
-				const storage = getStorage(firebase);
+				const storage = getStorage(app);
 				const storageRef = ref(
 					storage,
 					"images/" + this.imageFile.name
