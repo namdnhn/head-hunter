@@ -152,20 +152,32 @@ class CvController:
         if cv.avatar is not None:
             dbCv.avatar = cv.avatar
 
-        # Update experiences
-        for exp in experiences:
-            db_exp = db.query(Experience).filter(Experience.id == exp['id']).first()
-            if db_exp:
-                db_exp.company = exp.get('company', db_exp.company)
-                db_exp.time = exp.get('time', db_exp.time)
+
+        db.query(Experience).filter(Experience.cv_id == cvId).delete()
+        for exp_data in experiences:
+            newExp = Experience(
+                cv_id = cvId,
+                company=exp_data['company'],
+                time=exp_data['time']
+            )
+            db.add(newExp)
+            db.commit()
+            db.refresh(newExp)
+        
+            
 
         # Update educations
-        for edu in educations:
-            db_edu = db.query(Education).filter(Education.id == edu['id']).first()
-            if db_edu:
-                db_edu.school = edu.get('school', db_edu.school)
-                db_edu.time = edu.get('time', db_edu.time)
-                db_edu.department = edu.get('department', db_edu.department)
+        db.query(Education).filter(Education.cv_id == cvId).delete()
+        for edu_data in educations:
+            newEdu = Education(
+                cv_id = cvId,
+                school=edu_data['school'],
+                time=edu_data['time'],
+                department=edu_data['department']
+            )
+            db.add(newEdu)
+            db.commit()
+            db.refresh(newEdu)                
 
         db.commit()
         return {"msg": "Updated"}
