@@ -1,37 +1,12 @@
-import json
-from pstats import Stats
-import statistics
 from typing import Optional
-from models.user import UserModel
 from schemas.cvSchema import CreateCv, UpdateCv
-from models.cv import CvModel, Education, Experience
+from models.cv import CvModel
 from sqlalchemy.orm import Session
-from fastapi import Depends, HTTPException, UploadFile
+from fastapi import Depends, UploadFile
 from database import getDatabase
-from sqlalchemy.orm import joinedload
-from fastapi import Depends, HTTPException, status
 
 
 class CvController:
-    # def createCv(
-    #     cv: CreateCv = Depends(),
-    #     db: Session = Depends(getDatabase),
-    # ):
-    #     db_cv = CvModel(
-    #         user_id=cv.user_id,
-    #         image_path=cv.image_path,
-    #         experience=cv.experience,
-    #         position=cv.position,
-    #         skill=cv.skill,
-    #         education=cv.education,
-    #         achivement=cv.achivement,
-    #         activity=cv.activity,
-    #     )
-    #     db.add(db_cv)
-    #     db.commit()
-    #     db.refresh(db_cv)
-    #     return db_cv
-
     def createCv(
         experiences: list[dict],
         educations: list[dict],
@@ -101,22 +76,23 @@ class CvController:
     #     return db.query(CvModel).filter(CvModel.id == cvId).first()
 
     def getCvByCvId(cvId: int, db: Session = Depends(getDatabase)):
-        return (
-            db.query(CvModel)
-            .options(joinedload(CvModel.experiences), joinedload(CvModel.educations))
-            .filter(CvModel.id == cvId)
-            .first()
-        )
+        return db.query(CvModel).filter(CvModel.id == cvId).first()
 
     def getCvByUserId(userId: int, db: Session = Depends(getDatabase)):
         return db.query(CvModel).filter(CvModel.user_id == userId).all()
 
     def updateCv(
+        imgFile: Optional[UploadFile],
         cvId: int,
         cv: UpdateCv,
         db: Session = Depends(getDatabase),
     ):
         dbCv = db.query(CvModel).filter(CvModel.id == cvId).first()
+        if imgFile.content_type.startswith("image"):
+            file_path = f"public/{imgFile.filename}"
+            with open(file_path, "wb") as image_file:
+                image_file.write(imgFile.file.read())
+            dbCv.image_path = file_path
         if cv.user_id is not None:
             dbCv.user_id = cv.user_id
         if cv.experience is not None:
