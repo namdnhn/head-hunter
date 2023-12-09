@@ -6,7 +6,7 @@
                     <div class="flex items-center bg-white py-[10px] px-[20px] w-max gap-x-2 mb-26[px] rounded-full mx-auto xl:mx-0 text-xl">Head Hunter</div>
                     <div class="h1 mb-6 mt-1">Your Gateway to Talent Excellence!</div>
                     <p class="mb-[42px] md:max-w-xl">At Head Hunter, we're redefining the way talent meets opportunity. Whether you're on a quest for your dream job or seeking the perfect addition to your team, our platform is the nexus of ambition and expertise.</p>
-                    <router-link to="/contactpage"><button class="flex items-center bg-white py-[10px] px-[25px] w-max gap-x-2 mb-26[px] rounded-full mx-auto xl:mx-0 text-xl">Liên hệ chúng tôi</button></router-link>
+                    <router-link :to="contactLink"><button class="flex items-center bg-white py-[10px] px-[25px] w-max gap-x-2 mb-26[px] rounded-full mx-auto xl:mx-0 text-xl">Liên hệ chúng tôi</button></router-link>
                     
                 </div>
                 
@@ -239,3 +239,13 @@
     </section>
     <br><br><br>
 </template>
+
+<script lang="ts">
+    export default {
+        computed:{
+            contactLink(){
+                return "/contactpage"
+            }
+        }
+    }
+</script>
