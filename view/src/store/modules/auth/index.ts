@@ -18,7 +18,6 @@ export default {
             companyInfo: {
                 name: null,
                 email: null,
-                
             }
         }
     },
