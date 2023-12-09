@@ -43,12 +43,7 @@ export default {
 		},
 		formattedTimestamp(): string {
 			// Chuyển đổi timestamp thành dạng giờ đọc được ở đây
-			const date = new Date(this.lastMessage.timestamp); // Nhân 1000 để chuyển đổi từ giây sang mili giây
-			// const hours = date.getHours();
-			// const minutes = "0" + date.getMinutes();
-			// const seconds = "0" + date.getSeconds();
-			// const formattedTime =
-			// 	hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+			const date = new Date(this.lastMessage.timestamp);
 			return date.toLocaleString('en-GB');
 		},
 	},

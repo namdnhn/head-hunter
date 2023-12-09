@@ -122,7 +122,7 @@ import {
 	uploadBytesResumable,
 	getDownloadURL,
 } from "firebase/storage";
-import firebase from "../../../services/app"; 
+import {app} from "../../../services/app"; 
 
 export default defineComponent({
 	data() {
@@ -151,7 +151,7 @@ export default defineComponent({
 		},
 		async uploadImage() {
 			if (this.imageFile) {
-				const storage = getStorage(firebase);
+				const storage = getStorage(app);
 				const storageRef = ref(
 					storage,
 					"images/" + this.imageFile.name
