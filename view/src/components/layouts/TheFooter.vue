@@ -34,7 +34,7 @@
             <div class="flex flex-col gap-3 items-center text-stone-400">
                 <h1 class="text-sm md:text-base lg:text-lg text-amber-100">Dành cho doanh nghiệp</h1>
                 <ul class="text-xs md:text-sm lg:text-base flex flex-col gap-2 items-center">
-                    <li class="hover:cursor-pointer hover:text-stone-500">
+                    <li class="hover:cursor-pointer hover:text-stone-500" >
                         Tìm ứng viên
                     </li>
                     <li class="hover:cursor-pointer hover:text-stone-500">
@@ -49,18 +49,28 @@
             <div class="flex flex-col gap-3 text-stone-400 items-center ">
                 <h1 class="text-sm md:text-base lg:text-lg text-amber-100">Về Head Hunter</h1>
                 <ul class="text-xs md:text-sm lg:text-base flex flex-col gap-2 items-center">
-                    <li class="hover:cursor-pointer hover:text-stone-500">
+                    <router-link :to="introductionLink" class="hover:cursor-pointer hover:text-stone-500">
                         Giới thiệu
-                    </li>
-                    <li class="hover:cursor-pointer hover:text-stone-500">
+                    </router-link>
+                    <router-link :to="contactLink" class="hover:cursor-pointer hover:text-stone-500">
                         Liên lạc
-                    </li>
-                    <li class="hover:cursor-pointer hover:text-stone-500">
-                        Hỗ trợ
-                    </li>
+                    </router-link>
                 </ul>
             </div>
 
         </div>
     </footer>
 </template>
+
+<script lang="ts">
+    export default {
+        computed: {
+            introductionLink(){
+                return "/introductionpage"
+            },
+            contactLink(){
+                return "/contactpage"
+            }
+        }
+    }
+</script>
